@@ -429,10 +429,9 @@
       gap: 20px;
     }
     .bento-item {
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
-      background: #f0f0f0;
-      border: 1px solid rgba(217, 217, 217, 0.3);
+      background: transparent;
     }
     .bento-item img {
       width: 100%;
@@ -458,13 +457,6 @@
     .b-img9 { grid-column: span 6; grid-row: span 2; min-height: 820px; }
     .b-img10 { grid-column: span 6; height: 400px; }
 
-    /* Placeholder colors for images without direct URLs */
-    .b-img1 { background: #f0f4f8; }
-    .b-img2 { background: #defffd; }
-    .b-img6 { background: #c8f7e4; }
-    .b-img8 { background: #1a1b2e; }
-    .b-img9 { background: #0d0d1a; }
-    .b-img10 { background: #ff6b6b; }
 
     /* ── My Story ── */
     .my-story { padding-bottom: 80px; }
@@ -495,8 +487,8 @@
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 100px;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
+      display: flex;
+      flex-direction: column;
       gap: 80px;
     }
 
@@ -957,81 +949,7 @@
     </div>
 
     <div class="story-columns">
-      <!-- Skills -->
-      <div class="skills-col fade-up">
-        <h3>Tools &amp; Skills</h3>
-
-        <div class="skill-item">
-          <div class="skill-icon" style="background: linear-gradient(135deg, #f24e1e 0%, #ff7262 25%, #a259ff 50%, #1abcfe 75%, #0acf83 100%);">
-            <svg width="24" height="24" viewBox="0 0 38 57" fill="none">
-              <path d="M19 28.5A9.5 9.5 0 1128.5 19 9.51 9.51 0 0119 28.5z" fill="#1abcfe"/>
-              <path d="M9.5 47.5A9.5 9.5 0 1119 38a9.51 9.51 0 01-9.5 9.5z" fill="#0acf83"/>
-              <path d="M9.5 28.5A9.5 9.5 0 119 9.5h9.5V28.5z" fill="#ff7262"/>
-              <path d="M9.5 9.5H19A9.5 9.5 0 119 9.5z" fill="#f24e1e"/>
-              <path d="M19 9.5h9.5A9.5 9.5 0 1119 28.5z" fill="#a259ff"/>
-            </svg>
-          </div>
-          <div class="skill-text">
-            <div class="skill-name">Figma</div>
-            <div class="skill-desc">Proficient in Figma, specializing in crafting user-friendly interfaces and collaborative workflows.</div>
-          </div>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon" style="background: #fda800;">
-            <svg width="24" height="24" viewBox="0 0 50 50" fill="none">
-              <polygon points="25,5 45,40 5,40" fill="#fff" opacity="0.9"/>
-            </svg>
-          </div>
-          <div class="skill-text">
-            <div class="skill-name">Sketch</div>
-            <div class="skill-desc">Proficient in Sketch, with years of experience designing scalable interfaces prior to moving to Figma.</div>
-          </div>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon" style="background: #3b82f6;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="5" fill="#fff"/>
-              <path d="M12 2v3m0 14v3M2 12h3m14 0h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="skill-text">
-            <div class="skill-name">Principle For Mac</div>
-            <div class="skill-desc">Skilled in Principle for Mac, leveraging it to design smooth, realistic motion and interactions.</div>
-          </div>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon" style="background: #0055ff;">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <polygon points="11,1 21,21 1,21" fill="none" stroke="#fff" stroke-width="1.5"/>
-              <polygon points="11,8 16,18 6,18" fill="#fff"/>
-            </svg>
-          </div>
-          <div class="skill-text">
-            <div class="skill-name">Framer</div>
-            <div class="skill-desc">Proficient in Framer; used for building interactive prototypes and exploring advanced UI concepts.</div>
-          </div>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon" style="background: linear-gradient(135deg, #9b27af, #e91e63);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <rect x="4" y="4" width="7" height="7" rx="1.5" fill="#fff" opacity="0.9"/>
-              <rect x="13" y="4" width="7" height="7" rx="1.5" fill="#fff" opacity="0.7"/>
-              <rect x="4" y="13" width="7" height="7" rx="1.5" fill="#fff" opacity="0.7"/>
-              <rect x="13" y="13" width="7" height="7" rx="1.5" fill="#fff" opacity="0.5"/>
-            </svg>
-          </div>
-          <div class="skill-text">
-            <div class="skill-name">and Protopie, After Effects, Illustrator, Photoshop</div>
-            <div class="skill-desc">While not my core tools, these tools have helped me experiment with ideas and expand my design workflow.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Experience -->
+      <!-- Experience (now first) -->
       <div class="exp-col fade-up">
         <h3>Experience</h3>
 
@@ -1135,6 +1053,81 @@
         </div>
 
       </div>
+
+      <!-- Tools & Skills (now below) -->
+      <div class="skills-col fade-up">
+        <h3>Tools &amp; Skills</h3>
+
+        <div class="skill-item">
+          <div class="skill-icon" style="background: linear-gradient(135deg, #f24e1e 0%, #ff7262 25%, #a259ff 50%, #1abcfe 75%, #0acf83 100%);">
+            <svg width="24" height="24" viewBox="0 0 38 57" fill="none">
+              <path d="M19 28.5A9.5 9.5 0 1128.5 19 9.51 9.51 0 0119 28.5z" fill="#1abcfe"/>
+              <path d="M9.5 47.5A9.5 9.5 0 1119 38a9.51 9.51 0 01-9.5 9.5z" fill="#0acf83"/>
+              <path d="M9.5 28.5A9.5 9.5 0 119 9.5h9.5V28.5z" fill="#ff7262"/>
+              <path d="M9.5 9.5H19A9.5 9.5 0 119 9.5z" fill="#f24e1e"/>
+              <path d="M19 9.5h9.5A9.5 9.5 0 1119 28.5z" fill="#a259ff"/>
+            </svg>
+          </div>
+          <div class="skill-text">
+            <div class="skill-name">Figma</div>
+            <div class="skill-desc">Proficient in Figma, specializing in crafting user-friendly interfaces and collaborative workflows.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon" style="background: #fda800;">
+            <svg width="24" height="24" viewBox="0 0 50 50" fill="none">
+              <polygon points="25,5 45,40 5,40" fill="#fff" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="skill-text">
+            <div class="skill-name">Sketch</div>
+            <div class="skill-desc">Proficient in Sketch, with years of experience designing scalable interfaces prior to moving to Figma.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon" style="background: #3b82f6;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="5" fill="#fff"/>
+              <path d="M12 2v3m0 14v3M2 12h3m14 0h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="skill-text">
+            <div class="skill-name">Principle For Mac</div>
+            <div class="skill-desc">Skilled in Principle for Mac, leveraging it to design smooth, realistic motion and interactions.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon" style="background: #0055ff;">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <polygon points="11,1 21,21 1,21" fill="none" stroke="#fff" stroke-width="1.5"/>
+              <polygon points="11,8 16,18 6,18" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="skill-text">
+            <div class="skill-name">Framer</div>
+            <div class="skill-desc">Proficient in Framer; used for building interactive prototypes and exploring advanced UI concepts.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon" style="background: linear-gradient(135deg, #9b27af, #e91e63);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="4" y="4" width="7" height="7" rx="1.5" fill="#fff" opacity="0.9"/>
+              <rect x="13" y="4" width="7" height="7" rx="1.5" fill="#fff" opacity="0.7"/>
+              <rect x="4" y="13" width="7" height="7" rx="1.5" fill="#fff" opacity="0.7"/>
+              <rect x="13" y="13" width="7" height="7" rx="1.5" fill="#fff" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="skill-text">
+            <div class="skill-name">and Protopie, After Effects, Illustrator, Photoshop</div>
+            <div class="skill-desc">While not my core tools, these tools have helped me experiment with ideas and expand my design workflow.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
