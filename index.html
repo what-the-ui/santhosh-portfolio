@@ -144,6 +144,15 @@
     }
     .hero-bio .ext-link:hover { color: #FF6101; }
     .hero-bio .ext-link:hover svg path { stroke: #FF6101; }
+    .hero-btns {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .btn-sayhi {
+      display: none;
+    }
     .btn-resume {
       display: inline-flex;
       align-items: center;
@@ -301,6 +310,11 @@
       flex-direction: column;
       gap: 20px;
     }
+    .work-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
     .work-card {
       border-radius: 20px;
       padding: 40px 48px;
@@ -310,9 +324,9 @@
       align-items: center;
       min-height: 400px;
     }
-    .work-card.c-lime { background: #d9f0a3; }
-    .work-card.c-pink { background: #ffd6e2; }
-    .work-card.c-teal { background: #c2f0e8; }
+    .work-card.c-lime { background: #FFE4CC; }
+    .work-card.c-pink { background: #E8E0F8; }
+    .work-card.c-teal { background: #D6E8F8; }
 
     .work-icon {
       width: 70px;
@@ -446,15 +460,15 @@
     .b-img9 img { object-position: center top; }
     .b-img10 img { object-position: center top; }
     /* Grid placement */
-    .b-img1 { grid-column: span 7; height: 308px; }
-    .b-img2 { grid-column: span 5; grid-row: span 2; height: 601px; }
+    .b-img1 { grid-column: span 7; height: 308px; border: 1px solid rgba(217, 217, 217, 0.5); }
+    .b-img2 { grid-column: span 5; grid-row: span 2; height: 601px; border: 1px solid rgba(217, 217, 217, 0.5); }
     .b-img3 { grid-column: span 7; grid-row: span 2; height: 601px; }
     .b-img4 { grid-column: span 5; height: 308px; }
     .b-img5 { grid-column: span 12; height: 689px; }
     .b-img6 { grid-column: span 3; height: 308px; }
     .b-img7 { grid-column: span 9; height: 308px; }
     .b-img8 { grid-column: span 6; height: 400px; }
-    .b-img9 { grid-column: span 6; grid-row: span 2; min-height: 820px; }
+    .b-img9 { grid-column: span 6; grid-row: span 2; min-height: 820px; border: 1px solid rgba(217, 217, 217, 0.5); }
     .b-img10 { grid-column: span 6; height: 400px; }
 
 
@@ -467,16 +481,16 @@
     }
     .story-photo-wrap {
       width: 100%;
-      height: 500px;
+      height: 600px;
       overflow: hidden;
-      border-radius: 24px;
-      margin: 0 0 60px;
+      margin: 20px 0 32px;
     }
     .story-photo-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 45%;
+      object-position: center 30%;
+      display: block;
     }
     .story-bio {
       font-size: 20px;
@@ -490,7 +504,7 @@
       padding: 0 100px;
       display: flex;
       flex-direction: column;
-      gap: 80px;
+      gap: 40px;
     }
 
     /* Skills */
@@ -504,36 +518,46 @@
       letter-spacing: 1px;
       font-size: 13px;
     }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
     .skill-item {
       display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 18px 0;
-      border-bottom: 1px solid #f0f0f0;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px 6px 6px;
+      background: #ffffff;
+      border-radius: 100px;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: default;
     }
-    .skill-item:last-child { border-bottom: none; }
+    .skill-item:hover {
+      background: #ffffff;
+      border-color: rgba(255, 97, 1, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 97, 1, 0.1);
+    }
     .skill-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       flex-shrink: 0;
-      border-radius: 8px;
+      border-radius: 10px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      background: #fff;
     }
-    .skill-icon img { width: 100%; height: 100%; object-fit: contain; }
-    .skill-text {}
+    .skill-icon img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
     .skill-name {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #171717;
-    }
-    .skill-desc {
       font-size: 15px;
-      color: #666;
-      line-height: 1.5;
+      font-weight: 600;
+      color: #171717;
+      white-space: nowrap;
     }
 
     /* Experience */
@@ -548,9 +572,7 @@
     }
     .exp-item {
       padding: 24px 0;
-      border-bottom: 1px solid #f0f0f0;
     }
-    .exp-item:last-child { border-bottom: none; }
     .exp-header {
       display: flex;
       align-items: center;
@@ -562,15 +584,13 @@
       height: 52px;
       border-radius: 14px;
       flex-shrink: 0;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 900;
-      font-size: 20px;
-      color: #fff;
+      background: #f5f5f5;
     }
-    .exp-logo.poshmark { background: #FF6101; }
-    .exp-logo.amador { background: #3b82f6; }
+    .exp-logo img { width: 100%; height: 100%; object-fit: cover; }
     .exp-meta {}
     .exp-role {
       font-size: 20px;
@@ -586,12 +606,13 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 14px;
+      padding-left: 68px;
     }
     .exp-bullets li {
       font-size: 16px;
       color: #444;
-      line-height: 1.6;
+      line-height: 1.7;
       padding-left: 24px;
       position: relative;
     }
@@ -700,6 +721,143 @@
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
       .footer-contact { flex-direction: column; gap: 10px; }
       .footer-links { flex-wrap: wrap; gap: 16px; }
+
+      /* ── Mobile hero content ── */
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-bio { text-align: center; }
+      .hero-tagline { justify-content: center; }
+      .hero-btns {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      .btn-sayhi {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: #171717;
+        color: #fff;
+        padding: 16px 30px;
+        border-radius: 17px;
+        font-family: 'Lato', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        transition: background 0.2s, transform 0.15s;
+      }
+      .btn-resume {
+        width: 100%;
+        justify-content: center;
+        background: transparent;
+        color: #171717;
+        box-shadow: inset 0 0 0 2px #171717;
+        font-size: 18px;
+        padding: 16px 30px;
+      }
+      .btn-resume:hover { background: #f5f5f5; transform: translateY(-2px); }
+
+      /* ── Hide Ping & Vibe + QR on mobile ── */
+      .hero-right { display: none; }
+      .ping-qr-section { display: none; }
+
+      /* ── Nav spacing ── */
+      .nav-links { gap: 16px; }
+
+      /* ── Hide social bar (LinkedIn/Dribbble) ── */
+      .social-bar { display: none; }
+
+      /* ── Center section titles ── */
+      .section-heading { text-align: center; }
+    }
+
+    /* ── Keyframes ── */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes subtlePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 97, 1, 0); }
+      50%       { box-shadow: 0 0 0 8px rgba(255, 97, 1, 0.08); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+
+    /* ── Hero entrance ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-left > * {
+        opacity: 0;
+        animation: heroFadeUp 0.7s ease forwards;
+      }
+      .profile-photo      { animation-delay: 0.05s; }
+      .hero-name          { animation-delay: 0.15s; }
+      .hero-tagline       { animation-delay: 0.25s; }
+      .hero-bio           { animation-delay: 0.35s; }
+      .hero-btns          { animation-delay: 0.45s; }
+
+      /* Ping card floats gently */
+      .ping-card { animation: float 5s ease-in-out infinite; }
+
+      /* Nav logo subtle pulse on load */
+      .nav-logo { animation: heroFadeUp 0.5s ease forwards; }
+
+      /* Work cards lift on hover */
+      .work-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .work-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.10);
+      }
+
+
+      /* Social pills slide on hover */
+      .social-pill {
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+      .social-pill:hover { transform: translateX(4px); }
+
+      /* Skill chips spring on hover */
+      .skill-item {
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+      .skill-item:hover { transform: translateY(-3px) scale(1.04); }
+
+      /* Exp-logo pulse on hover */
+      .exp-logo {
+        transition: transform 0.2s ease;
+      }
+      .exp-logo:hover { transform: scale(1.08); }
+
+      /* Orange accent btn pulse */
+      .btn-sayhi {
+        transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      }
+      .btn-sayhi:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(23, 23, 23, 0.25);
+      }
+
+      /* Section headings shimmer on scroll-in */
+      .section-heading.visible {
+        background: linear-gradient(90deg, #171717 40%, #FF6101 50%, #171717 60%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 1.8s ease forwards;
+      }
     }
 
     /* ── Scroll animations ── */
@@ -761,7 +919,10 @@
         </a>
       </p>
 
-      <a href="#" class="btn-resume">Download Resume</a>
+      <div class="hero-btns">
+        <a href="http://wa.me/919894249490" target="_blank" rel="noopener" class="btn-sayhi">Say Hi</a>
+        <a href="#" class="btn-resume">Download Resume</a>
+      </div>
     </div>
 
     <!-- Right: Ping & Vibe Card -->
@@ -779,7 +940,7 @@
           <!-- QR section -->
           <div class="ping-qr-section">
             <div class="ping-qr-box">
-              <span class="ping-qr-label">Say hi!</span>
+              <span class="ping-qr-label">Scan to Say Hi!</span>
               <div class="ping-qr-wrap">
                 <img class="ping-qr-img" src="https://www.figma.com/api/mcp/asset/65a152e1-33fd-48d0-865b-95ac9c6a2c21" alt="QR code">
               </div>
@@ -805,8 +966,8 @@
     <h2 class="section-heading fade-up">Selected Works</h2>
     <div class="works-list">
 
-      <!-- Card 1: Shadow Guardian -->
-      <div class="work-card c-lime fade-up">
+      <!-- Card 1: Poshmark App Redesign -->
+      <a href="poshmark.html" class="work-card-link"><div class="work-card c-lime fade-up">
         <div class="work-left">
           <div class="work-icon dark">
             <div class="icon-shadow-guardian">
@@ -827,10 +988,10 @@
           <div class="work-preview-inner" style="background: rgba(200,230,120,0.5);"></div>
           <span class="coming-soon">Coming Soon</span>
         </div>
-      </div>
+      </div></a>
 
       <!-- Card 2: SuperOps AI -->
-      <div class="work-card c-pink fade-up">
+      <a href="superops.html" class="work-card-link"><div class="work-card c-pink fade-up">
         <div class="work-left">
           <div class="work-icon pink-bg" style="background:#fff;">
             <div class="icon-superops">S</div>
@@ -845,10 +1006,10 @@
           <div class="work-preview-inner" style="background: rgba(255,180,200,0.4);"></div>
           <span class="coming-soon">Coming Soon</span>
         </div>
-      </div>
+      </div></a>
 
       <!-- Card 3: Škoda Connected App -->
-      <div class="work-card c-teal fade-up">
+      <a href="skoda.html" class="work-card-link"><div class="work-card c-teal fade-up">
         <div class="work-left">
           <div class="work-icon dark">
             <div class="icon-skoda">Š</div>
@@ -864,7 +1025,7 @@
           <div class="work-preview-inner" style="background: rgba(150,220,200,0.4);"></div>
           <span class="coming-soon">Coming Soon</span>
         </div>
-      </div>
+      </div></a>
 
     </div>
   </section>
@@ -878,12 +1039,12 @@
       <div class="bento-grid">
         <!-- Img1 -->
         <div class="bento-item b-img1 fade-up">
-          <img src="images/Img1.png" alt="Design showcase">
+          <img src="images/Img1.png?v=2" alt="Design showcase">
         </div>
 
         <!-- Img2 -->
         <div class="bento-item b-img2 fade-up">
-          <img src="images/Img2.png" alt="Design showcase">
+          <img src="images/Img2.png?v=2" alt="Design showcase">
         </div>
 
         <!-- Img3 -->
@@ -918,7 +1079,7 @@
 
         <!-- Img9 -->
         <div class="bento-item b-img9 fade-up">
-          <img src="images/Img9.png" alt="Design showcase">
+          <img src="images/Img9.png?v=2" alt="Design showcase">
         </div>
 
         <!-- Img10 -->
@@ -956,7 +1117,7 @@
 
         <div class="exp-item">
           <div class="exp-header">
-            <div class="exp-logo poshmark">P</div>
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
             <div class="exp-meta">
               <div class="exp-role">Manager, Product Design</div>
               <div class="exp-company-date">2024 to Current · Poshmark India Private Limited</div>
@@ -974,7 +1135,7 @@
 
         <div class="exp-item">
           <div class="exp-header">
-            <div class="exp-logo poshmark">P</div>
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
             <div class="exp-meta">
               <div class="exp-role">Lead Product Designer</div>
               <div class="exp-company-date">2022 to 2024 · Poshmark India Private Limited</div>
@@ -992,7 +1153,7 @@
 
         <div class="exp-item">
           <div class="exp-header">
-            <div class="exp-logo poshmark">P</div>
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
             <div class="exp-meta">
               <div class="exp-role">Senior Product Designer</div>
               <div class="exp-company-date">2020 to 2022 · Poshmark India Private Limited</div>
@@ -1009,7 +1170,7 @@
 
         <div class="exp-item">
           <div class="exp-header">
-            <div class="exp-logo poshmark">P</div>
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
             <div class="exp-meta">
               <div class="exp-role">Product Designer</div>
               <div class="exp-company-date">2017 to 2020 · Poshmark India Private Limited</div>
@@ -1025,10 +1186,10 @@
 
         <div class="exp-item">
           <div class="exp-header">
-            <div class="exp-logo amador">A</div>
+            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
             <div class="exp-meta">
               <div class="exp-role">Product Designer</div>
-              <div class="exp-company-date">2015 to 2017 · AmadorWorks | Full Creative Private Limited</div>
+              <div class="exp-company-date">2015 to 2017 · AnywhereWorks | Full Creative Private Limited</div>
             </div>
           </div>
           <ul class="exp-bullets">
@@ -1040,10 +1201,10 @@
 
         <div class="exp-item">
           <div class="exp-header">
-            <div class="exp-logo amador">A</div>
+            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
             <div class="exp-meta">
               <div class="exp-role">Product Design Intern</div>
-              <div class="exp-company-date">2014 to 2015 · AmadorWorks | Full Creative Private Limited</div>
+              <div class="exp-company-date">2014 to 2015 · AnywhereWorks | Full Creative Private Limited</div>
             </div>
           </div>
           <ul class="exp-bullets">
@@ -1059,73 +1220,64 @@
       <div class="skills-col fade-up">
         <h3>Tools &amp; Skills</h3>
 
-        <div class="skill-item">
-          <div class="skill-icon" style="background: linear-gradient(135deg, #f24e1e 0%, #ff7262 25%, #a259ff 50%, #1abcfe 75%, #0acf83 100%);">
-            <svg width="24" height="24" viewBox="0 0 38 57" fill="none">
-              <path d="M19 28.5A9.5 9.5 0 1128.5 19 9.51 9.51 0 0119 28.5z" fill="#1abcfe"/>
-              <path d="M9.5 47.5A9.5 9.5 0 1119 38a9.51 9.51 0 01-9.5 9.5z" fill="#0acf83"/>
-              <path d="M9.5 28.5A9.5 9.5 0 119 9.5h9.5V28.5z" fill="#ff7262"/>
-              <path d="M9.5 9.5H19A9.5 9.5 0 119 9.5z" fill="#f24e1e"/>
-              <path d="M19 9.5h9.5A9.5 9.5 0 1119 28.5z" fill="#a259ff"/>
-            </svg>
-          </div>
-          <div class="skill-text">
+        <div class="skills-grid">
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/figma.png" alt="Figma">
+            </div>
             <div class="skill-name">Figma</div>
-            <div class="skill-desc">Proficient in Figma, specializing in crafting user-friendly interfaces and collaborative workflows.</div>
           </div>
-        </div>
 
-        <div class="skill-item">
-          <div class="skill-icon" style="background: #fda800;">
-            <svg width="24" height="24" viewBox="0 0 50 50" fill="none">
-              <polygon points="25,5 45,40 5,40" fill="#fff" opacity="0.9"/>
-            </svg>
-          </div>
-          <div class="skill-text">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/sketch.png" alt="Sketch">
+            </div>
             <div class="skill-name">Sketch</div>
-            <div class="skill-desc">Proficient in Sketch, with years of experience designing scalable interfaces prior to moving to Figma.</div>
           </div>
-        </div>
 
-        <div class="skill-item">
-          <div class="skill-icon" style="background: #3b82f6;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="5" fill="#fff"/>
-              <path d="M12 2v3m0 14v3M2 12h3m14 0h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="skill-text">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/principle.png" alt="Principle For Mac">
+            </div>
             <div class="skill-name">Principle For Mac</div>
-            <div class="skill-desc">Skilled in Principle for Mac, leveraging it to design smooth, realistic motion and interactions.</div>
           </div>
-        </div>
 
-        <div class="skill-item">
-          <div class="skill-icon" style="background: #0055ff;">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <polygon points="11,1 21,21 1,21" fill="none" stroke="#fff" stroke-width="1.5"/>
-              <polygon points="11,8 16,18 6,18" fill="#fff"/>
-            </svg>
-          </div>
-          <div class="skill-text">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/framer.png" alt="Framer">
+            </div>
             <div class="skill-name">Framer</div>
-            <div class="skill-desc">Proficient in Framer; used for building interactive prototypes and exploring advanced UI concepts.</div>
           </div>
-        </div>
 
-        <div class="skill-item">
-          <div class="skill-icon" style="background: linear-gradient(135deg, #9b27af, #e91e63);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <rect x="4" y="4" width="7" height="7" rx="1.5" fill="#fff" opacity="0.9"/>
-              <rect x="13" y="4" width="7" height="7" rx="1.5" fill="#fff" opacity="0.7"/>
-              <rect x="4" y="13" width="7" height="7" rx="1.5" fill="#fff" opacity="0.7"/>
-              <rect x="13" y="13" width="7" height="7" rx="1.5" fill="#fff" opacity="0.5"/>
-            </svg>
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/protopie.png" alt="Protopie">
+            </div>
+            <div class="skill-name">Protopie</div>
           </div>
-          <div class="skill-text">
-            <div class="skill-name">and Protopie, After Effects, Illustrator, Photoshop</div>
-            <div class="skill-desc">While not my core tools, these tools have helped me experiment with ideas and expand my design workflow.</div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/aftereffects.svg" alt="After Effects">
+            </div>
+            <div class="skill-name">After Effects</div>
           </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/illustrator.svg" alt="Illustrator">
+            </div>
+            <div class="skill-name">Illustrator</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/photoshop.svg" alt="Photoshop">
+            </div>
+            <div class="skill-name">Photoshop</div>
+          </div>
+
         </div>
       </div>
 

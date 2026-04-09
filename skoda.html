@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Škoda Connected App — Santhosh Rajendran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #fff;
+      background-image: radial-gradient(circle, rgba(255, 97, 1, 0.12) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      color: #171717;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 18px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #171717;
+    }
+    .nav-logo span { color: #FF6101; }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #171717;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: #FF6101;
+      transition: width 0.2s;
+    }
+    .nav-links a:hover { color: #FF6101; }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── Case Study Layout ── */
+    .cs-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 100px;
+    }
+
+    /* ── Back link ── */
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 48px 0 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: #888;
+      transition: color 0.2s;
+    }
+    .cs-back:hover { color: #FF6101; }
+
+    /* ── Hero Banner ── */
+    .cs-hero {
+      background: #D6E8F8;
+      border-radius: 28px;
+      padding: 72px 80px;
+      margin: 24px 0 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      min-height: 420px;
+    }
+    .cs-hero-left {}
+    .cs-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .cs-tag {
+      background: rgba(0,0,0,0.08);
+      color: #171717;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .cs-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: #171717;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .cs-subtitle {
+      font-size: 18px;
+      color: #444;
+      line-height: 1.65;
+      max-width: 460px;
+    }
+    .cs-hero-right {
+      background: rgba(255,255,255,0.5);
+      border-radius: 20px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* ── Section label ── */
+    .cs-section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Overview ── */
+    .cs-overview {
+      margin-bottom: 80px;
+    }
+    .cs-overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 60px;
+      align-items: start;
+    }
+    .cs-overview-desc {
+      font-size: 20px;
+      color: #171717;
+      line-height: 1.75;
+    }
+    .cs-meta-card {
+      background: #f7f7f7;
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .cs-meta-item {}
+    .cs-meta-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 4px;
+    }
+    .cs-meta-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #171717;
+    }
+
+    /* ── Problem ── */
+    .cs-problem {
+      background: #171717;
+      border-radius: 20px;
+      padding: 48px 56px;
+      margin: 48px 0 80px;
+    }
+    .cs-problem .cs-section-label { color: #FF6101; }
+    .cs-problem-text {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.55;
+    }
+
+    /* ── Process ── */
+    .cs-process { margin-bottom: 80px; }
+    .cs-phases {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 8px;
+    }
+    .cs-phase {
+      background: #f7f7f7;
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+    }
+    .cs-phase-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: #FF6101;
+      margin-bottom: 12px;
+    }
+    .cs-phase-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #171717;
+      margin-bottom: 12px;
+    }
+    .cs-phase-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .cs-phase-items {
+      list-style: none;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cs-phase-items li {
+      font-size: 14px;
+      color: #555;
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .cs-phase-items li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 7px;
+      width: 6px; height: 6px;
+      background: #FF6101;
+      border-radius: 50%;
+    }
+
+    /* ── Solution placeholder ── */
+    .cs-solution { margin-bottom: 100px; }
+    .cs-placeholder {
+      background: #f7f7f7;
+      border-radius: 20px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: #aaa;
+      margin-top: 32px;
+    }
+    .cs-placeholder svg { opacity: 0.4; }
+    .cs-placeholder p { font-size: 15px; font-weight: 500; }
+
+    /* ── Footer ── */
+    footer { background: #FF6101; color: #fff; }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a {
+      color: #fff; font-size: 18px; font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 0.8; }
+    .footer-contact { display: flex; gap: 40px; font-size: 16px; }
+    .footer-contact a {
+      color: #fff; display: flex; align-items: center;
+      gap: 8px; transition: opacity 0.2s;
+    }
+    .footer-contact a:hover { opacity: 0.8; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .fade-up.visible { opacity: 1; transform: none; }
+      .cs-hero { animation: fadeUp 0.7s ease forwards; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav, .cs-wrap { padding-left: 48px; padding-right: 48px; }
+      .cs-hero { grid-template-columns: 1fr; padding: 48px 40px; }
+      .cs-hero-right { display: none; }
+      .cs-title { font-size: 36px; }
+      .cs-overview-grid { grid-template-columns: 1fr; }
+      .cs-phases { grid-template-columns: 1fr 1fr; }
+      .cs-problem { padding: 36px 32px; }
+      .cs-problem-text { font-size: 22px; }
+    }
+    @media (max-width: 640px) {
+      nav, .cs-wrap { padding-left: 20px; padding-right: 20px; }
+      .cs-title { font-size: 28px; }
+      .cs-phases { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-contact { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ NAV ════ -->
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo">SR<span>.</span></a>
+      <div class="nav-links">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#works">Works</a>
+        <a href="index.html#my-story">My Story</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="cs-wrap">
+
+    <a href="index.html#works" class="cs-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Works
+    </a>
+
+    <!-- ── Hero ── -->
+    <div class="cs-hero">
+      <div class="cs-hero-left">
+        <div class="cs-tags">
+          <span class="cs-tag">iOS Design</span>
+          <span class="cs-tag">Android Design</span>
+          <span class="cs-tag">2023</span>
+        </div>
+        <h1 class="cs-title">Škoda Connected App</h1>
+        <p class="cs-subtitle">In-car connectivity app redesigned for seamless interaction between driver and vehicle — a smarter, safer, more intuitive experience.</p>
+      </div>
+      <div class="cs-hero-right">
+        <span>Cover image coming soon</span>
+      </div>
+    </div>
+
+    <!-- ── Overview ── -->
+    <section class="cs-overview fade-up">
+      <div class="cs-section-label">Overview</div>
+      <div class="cs-overview-grid">
+        <p class="cs-overview-desc">
+          Škoda connected app is an in-vehicle and companion mobile app that allows drivers to interact with their car remotely and on the go. I redesigned the full iOS and Android experience to reduce cognitive load while driving, simplify remote vehicle controls, and create a cohesive visual identity aligned with the Škoda brand.
+        </p>
+        <div class="cs-meta-card">
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Role</div>
+            <div class="cs-meta-value">Manager, Product Design</div>
+          </div>
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Platform</div>
+            <div class="cs-meta-value">iOS · Android</div>
+          </div>
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Year</div>
+            <div class="cs-meta-value">2023</div>
+          </div>
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Team</div>
+            <div class="cs-meta-value">Design · Product · Engineering</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Problem ── -->
+    <div class="cs-problem fade-up">
+      <div class="cs-section-label">The Problem</div>
+      <p class="cs-problem-text">"Drivers found the existing app confusing and distracting to use — too many steps to perform basic actions like locking the car or checking range, with a UI that felt generic rather than premium."</p>
+    </div>
+
+    <!-- ── Process ── -->
+    <section class="cs-process fade-up">
+      <div class="cs-section-label">Process &amp; Solution</div>
+      <div class="cs-phases">
+        <div class="cs-phase">
+          <div class="cs-phase-num">01</div>
+          <div class="cs-phase-title">Research</div>
+          <div class="cs-phase-desc">Understanding users, pain points, and market context.</div>
+          <ul class="cs-phase-items">
+            <li>User interviews with buyers &amp; sellers</li>
+            <li>Competitive analysis across resale platforms</li>
+            <li>Analytics review of drop-off funnels</li>
+            <li>Heuristic evaluation of current app</li>
+          </ul>
+        </div>
+        <div class="cs-phase">
+          <div class="cs-phase-num">02</div>
+          <div class="cs-phase-title">Define</div>
+          <div class="cs-phase-desc">Synthesising insights into clear problem statements.</div>
+          <ul class="cs-phase-items">
+            <li>Affinity mapping of research findings</li>
+            <li>User journey mapping</li>
+            <li>Defining core jobs-to-be-done</li>
+            <li>Prioritisation with product team</li>
+          </ul>
+        </div>
+        <div class="cs-phase">
+          <div class="cs-phase-num">03</div>
+          <div class="cs-phase-title">Design</div>
+          <div class="cs-phase-desc">Exploring, iterating, and refining solutions.</div>
+          <ul class="cs-phase-items">
+            <li>Information architecture restructure</li>
+            <li>Low-fi wireframes &amp; flows</li>
+            <li>High-fidelity UI in Figma</li>
+            <li>Prototype testing &amp; iteration</li>
+          </ul>
+        </div>
+        <div class="cs-phase">
+          <div class="cs-phase-num">04</div>
+          <div class="cs-phase-title">Deliver</div>
+          <div class="cs-phase-desc">Shipping and measuring impact.</div>
+          <ul class="cs-phase-items">
+            <li>Design handoff &amp; specs</li>
+            <li>QA collaboration with engineers</li>
+            <li>A/B testing on key flows</li>
+            <li>Post-launch metrics review</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Solution visuals ── -->
+    <section class="cs-solution fade-up">
+      <div class="cs-section-label">Final Designs</div>
+      <div class="cs-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#aaa" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="#aaa" stroke-width="1.5"/></svg>
+        <p>Final screens coming soon</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener">Dribbble</a>
+        <a href="https://instagram.com/santhosh.r777" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <div class="footer-contact">
+        <a href="tel:+919894249490">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          +91 989 424 9490
+        </a>
+        <a href="mailto:santhosh.r777@live.in">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          santhosh.r777@live.in
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
