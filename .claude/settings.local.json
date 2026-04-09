@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -sL -o img3-weather.png \"https://www.figma.com/api/mcp/asset/7ccdd14c-50d8-4933-8ead-e2cd880ae64e\")",
+      "Bash(curl -sL -o img4-cassette.png \"https://www.figma.com/api/mcp/asset/da799a43-3ac3-4814-b8df-033e9a51a32f\")",
+      "Bash(curl -sL -o img5-music.png \"https://www.figma.com/api/mcp/asset/413a8a51-2f74-48e3-ae78-0036b0127a37\")",
+      "Bash(curl -sL -o img7-wide.png \"https://www.figma.com/api/mcp/asset/cc9a0bd5-996f-4ffb-ba56-44b12007edf5\")",
+      "mcp__d44a96e2-e762-420b-82bd-d70170a71cc2__use_figma",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
