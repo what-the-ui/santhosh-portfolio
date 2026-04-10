@@ -708,7 +708,8 @@
     /* ─── Responsive 900px ──────────────────────────────────────────────── */
     @media (max-width: 900px) {
       .nav { padding: 0 24px; }
-      .cs-hero { padding: 0 24px 48px; }
+      .cs-hero { grid-template-columns: 1fr; min-height: auto; padding: 72px 24px 56px; align-items: start; gap: 32px; }
+      .cs-hero-img-ph { min-height: 300px; align-self: auto; }
       .cs-back { left: 24px; }
       .cs-section { padding: 72px 24px; }
       .cs-section-full { padding: 72px 24px; }
@@ -741,6 +742,9 @@
       .cs-compare-screens { grid-template-columns: 1fr; }
       .cs-footer { flex-direction: column; }
       .cs-footer-right { text-align: left; }
+      .cs-hero { padding: 64px 20px 48px; gap: 24px; }
+      .cs-hero-title { font-size: 2rem; }
+      .cs-hero-img-ph { min-height: 220px; }
     }
   </style>
 </head>
