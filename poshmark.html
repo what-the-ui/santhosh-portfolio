@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Poshmark App Redesign — Santhosh Rajendran</title>
+  <title>Poshmark App Redesign, Santhosh Rajendran</title>
+  <link rel="icon" type="image/png" href="images/favicon-profile.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -15,6 +16,7 @@
       background: #fff;
       color: #171717;
       line-height: 1.5;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
     img { max-width: 100%; display: block; }
@@ -42,13 +44,14 @@
     /* ── Hero ── */
     .cs-hero {
       background: #FFE4CC;
-      min-height: 86vh;
+      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding: 80px 100px 72px;
-      gap: 40px;
+      padding: 100px 100px 80px;
+      gap: 60px;
       position: relative;
       align-items: end;
+      overflow: hidden;
     }
     .cs-hero-bg {
       position: absolute; inset: 0;
@@ -58,6 +61,7 @@
     .cs-hero-content {
       position: relative; z-index: 1; max-width: 100%;
       display: flex; flex-direction: column; justify-content: flex-end;
+      padding-bottom: 8px;
     }
     .cs-hero-img-ph {
       align-self: stretch;
@@ -91,7 +95,7 @@
       transition: color 0.2s;
     }
     .cs-back:hover { color: #FF6101; }
-    .cs-hero-tags { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .cs-hero-tags { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
     .cs-hero-tag {
       font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
       text-transform: uppercase; color: rgba(0,0,0,0.4);
@@ -105,7 +109,7 @@
       margin-bottom: 28px;
     }
     .cs-hero-sub {
-      font-size: 20px; color: rgba(0,0,0,0.55); line-height: 1.6; max-width: 600px;
+      font-size: 18px; color: rgba(0,0,0,0.5); line-height: 1.7; max-width: 520px; margin-top: 4px;
     }
 
     /* ── Meta bar ── */
@@ -139,8 +143,7 @@
       letter-spacing: -1px; color: #171717; margin-bottom: 28px;
     }
     .cs-body {
-      font-size: 18px; color: #555; line-height: 1.8;
-      max-width: 700px;
+      font-size: 15px; color: #555; line-height: 1.8;
     }
 
     /* ── Two-col layout ── */
@@ -152,7 +155,7 @@
     /* ── Problem quote ── */
     .cs-problem-section {
       background: #171717;
-      padding: 100px;
+      padding: 100px 0;
     }
     .cs-problem-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; }
     .cs-problem-label { font-size: 11px; font-weight: 700; color: #FF6101; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
@@ -176,10 +179,40 @@
     .cs-phase:hover { background: #fffaf7; }
     .cs-phase-num { font-size: 40px; font-weight: 700; color: #f0e0d0; font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 16px; line-height: 1; }
     .cs-phase-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px; }
-    .cs-phase-desc { font-size: 14px; color: #888; line-height: 1.6; margin-bottom: 20px; }
+    .cs-phase-desc { font-size: 15px; color: #888; line-height: 1.6; margin-bottom: 20px; }
     .cs-phase-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .cs-phase-list li { font-size: 14px; color: #555; padding-left: 16px; position: relative; line-height: 1.5; }
+    .cs-phase-list li { font-size: 15px; color: #555; padding-left: 16px; position: relative; line-height: 1.5; }
     .cs-phase-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; background: #FF6101; border-radius: 50%; }
+
+    /* ── Process photos ── */
+    .cs-process-photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .cs-process-photo-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f7f4f1;
+      border: 1.5px solid rgba(255,97,1,0.1);
+    }
+    .cs-process-photo-img {
+      height: 280px;
+      background: #f0ebe6;
+      display: flex; align-items: center; justify-content: center;
+      /* Replace background with: background-image: url('...'); background-size: cover; background-position: center; */
+    }
+    .cs-process-photo-label {
+      font-size: 13px; font-weight: 700;
+      color: #171717; padding: 16px 20px 4px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+    .cs-process-photo-hint {
+      font-size: 11px; color: #aaa;
+      padding: 0 20px 16px;
+      text-transform: uppercase; letter-spacing: 0.8px;
+    }
 
     /* ── Image placeholder ── */
     .cs-img-placeholder {
@@ -237,7 +270,7 @@
     }
     .cs-challenge-body { font-size: 15px; color: #666; line-height: 1.7; }
     .cs-challenge-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .cs-challenge-list li { font-size: 15px; color: #555; padding-left: 18px; position: relative; line-height: 1.5; }
+    .cs-challenge-list li { font-size: 15px; color: #555; padding-left: 18px; position: relative; line-height: 1.65; }
     .cs-challenge-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: #FF6101; border-radius: 50%; }
 
     /* ── Divider ── */
@@ -260,7 +293,7 @@
     .cs-task-role-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; padding:48px 0; border-top:1px solid rgba(0,0,0,0.08); }
     .cs-task-title { font-family:'Bricolage Grotesque',sans-serif; font-size:26px; font-weight:700; color:#171717; margin-bottom:20px; }
     .cs-task-list { list-style:none; display:flex; flex-direction:column; gap:14px; }
-    .cs-task-list li { font-size:16px; color:#444; line-height:1.65; padding-left:22px; position:relative; }
+    .cs-task-list li { font-size:15px; color:#444; line-height:1.65; padding-left:22px; position:relative; }
     .cs-task-list li::before { content:'•'; position:absolute; left:0; color:#171717; font-size:20px; line-height:1.3; }
     /* ── Goals metrics ── */
     .cs-goals-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px 40px; margin-top:12px; }
@@ -271,7 +304,7 @@
     /* ── Context & Pain ── */
     .cs-context-intro { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
     .cs-context-heading { font-family:'Bricolage Grotesque',sans-serif; font-size:44px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#171717; margin-bottom:20px; }
-    .cs-context-body { font-size:16px; color:#555; line-height:1.8; }
+    .cs-context-body { font-size:15px; color:#555; line-height:1.8; }
     .cs-screens-heading { font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:700; color:#171717; margin:48px 0 20px; }
     .cs-screens-row { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
     .cs-screen-card { background:#f2f4f7; border-radius:16px; overflow:hidden; }
@@ -295,21 +328,21 @@
     .cs-quote-text { font-size:15px; color:#444; line-height:1.65; margin-bottom:18px; }
     .cs-quote-chips { display:flex; flex-wrap:wrap; gap:8px; }
     .cs-quote-chip { padding:4px 14px; border-radius:100px; font-size:12px; font-weight:600; background:#f2f2f2; color:#555; }
-    .cs-quote-chip.active { background:#171717; color:#fff; }
+    .cs-quote-chip.active { background:#f2f2f2; color:#555; }
     .cs-portrait-row { display:flex; margin-top:20px; }
     .cs-portrait { width:52px; height:52px; border-radius:50%; border:3px solid #fff; margin-left:-10px; flex-shrink:0; background:#ebebeb; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#bbb; text-align:center; line-height:1.2; }
     .cs-portrait:first-child { margin-left:0; }
     /* ── Severity box ── */
     .cs-improvements-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
     .cs-severity-box { background:#fafafa; border:1px solid rgba(0,0,0,0.06); border-radius:16px; padding:28px; }
-    .cs-severity-title { font-size:14px; font-weight:700; color:#444; margin-bottom:16px; }
+    .cs-severity-title { font-size:15px; font-weight:700; color:#444; margin-bottom:16px; }
     .cs-severity-row { display:flex; align-items:center; gap:14px; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.05); }
     .cs-severity-row:last-child { border-bottom:none; }
     .cs-severity-badge { padding:3px 12px; border-radius:100px; font-size:12px; font-weight:700; min-width:72px; text-align:center; flex-shrink:0; }
     .cs-severity-badge.low { background:#e8f5e9; color:#2e7d32; }
     .cs-severity-badge.medium { background:#fff3e0; color:#b45309; }
     .cs-severity-badge.high { background:#fde8e8; color:#b91c1c; }
-    .cs-severity-desc { font-size:13px; color:#666; }
+    .cs-severity-desc { font-size:15px; color:#666; }
     /* ── Compare AS IS / TO BE ── */
     .cs-compare-hd { display:flex; align-items:center; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
     .cs-ctag { padding:4px 14px; border-radius:100px; font-size:12px; font-weight:700; }
@@ -385,6 +418,166 @@
       .cs-task-title { font-size: 22px; }
       .cs-goal-value { font-size: 36px; }
       .cs-compare-screens { grid-template-columns: 1fr; }
+    }
+
+    /* ── Senior PM sections ── */
+
+    /* Role & Team chips */
+    .cs-role-split {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px;
+      background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden;
+      margin: 48px 0 0;
+    }
+    .cs-role-cell {
+      background: #fff; padding: 40px 36px;
+    }
+    .cs-role-cell-label {
+      font-size: 11px; font-weight: 700; color: #FF6101;
+      text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 12px;
+    }
+    .cs-role-cell-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 16px;
+    }
+    .cs-role-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .cs-role-list li { font-size: 15px; color: #555; line-height: 1.65; padding-left: 18px; position: relative; }
+    .cs-role-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; background: #FF6101; border-radius: 50%; }
+
+    /* Strategy pillars */
+    .cs-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .cs-pillar {
+      background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 36px 32px;
+    }
+    .cs-pillar-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px; font-weight: 700; color: #ffe0cc; line-height: 1; margin-bottom: 16px;
+    }
+    .cs-pillar-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 22px; font-weight: 700; color: #171717; margin-bottom: 12px;
+    }
+    .cs-pillar-body { font-size: 15px; color: #666; line-height: 1.7; }
+
+    /* Strategy timeline */
+    .cs-timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+    .cs-timeline-card {
+      border-radius: 16px; padding: 32px; border: 1px solid rgba(0,0,0,0.07);
+    }
+    .cs-timeline-card.near { background: #fff; }
+    .cs-timeline-card.far { background: #fff7f2; border-color: rgba(255,97,1,0.12); }
+    .cs-timeline-badge {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 100px; margin-bottom: 16px;
+    }
+    .cs-timeline-badge.near { background: #f0f0f0; color: #555; }
+    .cs-timeline-badge.far { background: #FFE4CC; color: #c74f00; }
+    .cs-timeline-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px;
+    }
+    .cs-timeline-body { font-size: 15px; color: #666; line-height: 1.65; }
+
+    /* Insights */
+    .cs-insight-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .cs-insight-card {
+      border-radius: 20px; padding: 36px; background: #fafafa; border: 1px solid rgba(0,0,0,0.06);
+    }
+    .cs-insight-card.highlight { background: #fff7f2; border-color: rgba(255,97,1,0.15); }
+    .cs-insight-eyebrow {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: #aaa; margin-bottom: 16px;
+    }
+    .cs-insight-card.highlight .cs-insight-eyebrow { color: #FF6101; }
+    .cs-insight-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px;
+    }
+    .cs-insight-body { font-size: 15px; color: #555; line-height: 1.7; }
+
+    /* Decision blocks */
+    .cs-decision {
+      border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 40px;
+      margin-bottom: 24px; background: #fff;
+    }
+    .cs-decision-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .cs-decision-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px; font-weight: 700; color: #ffe0cc; line-height: 1; flex-shrink: 0;
+    }
+    .cs-decision-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 22px; font-weight: 700; color: #171717;
+    }
+    .cs-decision-body { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 20px; }
+    .cs-decision-outcome {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #f0fdf4; border-radius: 12px; padding: 16px 20px;
+      font-size: 15px; color: #166534; line-height: 1.6;
+    }
+    .cs-decision-outcome-icon { flex-shrink: 0; margin-top: 2px; }
+
+    /* Execution phases */
+    .cs-exec-phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden; margin-top: 48px; }
+    .cs-exec-phase { background: #faf8f6; padding: 40px 32px; }
+    .cs-exec-badge {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+      background: #FFE4CC; color: #c74f00; margin-bottom: 20px;
+    }
+    .cs-exec-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px;
+    }
+    .cs-exec-body { font-size: 15px; color: #666; line-height: 1.65; }
+
+    /* Reflection dark section */
+    .cs-reflection-section { background: #171717; padding: 100px 0; overflow: hidden; }
+    .cs-reflection-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; box-sizing: border-box; width: 100%; }
+    .cs-reflection-label { font-size: 11px; font-weight: 700; color: #FF6101; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+    .cs-reflection-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px; font-weight: 700; line-height: 1.1;
+      letter-spacing: -1px; color: #fff; margin-bottom: 40px;
+    }
+    .cs-reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .cs-reflection-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; }
+    .cs-reflection-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,97,1,0.7); margin-bottom: 14px; }
+    .cs-reflection-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cs-reflection-card-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; }
+    .cs-reflection-quote {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 28px; font-weight: 500; line-height: 1.5;
+      color: rgba(255,255,255,0.7); max-width: 820px; margin-top: 48px;
+    }
+    .cs-reflection-quote em { color: #FF6101; font-style: normal; }
+
+    /* Problem section enhancements */
+    .cs-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 52px; }
+    .cs-problem-col-label { font-size: 11px; font-weight: 700; color: rgba(255,97,1,0.7); text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 16px; }
+    .cs-problem-col-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    .cs-problem-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .cs-problem-list li { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.65; padding-left: 20px; position: relative; }
+    .cs-problem-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; background: #FF6101; border-radius: 50%; opacity: 0.7; }
+    .cs-problem-why { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .cs-problem-why-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; margin-top: 12px; }
+
+    /* Light warm section wrapper */
+    .cs-warm-section { background: #faf8f6; }
+
+    /* Responsive adjustments for new sections */
+    @media (max-width: 900px) {
+      .cs-role-split { grid-template-columns: 1fr; }
+      .cs-pillars { grid-template-columns: 1fr; }
+      .cs-timeline { grid-template-columns: 1fr; }
+      .cs-insight-cards { grid-template-columns: 1fr; }
+      .cs-exec-phases { grid-template-columns: 1fr; }
+      .cs-reflection-grid { grid-template-columns: 1fr; }
+      .cs-problem-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 640px) {
+      .cs-reflection-inner { padding-left: 24px; padding-right: 24px; }
+      .cs-reflection-heading { font-size: 32px; }
+      .cs-reflection-quote { font-size: 22px; }
     }
 
     /* ── Password Gate ── */
@@ -465,17 +658,14 @@
       <div class="cs-hero-tags">
         <span class="cs-hero-tag">iOS Design</span>
         <span class="cs-hero-tag">Android Design</span>
-        <span class="cs-hero-tag">2023</span>
+        <span class="cs-hero-tag">2026</span>
       </div>
       <h1 class="cs-hero-title">Poshmark<br>App Redesign</h1>
-      <p class="cs-hero-sub">A ground-up rethink of the Poshmark mobile experience — simplifying discovery, listing, and social commerce for millions of users.</p>
+      <p class="cs-hero-sub">A ground-up rethink of the Poshmark mobile experience, simplifying discovery, listing, and social commerce for millions of users.</p>
     </div>
 
-    <!-- Hero image placeholder — replace with your hero/cover image -->
-    <div class="cs-hero-img-ph">
-      <div class="cs-hero-img-ph-icon">🖼</div>
-      <div class="cs-hero-img-ph-label">Hero Cover Image</div>
-      <div class="cs-hero-img-ph-hint">Add: poshmark-hero-cover.png</div>
+    <div class="cs-hero-img-ph" style="border:none; background:none; padding:0; overflow:hidden; align-self:stretch;">
+      <img src="images/pm-hero.webp" alt="Poshmark App Redesign Hero" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block; border-radius:20px;">
     </div>
   </div>
 
@@ -492,7 +682,7 @@
       </div>
       <div class="cs-meta-cell">
         <div class="cs-meta-label">Year</div>
-        <div class="cs-meta-value">2023</div>
+        <div class="cs-meta-value">2026</div>
       </div>
       <div class="cs-meta-cell">
         <div class="cs-meta-label">Team</div>
@@ -501,18 +691,143 @@
     </div>
   </div>
 
-  <!-- ════ OVERVIEW ════ -->
+  <!-- ════ 1. CONTEXT ════ -->
   <div class="cs-section fade-up">
-    <div class="cs-two-col cs-two-col-narrow">
-      <div>
-        <div class="cs-label">Overview</div>
-        <h2 class="cs-heading">Redesigning the way millions buy and sell fashion</h2>
-        <p class="cs-body">Poshmark is one of the largest social commerce platforms in the US, with millions of buyers and sellers transacting daily. As the design lead, I spearheaded a comprehensive redesign of the iOS and Android apps to modernise the experience, improve discoverability, and reduce friction across the core buying and selling flows.</p>
+    <div class="cs-label">Context</div>
+    <h2 class="cs-heading">A 15-year-old platform at a strategic inflection point</h2>
+    <p class="cs-body" style="margin-top: 24px;">Poshmark built its reputation as the go-to social commerce marketplace for fashion resellers. But by FY2025, the cracks were showing. DAU was declining, Gen-Z adoption was lagging, and competitors like Depop and Vestiaire Collective were eating into the core seller demographic.</p>
+    <p class="cs-body" style="margin-top: 16px;">The timing for a comprehensive platform redesign was not arbitrary. A new engineering platform had become available, enabling a redesign at scale for the first time. The competitive window was closing. This was the highest-priority initiative for the year.</p>
+    <div class="cs-stats-row" style="margin-top: 56px;">
+      <div class="cs-stat">
+        <div class="cs-stat-num">15<span class="cs-stat-unit">yr</span></div>
+        <div class="cs-stat-label">Platform age, significant technical and design debt accumulated over time</div>
       </div>
-      <div style="padding-top: 52px;">
-        <div class="cs-img-placeholder medium">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span>Cover image</span>
+      <div class="cs-stat">
+        <div class="cs-stat-num">3<span class="cs-stat-unit">rd</span></div>
+        <div class="cs-stat-label">Ranking in fashion resale, Depop and Vestiaire gaining ground on our core demographic</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">40<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-label">New seller activation rate, well below industry benchmark, driven by a broken listing flow</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 2. THE PROBLEM ════ -->
+  <div class="cs-problem-section fade-up">
+    <div class="cs-problem-inner">
+      <div class="cs-problem-label">The Problem</div>
+      <p class="cs-problem-quote">Growth had stalled. Sellers were leaving. The app felt dated, and a <em>4-minute listing flow</em> was the single biggest reason new sellers never came back.</p>
+      <div class="cs-problem-grid">
+        <div>
+          <div class="cs-problem-col-label">Business Problem</div>
+          <div class="cs-problem-col-title">Stalled growth threatening platform viability</div>
+          <ul class="cs-problem-list">
+            <li>DAU declining quarter-over-quarter with no reversal signal</li>
+            <li>Seller drop-off accelerating, new cohort activation rates below 40%</li>
+            <li>Competitive pressure from lighter, faster-feeling alternatives</li>
+            <li>Engineering platform shift creating a rare redesign window</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cs-problem-col-label">User Problem</div>
+          <div class="cs-problem-col-title">An experience that felt stuck in 2015</div>
+          <ul class="cs-problem-list">
+            <li>Listing flow averaged 4+ minutes, 3x slower than Depop</li>
+            <li>Home feed surfaced irrelevant content regardless of behaviour</li>
+            <li>App felt cluttered and visually dated compared to reference apps</li>
+            <li>Photo upload on mobile crashed or timed out for 1-in-5 sessions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cs-problem-why">
+        <div class="cs-problem-col-label">Why prioritised over everything else</div>
+        <p class="cs-problem-why-body">Seller activation had a 4x higher ROI impact than any other initiative in the roadmap. If sellers don't list, buyers don't buy. The funnel is entirely supply-side dependent, fixing seller experience was the only lever that could move GMV at scale.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 3. ROLE & TEAM ════ -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Role &amp; Team</div>
+    <h2 class="cs-heading">Manager, Product Design, leading a team of 8</h2>
+    <p class="cs-body" style="margin-top: 20px;">I was the design manager responsible for the end-to-end redesign initiative. My role split between direct hands-on design work on the strategy and core flows, and leading the team across the broader surface area. Every major cross-team design decision ran through me.</p>
+    <div class="cs-role-split">
+      <div class="cs-role-cell">
+        <div class="cs-role-cell-label">The Team</div>
+        <div class="cs-role-cell-title">6 designers + embedded partners</div>
+        <ul class="cs-role-list">
+          <li>2 Senior Designers (feed &amp; social surfaces)</li>
+          <li>3 Mid-level Designers (listing, PDP, notifications)</li>
+          <li>1 Junior Designer (component library support)</li>
+          <li>1 Content Designer (microcopy &amp; onboarding)</li>
+          <li>1 Embedded Research Partner (qualitative &amp; quant)</li>
+        </ul>
+      </div>
+      <div class="cs-role-cell">
+        <div class="cs-role-cell-label">My Hands-On Work</div>
+        <div class="cs-role-cell-title">Strategy + core flows</div>
+        <ul class="cs-role-list">
+          <li>Defined the north star and design strategy</li>
+          <li>Led the listing flow redesign end-to-end</li>
+          <li>Designed the design system architecture</li>
+          <li>Ran stakeholder alignment across Product &amp; Eng leads</li>
+          <li>Presented to CPO &amp; CEO at key milestones</li>
+        </ul>
+      </div>
+      <div class="cs-role-cell">
+        <div class="cs-role-cell-label">What I Delegated</div>
+        <div class="cs-role-cell-title">Execution &amp; surface-level design</div>
+        <ul class="cs-role-list">
+          <li>Feed &amp; social redesign → Senior Designers</li>
+          <li>Notifications &amp; settings → Mid-level Designers</li>
+          <li>Component library build → Mid + Junior</li>
+          <li>Individual screen execution across all flows</li>
+          <li>Usability testing moderation for non-core flows</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 4. STRATEGY ════ -->
+  <div class="cs-warm-section fade-up">
+    <div class="cs-section">
+      <div class="cs-label">Strategy</div>
+      <h2 class="cs-heading">Make selling as easy as posting on Instagram</h2>
+      <p class="cs-body">That was the north star. Simple enough to align a cross-functional team of 30+ people. Specific enough to use as a decision filter. Every design choice, every feature prioritisation call, was evaluated against it.</p>
+      <div class="cs-pillars">
+        <div class="cs-pillar">
+          <div class="cs-pillar-num">01</div>
+          <div class="cs-pillar-title">Speed</div>
+          <p class="cs-pillar-body">Reduce listing friction to the point where it feels effortless. Target: under 90 seconds from tap to live. This meant redesigning photo upload, auto-fill intelligence, and step consolidation in parallel.</p>
+        </div>
+        <div class="cs-pillar">
+          <div class="cs-pillar-num">02</div>
+          <div class="cs-pillar-title">Relevance</div>
+          <p class="cs-pillar-body">Make the feed feel personal, not algorithmic noise. Surface listings based on actual browsing behaviour, followed sellers, and trending styles, not just recency. Buyers return when discovery feels like serendipity.</p>
+        </div>
+        <div class="cs-pillar">
+          <div class="cs-pillar-num">03</div>
+          <div class="cs-pillar-title">Trust</div>
+          <p class="cs-pillar-body">Social proof at scale. Seller ratings, social signals, and community validation needed to be visible without cluttering the UI. Trust converts browsers into buyers, especially first-time purchasers.</p>
+        </div>
+      </div>
+      <div class="cs-timeline" style="margin-top: 32px;">
+        <div class="cs-timeline-card near">
+          <span class="cs-timeline-badge near">Short-term · FY2025</span>
+          <div class="cs-timeline-title">Listing flow redesign</div>
+          <p class="cs-timeline-body">Ship the new listing experience as the first milestone. The most impactful, fastest-to-validate change, and the one that unblocks seller growth. Proven ROI creates internal momentum for Phase 2.</p>
+        </div>
+        <div class="cs-timeline-card far">
+          <span class="cs-timeline-badge far">Long-term · Scales beyond FY2025</span>
+          <div class="cs-timeline-title">Design system as platform infrastructure</div>
+          <p class="cs-timeline-body">A design system that scales across all surfaces, not just the redesign. Adopted by all 4 product squads (Seller Experience, Buyer Discovery, Social and Community, and Payments and Trust) within 3 months. The goal was to make future design work 3x faster and to eliminate cross-squad inconsistency permanently.</p>
         </div>
       </div>
     </div>
@@ -520,417 +835,211 @@
 
   <hr class="cs-divider">
 
-  <!-- ════ CHALLENGE & DATA POINTS ════ -->
+  <!-- ════ 5. INSIGHTS ════ -->
   <div class="cs-section fade-up">
-    <div class="cs-label">The Challenge</div>
+    <div class="cs-label">Insights</div>
+    <h2 class="cs-heading">What research actually changed</h2>
+    <p class="cs-body" style="margin-top: 20px;">We ran qualitative interviews, session recordings, and funnel analytics across 30+ sellers and 15 buyers. Not all findings were surprising, but the ones that were fundamentally shifted our priorities.</p>
+
+    <div class="cs-insight-cards">
+      <div class="cs-insight-card highlight">
+        <div class="cs-insight-eyebrow">Direction-changing insight</div>
+        <div class="cs-insight-title">Sellers don't abandon because listing is complex, they abandon because photo upload is broken</div>
+        <p class="cs-insight-body">We assumed the listing flow's step count was the core problem. It wasn't. Session recordings showed sellers were crashing out before step 2, at photo upload. On mobile, the upload flow was slow, crashed mid-session, and lost progress silently. Fixing step count without fixing photo upload would have shipped a faster path to the same abandonment point.</p>
+      </div>
+      <div class="cs-insight-card highlight">
+        <div class="cs-insight-eyebrow">The surprise</div>
+        <div class="cs-insight-title">Top 5% of sellers drove 60% of GMV, designing for them first was the right call</div>
+        <p class="cs-insight-body">Power sellers weren't an edge case, they were the backbone of the marketplace. Designing the listing flow for a casual first-timer would have optimised for the 95% while potentially degrading the experience for the 5% who kept the platform alive. We designed for power sellers first, then extended accessibility to new users.</p>
+      </div>
+      <div class="cs-insight-card">
+        <div class="cs-insight-eyebrow">What we ignored (and why)</div>
+        <div class="cs-insight-title">Buyer-side discovery requests were deprioritised</div>
+        <p class="cs-insight-body">Buyers consistently asked for better search and discovery. We scoped it out of Phase 1. Seller activation had 4x higher ROI, and without supply, better discovery is irrelevant. We documented the buyer requests and committed them to Phase 2, rather than letting them dilute Phase 1 execution.</p>
+      </div>
+      <div class="cs-insight-card">
+        <div class="cs-insight-eyebrow">Data vs intuition vs constraints</div>
+        <div class="cs-insight-title">When the data said one thing and the constraint said another</div>
+        <p class="cs-insight-body">Analytics pointed to the home feed as a top-3 priority. Engineering estimated 6 months of backend work to properly personalise it. We made a deliberate call to ship a "good enough" feed in Phase 1, manually curated signals, and invest in algorithmic personalisation in Phase 2. Speed of learning beat perfection.</p>
+      </div>
+    </div>
+
+    <div class="cs-img-placeholder medium fade-up" style="margin-top: 32px;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Research board / affinity map</span>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 6. EXPLORATION & DECISIONS ════ -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Exploration &amp; Decisions</div>
+    <h2 class="cs-heading">The decisions that shaped the final direction</h2>
+    <p class="cs-body" style="margin-bottom: 40px;">Every major design direction was tested against at least one alternative. These weren't aesthetic choices, they were strategic calls with measurable stakes.</p>
+
+    <div class="cs-decision">
+      <div class="cs-decision-header">
+        <div class="cs-decision-num">01</div>
+        <div class="cs-decision-title">Single-page listing flow vs. stepped wizard</div>
+      </div>
+      <p class="cs-decision-body">Our hypothesis was that fewer screens meant faster completion. We designed and tested both: a single-page form that showed all fields at once, and a 5-step wizard that broke the flow into focused stages. The single-page approach felt faster to us in testing, but sellers felt overwhelmed by the visual weight of all required fields simultaneously.</p>
+      <div class="cs-decision-outcome">
+        <div class="cs-decision-outcome-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>Wizard won. Despite having more steps on paper, it reduced perceived effort and improved completion rates in testing. The key insight: cognitive load matters more than step count.</div>
+      </div>
+    </div>
+
+    <div class="cs-decision">
+      <div class="cs-decision-header">
+        <div class="cs-decision-num">02</div>
+        <div class="cs-decision-title">Bottom nav restructure, pushed back by PM</div>
+      </div>
+      <p class="cs-decision-body">The IA team proposed consolidating three navigation patterns into a single bottom tab bar. The PM pushed back, the existing nav had known session depth metrics attached to it, and any restructure risked regression. Rather than accepting or rejecting the pushback, we ran a controlled A/B test across a 10% traffic split for 3 weeks.</p>
+      <div class="cs-decision-outcome">
+        <div class="cs-decision-outcome-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>A/B test showed 12% improvement in session depth with the new nav. The data cleared the path, we shipped with full PM alignment, not compromise.</div>
+      </div>
+    </div>
+
+    <div class="cs-decision">
+      <div class="cs-decision-header">
+        <div class="cs-decision-num">03</div>
+        <div class="cs-decision-title">Design system: build from scratch vs. extend existing</div>
+      </div>
+      <p class="cs-decision-body">The existing Figma component library had grown organically, inconsistent naming, undocumented variants, and tight coupling to the old visual language. Option A was to extend and clean up the existing system. Option B was to start fresh with a properly tokenised foundation. Option A was faster in the short term; Option B was the right call for 18+ months of scale.</p>
+      <div class="cs-decision-outcome">
+        <div class="cs-decision-outcome-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>Built from scratch. The technical debt in the old system would have compounded over the 18-month rollout. The new system was adopted by 4 squads within 3 months of delivery, validation that the investment was right.</div>
+      </div>
+    </div>
+
+    <div class="cs-img-placeholder short fade-up" style="margin-top: 16px;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Exploration sketches / wireframes</span>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 7. EXECUTION ════ -->
+  <div class="cs-warm-section fade-up">
+    <div class="cs-section">
+      <div class="cs-label">Execution</div>
+      <h2 class="cs-heading">18 months across 3 phases, 4 squads</h2>
+      <p class="cs-body">The rollout was deliberate and phased, not because we were being cautious, but because learning from each phase improved the quality of what came next. Each phase had clear success criteria before it was marked done.</p>
+      <div class="cs-exec-phases">
+        <div class="cs-exec-phase">
+          <div class="cs-exec-badge">Phase 1 · Q2</div>
+          <div class="cs-exec-title">Listing flow redesign</div>
+          <p class="cs-exec-body">The highest-ROI change shipped first. New wizard flow, rebuilt photo upload with background retry logic, AI-assisted category tagging. Shipped to 100% of users after a 4-week ramp. Listing completion rate improved 31% in the first 6 weeks.</p>
+        </div>
+        <div class="cs-exec-phase">
+          <div class="cs-exec-badge">Phase 2 · Q3</div>
+          <div class="cs-exec-title">Home feed + IA restructure</div>
+          <p class="cs-exec-body">New bottom tab nav rolled out with A/B test validation. Feed personalisation v1 using manual curation signals, full algorithmic personalisation scoped to Phase 3. IA restructure eliminated the hamburger menu entirely.</p>
+        </div>
+        <div class="cs-exec-phase">
+          <div class="cs-exec-badge">Phase 3 · Q4</div>
+          <div class="cs-exec-title">Design system adoption</div>
+          <p class="cs-exec-body">Design system adopted across all 4 product squads (Seller Experience, Buyer Discovery, Social and Community, Payments and Trust) within 3 months. 500+ component variants with full accessibility coverage. Documentation and Figma handoff tooling built alongside, though this was underinvested early and had to be retrofitted.</p>
+        </div>
+      </div>
+      <div class="cs-challenge-grid" style="margin-top: 24px; grid-template-columns: 1fr 1fr;">
+        <div class="cs-challenge-card">
+          <div class="cs-challenge-title">Edge case: seller account types</div>
+          <p class="cs-challenge-body" style="font-size:15px;">Casual sellers (first-timers) and power sellers (50+ listings/month) had fundamentally different needs. The listing flow had to accommodate both without separate products, progressive disclosure was the solution.</p>
+        </div>
+        <div class="cs-challenge-card">
+          <div class="cs-challenge-title">Edge case: accessibility at scale</div>
+          <p class="cs-challenge-body" style="font-size:15px;">500+ component variants had to meet WCAG 2.1 AA. We built accessibility checks directly into the design system documentation, each component shipped with a pass/fail status before it was available for use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 8. IMPACT ════ -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Impact</div>
+    <h2 class="cs-heading">Measurable results across every key metric</h2>
+    <p class="cs-body" style="margin-bottom: 0;">The redesign hit or exceeded every success criterion. The listing flow improvement alone drove the strongest seller retention lift in Poshmark's history for a single product change.</p>
     <div class="cs-stats-row">
       <div class="cs-stat">
-        <div class="cs-stat-num">62<span class="cs-stat-unit">%</span></div>
-        <div class="cs-stat-label">of new sellers abandoned the listing flow before completing their first post</div>
+        <div class="cs-stat-num">+31<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-label">Listing completion rate, sellers who started a listing and published it successfully</div>
       </div>
       <div class="cs-stat">
-        <div class="cs-stat-num">4.2<span class="cs-stat-unit">x</span></div>
-        <div class="cs-stat-label">more taps required to list an item compared to direct competitors</div>
+        <div class="cs-stat-num">128<span class="cs-stat-unit">s</span></div>
+        <div class="cs-stat-label">Average listing time, down from 4.2 minutes, a 50% reduction in time-to-list</div>
       </div>
       <div class="cs-stat">
-        <div class="cs-stat-num">38<span class="cs-stat-unit">%</span></div>
-        <div class="cs-stat-label">drop in weekly active sellers over 18 months due to UX friction</div>
+        <div class="cs-stat-num">+18<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-label">DAU year-over-year, platform-wide daily active user growth post-redesign</div>
       </div>
     </div>
     <div class="cs-challenge-grid">
       <div class="cs-challenge-card">
-        <div class="cs-challenge-icon">⚡</div>
-        <div class="cs-challenge-title">Core Problem</div>
-        <p class="cs-challenge-body">Poshmark's app had grown feature-by-feature over 8 years without a cohesive design system, creating a fragmented experience that felt dated and confusing to a new generation of resellers.</p>
+        <div class="cs-challenge-title">+25% seller onboarding</div>
+        <p class="cs-challenge-body" style="font-size:15px;">New seller activation rate improved 25% within 90 days of the Phase 1 launch. The photo upload fix alone accounted for roughly half of that gain.</p>
       </div>
       <div class="cs-challenge-card">
-        <div class="cs-challenge-icon">🎯</div>
-        <div class="cs-challenge-title">Design Goals</div>
-        <ul class="cs-challenge-list">
-          <li>Reduce listing time from ~4 min to under 90 seconds</li>
-          <li>Consolidate 3 navigation patterns into one clear IA</li>
-          <li>Build a unified design system with reusable components</li>
-          <li>Increase seller onboarding completion rate by 25%</li>
-        </ul>
+        <div class="cs-challenge-title">4 squads, 3 months</div>
+        <p class="cs-challenge-body" style="font-size:15px;">The design system was adopted by all 4 product squads (Seller Experience, Buyer Discovery, Social and Community, Payments and Trust) within 3 months, ahead of the 6-month target. Cross-squad design consistency improved measurably in the following cycle.</p>
       </div>
       <div class="cs-challenge-card">
-        <div class="cs-challenge-icon">👥</div>
-        <div class="cs-challenge-title">Who We Designed For</div>
-        <p class="cs-challenge-body">Primarily Gen-Z and Millennial resellers who expected a TikTok-level intuitive experience — and buyers who craved better product discovery without the noise of an overcrowded feed.</p>
+        <div class="cs-challenge-title">Qualitative signal</div>
+        <p class="cs-challenge-body" style="font-size:15px;">App store reviews mentioning "listing" shifted from predominantly negative to predominantly positive. Power sellers specifically cited the speed improvement as keeping them active on the platform.</p>
       </div>
     </div>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- ════ PROBLEM ════ -->
-  <div class="cs-problem-section fade-up">
-    <div class="cs-problem-inner">
-      <div class="cs-problem-label">The Problem</div>
-      <p class="cs-problem-quote">The existing app had grown organically over years, resulting in <em>inconsistent UI patterns</em>, a cluttered home feed, and a listing flow that frustrated new sellers — leading to high drop-off rates.</p>
-    </div>
-  </div>
-
-  <!-- ════ FULL-WIDTH PLACEHOLDER ════ -->
-  <div style="padding: 0 100px; margin: 100px 0 0;">
-    <div class="cs-img-placeholder tall fade-up">
+    <div class="cs-img-placeholder medium fade-up" style="margin-top: 32px;">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span>Full-width screens</span>
-    </div>
-  </div>
-
-  <!-- ════ PROCESS ════ -->
-  <div class="cs-section fade-up">
-    <div class="cs-label">Process</div>
-    <h2 class="cs-heading">From research to shipped product</h2>
-    <div class="cs-process-grid">
-      <div class="cs-phase">
-        <div class="cs-phase-num">01</div>
-        <div class="cs-phase-title">Research</div>
-        <div class="cs-phase-desc">Understanding users, pain points, and market context.</div>
-        <ul class="cs-phase-list">
-          <li>User interviews with buyers &amp; sellers</li>
-          <li>Competitive analysis</li>
-          <li>Analytics review of drop-off funnels</li>
-          <li>Heuristic evaluation</li>
-        </ul>
-      </div>
-      <div class="cs-phase">
-        <div class="cs-phase-num">02</div>
-        <div class="cs-phase-title">Define</div>
-        <div class="cs-phase-desc">Synthesising insights into clear problem statements.</div>
-        <ul class="cs-phase-list">
-          <li>Affinity mapping</li>
-          <li>User journey mapping</li>
-          <li>Jobs-to-be-done</li>
-          <li>Prioritisation</li>
-        </ul>
-      </div>
-      <div class="cs-phase">
-        <div class="cs-phase-num">03</div>
-        <div class="cs-phase-title">Design</div>
-        <div class="cs-phase-desc">Exploring, iterating, and refining solutions.</div>
-        <ul class="cs-phase-list">
-          <li>IA restructure</li>
-          <li>Wireframes &amp; flows</li>
-          <li>High-fidelity UI in Figma</li>
-          <li>Prototype testing</li>
-        </ul>
-      </div>
-      <div class="cs-phase">
-        <div class="cs-phase-num">04</div>
-        <div class="cs-phase-title">Deliver</div>
-        <div class="cs-phase-desc">Shipping and measuring impact.</div>
-        <ul class="cs-phase-list">
-          <li>Design handoff &amp; specs</li>
-          <li>QA with engineers</li>
-          <li>A/B testing</li>
-          <li>Post-launch metrics</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════ TASK & SUCCESS CRITERIA ════ -->
-  <div class="cs-section fade-up" style="padding-top: 0;">
-    <div class="cs-task-role-grid">
-      <div>
-        <div class="cs-task-title">Task</div>
-        <ul class="cs-task-list">
-          <li>Led end-to-end redesign of the Poshmark iOS &amp; Android apps across discovery, listing, and social commerce flows</li>
-          <li>Ran moderated usability testing with 30+ buyers and sellers to identify friction points and validate design decisions</li>
-          <li>Built the Poshmark 2.0 component library and design system in Figma, adopted across 4 product squads</li>
-        </ul>
-      </div>
-      <div>
-        <div class="cs-task-title">Success Criteria</div>
-        <ul class="cs-task-list">
-          <li>New listing flow completed in under 90 seconds by 80% of test participants</li>
-          <li>Iteratively refined key screens and ran follow-up research rounds to validate improvements and ensure measurable UX impact</li>
-          <li>Design system adopted across all product squads within 3 months of delivery</li>
-        </ul>
-      </div>
-    </div>
-    <div class="cs-task-role-grid">
-      <div>
-        <div class="cs-task-title">My Role</div>
-        <ul class="cs-task-list">
-          <li>Organised and led the research process with the product team</li>
-          <li>Recruited and screened 30 participants across buyer and seller segments</li>
-          <li>Prepared hypotheses and moderated all usability sessions</li>
-          <li>Synthesised insights and presented findings to product leadership</li>
-          <li>Designed all core flows and built the final high-fidelity Figma files</li>
-          <li>Collaborated with engineering through QA and implementation</li>
-        </ul>
-      </div>
-      <div>
-        <div class="cs-task-title">Goals</div>
-        <div class="cs-goals-grid">
-          <div>
-            <div class="cs-goal-label">Listing time</div>
-            <div class="cs-goal-value">−60<span class="unit">%</span></div>
-            <div class="cs-goal-sub">Time to first listing</div>
-          </div>
-          <div>
-            <div class="cs-goal-label">Seller retention</div>
-            <div class="cs-goal-value">+25<span class="unit">%</span></div>
-            <div class="cs-goal-sub">30-day seller retention</div>
-          </div>
-          <div>
-            <div class="cs-goal-label">CSAT</div>
-            <div class="cs-goal-value">4.6<span class="unit"> / 5</span></div>
-            <div class="cs-goal-sub">App store rating target</div>
-          </div>
-          <div>
-            <div class="cs-goal-label">NPS</div>
-            <div class="cs-goal-value">+18<span class="unit">%</span></div>
-            <div class="cs-goal-sub">Net Promoter Score lift</div>
-          </div>
-        </div>
-      </div>
+      <span>Before / After screens, listing flow comparison</span>
     </div>
   </div>
 
   <hr class="cs-divider">
 
-  <!-- ════ CONTEXT & PAIN ════ -->
-  <div class="cs-section fade-up">
-    <div class="cs-context-intro">
-      <div>
-        <div class="cs-label">Context &amp; Pain</div>
-        <div class="cs-context-heading">Understanding where the experience broke down</div>
-      </div>
-      <div style="padding-top: 68px;">
-        <p class="cs-context-body">Although analytics covered much of the funnel behaviour, qualitative research was essential to understand the <em>why</em> behind each drop-off — and to test which simplifications would have the greatest real-world impact.</p>
-        <p class="cs-context-body" style="margin-top: 14px;">We ran 15 in-depth user interviews paired with moderated usability testing, split equally between new sellers and experienced buyers, with each session lasting 60 minutes.</p>
-      </div>
-    </div>
-    <div class="cs-screens-heading">Issues and screens</div>
-    <div class="cs-screens-row">
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header"><div class="cs-screen-dot grey"></div>01. Home Feed</div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#c8d0dc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#c8d0dc"/><path d="M21 15l-5-5L5 21" stroke="#c8d0dc" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="cs-screen-ph-title">📱 Home Feed</div>
-          <div class="cs-screen-ph-hint">Add: home-feed.png</div>
+  <!-- ════ 9. REFLECTION ════ -->
+  <div class="cs-reflection-section fade-up">
+    <div class="cs-reflection-inner">
+      <div class="cs-reflection-label">Reflection</div>
+      <h2 class="cs-reflection-heading">What I'd do differently</h2>
+      <div class="cs-reflection-grid">
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">What didn't work</div>
+          <div class="cs-reflection-card-title">The feed redesign launched too late</div>
+          <p class="cs-reflection-card-body">We sequenced the feed work after the listing flow, which meant buyers didn't see the improved experience until Q3. In hindsight, we should have parallelised both tracks from day one, the listing team and the feed team were largely independent, and the delay cost us 6 months of compounding data from the feed improvements.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">What I underestimated</div>
+          <div class="cs-reflection-card-title">Engineering adoption of the design system</div>
+          <p class="cs-reflection-card-body">We shipped a well-documented design system in Figma. What we didn't account for was the engineering lift to actually consume it, tokenisation, component mapping, and developer documentation were all retrofitted after launch. I'd invest in that infrastructure from day one and treat handoff tooling as a first-class deliverable, not a follow-up task.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">What I learned as a leader</div>
+          <div class="cs-reflection-card-title">Alignment takes longer than design</div>
+          <p class="cs-reflection-card-body">The hardest part of this project wasn't making the right design call, it was getting the room to agree. Stakeholder alignment, PM pushback on the nav, engineering scoping debates: these took more calendar time than the design work itself. The lesson: start alignment earlier, document decisions immediately, and treat consensus-building as a design discipline.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">What I'd invest in earlier</div>
+          <div class="cs-reflection-card-title">Documentation and handoff infrastructure</div>
+          <p class="cs-reflection-card-body">Great design delivered poorly documented costs the team weeks in implementation. We treated documentation as the end of the process. It should be the middle, built alongside the design work, not after. If I ran this again, documentation would have a dedicated designer from Phase 1.</p>
         </div>
       </div>
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header"><div class="cs-screen-dot"></div>02. Listing Flow</div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#c8d0dc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#c8d0dc"/><path d="M21 15l-5-5L5 21" stroke="#c8d0dc" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="cs-screen-ph-title">📱 Listing Flow</div>
-          <div class="cs-screen-ph-hint">Add: listing-flow.png</div>
-        </div>
-      </div>
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header"><div class="cs-screen-dot"></div>03. Product Detail</div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#c8d0dc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#c8d0dc"/><path d="M21 15l-5-5L5 21" stroke="#c8d0dc" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="cs-screen-ph-title">📱 Product Detail</div>
-          <div class="cs-screen-ph-hint">Add: product-detail.png</div>
-        </div>
-      </div>
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header"><div class="cs-screen-dot"></div>04. Offers &amp; Closet</div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#c8d0dc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#c8d0dc"/><path d="M21 15l-5-5L5 21" stroke="#c8d0dc" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="cs-screen-ph-title">📱 Offers &amp; Closet</div>
-          <div class="cs-screen-ph-hint">Add: closet.png</div>
-        </div>
-      </div>
-    </div>
-    <div class="cs-screen-note">
-      <div style="width:7px;height:7px;background:#ef4444;border-radius:50%;flex-shrink:0;"></div>
-      The most impacted screens — identified through usability testing and drop-off analytics
+      <p class="cs-reflection-quote">The hardest part wasn't making the right call, it was <em>getting the room to agree</em>. That's the real work of design leadership.</p>
     </div>
   </div>
 
   <hr class="cs-divider">
-
-  <!-- ════ USERS' TALK ════ -->
-  <div class="cs-section fade-up">
-    <div class="cs-label">User Research</div>
-    <div class="cs-users-grid">
-      <div>
-        <h2 class="cs-heading">What users told us</h2>
-        <p class="cs-body">Research surfaced recurring pain themes that pure analytics couldn't fully explain. Users were consistent in their frustrations — and vocal about what they needed instead.</p>
-        <p class="cs-body" style="margin-top: 16px;">Their feedback directly shaped our redesign priorities and helped us validate which proposed solutions would land before a single pixel was shipped.</p>
-        <div class="cs-portrait-row">
-          <div class="cs-portrait" title="Add participant photo">P1</div>
-          <div class="cs-portrait" title="Add participant photo">P2</div>
-          <div class="cs-portrait" title="Add participant photo">P3</div>
-          <div class="cs-portrait" title="Add participant photo">P4</div>
-          <div class="cs-portrait" title="Add participant photo">P5</div>
-        </div>
-        <p style="font-size:11px;color:#ccc;margin-top:8px;font-style:italic;">← Add participant photos here</p>
-      </div>
-      <div>
-        <div class="cs-quote-card">
-          <div class="cs-quote-mark">«</div>
-          <div class="cs-quote-user-row">
-            <span class="cs-quote-name">Sarah M.</span>
-            <span class="cs-quote-dot-sm"></span>
-            <span class="cs-quote-detail">Active seller · 2 years</span>
-          </div>
-          <p class="cs-quote-text">It takes so many steps just to list one item. By the time I've filled in category, size, price and description — I've already lost the motivation to list the next one.</p>
-          <div class="cs-quote-chips">
-            <span class="cs-quote-chip">Listing friction</span>
-            <span class="cs-quote-chip active">Photo upload</span>
-            <span class="cs-quote-chip">Category input</span>
-          </div>
-        </div>
-        <div class="cs-quote-card">
-          <div class="cs-quote-mark">«</div>
-          <div class="cs-quote-user-row">
-            <span class="cs-quote-name">James K.</span>
-            <span class="cs-quote-dot-sm"></span>
-            <span class="cs-quote-detail">Buyer · Casual user</span>
-          </div>
-          <p class="cs-quote-text">The home feed feels totally random. I want to see things close to what I've liked before — not just whatever's been recently listed by anyone.</p>
-          <div class="cs-quote-chips">
-            <span class="cs-quote-chip active">Discovery</span>
-            <span class="cs-quote-chip">Feed relevance</span>
-            <span class="cs-quote-chip">Search</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- ════ IMPROVEMENTS ════ -->
-  <div class="cs-section fade-up">
-    <div class="cs-label">Improvements</div>
-    <div class="cs-improvements-grid">
-      <div>
-        <h2 class="cs-heading">Defining what to fix first</h2>
-        <p class="cs-body" style="margin-bottom:20px;">After research with new sellers, we ran a second round with experienced power sellers to stress-test our findings and validate edge-case scenarios.</p>
-        <p class="cs-body">We synthesised findings into a prioritised improvement report and presented it to product leadership. Every design decision that followed was anchored to a specific research insight.</p>
-        <p style="margin-top:28px;"><a href="#" style="font-size:15px;font-weight:700;color:#171717;text-decoration:underline;text-underline-offset:3px;">Research Report ↗</a></p>
-      </div>
-      <div>
-        <div class="cs-severity-box">
-          <div class="cs-severity-title">We categorised issues into three severity levels:</div>
-          <div class="cs-severity-row">
-            <span class="cs-severity-badge low">Minor</span>
-            <span class="cs-severity-desc">Small inconsistencies and non-critical UX friction</span>
-          </div>
-          <div class="cs-severity-row">
-            <span class="cs-severity-badge medium">Moderate</span>
-            <span class="cs-severity-desc">Noticeable friction impacting task completion rates</span>
-          </div>
-          <div class="cs-severity-row">
-            <span class="cs-severity-badge high">Critical</span>
-            <span class="cs-severity-desc">Flow-breaking issues causing user abandonment</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- ════ ISSUES — AS IS ════ -->
-  <div class="cs-section fade-up">
-    <div class="cs-compare-hd">
-      <h2 class="cs-heading" style="margin-bottom:0;">Issues</h2>
-      <span class="cs-ctag ver">V1.0</span>
-      <span class="cs-ctag sev">Critical</span>
-    </div>
-    <div class="cs-compare-layout">
-      <ul class="cs-issues-list">
-        <li>
-          <div class="cs-issue-icon err"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">The listing flow had 12 separate steps — causing 62% of new sellers to abandon before completing their first listing.</div>
-            <div class="cs-issue-note">Highest drop-off at step 4 (photo requirements) and step 9 (category tree depth).</div>
-          </div>
-        </li>
-        <li>
-          <div class="cs-issue-icon err"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Home feed showed undifferentiated content regardless of browsing history — making discovery feel random and reducing return visit frequency by 38%.</div>
-          </div>
-        </li>
-        <li>
-          <div class="cs-issue-icon err"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Three coexisting navigation patterns (tab bar, hamburger menu, swipe gestures) created inconsistent mental models across the app.</div>
-          </div>
-        </li>
-      </ul>
-      <div class="cs-compare-panel">
-        <div class="cs-compare-panel-lbl">AS IS — Current screens</div>
-        <div class="cs-compare-screens">
-          <div class="cs-compare-screen">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#aab" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#aab"/><path d="M21 15l-5-5L5 21" stroke="#aab" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="cslbl">Home V1</span>
-            <span class="cshint">Add: home-v1.png</span>
-          </div>
-          <div class="cs-compare-screen">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#aab" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#aab"/><path d="M21 15l-5-5L5 21" stroke="#aab" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="cslbl">Listing V1</span>
-            <span class="cshint">Add: listing-v1.png</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════ SOLUTION — TO BE ════ -->
-  <div class="cs-section fade-up" style="padding-top: 0;">
-    <div class="cs-compare-hd">
-      <h2 class="cs-heading" style="margin-bottom:0;">The Solution</h2>
-      <span class="cs-ctag ver">V2.0</span>
-      <span class="cs-ctag tobe">TO BE</span>
-    </div>
-    <div class="cs-compare-layout">
-      <ul class="cs-issues-list">
-        <li>
-          <div class="cs-issue-icon ok"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Redesigned the listing flow from 12 steps to 5 — grouping photos, title, and category into a single smart screen with AI-assisted tagging. Listing time dropped from 4 min to under 90 seconds.</div>
-          </div>
-        </li>
-        <li>
-          <div class="cs-issue-icon ok"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Rebuilt the home feed with a personalised discovery engine — surfacing liked categories, followed sellers, and trending styles based on real browsing behaviour.</div>
-          </div>
-        </li>
-        <li>
-          <div class="cs-issue-icon ok"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Consolidated all navigation into a single bottom tab bar with consistent gesture rules — eliminating conflicting patterns and reducing navigation-related support tickets by 40%.</div>
-          </div>
-        </li>
-      </ul>
-      <div class="cs-compare-panel">
-        <div class="cs-compare-panel-lbl">TO BE — Redesigned screens</div>
-        <div class="cs-compare-screens">
-          <div class="cs-compare-screen ok-bg">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#aab" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#aab"/><path d="M21 15l-5-5L5 21" stroke="#aab" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="cslbl">Home V2</span>
-            <span class="cshint">Add: home-v2.png</span>
-          </div>
-          <div class="cs-compare-screen ok-bg">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#aab" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#aab"/><path d="M21 15l-5-5L5 21" stroke="#aab" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="cslbl">Listing V2</span>
-            <span class="cshint">Add: listing-v2.png</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ════ FINAL DESIGN SHOWCASE ════ -->
   <div class="cs-final-wrap fade-up">
     <div style="max-width:1280px; margin:0 auto 40px; padding:100px 0 0;">
       <div style="font-size:11px;font-weight:700;color:#FF6101;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;">Final Design</div>
       <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:700;letter-spacing:-1px;color:#171717;margin-bottom:8px;">See it all together</h2>
-      <p style="font-size:18px;color:#888;max-width:560px;line-height:1.6;">The complete Poshmark 2.0 — every flow, every screen, shipped.</p>
+      <p style="font-size:18px;color:#888;max-width:560px;line-height:1.6;">The complete Poshmark 2.0, every flow, every screen, shipped.</p>
     </div>
     <div style="max-width:1280px; margin:0 auto;">
       <div class="cs-final-hero">
@@ -938,7 +1047,7 @@
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ddd" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ddd"/><path d="M21 15l-5-5L5 21" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
         <div class="cs-final-hero-title">📐 Full Design Overview</div>
-        <div class="cs-final-hero-hint">Add: poshmark-full-overview.png — all screens, flows, and states</div>
+        <div class="cs-final-hero-hint">Add: poshmark-full-overview.png, all screens, flows, and states</div>
       </div>
       <div class="cs-final-grid">
         <div class="cs-final-screen">
