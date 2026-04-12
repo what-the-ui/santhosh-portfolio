@@ -228,6 +228,53 @@
     .cs-img-placeholder svg { opacity: 0.4; }
     .cs-img-placeholder span { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
+    /* ── Before / After Slider ── */
+    .ba-wrap { border-radius: 20px; overflow: hidden; }
+    .ba-slider { position: relative; width: 100%; user-select: none; line-height: 0; border-radius: 20px; overflow: hidden; cursor: ew-resize; }
+    .ba-img { width: 100%; display: block; border-radius: 0; }
+    .ba-before-clip { position: absolute; top: 0; left: 0; height: 100%; overflow: hidden; width: 0%; }
+    .ba-before-clip .ba-img { width: auto; height: 100%; max-width: none; position: absolute; top: 0; left: 0; }
+    .ba-divider {
+      position: absolute; top: 0; height: 100%;
+      width: 4px;
+      background: #FF6101;
+      box-shadow: 0 0 16px 4px rgba(255, 97, 1, 0.6), 0 0 32px 8px rgba(255, 97, 1, 0.25);
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
+      transition: box-shadow 0.2s;
+    }
+    .ba-handle {
+      width: 44px; height: 44px;
+      background: #FF6101;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 4px rgba(255,97,1,0.25), 0 2px 12px rgba(255,97,1,0.4);
+      flex-shrink: 0;
+    }
+    .ba-handle svg path { stroke: #fff; }
+    .ba-label {
+      position: absolute;
+      top: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #fff;
+      pointer-events: none;
+      z-index: 4;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+    }
+    .ba-label-new { right: 20px; }
+    .ba-label-old { left: 20px; }
+    .ba-caption {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #999;
+      letter-spacing: 0.3px;
+    }
+
     /* ── Final showcase ── */
     .cs-final-wrap { padding: 0 100px 120px; }
     .cs-final-hero { background: #f5f5f5; border-radius: 24px; height: 760px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; color: #ccc; margin-bottom: 24px; }
@@ -413,7 +460,9 @@
       .cs-heading { font-size: 28px; }
       .cs-problem-quote { font-size: 24px; }
       .cs-process-grid { grid-template-columns: 1fr; }
-      .cs-meta-bar-inner { grid-template-columns: 1fr 1fr; padding-left: 24px; padding-right: 24px; }
+      .cs-meta-bar-inner { grid-template-columns: 1fr; padding-left: 24px; padding-right: 24px; gap: 0; }
+      .cs-meta-cell { padding: 16px 0; border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); padding-left: 0 !important; }
+      .cs-meta-cell:last-child { border-bottom: none; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
       .footer-contact { flex-direction: column; gap: 10px; }
       .cs-divider { margin: 0 24px; }
@@ -873,10 +922,7 @@
       </div>
     </div>
 
-    <div class="cs-img-placeholder medium fade-up" style="margin-top: 32px;">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span>Research board / affinity map</span>
-    </div>
+    <img src="images/affinity-journey.png" alt="Affinity and Journey mapping" style="width:100%; border-radius:20px; display:block; margin-top:32px;">
   </div>
 
   <hr class="cs-divider">
@@ -923,10 +969,7 @@
       </div>
     </div>
 
-    <div class="cs-img-placeholder short fade-up" style="margin-top: 16px;">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span>Exploration sketches / wireframes</span>
-    </div>
+    <img src="images/posh6.png" alt="Exploration sketches and wireframes" style="width:100%; border-radius:20px; display:block; margin-top:16px;">
   </div>
 
   <hr class="cs-divider">
@@ -935,7 +978,7 @@
   <div class="cs-warm-section fade-up">
     <div class="cs-section">
       <div class="cs-label">Execution</div>
-      <h2 class="cs-heading">18 months across 3 phases, 4 squads</h2>
+      <h2 class="cs-heading">5 months across 3 phases, 4 squads</h2>
       <p class="cs-body">The rollout was deliberate and phased, not because we were being cautious, but because learning from each phase improved the quality of what came next. Each phase had clear success criteria before it was marked done.</p>
       <div class="cs-exec-phases">
         <div class="cs-exec-phase">
@@ -1002,9 +1045,23 @@
         <p class="cs-challenge-body" style="font-size:15px;">App store reviews mentioning "listing" shifted from predominantly negative to predominantly positive. Power sellers specifically cited the speed improvement as keeping them active on the platform.</p>
       </div>
     </div>
-    <div class="cs-img-placeholder medium fade-up" style="margin-top: 32px;">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span>Before / After screens, listing flow comparison</span>
+    <!-- ── Before / After Slider ── -->
+    <div style="margin-top: 32px;">
+      <div class="ba-wrap"><div class="ba-slider" id="baSlider">
+        <!-- New UI (after) — full width base -->
+        <img class="ba-img ba-after" src="images/after.png" alt="New UI">
+        <!-- Old UI (before) — clipped by slider position -->
+        <div class="ba-before-clip" id="baClip">
+          <img class="ba-img ba-before" src="images/before.png" alt="Old UI">
+        </div>
+        <!-- Divider -->
+        <div class="ba-divider" id="baDivider">
+          <div class="ba-handle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div></div>
+      <p class="ba-caption">Slide to compare</p>
     </div>
   </div>
 
@@ -1051,29 +1108,12 @@
       <p style="font-size:18px;color:#888;max-width:560px;line-height:1.6;">The complete Poshmark 2.0, every flow, every screen, shipped.</p>
     </div>
     <div style="max-width:1280px; margin:0 auto;">
-      <div class="cs-final-hero">
-        <div class="cs-final-hero-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ddd" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ddd"/><path d="M21 15l-5-5L5 21" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div class="cs-final-hero-title">📐 Full Design Overview</div>
-        <div class="cs-final-hero-hint">Add: poshmark-full-overview.png, all screens, flows, and states</div>
-      </div>
-      <div class="cs-final-grid">
-        <div class="cs-final-screen">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span class="cslbl">Home Feed</span>
-          <span class="cshint">Add: home-feed-final.png</span>
-        </div>
-        <div class="cs-final-screen">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span class="cslbl">New Listing Flow</span>
-          <span class="cshint">Add: listing-final.png</span>
-        </div>
-        <div class="cs-final-screen">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#ccc" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#ccc"/><path d="M21 15l-5-5L5 21" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span class="cslbl">Product Detail</span>
-          <span class="cshint">Add: product-final.png</span>
-        </div>
+      <img src="images/posh1.png" alt="Poshmark full design overview" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
+      <img src="images/posh2.png" alt="Poshmark design screens" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
+        <img src="images/posh3.png" alt="Poshmark home feed" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
+        <img src="images/posh4.png" alt="Poshmark new listing flow" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
+        <img src="images/posh5.png" alt="Poshmark product detail" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
       </div>
     </div>
   </div>
@@ -1122,6 +1162,82 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Before / After Slider ──
+    (function() {
+      const slider = document.getElementById('baSlider');
+      if (!slider) return;
+      const clip = document.getElementById('baClip');
+      const divider = document.getElementById('baDivider');
+      let dragging = false;
+
+      function setPos(pct) {
+        pct = Math.max(0, Math.min(100, pct));
+        clip.style.width = pct + '%';
+        divider.style.left = pct + '%';
+      }
+
+      // Set initial position to 20px from left
+      let hintPlayed = false;
+
+      function playHint(startPct) {
+        if (hintPlayed) return;
+        hintPlayed = true;
+        const rect = slider.getBoundingClientRect();
+        const deltaPct = (40 / rect.width) * 100;
+        const targetPct = startPct + deltaPct;
+        const duration = 1400;
+        let start = null;
+
+        function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+        function animate(ts) {
+          if (dragging) return; // stop if user grabbed it
+          if (!start) start = ts;
+          const elapsed = ts - start;
+          const t = Math.min(elapsed / duration, 1);
+          const ease = easeInOut(t);
+          // Go right then come back
+          const pos = t <= 0.5
+            ? startPct + ease * deltaPct * 2
+            : targetPct - (ease - 0.5) * deltaPct * 2;
+          setPos(t < 1 ? pos : startPct);
+          if (t < 1) requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+      }
+
+      function initPos() {
+        setPos(0);
+        // Trigger hint when slider scrolls into view
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setTimeout(() => playHint(0), 400);
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.5 });
+        observer.observe(slider);
+      }
+      // Wait for image to load to get correct dimensions
+      const afterImg = slider.querySelector('.ba-after');
+      if (afterImg.complete) initPos();
+      else afterImg.addEventListener('load', initPos);
+
+      function getPercent(clientX) {
+        const rect = slider.getBoundingClientRect();
+        return ((clientX - rect.left) / rect.width) * 100;
+      }
+
+      slider.addEventListener('mousedown', e => { dragging = true; setPos(getPercent(e.clientX)); });
+      window.addEventListener('mousemove', e => { if (dragging) setPos(getPercent(e.clientX)); });
+      window.addEventListener('mouseup', () => { dragging = false; });
+
+      slider.addEventListener('touchstart', e => { dragging = true; setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
+      window.addEventListener('touchmove', e => { if (dragging) setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
+      window.addEventListener('touchend', () => { dragging = false; });
+    })();
   </script>
 </body>
 </html>
