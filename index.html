@@ -943,7 +943,7 @@
 
       <div class="hero-btns">
         <a href="http://wa.me/919894249490" target="_blank" rel="noopener" class="btn-sayhi">Say Hi</a>
-        <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="btn-resume">Download Resume</a>
+        <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="btn-resume" onclick="gtag('event','resume_download',{event_category:'engagement',event_label:'Download Resume'})">Download Resume</a>
       </div>
     </div>
 
@@ -989,7 +989,7 @@
     <div class="works-list">
 
       <!-- Card 1: Poshmark App Redesign -->
-      <a href="poshmark.html" class="work-card-link"><div class="work-card c-lime fade-up">
+      <a href="poshmark.html" class="work-card-link" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Poshmark App Redesign'})"><div class="work-card c-lime fade-up">
         <div class="work-left">
           <div class="work-icon" style="overflow:hidden; padding:0;">
             <img src="icons/poshmark.png" alt="Poshmark" style="width:100%; height:100%; object-fit:cover; display:block;">
@@ -1009,7 +1009,7 @@
       </div></a>
 
       <!-- Card 2: SuperOps AI -->
-      <div class="work-card-link work-card-disabled" onclick="showComingSoon()"><div class="work-card c-pink fade-up">
+      <div class="work-card-link work-card-disabled" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'SuperOps AI'});showComingSoon()"><div class="work-card c-pink fade-up">
         <div class="work-left">
           <div class="work-icon pink-bg" style="background:#fff;">
             <div class="icon-superops">S</div>
@@ -1027,7 +1027,7 @@
       </div></div>
 
       <!-- Card 3: Škoda Connected App -->
-      <div class="work-card-link work-card-disabled" onclick="showComingSoon()"><div class="work-card c-teal fade-up">
+      <div class="work-card-link work-card-disabled" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Skoda Connected App'});showComingSoon()"><div class="work-card c-teal fade-up">
         <div class="work-left">
           <div class="work-icon dark">
             <div class="icon-skoda">Š</div>
