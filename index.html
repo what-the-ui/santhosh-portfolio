@@ -100,12 +100,11 @@
       overflow: hidden;
       margin-bottom: 36px;
     }
-    .profile-photo img.bg {
+    .profile-photo .bg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
     }
     .profile-photo img.face {
       position: absolute;
@@ -915,8 +914,8 @@
     <!-- Left -->
     <div class="hero-left">
       <div class="profile-photo">
-        <img class="bg" src="https://www.figma.com/api/mcp/asset/c61c7617-3b1f-40b5-8e8b-f7b8560aa7ce" alt="">
-        <img class="face" src="https://www.figma.com/api/mcp/asset/d5fcc45d-dda4-4da5-a219-12291741a7cc" alt="Santhosh Rajendran">
+        <div class="bg" style="background:#FF6101;"></div>
+        <img class="face" src="images/profile-photo.png" alt="Santhosh Rajendran">
       </div>
 
       <h1 class="hero-name">Santhosh Rajendran</h1>
@@ -953,7 +952,7 @@
         <!-- Orange header bar -->
         <div class="ping-header-bar">
           <div class="ping-logo">
-            <img src="https://www.figma.com/api/mcp/asset/4e79e056-6f38-4510-b5c5-19a4f10c9e84" alt="Ping & Vibe logo">
+            <img src="images/ping-vibe-logo.png" alt="Ping & Vibe logo">
           </div>
           <span class="ping-title">Ping &amp; Vibe</span>
         </div>
@@ -1027,12 +1026,12 @@
       </div></div>
 
       <!-- Card 3: Škoda Connected App -->
-      <div class="work-card-link work-card-disabled" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Skoda Connected App'});showComingSoon()"><div class="work-card c-teal fade-up">
+      <a href="skoda.html" class="work-card-link" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Skoda Connected App'})"><div class="work-card c-teal fade-up">
         <div class="work-left">
           <div class="work-icon dark">
             <div class="icon-skoda">Š</div>
           </div>
-          <h3 class="work-title">Škoda Connected App</h3>
+          <h3 class="work-title">Škoda Connected App Concept</h3>
           <p class="work-desc">In-car connectivity app redesigned for seamless interaction between driver and vehicle experience.</p>
           <div class="work-tags">
             <span class="tag">iOS design</span>
@@ -1041,9 +1040,8 @@
         </div>
         <div class="work-preview" style="align-self: stretch; border-radius: 0; aspect-ratio: unset;">
           <div class="work-preview-inner" style="position:absolute; inset:12px 0 12px 12px; overflow:hidden; border-radius:18px; background:#FFF3F1;"></div>
-          <span class="coming-soon">Coming Soon</span>
         </div>
-      </div></div>
+      </div></a>
 
     </div>
   </section>
