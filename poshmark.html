@@ -646,6 +646,49 @@
       .cs-reflection-quote { font-size: 22px; }
     }
 
+    /* ── Case Study Nav ── */
+    .cs-case-nav { border-top: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 100px;
+      display: flex;
+    }
+    .cs-case-nav-card {
+      flex: 1; padding: 48px 0;
+      display: flex; flex-direction: column; gap: 10px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .cs-case-nav-card:hover { background: #fafafa; }
+    .cs-case-nav-prev { padding-right: 60px; border-right: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-next { padding-left: 60px; text-align: right; margin-left: auto; }
+    .cs-case-nav-card.solo-next { margin-left: auto; }
+    .cs-case-nav-label {
+      font-size: 11px; font-weight: 700; color: #aaa;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .cs-case-nav-next .cs-case-nav-label { justify-content: flex-end; }
+    .cs-case-nav-project {
+      font-size: 11px; font-weight: 700; color: #FF6101;
+      text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .cs-case-nav-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 28px; font-weight: 700; color: #171717;
+      line-height: 1.2; letter-spacing: -0.5px;
+      transition: color 0.2s;
+    }
+    .cs-case-nav-card:hover .cs-case-nav-title { color: #FF6101; }
+    @media (max-width: 1100px) { .cs-case-nav-inner { padding: 0 48px; } }
+    @media (max-width: 640px) {
+      .cs-case-nav-inner { padding: 0 24px; flex-direction: column; }
+      .cs-case-nav-prev { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); padding-right: 0; }
+      .cs-case-nav-next { padding-left: 0; text-align: left; }
+      .cs-case-nav-next .cs-case-nav-label { justify-content: flex-start; }
+      .cs-case-nav-card.solo-next { margin-left: 0; text-align: left; }
+      .cs-case-nav-card.solo-next .cs-case-nav-label { justify-content: flex-start; }
+      .cs-case-nav-title { font-size: 22px; }
+    }
+
     /* ── Password Gate ── */
     #pw-gate {
       position: fixed; inset: 0; z-index: 9999;
@@ -1123,6 +1166,17 @@
         <img src="images/posh4.png" alt="Poshmark new listing flow" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
         <img src="images/posh5.png" alt="Poshmark product detail" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
       </div>
+    </div>
+  </div>
+
+  <!-- ════ Case Study Nav ════ -->
+  <div class="cs-case-nav">
+    <div class="cs-case-nav-inner">
+      <a href="skoda.html" class="cs-case-nav-card cs-case-nav-next solo-next">
+        <div class="cs-case-nav-label">Next Case Study <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="cs-case-nav-project">Automotive · UX Design</div>
+        <div class="cs-case-nav-title">Škoda Connected App Concept</div>
+      </a>
     </div>
   </div>
 

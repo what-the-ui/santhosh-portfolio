@@ -1,1293 +1,1867 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Škoda Connected App — Case Study · Santhosh R.</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXDLQZNTFX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXDLQZNTFX');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Škoda Connected App Concept · Santhosh Rajendran</title>
   <link rel="icon" type="image/png" href="images/favicon-profile.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset & Base ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --accent: #1A6AB5;
-      --orange: #FF6101;
-      --dark:   #171717;
-      --mid:    #444;
-      --soft:   #888;
-      --line:   #e5e5e5;
-      --bg:     #FAFAF8;
-      --white:  #ffffff;
-      --radius: 12px;
-      --font:   'Inter', system-ui, -apple-system, sans-serif;
-    }
     html { scroll-behavior: smooth; }
     body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--dark);
-      line-height: 1.6;
+      font-family: 'Lato', sans-serif;
+      background: #fff;
+      color: #171717;
+      line-height: 1.5;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-    a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
-    img { display: block; max-width: 100%; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
 
-    /* ─── Nav ───────────────────────────────────────────────────────────── */
-    .nav {
+    /* ── Nav ── */
+    header {
       position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px;
-      height: 64px;
-      background: rgba(250,250,248,0.92);
+      background: rgba(255,255,255,0.88);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
-    .nav-logo {
-      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em;
-      color: var(--dark);
+    nav {
+      max-width: 1280px; margin: 0 auto;
+      padding: 18px 100px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .nav-logo span { color: var(--orange); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a {
-      font-size: 0.875rem; font-weight: 500; color: var(--mid);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--dark); }
+    .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; }
+    .nav-logo span { color: #FF6101; }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #FF6101; }
 
-    /* ─── Hero ──────────────────────────────────────────────────────────── */
+    /* ── Hero ── */
     .cs-hero {
-      min-height: 86vh;
-      background: #D6E8F8;
+      background: #F9FBD1;
+      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding: 80px 48px 64px;
-      gap: 32px;
+      padding: 100px 100px 80px;
+      gap: 60px;
       position: relative;
       align-items: end;
+      overflow: hidden;
     }
-    .cs-hero-left {
+    .cs-hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(180,190,80,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cs-hero-content {
+      position: relative; z-index: 1; max-width: 100%;
       display: flex; flex-direction: column; justify-content: flex-end;
-    }
-    .cs-hero-img-ph {
-      align-self: stretch;
-      border: 2px dashed rgba(26,106,181,0.25);
-      border-radius: 20px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 14px;
-      background: rgba(255,255,255,0.35);
-      min-height: 520px;
-    }
-    .cs-hero-img-ph-icon {
-      width: 64px; height: 64px;
-      border: 2px dashed rgba(26,106,181,0.3);
-      border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; opacity: 0.5;
-    }
-    .cs-hero-img-ph-label {
-      font-size: 12px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1.5px; color: rgba(26,106,181,0.5);
-    }
-    .cs-hero-img-ph-hint {
-      font-size: 12px; color: rgba(26,106,181,0.35);
+      padding-bottom: 8px;
     }
     .cs-back {
-      position: absolute; top: 36px; left: 48px;
-      font-size: 0.875rem; font-weight: 500; color: var(--mid);
+      position: absolute; top: 40px; left: 100px;
       display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 600; color: rgba(0,0,0,0.4);
       transition: color 0.2s;
     }
-    .cs-back:hover { color: #1A6AB5; }
-    .cs-tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 20px;
-    }
-    .cs-tag {
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,0.6);
-      border: 1px solid rgba(26,106,181,0.18);
-      color: var(--accent);
-      padding: 4px 12px; border-radius: 100px;
+    .cs-back:hover { color: #FF6101; }
+    .cs-hero-tags { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .cs-hero-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(0,0,0,0.4);
+      border: 1.5px solid rgba(0,0,0,0.15);
+      padding: 5px 14px; border-radius: 100px;
     }
     .cs-hero-title {
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 800; letter-spacing: -0.04em;
-      line-height: 1.05;
-      color: var(--dark);
-      max-width: 820px;
-      margin-bottom: 20px;
-      white-space: pre-line;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 80px; font-weight: 700; line-height: 1.0;
+      color: #171717; letter-spacing: -2px;
+      margin-bottom: 28px;
     }
+    .cs-hero-title em { color: #419468; font-style: normal; }
     .cs-hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--mid);
-      max-width: 640px;
-      line-height: 1.6;
+      font-size: 18px; color: rgba(0,0,0,0.5); line-height: 1.7; max-width: 520px; margin-top: 4px;
     }
 
-    /* ─── Meta Bar ──────────────────────────────────────────────────────── */
-    .cs-meta {
+    /* Hero right — car visual */
+    .cs-hero-right {
+      position: relative; z-index: 1;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .cs-hero-car-wrap {
+      width: 100%; max-width: 560px;
+      filter: drop-shadow(0 40px 80px rgba(65,148,104,0.18));
+    }
+
+    /* ── Meta bar ── */
+    .cs-meta-bar {
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .cs-meta-bar-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 100px;
       display: grid; grid-template-columns: repeat(4, 1fr);
-      border-bottom: 1px solid var(--line);
-      background: var(--white);
     }
-    .cs-meta-item {
-      padding: 28px 32px;
-      border-right: 1px solid var(--line);
+    .cs-meta-cell {
+      padding: 36px 0;
+      border-right: 1px solid rgba(0,0,0,0.08);
     }
-    .cs-meta-item:last-child { border-right: none; }
-    .cs-meta-label {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--soft);
-      margin-bottom: 6px;
-    }
-    .cs-meta-value {
-      font-size: 0.95rem; font-weight: 600; color: var(--dark);
-    }
+    .cs-meta-cell:first-child { padding-left: 0; }
+    .cs-meta-cell:last-child { border-right: none; padding-left: 40px; }
+    .cs-meta-cell:not(:first-child):not(:last-child) { padding-left: 40px; }
+    .cs-meta-label { font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .cs-meta-value { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 600; color: #171717; }
 
-    /* ─── Section Base ──────────────────────────────────────────────────── */
-    .cs-section {
-      padding: 96px 48px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cs-section-full {
-      padding: 96px 48px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    /* ── Body sections ── */
+    .cs-section { max-width: 1280px; margin: 0 auto; padding: 100px 100px; }
+    .cs-section + .cs-section { padding-top: 0; }
     .cs-label {
-      display: inline-block;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
+      font-size: 11px; font-weight: 700; color: #419468;
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
     }
     .cs-heading {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 800; letter-spacing: -0.03em;
-      line-height: 1.15; color: var(--dark);
-      margin-bottom: 20px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px; font-weight: 700; line-height: 1.1;
+      letter-spacing: -1px; color: #171717; margin-bottom: 28px;
     }
     .cs-body {
-      font-size: 1rem; color: var(--mid);
-      line-height: 1.75; max-width: 640px;
-    }
-    .cs-body + .cs-body { margin-top: 16px; }
-
-    /* ─── Divider ───────────────────────────────────────────────────────── */
-    .cs-divider {
-      border: none;
-      border-top: 1px solid var(--line);
-      margin: 0 48px;
+      font-size: 15px; color: #555; line-height: 1.8;
     }
 
-    /* ─── Two-col narrow ────────────────────────────────────────────────── */
-    .two-col-narrow {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
+    /* ── Two-col layout ── */
+    .cs-two-col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
     }
+    .cs-two-col-narrow { grid-template-columns: 2fr 1fr; }
+    .cs-two-col-wide { grid-template-columns: 1fr 2fr; }
 
-    /* ─── Stats Row ─────────────────────────────────────────────────────── */
-    .cs-stats-row {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-top: 48px;
-    }
-    .cs-stat {
-      background: var(--white);
-      padding: 36px 32px;
-    }
-    .cs-stat-num {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800; letter-spacing: -0.04em;
-      color: var(--dark); line-height: 1;
-      margin-bottom: 10px;
-    }
-    .cs-stat-desc {
-      font-size: 0.9rem; color: var(--mid); line-height: 1.5;
-    }
-
-    /* ─── Challenge Grid ────────────────────────────────────────────────── */
-    .cs-challenge-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .cs-challenge-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 32px;
-    }
-    .cs-challenge-icon {
-      font-size: 1.5rem; margin-bottom: 16px;
-    }
-    .cs-challenge-title {
-      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em;
-      text-transform: uppercase; color: var(--dark);
-      margin-bottom: 12px;
-    }
-    .cs-challenge-list {
-      list-style: none; padding: 0;
-    }
-    .cs-challenge-list li {
-      font-size: 0.9rem; color: var(--mid);
-      padding: 4px 0 4px 16px;
-      position: relative; line-height: 1.5;
-    }
-    .cs-challenge-list li::before {
-      content: '';
-      position: absolute; left: 0; top: 11px;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.5;
-    }
-    .cs-challenge-body {
-      font-size: 0.9rem; color: var(--mid); line-height: 1.6;
-    }
-
-    /* ─── Task / Role Grid ──────────────────────────────────────────────── */
-    .cs-task-role-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin-top: 12px;
-    }
-    .cs-task-title {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--soft);
-      margin-bottom: 16px;
-    }
-    .cs-task-list {
-      list-style: none; padding: 0;
-    }
-    .cs-task-list li {
-      font-size: 0.95rem; color: var(--mid);
-      padding: 8px 0 8px 20px;
-      position: relative;
-      border-bottom: 1px solid var(--line);
-      line-height: 1.5;
-    }
-    .cs-task-list li:last-child { border-bottom: none; }
-    .cs-task-list li::before {
-      content: '';
-      position: absolute; left: 0; top: 16px;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    /* ─── Goals Grid ────────────────────────────────────────────────────── */
-    .cs-goals-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .cs-goal-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-    .cs-goal-label {
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--soft);
-      margin-bottom: 8px;
-    }
-    .cs-goal-value {
-      font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em;
-      color: #22c55e; line-height: 1;
-      margin-bottom: 6px;
-    }
-    .cs-goal-sub {
-      font-size: 0.8rem; color: var(--soft);
-    }
-
-    /* ─── Context Intro ─────────────────────────────────────────────────── */
-    .cs-context-intro {
-      display: grid; grid-template-columns: 1fr 1.6fr;
-      gap: 64px; align-items: start;
-      margin-bottom: 64px;
-    }
-    .cs-context-heading {
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 800; letter-spacing: -0.03em;
-      line-height: 1.2; color: var(--dark);
-      position: sticky; top: 80px;
-    }
-    .cs-context-body {
-      font-size: 1rem; color: var(--mid);
-      line-height: 1.75;
-    }
-    .cs-context-body + .cs-context-body { margin-top: 16px; }
-
-    /* ─── Screens Row ───────────────────────────────────────────────────── */
-    .cs-screens-heading {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--soft);
-      margin-bottom: 20px;
-    }
-    .cs-screens-row {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .cs-screen-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .cs-screen-card-header {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
-      font-size: 0.78rem; font-weight: 600; color: var(--dark);
-    }
-    .cs-screen-dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    }
-    .cs-screen-dot.grey { background: #aaa; }
-    .cs-screen-dot.red  { background: #ef4444; }
-    .cs-screen-ph {
-      height: 420px;
-      background: #f0f6fc;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 8px; padding: 20px; text-align: center;
-    }
-    .cs-screen-ph-icon {
-      font-size: 1.8rem; opacity: 0.35;
-    }
-    .cs-screen-ph-title {
-      font-size: 0.8rem; font-weight: 600; color: var(--soft);
-    }
-    .cs-screen-ph-hint {
-      font-size: 0.7rem; color: #bbb;
-      word-break: break-all;
-    }
-    .cs-screen-note {
-      margin-top: 16px;
-      font-size: 0.8rem; color: var(--soft);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .cs-screen-note::before {
-      content: '';
-      display: inline-block;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #ef4444; flex-shrink: 0;
-    }
-
-    /* ─── Users Grid ────────────────────────────────────────────────────── */
-    .cs-users-grid {
-      display: grid; grid-template-columns: 1fr 1.4fr;
-      gap: 64px; align-items: start;
-    }
-    .cs-users-text .cs-heading { margin-bottom: 16px; }
-    .cs-portrait-row {
-      display: flex; gap: 12px; margin-top: 32px;
-    }
-    .cs-portrait {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: #d0e5f7;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; font-weight: 700; color: var(--accent);
-      flex-shrink: 0;
-    }
-    .cs-quotes-col {
-      display: flex; flex-direction: column; gap: 24px;
-    }
-    .cs-quote-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-    .cs-quote-mark {
-      font-size: 2.5rem; line-height: 1;
-      color: #1A6AB5;
-      font-family: Georgia, serif;
-      margin-bottom: 12px;
-    }
-    .cs-quote-text {
-      font-size: 0.95rem; color: var(--dark);
-      line-height: 1.65; font-style: italic;
-      margin-bottom: 16px;
-    }
-    .cs-quote-user-row {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 12px;
-    }
-    .cs-quote-name {
-      font-size: 0.875rem; font-weight: 700; color: var(--dark);
-    }
-    .cs-quote-dot-sm {
-      width: 4px; height: 4px; border-radius: 50%; background: var(--soft);
-    }
-    .cs-quote-detail {
-      font-size: 0.8rem; color: var(--soft);
-    }
-    .cs-quote-chips {
-      display: flex; flex-wrap: wrap; gap: 6px;
-    }
-    .cs-quote-chip {
-      font-size: 0.7rem; font-weight: 600;
-      padding: 3px 10px; border-radius: 100px;
-      background: #f0f0ee; color: var(--soft);
-    }
-    .cs-quote-chip.active {
-      background: #ddeef9; color: var(--accent);
-    }
-
-    /* ─── Improvements Grid ─────────────────────────────────────────────── */
-    .cs-improvements-grid {
-      display: grid; grid-template-columns: 1.4fr 1fr;
-      gap: 64px; align-items: start;
-    }
-    .cs-report-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 20px;
-      font-size: 0.875rem; font-weight: 600;
-      color: var(--accent);
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 2px;
-      transition: opacity 0.2s;
-    }
-    .cs-report-link:hover { opacity: 0.7; }
-    .cs-severity-box {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .cs-severity-title {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--soft);
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--line);
-    }
-    .cs-severity-row {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--line);
-    }
-    .cs-severity-row:last-child { border-bottom: none; }
-    .cs-severity-badge {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 3px 8px; border-radius: 4px;
-      flex-shrink: 0; margin-top: 2px;
-    }
-    .cs-severity-badge.low    { background: #dcfce7; color: #16a34a; }
-    .cs-severity-badge.medium { background: #fef9c3; color: #a16207; }
-    .cs-severity-badge.high   { background: #fee2e2; color: #dc2626; }
-    .cs-severity-desc {
-      font-size: 0.875rem; color: var(--mid); line-height: 1.5;
-    }
-
-    /* ─── Problem Quote ─────────────────────────────────────────────────── */
+    /* ── Problem quote ── */
     .cs-problem-section {
-      background: var(--dark);
-      padding: 96px 48px;
+      background: #0d1f14;
+      padding: 100px 0;
     }
-    .cs-problem-inner {
-      max-width: 880px; margin: 0 auto;
-    }
-    .cs-problem-label {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
+    .cs-problem-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; }
+    .cs-problem-label { font-size: 11px; font-weight: 700; color: #78faae; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
     .cs-problem-quote {
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 700; letter-spacing: -0.02em;
-      line-height: 1.4; color: #f5f5f5;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 36px; font-weight: 500; line-height: 1.5;
+      color: #fff; max-width: 900px;
     }
-    .cs-problem-quote em {
-      font-style: italic; color: #6BB8F0;
-    }
+    .cs-problem-quote em { color: #78faae; font-style: normal; }
+    .cs-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 52px; }
+    .cs-problem-col-label { font-size: 11px; font-weight: 700; color: rgba(120,250,174,0.7); text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 16px; }
+    .cs-problem-col-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    .cs-problem-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .cs-problem-list li { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.65; padding-left: 20px; position: relative; }
+    .cs-problem-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; background: #78faae; border-radius: 50%; opacity: 0.7; }
+    .cs-problem-why { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .cs-problem-why-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; margin-top: 12px; }
 
-    /* ─── Image Placeholder ─────────────────────────────────────────────── */
-    .cs-img-placeholder {
-      background: #eaeef2;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 10px;
-      color: #aaa; font-size: 0.875rem; font-weight: 500;
-    }
-    .cs-img-placeholder.tall   { height: 680px; }
-    .cs-img-placeholder.medium { height: 520px; }
-    .cs-img-placeholder.short  { height: 360px; }
-    .cs-img-placeholder-icon { font-size: 2rem; opacity: 0.4; }
-
-    /* ─── Process ───────────────────────────────────────────────────────── */
+    /* ── Process grid ── */
     .cs-process-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      background: var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+      background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden;
       margin-top: 48px;
     }
     .cs-phase {
-      background: var(--white);
-      padding: 36px 28px;
+      background: #fff; padding: 40px 32px;
       transition: background 0.2s;
     }
-    .cs-phase:hover { background: #f5faff; }
-    .cs-phase-num {
-      font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em;
-      color: #c8e0f5; line-height: 1;
-      margin-bottom: 16px;
+    .cs-phase:hover { background: #f4faf7; }
+    .cs-phase-num { font-size: 40px; font-weight: 700; color: #c8e8d6; font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 16px; line-height: 1; }
+    .cs-phase-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px; }
+    .cs-phase-desc { font-size: 15px; color: #888; line-height: 1.6; margin-bottom: 20px; }
+    .cs-phase-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .cs-phase-list li { font-size: 15px; color: #555; padding-left: 16px; position: relative; line-height: 1.5; }
+    .cs-phase-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; background: #419468; border-radius: 50%; }
+
+    /* ── Phone mockup ── */
+    .phone-grid {
+      display: grid; gap: 24px;
     }
-    .cs-phase-title {
-      font-size: 0.95rem; font-weight: 700; color: var(--dark);
-      margin-bottom: 8px;
+    .phone-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .phone-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .phone-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .phone-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
     }
-    .cs-phase-sub {
-      font-size: 0.78rem; color: var(--soft);
-      margin-bottom: 16px;
+    .phone {
+      width: 100%; max-width: 220px;
+      background: #0f1a13;
+      border-radius: 36px;
+      border: 2px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 6px rgba(255,255,255,0.04);
+      position: relative;
+      aspect-ratio: 9/19.5;
     }
-    .cs-phase-list {
-      list-style: none; padding: 0;
+    .phone::before {
+      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 5px; background: rgba(255,255,255,0.15); border-radius: 3px; z-index: 10;
     }
-    .cs-phase-list li {
-      font-size: 0.82rem; color: var(--mid);
-      padding: 4px 0 4px 14px;
-      position: relative; line-height: 1.4;
+    .phone-inner {
+      width: 100%; height: 100%;
+      overflow: hidden; position: relative;
     }
-    .cs-phase-list li::before {
-      content: '';
-      position: absolute; left: 0; top: 10px;
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.5;
+    .phone-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #aaa; text-align: center;
     }
 
-    /* ─── Compare ───────────────────────────────────────────────────────── */
-    .cs-compare-section {
-      padding: 80px 48px;
-      max-width: 1200px; margin: 0 auto;
+    /* Screen: Splash */
+    .screen-splash {
+      width: 100%; height: 100%;
+      background: #0d1f14;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
     }
-    .cs-compare-hd {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
+    .screen-splash .logo-mark {
+      width: 56px; height: 56px;
+      background: #419468; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
     }
-    .cs-ctag {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 12px; border-radius: 100px;
+    .screen-splash .brand-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 3px; text-transform: uppercase;
     }
-    .cs-ctag.ver  { background: #f0f0ee; color: var(--soft); }
-    .cs-ctag.sev  { background: #ddeef9; color: var(--accent); }
-    .cs-ctag.asis { background: #fee2e2; color: #dc2626; }
-    .cs-ctag.tobe { background: #dcfce7; color: #16a34a; }
-    .cs-compare-title {
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-      font-weight: 800; letter-spacing: -0.03em; color: var(--dark);
+    .screen-splash .tagline { font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* Screen: Welcome */
+    .screen-welcome {
+      width: 100%; height: 100%;
+      background-image: url('images/skoda/welcome-bg.jpg');
+      background-size: cover; background-position: center;
+      position: relative; display: flex; flex-direction: column; justify-content: flex-end;
     }
-    .cs-compare-layout {
-      display: grid; grid-template-columns: 1fr 1.8fr;
-      gap: 48px; align-items: center;
+    .screen-welcome::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
     }
-    .cs-compare-panel {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
+    .screen-welcome-content {
+      position: relative; padding: 16px; z-index: 1;
     }
-    .cs-compare-panel-lbl {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--soft);
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
+    .screen-welcome-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.2;
     }
-    .cs-compare-screens {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2px; background: var(--line);
+    .screen-welcome-sub { font-size: 8px; color: rgba(255,255,255,0.55); line-height: 1.4; margin-bottom: 12px; }
+    .screen-welcome-btn {
+      background: #419468; color: #fff;
+      border-radius: 20px; padding: 7px 14px;
+      font-size: 9px; font-weight: 700;
+      text-align: center; letter-spacing: 0.5px;
     }
-    .cs-compare-screen {
-      background: #f0f6fc;
-      height: 520px;
+
+    /* Screen: OTP */
+    .screen-otp {
+      width: 100%; height: 100%;
+      background: #fff;
+      display: flex; flex-direction: column;
+      padding: 32px 12px 16px;
+    }
+    .screen-otp .otp-back {
+      font-size: 14px; color: #419468; margin-bottom: 20px;
+    }
+    .screen-otp .otp-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 700; color: #171717; margin-bottom: 4px;
+    }
+    .screen-otp .otp-sub { font-size: 7px; color: #888; margin-bottom: 20px; line-height: 1.4; }
+    .screen-otp .phone-disp {
+      background: #f5f5f5; border-radius: 8px;
+      padding: 8px 10px; font-size: 10px; color: #171717;
+      margin-bottom: 16px; font-weight: 600;
+    }
+    .screen-otp .otp-boxes {
+      display: flex; gap: 6px; margin-bottom: 20px;
+    }
+    .screen-otp .otp-box {
+      flex: 1; height: 32px; background: #f0f0f0; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #171717;
+    }
+    .screen-otp .otp-box.active { background: #eef9f4; border: 1.5px solid #419468; }
+    .screen-otp .otp-btn {
+      background: #419468; color: #fff; border-radius: 20px;
+      padding: 8px; text-align: center; font-size: 9px; font-weight: 700;
+    }
+
+    /* Screen: Home Dashboard */
+    .screen-home {
+      width: 100%; height: 100%;
+      background: #f5f8f6;
+      display: flex; flex-direction: column;
+    }
+    .screen-home .home-header {
+      background: #0d1f14; padding: 14px 12px 10px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .screen-home .home-greeting { font-size: 8px; color: rgba(255,255,255,0.5); }
+    .screen-home .home-name { font-size: 11px; font-weight: 700; color: #fff; }
+    .screen-home .home-avatar {
+      width: 22px; height: 22px; background: #419468; border-radius: 50%;
+    }
+    .screen-home .home-car-section {
+      background: #0d1f14; padding: 8px 12px 14px;
+    }
+    .screen-home .home-car-model { font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+    .screen-home .home-car-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .screen-home .home-car-img {
+      width: 100%; padding: 0 8px;
+    }
+    .screen-home .home-stats {
+      display: flex; gap: 6px; padding: 8px 12px;
+    }
+    .screen-home .home-stat {
+      flex: 1; background: #fff; border-radius: 8px; padding: 6px 8px;
+    }
+    .screen-home .home-stat-val { font-size: 11px; font-weight: 700; color: #171717; }
+    .screen-home .home-stat-val span { font-size: 7px; color: #888; font-weight: 400; }
+    .screen-home .home-stat-lbl { font-size: 7px; color: #aaa; }
+    .screen-home .home-actions {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 0 12px 8px;
+    }
+    .screen-home .home-action {
+      background: #fff; border-radius: 8px; padding: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .screen-home .home-action-icon {
+      width: 22px; height: 22px; background: #eef9f4; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .screen-home .home-action-name { font-size: 8px; font-weight: 600; color: #171717; }
+    .screen-home .home-action-state { font-size: 7px; color: #aaa; }
+
+    /* Screen: Climate */
+    .screen-climate {
+      width: 100%; height: 100%;
+      background: #fff;
+      display: flex; flex-direction: column; padding: 28px 12px 16px;
+    }
+    .screen-climate .clim-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 700; color: #171717; margin-bottom: 4px;
+    }
+    .screen-climate .clim-sub { font-size: 7px; color: #888; margin-bottom: 16px; }
+    .screen-climate .clim-temp-ring {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 4px solid #419468;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 6px; padding: 16px; text-align: center;
+      margin: 0 auto 16px;
     }
-    .cs-compare-screen.ok-bg { background: #f0fdf4; }
-    .cs-cslbl {
-      font-size: 0.78rem; font-weight: 600; color: var(--soft);
+    .screen-climate .clim-temp-val { font-size: 22px; font-weight: 700; color: #171717; line-height: 1; }
+    .screen-climate .clim-temp-unit { font-size: 8px; color: #888; }
+    .screen-climate .clim-row {
+      display: flex; justify-content: space-between; margin-bottom: 8px;
     }
-    .cs-cshint {
-      font-size: 0.68rem; color: #bbb; word-break: break-all;
+    .screen-climate .clim-chip {
+      background: #eef9f4; color: #419468; border-radius: 20px;
+      padding: 4px 10px; font-size: 8px; font-weight: 700;
     }
-    .cs-issues-list {
-      display: flex; flex-direction: column; gap: 16px;
+    .screen-climate .clim-chip.inactive {
+      background: #f5f5f5; color: #888;
     }
-    .cs-issue-item {
-      display: flex; gap: 14px; align-items: flex-start;
-    }
-    .cs-issue-icon {
-      width: 24px; height: 24px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .cs-issue-icon.err { background: #fee2e2; color: #dc2626; }
-    .cs-issue-icon.ok  { background: #dcfce7; color: #16a34a; }
-    .cs-issue-body { flex: 1; }
-    .cs-issue-text {
-      font-size: 0.9rem; color: var(--dark); line-height: 1.6;
-      margin-bottom: 4px;
-    }
-    .cs-issue-note {
-      font-size: 0.78rem; color: var(--soft); font-style: italic;
+    .screen-climate .clim-btn {
+      background: #419468; color: #fff; border-radius: 20px;
+      padding: 8px; text-align: center; font-size: 9px; font-weight: 700;
+      margin-top: 12px;
     }
 
-    /* ─── Footer ────────────────────────────────────────────────────────── */
-    .cs-footer {
-      background: #FF6101;
-      padding: 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
+    /* Screen: Digital Key */
+    .screen-dkey {
+      width: 100%; height: 100%;
+      background: #0d1f14;
+      display: flex; flex-direction: column; padding: 28px 12px 16px;
     }
-    .cs-footer-left {
-      display: flex; flex-direction: column; gap: 8px;
+    .screen-dkey .dkey-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px;
     }
-    .cs-footer-logo {
-      font-size: 1.1rem; font-weight: 800; color: var(--white);
-      letter-spacing: -0.02em;
+    .screen-dkey .dkey-sub { font-size: 7px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .screen-dkey .dkey-ring {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 3px solid rgba(120,250,174,0.3);
+      background: rgba(120,250,174,0.08);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 30px rgba(120,250,174,0.15);
     }
-    .cs-footer-links {
-      display: flex; gap: 20px;
+    .screen-dkey .dkey-icon { font-size: 28px; }
+    .screen-dkey .dkey-status { font-size: 8px; color: #78faae; text-align: center; margin-bottom: 16px; }
+    .screen-dkey .dkey-action-row {
+      display: flex; gap: 6px; margin-bottom: 10px;
     }
-    .cs-footer-links a {
-      font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.8);
+    .screen-dkey .dkey-action {
+      flex: 1; background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 8px 6px; text-align: center;
+    }
+    .screen-dkey .dkey-action-icon { font-size: 14px; margin-bottom: 3px; }
+    .screen-dkey .dkey-action-lbl { font-size: 7px; color: rgba(255,255,255,0.5); }
+    .screen-dkey .dkey-share-btn {
+      background: #419468; color: #fff; border-radius: 20px;
+      padding: 8px; text-align: center; font-size: 9px; font-weight: 700;
+      margin-top: 6px;
+    }
+
+    /* Screen: Share Key */
+    .screen-share {
+      width: 100%; height: 100%;
+      background: #fff;
+      display: flex; flex-direction: column; padding: 28px 12px 16px;
+    }
+    .screen-share .share-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 700; color: #171717; margin-bottom: 4px;
+    }
+    .screen-share .share-sub { font-size: 7px; color: #888; margin-bottom: 16px; }
+    .screen-share .share-user {
+      display: flex; align-items: center; gap: 8px;
+      background: #f8f8f8; border-radius: 10px; padding: 8px;
+      margin-bottom: 10px;
+    }
+    .screen-share .share-avatar {
+      width: 28px; height: 28px; background: #c2f0e8; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: #419468; flex-shrink: 0;
+    }
+    .screen-share .share-name { font-size: 10px; font-weight: 600; color: #171717; }
+    .screen-share .share-type { font-size: 7px; color: #888; }
+    .screen-share .share-perms {
+      display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;
+    }
+    .screen-share .share-perm-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 8px; background: #f8f8f8; border-radius: 8px;
+    }
+    .screen-share .share-perm-lbl { font-size: 8px; color: #555; }
+    .screen-share .share-toggle {
+      width: 24px; height: 14px; background: #419468; border-radius: 7px; position: relative;
+    }
+    .screen-share .share-toggle::after {
+      content: ''; position: absolute; top: 2px; right: 2px;
+      width: 10px; height: 10px; background: #fff; border-radius: 50%;
+    }
+    .screen-share .share-toggle.off { background: #ddd; }
+    .screen-share .share-toggle.off::after { right: auto; left: 2px; }
+    .screen-share .share-btn {
+      background: #419468; color: #fff; border-radius: 20px;
+      padding: 8px; text-align: center; font-size: 9px; font-weight: 700;
+    }
+
+    /* Screen: Vehicle Control */
+    .screen-vctrl {
+      width: 100%; height: 100%;
+      background: #fff;
+      display: flex; flex-direction: column; padding: 28px 12px 16px;
+    }
+    .screen-vctrl .vctrl-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 13px; font-weight: 700; color: #171717; margin-bottom: 4px;
+    }
+    .screen-vctrl .vctrl-car-mini {
+      width: 100%; max-height: 60px; object-fit: contain; margin: 8px 0 12px;
+    }
+    .screen-vctrl .vctrl-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1;
+    }
+    .screen-vctrl .vctrl-item {
+      background: #f8f8f8; border-radius: 8px; padding: 8px;
+    }
+    .screen-vctrl .vctrl-item.active { background: #eef9f4; border: 1px solid rgba(65,148,104,0.2); }
+    .screen-vctrl .vctrl-icon { font-size: 14px; margin-bottom: 3px; }
+    .screen-vctrl .vctrl-name { font-size: 8px; font-weight: 600; color: #171717; margin-bottom: 2px; }
+    .screen-vctrl .vctrl-val { font-size: 7px; color: #888; }
+    .screen-vctrl .vctrl-val.green { color: #419468; font-weight: 700; }
+
+    /* Screen: Tyre Pressure */
+    .screen-tyre {
+      width: 100%; height: 100%;
+      background: #fff;
+      display: flex; flex-direction: column; padding: 28px 12px 16px;
+    }
+    .screen-tyre .tyre-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 13px; font-weight: 700; color: #171717; margin-bottom: 16px;
+    }
+    .screen-tyre .tyre-car-diag {
+      width: 120px; height: 70px; margin: 0 auto 12px;
+      position: relative;
+    }
+    .screen-tyre .tyre-car-body {
+      position: absolute; inset: 8px 20px;
+      background: #e8e8e8; border-radius: 8px;
+    }
+    .screen-tyre .tyre-wheel {
+      position: absolute; width: 16px; height: 16px;
+      background: #419468; border-radius: 4px;
+    }
+    .screen-tyre .tyre-wheel.tl { top: 4px; left: 4px; }
+    .screen-tyre .tyre-wheel.tr { top: 4px; right: 4px; }
+    .screen-tyre .tyre-wheel.bl { bottom: 4px; left: 4px; }
+    .screen-tyre .tyre-wheel.br { bottom: 4px; right: 4px; }
+    .screen-tyre .tyre-readings {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    }
+    .screen-tyre .tyre-reading {
+      background: #f8f8f8; border-radius: 8px; padding: 8px; text-align: center;
+    }
+    .screen-tyre .tyre-psi { font-size: 14px; font-weight: 700; color: #171717; }
+    .screen-tyre .tyre-psi-unit { font-size: 7px; color: #888; }
+    .screen-tyre .tyre-reading-lbl { font-size: 7px; color: #aaa; margin-top: 2px; }
+
+    /* ── Section: Screens showcase ── */
+    .cs-screens-section {
+      background: #f2f8f5;
+      padding: 100px 0;
+    }
+    .cs-screens-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; }
+
+    /* ── Challenge cards ── */
+    .cs-challenge-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 8px;
+    }
+    .cs-challenge-card {
+      background: #fafafa; border: 1px solid rgba(0,0,0,0.06); border-radius: 20px; padding: 36px 32px;
+    }
+    .cs-challenge-icon { font-size: 28px; margin-bottom: 16px; }
+    .cs-challenge-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px; font-weight: 700; color: #171717; margin-bottom: 12px;
+    }
+    .cs-challenge-body { font-size: 15px; color: #666; line-height: 1.7; }
+
+    /* ── Insight cards ── */
+    .cs-insight-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .cs-insight-card {
+      border-radius: 20px; padding: 36px; background: #fafafa; border: 1px solid rgba(0,0,0,0.06);
+    }
+    .cs-insight-card.highlight { background: #eef9f4; border-color: rgba(65,148,104,0.2); }
+    .cs-insight-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #aaa; margin-bottom: 16px; }
+    .cs-insight-card.highlight .cs-insight-eyebrow { color: #419468; }
+    .cs-insight-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px;
+    }
+    .cs-insight-body { font-size: 15px; color: #555; line-height: 1.7; }
+
+    /* ── Design System palette ── */
+    .cs-palette { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .cs-swatch {
+      display: flex; flex-direction: column; gap: 8px; align-items: center;
+    }
+    .cs-swatch-box {
+      width: 72px; height: 72px; border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .cs-swatch-label { font-size: 11px; color: #888; text-align: center; }
+    .cs-swatch-hex { font-size: 12px; font-weight: 700; color: #171717; text-align: center; }
+
+    /* ── Type samples ── */
+    .cs-type-row { display: flex; gap: 40px; flex-wrap: wrap; align-items: baseline; margin-top: 32px; }
+    .cs-type-sample { }
+    .cs-type-specimen { line-height: 1; }
+    .cs-type-meta { font-size: 12px; color: #999; margin-top: 4px; }
+
+    /* ── Decision blocks ── */
+    .cs-decision {
+      border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 40px;
+      margin-bottom: 24px; background: #fff;
+    }
+    .cs-decision-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .cs-decision-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px; font-weight: 700; color: #c8e8d6; line-height: 1; flex-shrink: 0;
+    }
+    .cs-decision-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 22px; font-weight: 700; color: #171717;
+    }
+    .cs-decision-body { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 20px; }
+    .cs-decision-outcome {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #eef9f4; border-radius: 12px; padding: 16px 20px;
+      font-size: 15px; color: #166534; line-height: 1.6;
+    }
+    .cs-decision-outcome-icon { flex-shrink: 0; margin-top: 2px; }
+
+    /* ── Reflection dark section ── */
+    .cs-reflection-section { background: #0d1f14; padding: 100px 0; overflow: hidden; }
+    .cs-reflection-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; box-sizing: border-box; width: 100%; }
+    .cs-reflection-label { font-size: 11px; font-weight: 700; color: #78faae; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+    .cs-reflection-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px; font-weight: 700; line-height: 1.1;
+      letter-spacing: -1px; color: #fff; margin-bottom: 40px;
+    }
+    .cs-reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .cs-reflection-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; }
+    .cs-reflection-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(120,250,174,0.7); margin-bottom: 14px; }
+    .cs-reflection-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cs-reflection-card-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; }
+    .cs-reflection-quote {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 28px; font-weight: 500; line-height: 1.5;
+      color: rgba(255,255,255,0.7); max-width: 820px; margin-top: 48px;
+    }
+    .cs-reflection-quote em { color: #78faae; font-style: normal; }
+
+    /* ── Divider ── */
+    .cs-divider { border: none; border-top: 1px solid rgba(0,0,0,0.07); margin: 0 100px; }
+
+    /* ── Footer ── */
+    footer { background: #FF6101; color: #fff; }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; padding: 40px 100px;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a { color: #fff; font-size: 16px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; transition: opacity 0.2s; }
+    .footer-links a:hover { opacity: 0.8; }
+    .footer-contact { display: flex; gap: 40px; font-size: 16px; }
+    .footer-contact a { color: #fff; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s; }
+    .footer-contact a:hover { opacity: 0.8; }
+
+    /* ── My Role section ── */
+    .cs-role-band { border-bottom: 1px solid rgba(0,0,0,0.07); background: #f8faf9; }
+    .cs-role-band-inner { max-width:1280px; margin:0 auto; padding:0 100px; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(0,0,0,0.05); border-radius:0; overflow:hidden; }
+    .cs-role-band-cell { background:#f8faf9; padding:44px 40px; }
+    .cs-role-band-cell:nth-child(1) { padding-left:0; background:#f8faf9; }
+    .cs-role-band-eyebrow { font-size:11px; font-weight:700; color:#419468; text-transform:uppercase; letter-spacing:1.8px; margin-bottom:10px; }
+    .cs-role-band-title { font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:700; color:#171717; margin-bottom:14px; }
+    .cs-role-band-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .cs-role-band-list li { font-size:14px; color:#555; line-height:1.6; padding-left:16px; position:relative; }
+    .cs-role-band-list li::before { content:''; position:absolute; left:0; top:8px; width:5px; height:5px; background:#419468; border-radius:50%; }
+
+    /* ── North Star section ── */
+    .cs-north-section { background:#0d1f14; padding:80px 0; }
+    .cs-north-inner { max-width:1280px; margin:0 auto; padding:0 100px; }
+    .cs-north-label { font-size:11px; font-weight:700; color:#78faae; text-transform:uppercase; letter-spacing:2px; margin-bottom:24px; }
+    .cs-north-statement { font-family:'Bricolage Grotesque',sans-serif; font-size:32px; font-weight:700; color:#fff; line-height:1.3; max-width:880px; margin-bottom:52px; letter-spacing:-0.5px; }
+    .cs-north-statement em { color:#78faae; font-style:normal; }
+    .cs-north-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.06); border-radius:16px; overflow:hidden; }
+    .cs-north-pillar { background:#0d1f14; padding:32px 28px; }
+    .cs-north-pillar-icon { font-size:24px; margin-bottom:14px; }
+    .cs-north-pillar-title { font-family:'Bricolage Grotesque',sans-serif; font-size:17px; font-weight:700; color:#fff; margin-bottom:8px; }
+    .cs-north-pillar-body { font-size:14px; color:rgba(255,255,255,0.5); line-height:1.65; }
+
+    /* ── Ambiguity / messy middle ── */
+    .cs-messy-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px; }
+    .cs-messy-card { border-radius:20px; padding:36px; }
+    .cs-messy-card.wrong { background:#fef2f2; border:1px solid rgba(239,68,68,0.15); }
+    .cs-messy-card.pivot { background:#fff7ed; border:1px solid rgba(245,158,11,0.15); }
+    .cs-messy-card.learned { background:#f0fdf4; border:1px solid rgba(34,197,94,0.15); }
+    .cs-messy-card.tension { background:#f0f9ff; border:1px solid rgba(14,165,233,0.15); }
+    .cs-messy-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px; }
+    .cs-messy-card.wrong .cs-messy-eyebrow { color:#dc2626; }
+    .cs-messy-card.pivot .cs-messy-eyebrow { color:#b45309; }
+    .cs-messy-card.learned .cs-messy-eyebrow { color:#15803d; }
+    .cs-messy-card.tension .cs-messy-eyebrow { color:#0369a1; }
+    .cs-messy-title { font-family:'Bricolage Grotesque',sans-serif; font-size:18px; font-weight:700; color:#171717; margin-bottom:10px; }
+    .cs-messy-body { font-size:14px; color:#555; line-height:1.7; }
+
+    /* ── Impact metrics ── */
+    .cs-impact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(0,0,0,0.06); border-radius:20px; overflow:hidden; margin-top:48px; }
+    .cs-impact-cell { background:#fff; padding:44px 36px; }
+    .cs-impact-num { font-family:'Bricolage Grotesque',sans-serif; font-size:60px; font-weight:700; line-height:1; color:#171717; letter-spacing:-2px; margin-bottom:12px; }
+    .cs-impact-num .unit { font-size:32px; }
+    .cs-impact-label { font-size:15px; color:#888; line-height:1.6; max-width:200px; }
+    .cs-impact-source { font-size:11px; color:#bbb; margin-top:10px; font-style:italic; }
+
+    /* ── Trade-offs section ── */
+    .cs-tradeoff-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px; }
+    .cs-tradeoff-card { border:1px solid rgba(0,0,0,0.07); border-radius:20px; padding:36px; }
+    .cs-tradeoff-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .cs-tradeoff-title { font-family:'Bricolage Grotesque',sans-serif; font-size:18px; font-weight:700; color:#171717; }
+    .cs-tradeoff-badge { font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; padding:4px 12px; border-radius:100px; }
+    .cs-tradeoff-badge.cut { background:#fde8e8; color:#b91c1c; }
+    .cs-tradeoff-badge.deferred { background:#fff3e0; color:#b45309; }
+    .cs-tradeoff-body { font-size:14px; color:#555; line-height:1.7; margin-bottom:16px; }
+    .cs-tradeoff-reason { display:flex; align-items:flex-start; gap:10px; background:#f8f8f8; border-radius:10px; padding:12px 16px; font-size:13px; color:#444; line-height:1.6; }
+
+    /* ── XFN / collaboration ── */
+    .cs-xfn-row { display:flex; flex-direction:column; gap:16px; margin-top:48px; }
+    .cs-xfn-item { display:grid; grid-template-columns:160px 1fr; gap:32px; align-items:start; padding:28px 0; border-top:1px solid rgba(0,0,0,0.07); }
+    .cs-xfn-item:last-child { border-bottom:1px solid rgba(0,0,0,0.07); }
+    .cs-xfn-role { font-family:'Bricolage Grotesque',sans-serif; font-size:15px; font-weight:700; color:#171717; }
+    .cs-xfn-role-sub { font-size:12px; color:#aaa; margin-top:2px; }
+    .cs-xfn-body { font-size:15px; color:#555; line-height:1.7; }
+    .cs-xfn-quote { font-style:italic; color:#888; font-size:14px; margin-top:8px; border-left:3px solid #c2f0e8; padding-left:12px; }
+
+    /* ── Responsive additions ── */
+    @media (max-width: 900px) {
+      .cs-role-band-inner { grid-template-columns:1fr; }
+      .cs-role-band-cell:nth-child(1) { padding-left:40px; }
+      .cs-north-pillars { grid-template-columns:1fr; }
+      .cs-messy-grid { grid-template-columns:1fr; }
+      .cs-impact-grid { grid-template-columns:1fr; }
+      .cs-tradeoff-grid { grid-template-columns:1fr; }
+      .cs-xfn-item { grid-template-columns:1fr; gap:8px; }
+    }
+    @media (max-width: 640px) {
+      .cs-role-band-inner { padding-left:24px; padding-right:24px; }
+      .cs-role-band-cell { padding-left:0 !important; }
+      .cs-north-inner { padding-left:24px; padding-right:24px; }
+      .cs-north-statement { font-size:24px; }
+    }
+
+    /* ── Case Study Nav ── */
+    .cs-case-nav { border-top: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 100px;
+      display: flex;
+    }
+    .cs-case-nav-card {
+      flex: 1; padding: 48px 0;
+      display: flex; flex-direction: column; gap: 10px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .cs-case-nav-card:hover { background: #f4faf7; }
+    .cs-case-nav-prev { padding-right: 60px; border-right: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-next { padding-left: 60px; text-align: right; }
+    .cs-case-nav-card.solo-next { margin-left: auto; }
+    .cs-case-nav-label {
+      font-size: 11px; font-weight: 700; color: #aaa;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .cs-case-nav-next .cs-case-nav-label { justify-content: flex-end; }
+    .cs-case-nav-project {
+      font-size: 11px; font-weight: 700; color: #419468;
+      text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .cs-case-nav-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 28px; font-weight: 700; color: #171717;
+      line-height: 1.2; letter-spacing: -0.5px;
       transition: color 0.2s;
     }
-    .cs-footer-links a:hover { color: var(--white); }
-    .cs-footer-right {
-      text-align: right;
-    }
-    .cs-footer-cta {
-      font-size: 0.8rem; color: rgba(255,255,255,0.7);
-      margin-bottom: 6px;
-    }
-    .cs-footer-email {
-      font-size: 1rem; font-weight: 700; color: var(--white);
-    }
-
-    /* ─── Fade-up animation ─────────────────────────────────────────────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── Responsive 1100px ─────────────────────────────────────────────── */
-    @media (max-width: 1100px) {
-      .cs-process-grid { grid-template-columns: repeat(2, 1fr); }
-      .cs-meta { grid-template-columns: repeat(2, 1fr); }
-      .cs-meta-item:nth-child(2) { border-right: none; }
-      .cs-meta-item:nth-child(3) { border-top: 1px solid var(--line); }
-      .cs-meta-item:nth-child(4) { border-top: 1px solid var(--line); }
-    }
-
-    /* ─── Responsive 900px ──────────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .nav { padding: 0 24px; }
-      .cs-hero { grid-template-columns: 1fr; min-height: auto; padding: 72px 24px 56px; align-items: start; gap: 32px; }
-      .cs-hero-img-ph { min-height: 300px; align-self: auto; }
-      .cs-back { left: 24px; }
-      .cs-section { padding: 72px 24px; }
-      .cs-section-full { padding: 72px 24px; }
-      .cs-divider { margin: 0 24px; }
-      .cs-compare-section { padding: 60px 24px; }
-      .cs-problem-section { padding: 72px 24px; }
-      .two-col-narrow { grid-template-columns: 1fr; gap: 40px; }
-      .cs-stats-row { grid-template-columns: 1fr; }
-      .cs-challenge-grid { grid-template-columns: 1fr; }
-      .cs-task-role-grid { grid-template-columns: 1fr; gap: 36px; }
-      .cs-context-intro { grid-template-columns: 1fr; gap: 32px; }
-      .cs-context-heading { position: static; }
-      .cs-screens-row { grid-template-columns: repeat(2, 1fr); }
-      .cs-users-grid { grid-template-columns: 1fr; gap: 40px; }
-      .cs-improvements-grid { grid-template-columns: 1fr; gap: 40px; }
-      .cs-compare-layout { grid-template-columns: 1fr; gap: 32px; }
-      .cs-footer { padding: 36px 24px; }
-      .cs-footer-right { text-align: left; }
-    }
-
-    /* ─── Responsive 640px ──────────────────────────────────────────────── */
+    .cs-case-nav-card:hover .cs-case-nav-title { color: #419468; }
+    @media (max-width: 1100px) { .cs-case-nav-inner { padding: 0 48px; } }
     @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .cs-hero-title { font-size: 2.4rem; }
-      .cs-meta { grid-template-columns: 1fr 1fr; }
-      .cs-meta-item { padding: 20px 16px; }
+      .cs-case-nav-inner { padding: 0 24px; flex-direction: column; }
+      .cs-case-nav-prev { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); padding-right: 0; }
+      .cs-case-nav-next { padding-left: 0; text-align: left; }
+      .cs-case-nav-next .cs-case-nav-label { justify-content: flex-start; }
+      .cs-case-nav-title { font-size: 22px; }
+    }
+
+    /* ── Scroll animations ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up { opacity:0; transform:translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+      .fade-up.visible { opacity:1; transform:none; }
+      .cs-hero-content { animation: fadeUp 0.8s ease forwards; }
+      .cs-hero-right { animation: fadeUp 1s ease 0.2s both; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      nav, .cs-hero, .cs-section, .cs-problem-inner, .footer-inner, .cs-screens-inner { padding-left: 48px; padding-right: 48px; }
+      .cs-back { left: 48px; }
+      .cs-hero-title { font-size: 60px; }
+      .cs-meta-bar-inner { padding-left: 48px; padding-right: 48px; }
+      .cs-divider { margin: 0 48px; }
+      .cs-hero { padding: 80px 48px 60px; gap: 40px; }
+    }
+    @media (max-width: 900px) {
+      .cs-hero-title { font-size: 44px; }
+      .cs-heading { font-size: 36px; }
+      .cs-two-col, .cs-two-col-narrow, .cs-two-col-wide { grid-template-columns: 1fr; gap: 40px; }
+      .cs-process-grid { grid-template-columns: 1fr 1fr; }
+      .cs-meta-bar-inner { grid-template-columns: 1fr 1fr; }
+      .cs-meta-cell:nth-child(2) { border-right: none; }
+      .cs-meta-cell:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.08); padding-left: 0; }
+      .cs-meta-cell { padding-left: 0 !important; }
+      .cs-challenge-grid { grid-template-columns: 1fr 1fr; }
+      .cs-insight-cards { grid-template-columns: 1fr; }
+      .cs-reflection-grid { grid-template-columns: 1fr; }
+      .cs-problem-grid { grid-template-columns: 1fr; gap: 40px; }
+      .phone-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .phone-grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .nav-links a { font-size: 15px; }
+      .cs-hero { grid-template-columns: 1fr; min-height: auto; padding: 80px 48px 60px; align-items: start; gap: 32px; }
+    }
+    @media (max-width: 640px) {
+      nav, .cs-hero, .cs-section, .cs-problem-inner, .footer-inner, .cs-screens-inner { padding-left: 24px; padding-right: 24px; }
+      .cs-back { left: 24px; }
+      .cs-hero-title { font-size: 36px; letter-spacing: -1px; }
+      .cs-heading { font-size: 28px; }
+      .cs-problem-quote { font-size: 24px; }
       .cs-process-grid { grid-template-columns: 1fr; }
-      .cs-screens-row { grid-template-columns: 1fr 1fr; }
-      .cs-goals-grid { grid-template-columns: 1fr 1fr; }
-      .cs-compare-screens { grid-template-columns: 1fr; }
-      .cs-footer { flex-direction: column; }
-      .cs-footer-right { text-align: left; }
-      .cs-hero { padding: 64px 20px 48px; gap: 24px; }
-      .cs-hero-title { font-size: 2rem; }
-      .cs-hero-img-ph { min-height: 220px; }
+      .cs-meta-bar-inner { grid-template-columns: 1fr; padding-left: 24px; padding-right: 24px; gap: 0; }
+      .cs-meta-cell { padding: 16px 0; border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); padding-left: 0 !important; }
+      .cs-meta-cell:last-child { border-bottom: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-contact { flex-direction: column; gap: 10px; }
+      .cs-divider { margin: 0 24px; }
+      .nav-links { display: none; }
+      .cs-challenge-grid { grid-template-columns: 1fr; }
+      .phone-grid-3, .phone-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .phone-grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .cs-reflection-inner { padding-left: 24px; padding-right: 24px; }
+      .cs-reflection-heading { font-size: 32px; }
+      .cs-reflection-quote { font-size: 22px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <a href="index.html" class="nav-logo">SR<span>.</span></a>
-    <div class="nav-links">
-      <a href="index.html#hero">Home</a>
-      <a href="index.html#works">Works</a>
-      <a href="index.html#story">My Story</a>
-    </div>
-  </nav>
+  <!-- ════ Nav ════ -->
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo">SR<span>.</span></a>
+      <div class="nav-links">
+        <a href="index.html#works">Work</a>
+        <a href="index.html#design-showcase">Design</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
 
-  <!-- HERO -->
+  <!-- ════ Hero ════ -->
   <section class="cs-hero">
-    <a href="index.html#works" class="cs-back">← Back to Works</a>
-
-    <div class="cs-hero-left">
-      <div class="cs-tags">
-        <span class="cs-tag">Automotive</span>
-        <span class="cs-tag">iOS</span>
-        <span class="cs-tag">Android</span>
-        <span class="cs-tag">IoT</span>
-        <span class="cs-tag">2021</span>
+    <div class="cs-hero-bg"></div>
+    <a href="index.html#works" class="cs-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Works
+    </a>
+    <div class="cs-hero-content">
+      <div class="cs-hero-tags">
+        <span class="cs-hero-tag">UX Design</span>
+        <span class="cs-hero-tag">Mobile App</span>
+        <span class="cs-hero-tag">Automotive</span>
+        <span class="cs-hero-tag">Concept</span>
+        <span class="cs-hero-tag">2024</span>
       </div>
-      <h1 class="cs-hero-title">Škoda Connected App</h1>
-      <p class="cs-hero-sub">Reimagining the connected car experience for Škoda owners — remote vehicle control, real-time insights, and intelligent journey planning in one unified app.</p>
+      <h1 class="cs-hero-title">Škoda<br><em>Connected</em><br>App</h1>
+      <p class="cs-hero-sub">A conceptual redesign of a connected car app for Škoda vehicle owners — bringing keyless access, remote controls, and real-time vehicle insights into a seamless mobile experience.</p>
     </div>
-
-    <!-- Hero image placeholder — replace with your cover image -->
-    <div class="cs-hero-img-ph">
-      <div class="cs-hero-img-ph-icon">🖼</div>
-      <div class="cs-hero-img-ph-label">Hero Cover Image</div>
-      <div class="cs-hero-img-ph-hint">Add: skoda-hero-cover.png</div>
+    <div class="cs-hero-right">
+      <div class="cs-hero-car-wrap">
+        <img src="images/skoda/car.png" alt="Škoda car" style="width:100%;">
+      </div>
     </div>
   </section>
 
-  <!-- META BAR -->
-  <div class="cs-meta">
-    <div class="cs-meta-item">
-      <div class="cs-meta-label">Role</div>
-      <div class="cs-meta-value">Senior Product Designer</div>
-    </div>
-    <div class="cs-meta-item">
-      <div class="cs-meta-label">Platform</div>
-      <div class="cs-meta-value">iOS · Android</div>
-    </div>
-    <div class="cs-meta-item">
-      <div class="cs-meta-label">Year</div>
-      <div class="cs-meta-value">2021</div>
-    </div>
-    <div class="cs-meta-item">
-      <div class="cs-meta-label">Team</div>
-      <div class="cs-meta-value">Design · Engineering · OEM</div>
+  <!-- ════ Meta Bar ════ -->
+  <div class="cs-meta-bar">
+    <div class="cs-meta-bar-inner">
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-value">UX Designer</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Platform</div>
+        <div class="cs-meta-value">iOS Mobile</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Type</div>
+        <div class="cs-meta-value">Personal Concept</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Year</div>
+        <div class="cs-meta-value">2024</div>
+      </div>
     </div>
   </div>
 
-  <!-- OVERVIEW -->
-  <section class="cs-section fade-up">
-    <div class="two-col-narrow">
-      <div>
-        <span class="cs-label">Overview</span>
-        <h2 class="cs-heading">Connecting millions of drivers to their cars through a single, intelligent app</h2>
-        <p class="cs-body">Škoda's connected vehicle ecosystem needed a mobile experience that matched the sophistication of its cars. I redesigned the companion app from the ground up — bringing remote vehicle controls, real-time diagnostics, trip tracking, and predictive maintenance into a cohesive interface that works for both tech-savvy early adopters and everyday drivers across 30+ markets.</p>
-      </div>
-      <div class="cs-img-placeholder medium" style="border-radius: 12px;">
-        <div class="cs-img-placeholder-icon">🖼</div>
-        <span>Add: overview-skoda.png</span>
-      </div>
-    </div>
-  </section>
-
-  <hr class="cs-divider" />
-
-  <!-- THE CHALLENGE -->
-  <section class="cs-section fade-up">
-    <span class="cs-label">The Challenge</span>
-    <div class="cs-stats-row">
-      <div class="cs-stat">
-        <div class="cs-stat-num">31%</div>
-        <div class="cs-stat-desc">of Škoda Connect users stopped using the app within 30 days of first activation</div>
-      </div>
-      <div class="cs-stat">
-        <div class="cs-stat-num">6+</div>
-        <div class="cs-stat-desc">average taps needed to reach key remote control features from the home screen</div>
-      </div>
-      <div class="cs-stat">
-        <div class="cs-stat-num">4.8★</div>
-        <div class="cs-stat-desc">App Store rating achieved post-launch, up from 3.2 on the previous version</div>
-      </div>
-    </div>
-    <div class="cs-challenge-grid">
-      <div class="cs-challenge-card">
-        <div class="cs-challenge-icon">🚗</div>
-        <div class="cs-challenge-title">Core Problem</div>
-        <p class="cs-challenge-body">The previous app was a direct port of the web portal — a dense feature list rather than a contextual, mobile-first experience. Connected features were buried behind menus, and the interface felt generic rather than premium. Drivers couldn't easily find or trust the app to manage their vehicle.</p>
-      </div>
-      <div class="cs-challenge-card">
-        <div class="cs-challenge-icon">🎯</div>
-        <div class="cs-challenge-title">Design Goals</div>
-        <ul class="cs-challenge-list">
-          <li>Surface the top 5 actions within 2 taps from home</li>
-          <li>Build a visual vehicle status dashboard that feels alive</li>
-          <li>Design for multi-market localisation from day one</li>
-          <li>Reduce support tickets related to feature discoverability by 40%</li>
+  <!-- ════ My Role ════ -->
+  <div class="cs-role-band">
+    <div class="cs-role-band-inner">
+      <div class="cs-role-band-cell">
+        <div class="cs-role-band-eyebrow">My Role</div>
+        <div class="cs-role-band-title">Product Design Lead</div>
+        <ul class="cs-role-band-list">
+          <li>Defined the problem scope and prioritisation framework</li>
+          <li>Drove design direction across all 15+ screens</li>
+          <li>Made final calls on trade-offs between scope and polish</li>
+          <li>Structured the concept to validate with real Škoda owners</li>
         </ul>
       </div>
-      <div class="cs-challenge-card">
-        <div class="cs-challenge-icon">🌍</div>
-        <div class="cs-challenge-title">Who We Designed For</div>
-        <p class="cs-challenge-body">Škoda owners across 30+ European markets — ranging from young urban commuters using the app daily to check range and pre-condition their car, to occasional users who primarily needed emergency assistance and service reminders.</p>
-      </div>
-    </div>
-  </section>
-
-  <hr class="cs-divider" />
-
-  <!-- TASK & SUCCESS CRITERIA -->
-  <section class="cs-section fade-up">
-    <span class="cs-label">Task &amp; Success Criteria</span>
-    <div class="cs-task-role-grid">
-      <div>
-        <div class="cs-task-title">Task</div>
-        <ul class="cs-task-list">
-          <li>Led full redesign of the Škoda Connect companion app for iOS and Android</li>
-          <li>Ran driver diary studies and in-car contextual research sessions across 3 European markets</li>
-          <li>Designed a premium, glanceable UI system optimised for quick access and multi-market localisation</li>
+      <div class="cs-role-band-cell">
+        <div class="cs-role-band-eyebrow">Decision Ownership</div>
+        <div class="cs-role-band-title">What I was accountable for</div>
+        <ul class="cs-role-band-list">
+          <li>Which flows to build vs. defer (cut 3 originally scoped features)</li>
+          <li>Design system architecture — scalability over speed</li>
+          <li>Information hierarchy on the home dashboard (pivoted twice)</li>
+          <li>Accessibility standards — minimum WCAG AA across all screens</li>
         </ul>
       </div>
-      <div>
-        <div class="cs-task-title">Success Criteria</div>
-        <ul class="cs-task-list">
-          <li>Top 5 remote actions reachable in 2 taps from home screen</li>
-          <li>App Store rating improved from 3.2 to 4.8 post-launch</li>
-          <li>Feature discoverability support tickets reduced by 40%</li>
+      <div class="cs-role-band-cell">
+        <div class="cs-role-band-eyebrow">If Shipped</div>
+        <div class="cs-role-band-title">Cross-functional partners</div>
+        <ul class="cs-role-band-list">
+          <li><strong>Product</strong> — feature prioritisation &amp; business case alignment</li>
+          <li><strong>Engineering</strong> — BLE/NFC constraints for digital key flow</li>
+          <li><strong>Research</strong> — validating onboarding drop-off hypotheses</li>
+          <li><strong>Brand</strong> — design system alignment with Škoda identity</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- MY ROLE & GOALS -->
-  <section class="cs-section fade-up" style="padding-top: 0;">
-    <div class="cs-task-role-grid">
-      <div>
-        <div class="cs-task-title">My Role</div>
-        <ul class="cs-task-list">
-          <li>Planned and led research across driver diary studies and contextual sessions</li>
-          <li>Recruited 28 participants across 3 markets (DE, CZ, UK)</li>
-          <li>Synthesised insights into an ownership journey map and design brief</li>
-          <li>Designed the new IA, home screen, remote controls, and trip flows</li>
-          <li>Built iOS and Android UI components aligned to OEM brand guidelines</li>
-          <li>Coordinated handoff with engineering and OEM integration partners</li>
-        </ul>
+  <!-- ════ Overview ════ -->
+  <section class="cs-section">
+    <div class="cs-two-col">
+      <div class="fade-up">
+        <div class="cs-label">Overview</div>
+        <h2 class="cs-heading">A smarter way to own a car</h2>
+        <p class="cs-body" style="margin-bottom:20px;">Connected car apps are notoriously clunky. They're built as feature dumps, not experiences — burying the most-used actions (unlock, climate, fuel check) behind deep navigation hierarchies while offering little contextual awareness.</p>
+        <p class="cs-body">This concept explores what a Škoda Connected app could feel like if it prioritised the user's daily rituals over feature completeness. From a friction-free OTP onboarding to a Dashboard that surfaces the right information at the right moment — every screen was designed from a place of intent.</p>
       </div>
-      <div>
-        <div class="cs-task-title">Goals</div>
-        <div class="cs-goals-grid">
-          <div class="cs-goal-card">
-            <div class="cs-goal-label">Churn (30d)</div>
-            <div class="cs-goal-value">−31%</div>
-            <div class="cs-goal-sub">Monthly active users</div>
-          </div>
-          <div class="cs-goal-card">
-            <div class="cs-goal-label">Key actions</div>
-            <div class="cs-goal-value">2 taps</div>
-            <div class="cs-goal-sub">From home screen</div>
-          </div>
-          <div class="cs-goal-card">
-            <div class="cs-goal-label">App Store</div>
-            <div class="cs-goal-value">4.8 ★</div>
-            <div class="cs-goal-sub">Rating post-launch</div>
-          </div>
-          <div class="cs-goal-card">
-            <div class="cs-goal-label">Support tickets</div>
-            <div class="cs-goal-value">−40%</div>
-            <div class="cs-goal-sub">Feature discovery issues</div>
+      <div class="fade-up" style="transition-delay:0.1s">
+        <div style="background:#f2f8f5; border-radius:20px; padding:36px;">
+          <div class="cs-meta-label" style="margin-bottom:24px;">Project Context</div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div>
+              <div class="cs-meta-label">Tools</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:600;color:#171717;margin-top:4px;">Figma, FigJam, Montserrat</div>
+            </div>
+            <div>
+              <div class="cs-meta-label">Scope</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:600;color:#171717;margin-top:4px;">Onboarding · Dashboard · Vehicle Controls · Digital Key</div>
+            </div>
+            <div>
+              <div class="cs-meta-label">Key Constraint</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:600;color:#171717;margin-top:4px;">Single-handed use, outdoor legibility, offline-first mindset</div>
+            </div>
+            <div>
+              <div class="cs-meta-label">Inspiration</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:600;color:#171717;margin-top:4px;">Tesla app, Rivian, NIO Life</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <hr class="cs-divider" />
-
-  <!-- CONTEXT & PAIN -->
-  <section class="cs-section fade-up">
-    <span class="cs-label">Context &amp; Pain Points</span>
-    <div class="cs-context-intro">
-      <h2 class="cs-context-heading">Driving insights from diary studies and in-car observation</h2>
-      <div>
-        <p class="cs-context-body">Usage data told us features were underused, but not why. We needed to understand the real moments drivers wanted to interact with their car remotely — and what prevented them from doing so.</p>
-        <p class="cs-context-body" style="margin-top: 16px;">We ran 2-week driver diary studies with 16 participants across Germany, Czech Republic, and the UK, followed by 12 in-car contextual sessions and a teardown of 5 competitor OEM apps.</p>
-      </div>
-    </div>
-    <div class="cs-screens-heading">Key screens audited during research</div>
-    <div class="cs-screens-row">
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header">
-          <span class="cs-screen-dot grey"></span>
-          01. Home Screen
-        </div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon">📱</div>
-          <div class="cs-screen-ph-title">Home Screen</div>
-          <div class="cs-screen-ph-hint">Add: home-screen.png</div>
-        </div>
-      </div>
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header">
-          <span class="cs-screen-dot red"></span>
-          02. Remote Controls
-        </div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon">🔑</div>
-          <div class="cs-screen-ph-title">Remote Controls</div>
-          <div class="cs-screen-ph-hint">Add: remote-controls.png</div>
-        </div>
-      </div>
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header">
-          <span class="cs-screen-dot grey"></span>
-          03. Trip History
-        </div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon">🗺</div>
-          <div class="cs-screen-ph-title">Trip History</div>
-          <div class="cs-screen-ph-hint">Add: trip-history.png</div>
-        </div>
-      </div>
-      <div class="cs-screen-card">
-        <div class="cs-screen-card-header">
-          <span class="cs-screen-dot red"></span>
-          04. Service Booking
-        </div>
-        <div class="cs-screen-ph">
-          <div class="cs-screen-ph-icon">🔧</div>
-          <div class="cs-screen-ph-title">Service Booking</div>
-          <div class="cs-screen-ph-hint">Add: service-booking.png</div>
-        </div>
-      </div>
-    </div>
-    <div class="cs-screen-note">Red dot = screens with highest abandonment and support ticket volume</div>
-  </section>
-
-  <hr class="cs-divider" />
-
-  <!-- USERS' TALK -->
-  <section class="cs-section fade-up">
-    <div class="cs-users-grid">
-      <div class="cs-users-text">
-        <span class="cs-label">Users' Talk</span>
-        <h2 class="cs-heading">Drivers told us exactly what they needed</h2>
-        <p class="cs-body">The diary studies surfaced a clear pattern: drivers wanted fast access to a handful of high-frequency actions — lock, climate control, range, and locate. Everything else could be secondary.</p>
-        <p class="cs-body" style="margin-top: 16px;">The existing app made even these simple tasks feel like an expedition. Quotes from participants became our north star for the redesign.</p>
-        <div class="cs-portrait-row">
-          <div class="cs-portrait">K</div>
-          <div class="cs-portrait">E</div>
-          <div class="cs-portrait">T</div>
-          <div class="cs-portrait">M</div>
-        </div>
-      </div>
-      <div class="cs-quotes-col">
-        <div class="cs-quote-card">
-          <div class="cs-quote-mark">"</div>
-          <p class="cs-quote-text">I just want to check my range and pre-heat the car before I leave. Every time I try I end up hunting through the app for 30 seconds just to find the climate button.</p>
-          <div class="cs-quote-user-row">
-            <div class="cs-quote-name">Klaus M.</div>
-            <div class="cs-quote-dot-sm"></div>
-            <div class="cs-quote-detail">Škoda Octavia owner · Daily commuter</div>
-          </div>
-          <div class="cs-quote-chips">
-            <span class="cs-quote-chip active">Climate control</span>
-            <span class="cs-quote-chip">Range check</span>
-            <span class="cs-quote-chip">Quick actions</span>
-          </div>
-        </div>
-        <div class="cs-quote-card">
-          <div class="cs-quote-mark">"</div>
-          <p class="cs-quote-text">I downloaded the app when I got the car, used it once, and deleted it. It felt like a website, not a car app. Nothing felt instant or confident.</p>
-          <div class="cs-quote-user-row">
-            <div class="cs-quote-name">Emma S.</div>
-            <div class="cs-quote-dot-sm"></div>
-            <div class="cs-quote-detail">Škoda Enyaq owner · Weekend driver</div>
-          </div>
-          <div class="cs-quote-chips">
-            <span class="cs-quote-chip active">First impression</span>
-            <span class="cs-quote-chip">Trust</span>
-            <span class="cs-quote-chip">App feel</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="cs-divider" />
-
-  <!-- IMPROVEMENTS -->
-  <section class="cs-section fade-up">
-    <div class="cs-improvements-grid">
-      <div>
-        <span class="cs-label">Improvements</span>
-        <h2 class="cs-heading">Prioritising what matters most to drivers</h2>
-        <p class="cs-body">After the initial diary phase with daily commuters, we ran a second round with occasional users — revealing that the discoverability problem affected both power users and casual ones equally, just at different points in the journey.</p>
-        <p class="cs-body" style="margin-top: 16px;">We mapped every identified issue to a driver need and assigned severity based on frequency of mention, impact on daily use, and estimated engineering effort.</p>
-        <a href="#" class="cs-report-link">View research report →</a>
-      </div>
-      <div class="cs-severity-box">
-        <div class="cs-severity-title">Issue Severity Scale</div>
-        <div class="cs-severity-row">
-          <span class="cs-severity-badge low">Minor</span>
-          <div class="cs-severity-desc">Visual inconsistencies and label clarity issues</div>
-        </div>
-        <div class="cs-severity-row">
-          <span class="cs-severity-badge medium">Moderate</span>
-          <div class="cs-severity-desc">Navigation depth hiding key features</div>
-        </div>
-        <div class="cs-severity-row">
-          <span class="cs-severity-badge high">Critical</span>
-          <div class="cs-severity-desc">Core actions inaccessible within reasonable tap count</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROBLEM QUOTE -->
-  <div class="cs-problem-section fade-up">
+  <!-- ════ Problem ════ -->
+  <section class="cs-problem-section">
     <div class="cs-problem-inner">
-      <div class="cs-problem-label">The Core Insight</div>
-      <p class="cs-problem-quote">Connected car apps had the potential to deepen the relationship between owner and vehicle — but most felt like <em>afterthoughts bolted onto hardware</em>. The bar for quality was low. We set out to raise it.</p>
+      <div class="cs-problem-label">The Problem</div>
+      <div class="cs-problem-quote">Existing connected car apps treat the phone as a <em>remote control</em>, not an extension of the car ownership experience.</div>
+      <div class="cs-problem-grid">
+        <div class="fade-up">
+          <div class="cs-problem-col-label">Pain Points</div>
+          <div class="cs-problem-col-title">What's broken today</div>
+          <ul class="cs-problem-list">
+            <li>Critical actions like unlock or climate start are buried 3–4 taps deep</li>
+            <li>No contextual awareness — the app looks identical at 7am and 11pm</li>
+            <li>Onboarding requires VIN entry, dealer codes, and multiple account screens</li>
+            <li>Vehicle status (fuel, range, tyre pressure) requires manual refresh</li>
+            <li>Digital key sharing is either absent or requires full account creation by the recipient</li>
+          </ul>
+        </div>
+        <div class="fade-up" style="transition-delay:0.1s">
+          <div class="cs-problem-col-label">Design Goals</div>
+          <div class="cs-problem-col-title">What this concept solves</div>
+          <ul class="cs-problem-list">
+            <li>Surface top 3 actions within one thumb reach on the home screen</li>
+            <li>OTP-first onboarding — zero VIN or dealer input from the user</li>
+            <li>Persistent, glanceable vehicle health at the top of every session</li>
+            <li>Share access to the car with granular permission controls, no sign-up required for recipient</li>
+            <li>Design system that works in bright sunlight and dark environments</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cs-problem-why">
+        <div class="cs-problem-label">Why Škoda?</div>
+        <p class="cs-problem-why-body">Škoda occupies a compelling space in the automotive market — a brand that prides itself on being "Simply Clever." Yet its digital touchpoints have not kept pace with this positioning. This concept is a love letter to what their app could be if it lived up to the brand's promise.</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- FULL-WIDTH IMAGE -->
-  <div class="cs-img-placeholder tall fade-up">
-    <div class="cs-img-placeholder-icon">🖼</div>
-    <span>Add: skoda-full-spread.png</span>
-  </div>
+  <!-- ════ North Star ════ -->
+  <section class="cs-north-section">
+    <div class="cs-north-inner">
+      <div class="cs-north-label">Product North Star</div>
+      <div class="cs-north-statement">
+        Make every Škoda owner feel like they have a <em>co-pilot</em> — not an app that reacts, but a companion that anticipates.
+      </div>
+      <div class="cs-north-pillars">
+        <div class="cs-north-pillar fade-up">
+          <div class="cs-north-pillar-icon">⚡</div>
+          <div class="cs-north-pillar-title">Glanceable</div>
+          <div class="cs-north-pillar-body">Critical status visible in under 2 seconds. If you have to hunt for it, we've failed. Every screen designed for the parking lot, not the sofa.</div>
+        </div>
+        <div class="cs-north-pillar fade-up" style="transition-delay:0.1s">
+          <div class="cs-north-pillar-icon">🤝</div>
+          <div class="cs-north-pillar-title">Trustworthy</div>
+          <div class="cs-north-pillar-body">Car actions carry real-world consequences. Every destructive action (start engine, share key) has deliberate friction — confirmation, not instant execution.</div>
+        </div>
+        <div class="cs-north-pillar fade-up" style="transition-delay:0.2s">
+          <div class="cs-north-pillar-icon">🌱</div>
+          <div class="cs-north-pillar-title">Simply Clever</div>
+          <div class="cs-north-pillar-body">Škoda's own positioning. Features that earn their place — we cut anything that added capability without adding value. Smaller, sharper beats bigger, bloated.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- PROCESS -->
-  <section class="cs-section-full fade-up">
-    <span class="cs-label">Process</span>
-    <h2 class="cs-heading">How we got there</h2>
+  <!-- ════ Navigating Ambiguity ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Navigating Ambiguity</div>
+    <h2 class="cs-heading">It wasn't a straight line</h2>
+    <p class="cs-body" style="max-width:680px;">Here's what the process actually looked like — the assumptions that proved wrong, the pivots that felt risky, and the tensions I had to hold.</p>
+    <div class="cs-messy-grid">
+      <div class="cs-messy-card wrong fade-up">
+        <div class="cs-messy-eyebrow">❌ Wrong assumption</div>
+        <div class="cs-messy-title">I assumed the home screen needed more features</div>
+        <p class="cs-messy-body">My first iteration had 8 action tiles on the home dashboard — every feature a Škoda owner could need. It looked impressive in Figma. In walkthrough, every reviewer immediately asked "but what do I tap first?" I'd optimised for completeness, not clarity. We cut it to 4 primary actions.</p>
+      </div>
+      <div class="cs-messy-card pivot fade-up" style="transition-delay:0.1s">
+        <div class="cs-messy-eyebrow">🔄 Risky pivot</div>
+        <div class="cs-messy-title">Dropped the map view entirely</div>
+        <p class="cs-messy-body">The original scope included a live vehicle location map as a top-level tab. Engineering flagged that GPS polling in background would drain battery by ~18% per hour — a dealbreaker for trust. Instead of fighting the constraint, I reframed: location becomes a contextual detail (parking floor, last seen) rather than a live feed. Smaller scope, but more honest.</p>
+      </div>
+      <div class="cs-messy-card tension fade-up" style="transition-delay:0.2s">
+        <div class="cs-messy-eyebrow">⚡ Design tension</div>
+        <div class="cs-messy-title">Safety friction vs. speed</div>
+        <p class="cs-messy-body">Engine start requires 2 taps by design. Early feedback from 3 informal testers said "just make it one tap." But a one-tap engine start on a car is a safety risk — accidental activation, pocket starts. I held the friction. The right UX and the comfortable UX aren't always the same thing. I documented this explicitly in the design rationale.</p>
+      </div>
+      <div class="cs-messy-card learned fade-up" style="transition-delay:0.3s">
+        <div class="cs-messy-eyebrow">✅ Corrected mid-flight</div>
+        <div class="cs-messy-title">OTP was an afterthought — then became the lead</div>
+        <p class="cs-messy-body">The original brief had a standard email+password onboarding with OTP as a secondary verification. Midway through, I audited 6 competitor apps — every single one had a "forgot password" as the #2 action after login. Onboarding friction was the real problem. I reframed the entire flow around phone number + OTP. This became the most distinctive part of the concept.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Process ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Process</div>
+    <h2 class="cs-heading">Four phases, one cohesive experience</h2>
+    <p class="cs-body" style="max-width:680px;">This concept followed a compressed design sprint — moving from research to high-fidelity prototypes while staying anchored to user needs at every decision point.</p>
     <div class="cs-process-grid">
-      <div class="cs-phase">
+      <div class="cs-phase fade-up">
         <div class="cs-phase-num">01</div>
         <div class="cs-phase-title">Research</div>
-        <div class="cs-phase-sub">Understanding drivers beyond driving</div>
+        <div class="cs-phase-desc">Analysed existing connected car apps and identified friction patterns</div>
         <ul class="cs-phase-list">
-          <li>Driver diary studies (2 weeks)</li>
-          <li>In-car contextual observation</li>
-          <li>App store review mining</li>
-          <li>Competitor benchmark (5 OEMs)</li>
+          <li>Competitive audit: Tesla, BMW, Volkswagen apps</li>
+          <li>User journey mapping for daily car usage</li>
+          <li>Identifying the 5 most-used features</li>
+          <li>Outdoor legibility research</li>
         </ul>
       </div>
-      <div class="cs-phase">
+      <div class="cs-phase fade-up" style="transition-delay:0.1s">
         <div class="cs-phase-num">02</div>
         <div class="cs-phase-title">Define</div>
-        <div class="cs-phase-sub">Mapping ownership journey JTBD</div>
+        <div class="cs-phase-desc">Synthesised findings into design principles and user stories</div>
         <ul class="cs-phase-list">
-          <li>Ownership journey mapping</li>
-          <li>Context-based use case prioritisation</li>
-          <li>Feature taxonomy redesign</li>
-          <li>Persona development (3 types)</li>
+          <li>Information architecture redesign</li>
+          <li>Core principles: Glanceable, Reachable, Trustworthy</li>
+          <li>User stories for each major flow</li>
+          <li>Accessibility requirements (contrast, tap targets)</li>
         </ul>
       </div>
-      <div class="cs-phase">
+      <div class="cs-phase fade-up" style="transition-delay:0.2s">
         <div class="cs-phase-num">03</div>
         <div class="cs-phase-title">Design</div>
-        <div class="cs-phase-sub">Premium contextual UI for connected car</div>
+        <div class="cs-phase-desc">Built the design system and prototyped all key screens in Figma</div>
         <ul class="cs-phase-list">
-          <li>New IA &amp; navigation model</li>
-          <li>Vehicle status home widget</li>
-          <li>Dark mode for glanceability</li>
-          <li>iOS &amp; Android native components</li>
+          <li>Dark + light mode components</li>
+          <li>Montserrat-based type scale</li>
+          <li>Green palette with sufficient contrast ratios</li>
+          <li>Interactive prototype with 15+ screens</li>
         </ul>
       </div>
-      <div class="cs-phase">
+      <div class="cs-phase fade-up" style="transition-delay:0.3s">
         <div class="cs-phase-num">04</div>
-        <div class="cs-phase-title">Validate &amp; Ship</div>
-        <div class="cs-phase-sub">Phased rollout with real owners</div>
+        <div class="cs-phase-title">Deliver</div>
+        <div class="cs-phase-desc">Refined screens, edge cases, and documented design decisions</div>
         <ul class="cs-phase-list">
-          <li>Moderated usability testing</li>
-          <li>Beta programme (500+ owners)</li>
-          <li>Phased market rollout</li>
-          <li>Post-launch NPS &amp; CSAT tracking</li>
+          <li>Complete onboarding flow (5 screens)</li>
+          <li>Home dashboard with live data states</li>
+          <li>Digital key with share permissions</li>
+          <li>Vehicle controls: climate, lights, wipers, tyres</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ISSUES AS IS -->
-  <section class="cs-compare-section fade-up">
-    <div class="cs-compare-hd">
-      <span class="cs-ctag ver">V1.0</span>
-      <span class="cs-ctag asis">AS IS</span>
-      <span class="cs-ctag sev">Critical Issues</span>
-      <span class="cs-compare-title">What was broken</span>
-    </div>
-    <div class="cs-compare-layout">
-      <div class="cs-issues-list">
-        <div class="cs-issue-item">
-          <div class="cs-issue-icon err">✗</div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Remote control features were 4–6 taps deep from the home screen — 31% of users gave up trying to use climate control remotely within the first month.</div>
-            <div class="cs-issue-note">Confirmed by app analytics: 68% of climate control sessions abandoned before action was triggered.</div>
+  <hr class="cs-divider">
+
+  <!-- ════ Onboarding Screens ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Onboarding</div>
+    <h2 class="cs-heading">From zero to unlocked in under 60 seconds</h2>
+    <p class="cs-body" style="max-width:680px; margin-bottom:60px;">The onboarding flow is designed to feel effortless. No VIN numbers, no dealer codes. Just your phone number, a 4-digit OTP, and you're in — pairing your vehicle is the first thing you do inside the app, not a prerequisite to enter.</p>
+    <div class="phone-grid phone-grid-4">
+      <!-- Splash Screen -->
+      <div class="phone-wrap fade-up">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="screen-splash">
+              <div class="logo-mark">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M14 4L24 9.5V18.5L14 24L4 18.5V9.5L14 4Z" stroke="white" stroke-width="2" fill="none"/>
+                  <path d="M14 8L20 11.5V18.5L14 22L8 18.5V11.5L14 8Z" fill="white" opacity="0.3"/>
+                </svg>
+              </div>
+              <div class="brand-name">Škoda</div>
+              <div class="tagline">Connected</div>
+            </div>
           </div>
         </div>
-        <div class="cs-issue-item">
-          <div class="cs-issue-icon err">✗</div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">The home screen showed a static list of 20+ features with no hierarchy or context — creating a visual wall that overwhelmed both first-time and returning users.</div>
-          </div>
-        </div>
-        <div class="cs-issue-item">
-          <div class="cs-issue-icon err">✗</div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">The app had no memory of recent actions, forcing users to navigate the full feature tree every time — even for daily-use actions like range check or lock confirmation.</div>
-          </div>
-        </div>
+        <div class="phone-label">Splash</div>
       </div>
-      <div class="cs-compare-panel">
-        <div class="cs-compare-panel-lbl">Screens · AS IS</div>
-        <div class="cs-compare-screens">
-          <div class="cs-compare-screen">
-            <div class="cs-cslbl">Home V1</div>
-            <div class="cs-cshint">Add: home-v1.png</div>
+      <!-- Welcome Screen -->
+      <div class="phone-wrap fade-up" style="transition-delay:0.1s">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="screen-welcome">
+              <div class="screen-welcome-content">
+                <div class="screen-welcome-title">Welcome to<br>Škoda Connected</div>
+                <div class="screen-welcome-sub">Your car, always in your pocket. Control, monitor and secure your Škoda from anywhere.</div>
+                <div class="screen-welcome-btn">Get Started →</div>
+              </div>
+            </div>
           </div>
-          <div class="cs-compare-screen">
-            <div class="cs-cslbl">Controls V1</div>
-            <div class="cs-cshint">Add: controls-v1.png</div>
+        </div>
+        <div class="phone-label">Welcome</div>
+      </div>
+      <!-- OTP Screen -->
+      <div class="phone-wrap fade-up" style="transition-delay:0.2s">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="screen-otp">
+              <div class="otp-back">←</div>
+              <div class="otp-title">Verify your number</div>
+              <div class="otp-sub">We've sent a 4-digit code to +44 7700 ••••• 90</div>
+              <div class="phone-disp">+44 7700 900090</div>
+              <div class="otp-boxes">
+                <div class="otp-box">3</div>
+                <div class="otp-box">7</div>
+                <div class="otp-box active"></div>
+                <div class="otp-box"></div>
+              </div>
+              <div class="otp-btn">Verify Code</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">OTP Verify</div>
+      </div>
+      <!-- Vehicle Pairing Screen -->
+      <div class="phone-wrap fade-up" style="transition-delay:0.3s">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="screen-home" style="background:#fff; padding:28px 12px 16px; display:flex; flex-direction:column;">
+              <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:13px; font-weight:700; color:#171717; margin-bottom:4px;">Pair Your Vehicle</div>
+              <div style="font-size:7px; color:#888; margin-bottom:16px;">Choose how to connect your Škoda</div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="background:#eef9f4; border:1.5px solid #419468; border-radius:10px; padding:10px 10px; display:flex; align-items:center; gap:8px;">
+                  <div style="width:28px; height:28px; background:#419468; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px;">📱</div>
+                  <div>
+                    <div style="font-size:9px; font-weight:700; color:#171717;">Scan QR Code</div>
+                    <div style="font-size:7px; color:#419468;">Recommended · Instant</div>
+                  </div>
+                </div>
+                <div style="background:#f8f8f8; border:1px solid rgba(0,0,0,0.08); border-radius:10px; padding:10px 10px; display:flex; align-items:center; gap:8px;">
+                  <div style="width:28px; height:28px; background:#e8e8e8; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px;">🔤</div>
+                  <div>
+                    <div style="font-size:9px; font-weight:700; color:#171717;">Enter VIN</div>
+                    <div style="font-size:7px; color:#888;">Manual entry</div>
+                  </div>
+                </div>
+                <div style="background:#f8f8f8; border:1px solid rgba(0,0,0,0.08); border-radius:10px; padding:10px 10px; display:flex; align-items:center; gap:8px;">
+                  <div style="width:28px; height:28px; background:#e8e8e8; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px;">🏪</div>
+                  <div>
+                    <div style="font-size:9px; font-weight:700; color:#171717;">Via Dealership</div>
+                    <div style="font-size:7px; color:#888;">Dealer code required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Vehicle Pair</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- ════ Home Dashboard ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Home Dashboard</div>
+    <div class="cs-two-col cs-two-col-wide" style="gap:60px;">
+      <div class="fade-up" style="display:flex; flex-direction:column; justify-content:center;">
+        <h2 class="cs-heading">Your car at a glance</h2>
+        <p class="cs-body" style="margin-bottom:24px;">The home dashboard puts the car first. The header section shows the vehicle model, a real-time silhouette rendering, and the two stats that matter most — fuel percentage and estimated range. Below it, the 4 most-used actions are arranged in a 2×2 grid within thumb reach.</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px;">
+          <li style="display:flex; align-items:flex-start; gap:12px;">
+            <div style="width:8px; height:8px; background:#419468; border-radius:50%; flex-shrink:0; margin-top:6px;"></div>
+            <div style="font-size:15px; color:#555; line-height:1.65;"><strong style="color:#171717;">76% fuel · 453 km range</strong> — persistent at the top, always fresh</div>
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:12px;">
+            <div style="width:8px; height:8px; background:#419468; border-radius:50%; flex-shrink:0; margin-top:6px;"></div>
+            <div style="font-size:15px; color:#555; line-height:1.65;"><strong style="color:#171717;">Keyless Start/Stop</strong> — one tap, zero friction</div>
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:12px;">
+            <div style="width:8px; height:8px; background:#419468; border-radius:50%; flex-shrink:0; margin-top:6px;"></div>
+            <div style="font-size:15px; color:#555; line-height:1.65;"><strong style="color:#171717;">Climate Control</strong> — pre-heat or pre-cool before you reach the car</div>
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:12px;">
+            <div style="width:8px; height:8px; background:#419468; border-radius:50%; flex-shrink:0; margin-top:6px;"></div>
+            <div style="font-size:15px; color:#555; line-height:1.65;"><strong style="color:#171717;">Digital Key</strong> — share access to your car directly from the dashboard</div>
+          </li>
+        </ul>
+      </div>
+      <div class="fade-up" style="transition-delay:0.15s; display:flex; justify-content:center;">
+        <div class="phone" style="max-width:260px; width:260px;">
+          <div class="phone-inner">
+            <div class="screen-home">
+              <div class="home-header">
+                <div>
+                  <div class="home-greeting">Good morning,</div>
+                  <div class="home-name">Santhosh 👋</div>
+                </div>
+                <div class="home-avatar"></div>
+              </div>
+              <div class="home-car-section">
+                <div class="home-car-model">Škoda Octavia</div>
+                <div class="home-car-name">My Octavia</div>
+                <div class="home-car-img">
+                  <img src="images/skoda/car.png" alt="Škoda car" style="width:100%; filter:brightness(1.1);">
+                </div>
+              </div>
+              <div class="home-stats">
+                <div class="home-stat">
+                  <div class="home-stat-val">76<span>%</span></div>
+                  <div class="home-stat-lbl">Fuel</div>
+                </div>
+                <div class="home-stat">
+                  <div class="home-stat-val">453<span>km</span></div>
+                  <div class="home-stat-lbl">Range</div>
+                </div>
+                <div class="home-stat">
+                  <div class="home-stat-val" style="color:#22c55e;">✓</div>
+                  <div class="home-stat-lbl">Locked</div>
+                </div>
+              </div>
+              <div class="home-actions">
+                <div class="home-action">
+                  <div class="home-action-icon">🔑</div>
+                  <div>
+                    <div class="home-action-name">Keyless</div>
+                    <div class="home-action-state" style="color:#419468;">Active</div>
+                  </div>
+                </div>
+                <div class="home-action">
+                  <div class="home-action-icon">🌡️</div>
+                  <div>
+                    <div class="home-action-name">Climate</div>
+                    <div class="home-action-state">Off</div>
+                  </div>
+                </div>
+                <div class="home-action">
+                  <div class="home-action-icon">📍</div>
+                  <div>
+                    <div class="home-action-name">Location</div>
+                    <div class="home-action-state">B3, P2 Level</div>
+                  </div>
+                </div>
+                <div class="home-action">
+                  <div class="home-action-icon">🔐</div>
+                  <div>
+                    <div class="home-action-name">Digital Key</div>
+                    <div class="home-action-state">1 shared</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SOLUTION TO BE -->
-  <section class="cs-compare-section fade-up" style="padding-top: 0;">
-    <div class="cs-compare-hd">
-      <span class="cs-ctag ver">V2.0</span>
-      <span class="cs-ctag tobe">TO BE</span>
-      <span class="cs-compare-title">What we shipped</span>
+  <hr class="cs-divider">
+
+  <!-- ════ Digital Key ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Digital Key</div>
+    <h2 class="cs-heading">Share your car like you share a file</h2>
+    <p class="cs-body" style="max-width:680px; margin-bottom:60px;">The digital key feature reimagines car sharing. Instead of handing over a physical key (or a clunky token), you share access directly from your phone with granular permission controls — time-limited, revocable, and no sign-up required for the recipient.</p>
+    <div class="phone-grid phone-grid-3">
+      <!-- Digital Key screen -->
+      <div class="phone-wrap fade-up">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="screen-dkey">
+              <div class="dkey-title">Digital Key</div>
+              <div class="dkey-sub">Your phone is your car key</div>
+              <div class="dkey-ring">
+                <div class="dkey-icon">🔐</div>
+              </div>
+              <div class="dkey-status">NFC & Bluetooth Active · Ready to unlock</div>
+              <div class="dkey-action-row">
+                <div class="dkey-action">
+                  <div class="dkey-action-icon">🔓</div>
+                  <div class="dkey-action-lbl">Unlock</div>
+                </div>
+                <div class="dkey-action">
+                  <div class="dkey-action-icon">🔒</div>
+                  <div class="dkey-action-lbl">Lock</div>
+                </div>
+                <div class="dkey-action">
+                  <div class="dkey-action-icon">🚗</div>
+                  <div class="dkey-action-lbl">Start</div>
+                </div>
+              </div>
+              <div class="dkey-share-btn">+ Share Key Access</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Digital Key</div>
+      </div>
+      <!-- Share Key screen -->
+      <div class="phone-wrap fade-up" style="transition-delay:0.1s">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="screen-share">
+              <div class="share-title">Share Key</div>
+              <div class="share-sub">Sharing with Ranjini · Expires in 2 days</div>
+              <div class="share-user">
+                <div class="share-avatar">R</div>
+                <div>
+                  <div class="share-name">Ranjini S.</div>
+                  <div class="share-type">Temporary Access</div>
+                </div>
+              </div>
+              <div class="share-perms">
+                <div style="font-size:9px; font-weight:700; color:#171717; margin-bottom:4px;">Permissions</div>
+                <div class="share-perm-row">
+                  <div class="share-perm-lbl">Unlock & Lock</div>
+                  <div class="share-toggle"></div>
+                </div>
+                <div class="share-perm-row">
+                  <div class="share-perm-lbl">Start Engine</div>
+                  <div class="share-toggle off"></div>
+                </div>
+                <div class="share-perm-row">
+                  <div class="share-perm-lbl">Climate Control</div>
+                  <div class="share-toggle"></div>
+                </div>
+                <div class="share-perm-row">
+                  <div class="share-perm-lbl">View Location</div>
+                  <div class="share-toggle"></div>
+                </div>
+              </div>
+              <div class="share-btn">Send Invite Link →</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Share Access</div>
+      </div>
+      <!-- Manage Keys screen -->
+      <div class="phone-wrap fade-up" style="transition-delay:0.2s">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="screen-share">
+              <div class="share-title">Shared Keys</div>
+              <div class="share-sub">2 active · Tap to manage</div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div class="share-user" style="justify-content:space-between;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div class="share-avatar">R</div>
+                    <div>
+                      <div class="share-name">Ranjini S.</div>
+                      <div class="share-type">Unlock · Climate · 2d left</div>
+                    </div>
+                  </div>
+                  <div style="font-size:8px; color:#419468; font-weight:700;">Active</div>
+                </div>
+                <div class="share-user" style="justify-content:space-between;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div class="share-avatar" style="background:#ffd6e2; color:#c74f7d;">P</div>
+                    <div>
+                      <div class="share-name">Priya K.</div>
+                      <div class="share-type">Full Access · 5d left</div>
+                    </div>
+                  </div>
+                  <div style="font-size:8px; color:#419468; font-weight:700;">Active</div>
+                </div>
+                <div class="share-user" style="opacity:0.5;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div class="share-avatar" style="background:#f0f0f0; color:#888;">A</div>
+                    <div>
+                      <div class="share-name">Arun M.</div>
+                      <div class="share-type">Expired 3 days ago</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="share-btn" style="margin-top:12px;">+ Add New Key</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Manage Keys</div>
+      </div>
     </div>
-    <div class="cs-compare-layout">
-      <div class="cs-issues-list">
-        <div class="cs-issue-item">
-          <div class="cs-issue-icon ok">✓</div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Redesigned the home screen as a contextual, intelligent widget — showing vehicle status, range, and the top 3 actions based on time of day and location. Core actions now reachable in 2 taps.</div>
+  </section>
+
+  <!-- ════ Vehicle Controls (green bg section) ════ -->
+  <section class="cs-screens-section">
+    <div class="cs-screens-inner">
+      <div class="cs-label">Vehicle Controls</div>
+      <h2 class="cs-heading">Every control, one tap away</h2>
+      <p class="cs-body" style="max-width:680px; margin-bottom:60px;">From pre-conditioning the cabin to checking tyre pressure before a long drive — each control screen is built for speed. Big tap targets, clear states (on/off/active), and haptic confirmation on every critical action.</p>
+      <div class="phone-grid phone-grid-4">
+        <!-- Climate -->
+        <div class="phone-wrap fade-up">
+          <div class="phone">
+            <div class="phone-inner">
+              <div class="screen-climate">
+                <div class="clim-title">Climate Control</div>
+                <div class="clim-sub">Last used: Today at 8:02 AM</div>
+                <div class="clim-temp-ring">
+                  <div class="clim-temp-val">22</div>
+                  <div class="clim-temp-unit">°C</div>
+                </div>
+                <div class="clim-row">
+                  <div class="clim-chip">A/C On</div>
+                  <div class="clim-chip">Fan ●●●○</div>
+                </div>
+                <div class="clim-row" style="margin-top:6px;">
+                  <div class="clim-chip inactive">Seat Heat</div>
+                  <div class="clim-chip inactive">Defrost</div>
+                </div>
+                <div class="clim-btn">Start Climate</div>
+              </div>
+            </div>
           </div>
+          <div class="phone-label">Climate</div>
         </div>
-        <div class="cs-issue-item">
-          <div class="cs-issue-icon ok">✓</div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Built a persistent "Quick Actions" dock that remembers the user's 4 most recent actions and surfaces them prominently — reducing repeat-action navigation by 58%.</div>
+        <!-- Lights -->
+        <div class="phone-wrap fade-up" style="transition-delay:0.1s">
+          <div class="phone">
+            <div class="phone-inner">
+              <div class="screen-vctrl">
+                <div class="vctrl-title">Headlights</div>
+                <img src="images/skoda/car.png" alt="car" class="vctrl-car-mini">
+                <div class="vctrl-grid">
+                  <div class="vctrl-item active">
+                    <div class="vctrl-icon">💡</div>
+                    <div class="vctrl-name">Headlights</div>
+                    <div class="vctrl-val green">On · DRL</div>
+                  </div>
+                  <div class="vctrl-item">
+                    <div class="vctrl-icon">🔦</div>
+                    <div class="vctrl-name">Fog Lights</div>
+                    <div class="vctrl-val">Off</div>
+                  </div>
+                  <div class="vctrl-item active">
+                    <div class="vctrl-icon">🚨</div>
+                    <div class="vctrl-name">Hazards</div>
+                    <div class="vctrl-val">Available</div>
+                  </div>
+                  <div class="vctrl-item">
+                    <div class="vctrl-icon">🌙</div>
+                    <div class="vctrl-name">Ambient</div>
+                    <div class="vctrl-val">Off</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="phone-label">Headlights</div>
         </div>
-        <div class="cs-issue-item">
-          <div class="cs-issue-icon ok">✓</div>
-          <div class="cs-issue-body">
-            <div class="cs-issue-text">Redesigned the full feature list as a progressive disclosure system — showing the most relevant features first based on context, with full access always one more tap away.</div>
+        <!-- Wipers -->
+        <div class="phone-wrap fade-up" style="transition-delay:0.2s">
+          <div class="phone">
+            <div class="phone-inner">
+              <div class="screen-vctrl">
+                <div class="vctrl-title">Wipers</div>
+                <img src="images/skoda/car.png" alt="car" class="vctrl-car-mini">
+                <div class="vctrl-grid">
+                  <div class="vctrl-item">
+                    <div class="vctrl-icon">💧</div>
+                    <div class="vctrl-name">Front Wiper</div>
+                    <div class="vctrl-val">Off</div>
+                  </div>
+                  <div class="vctrl-item">
+                    <div class="vctrl-icon">💧</div>
+                    <div class="vctrl-name">Rear Wiper</div>
+                    <div class="vctrl-val">Off</div>
+                  </div>
+                  <div class="vctrl-item active">
+                    <div class="vctrl-icon">🚿</div>
+                    <div class="vctrl-name">Washer</div>
+                    <div class="vctrl-val green">Level OK</div>
+                  </div>
+                  <div class="vctrl-item">
+                    <div class="vctrl-icon">❄️</div>
+                    <div class="vctrl-name">De-ice</div>
+                    <div class="vctrl-val">Off</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-label">Wipers</div>
+        </div>
+        <!-- Tyre Pressure -->
+        <div class="phone-wrap fade-up" style="transition-delay:0.3s">
+          <div class="phone">
+            <div class="phone-inner">
+              <div class="screen-tyre">
+                <div class="tyre-title">Tyre Pressure</div>
+                <div class="tyre-car-diag">
+                  <div class="tyre-car-body"></div>
+                  <div class="tyre-wheel tl"></div>
+                  <div class="tyre-wheel tr"></div>
+                  <div class="tyre-wheel bl"></div>
+                  <div class="tyre-wheel br"></div>
+                </div>
+                <div class="tyre-readings">
+                  <div class="tyre-reading">
+                    <div class="tyre-psi">32<span class="tyre-psi-unit">psi</span></div>
+                    <div class="tyre-reading-lbl">Front Left</div>
+                  </div>
+                  <div class="tyre-reading">
+                    <div class="tyre-psi">33<span class="tyre-psi-unit">psi</span></div>
+                    <div class="tyre-reading-lbl">Front Right</div>
+                  </div>
+                  <div class="tyre-reading">
+                    <div class="tyre-psi">31<span class="tyre-psi-unit">psi</span></div>
+                    <div class="tyre-reading-lbl">Rear Left</div>
+                  </div>
+                  <div class="tyre-reading" style="border:1.5px solid #f59e0b;">
+                    <div class="tyre-psi" style="color:#f59e0b;">28<span class="tyre-psi-unit">psi</span></div>
+                    <div class="tyre-reading-lbl" style="color:#f59e0b;">Rear Right ⚠</div>
+                  </div>
+                </div>
+                <div style="background:#fff7ed; border-radius:8px; padding:6px 8px; margin-top:8px;">
+                  <div style="font-size:8px; color:#b45309; font-weight:600;">Rear Right slightly low — check when possible</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-label">Tyre Pressure</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Impact & Business Case ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Impact & Business Case</div>
+    <h2 class="cs-heading">Why this matters for Škoda as a business</h2>
+    <p class="cs-body" style="max-width:760px; margin-bottom:12px;">Connected car apps aren't just a customer experience play — they're a retention and loyalty instrument. For an automotive brand, the app is the primary touchpoint between purchases. Here's the business case for investing in this direction:</p>
+
+    <div class="cs-impact-grid">
+      <div class="cs-impact-cell fade-up">
+        <div class="cs-impact-num">40<span class="unit">%</span></div>
+        <div class="cs-impact-label">of connected car app users uninstall within 30 days of first use</div>
+        <div class="cs-impact-source">↑ This concept targets the onboarding drop-off as the primary retention lever</div>
+        <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/unlocking-the-full-life-cycle-value-from-connected-car-data" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#419468;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Connected Car Data <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      </div>
+      <div class="cs-impact-cell fade-up" style="transition-delay:0.1s">
+        <div class="cs-impact-num">3<span class="unit">×</span></div>
+        <div class="cs-impact-label">higher lifetime value from digitally engaged car owners vs. owners who never open the app</div>
+        <div class="cs-impact-source">↑ Higher engagement = higher service booking, accessory, and upsell conversion</div>
+        <a href="https://www2.deloitte.com/us/en/pages/manufacturing/articles/automotive-consumer-study.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#419468;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Deloitte · Automotive Consumer Study <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      </div>
+      <div class="cs-impact-cell fade-up" style="transition-delay:0.2s">
+        <div class="cs-impact-num">62<span class="unit">%</span></div>
+        <div class="cs-impact-label">of EV buyers say the digital &amp; app experience influenced their brand choice</div>
+        <div class="cs-impact-source">↑ As Škoda transitions to EV, a premium app becomes a purchase driver, not just a feature</div>
+        <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/mobility-consumer-pulse" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#419468;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Mobility Consumer Pulse 2023 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;">
+      <div class="cs-label">Strategic Bets</div>
+      <div class="cs-two-col" style="gap:40px; margin-top:20px;">
+        <div class="fade-up" style="border:1px solid rgba(0,0,0,0.07); border-radius:20px; padding:36px;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:11px; font-weight:700; color:#419468; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px;">Bet 1 · Near-term</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:700; color:#171717; margin-bottom:12px;">Reduce onboarding drop-off by 25%</div>
+          <p style="font-size:14px; color:#555; line-height:1.7;">OTP-first onboarding removes the most common reason for abandonment (forgotten password, VIN confusion). Target: &lt;60s to first meaningful action. Metric: 7-day retention after install.</p>
+        </div>
+        <div class="fade-up" style="transition-delay:0.1s; border:1px solid rgba(65,148,104,0.2); border-radius:20px; padding:36px; background:#eef9f4;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:11px; font-weight:700; color:#419468; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px;">Bet 2 · Platform play</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:700; color:#171717; margin-bottom:12px;">Digital Key as the EV differentiator</div>
+          <p style="font-size:14px; color:#555; line-height:1.7;">As Škoda's EV lineup expands, digital key sharing positions the app as infrastructure — not just a remote control. Partners, valets, charging station operators. This feature moves the app from utility to platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- ════ Design System ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Design System</div>
+    <h2 class="cs-heading">Built for outdoors, refined for trust</h2>
+    <p class="cs-body" style="max-width:680px; margin-bottom:48px;">Every visual decision in this design system serves a function. The dark forest green creates premium contrast both indoors and in bright sunlight. Mint (#78faae) is reserved exclusively for active states and success feedback — a visual language that users learn quickly.</p>
+
+    <div class="cs-two-col" style="gap:60px;">
+      <div class="fade-up">
+        <div style="font-size:13px; font-weight:700; color:#aaa; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:20px;">Colour Palette</div>
+        <div class="cs-palette">
+          <div class="cs-swatch">
+            <div class="cs-swatch-box" style="background:#0d1f14;"></div>
+            <div class="cs-swatch-label">Dark Base</div>
+            <div class="cs-swatch-hex">#0D1F14</div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-box" style="background:#1a3424;"></div>
+            <div class="cs-swatch-label">Deep Forest</div>
+            <div class="cs-swatch-hex">#1A3424</div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-box" style="background:#419468;"></div>
+            <div class="cs-swatch-label">Brand Green</div>
+            <div class="cs-swatch-hex">#419468</div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-box" style="background:#78faae; border:1px solid rgba(0,0,0,0.06);"></div>
+            <div class="cs-swatch-label">Mint Active</div>
+            <div class="cs-swatch-hex">#78FAAE</div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-box" style="background:#eef9f4; border:1px solid rgba(0,0,0,0.06);"></div>
+            <div class="cs-swatch-label">Light Tint</div>
+            <div class="cs-swatch-hex">#EEF9F4</div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-box" style="background:#ffffff; border:1px solid rgba(0,0,0,0.08);"></div>
+            <div class="cs-swatch-label">White</div>
+            <div class="cs-swatch-hex">#FFFFFF</div>
           </div>
         </div>
       </div>
-      <div class="cs-compare-panel">
-        <div class="cs-compare-panel-lbl">Screens · TO BE</div>
-        <div class="cs-compare-screens">
-          <div class="cs-compare-screen ok-bg">
-            <div class="cs-cslbl">Home V2</div>
-            <div class="cs-cshint">Add: home-v2.png</div>
+      <div class="fade-up" style="transition-delay:0.15s;">
+        <div style="font-size:13px; font-weight:700; color:#aaa; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:20px;">Typography</div>
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:42px; font-weight:700; line-height:1; letter-spacing:-1px; color:#171717;">Aa</div>
+            <div style="font-size:12px; color:#888; margin-top:4px;">Bricolage Grotesque · Headings</div>
           </div>
-          <div class="cs-compare-screen ok-bg">
-            <div class="cs-cslbl">Controls V2</div>
-            <div class="cs-cshint">Add: controls-v2.png</div>
+          <div>
+            <div style="font-family:'Lato',sans-serif; font-size:36px; font-weight:400; line-height:1; color:#555;">Aa</div>
+            <div style="font-size:12px; color:#888; margin-top:4px;">Lato · Body & UI copy</div>
+          </div>
+          <div style="background:#0d1f14; border-radius:12px; padding:20px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:700; color:#fff; margin-bottom:4px;">Škoda Octavia</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.4);">White on dark — 4.5:1 contrast</div>
+            <div style="font-size:12px; color:#78faae; margin-top:4px;">Active state — 7.2:1 contrast</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ════ FINAL DESIGN SHOWCASE ════ -->
-  <section class="cs-section fade-up" style="padding-bottom: 0;">
-    <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;">Final Design</div>
-    <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:700;letter-spacing:-1px;color:#171717;margin-bottom:8px;">See it all together</h2>
-    <p style="font-size:18px;color:#888;max-width:560px;line-height:1.6;margin-bottom:48px;">The complete Škoda Connected App — every screen, every flow, shipped across 30+ markets.</p>
-    <div style="background:#f0f6fc;border-radius:24px;height:760px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:#aac;margin-bottom:24px;">
-      <div style="width:72px;height:72px;border:2px dashed #c8ddf0;border-radius:18px;display:flex;align-items:center;justify-content:center;">
-        <span style="font-size:28px;opacity:0.4;">🖼</span>
+  <hr class="cs-divider">
+
+  <!-- ════ Key Decisions ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Key Decisions</div>
+    <h2 class="cs-heading">Every decision has a reason</h2>
+
+    <div class="cs-decision fade-up">
+      <div class="cs-decision-header">
+        <div class="cs-decision-num">01</div>
+        <div class="cs-decision-title">OTP over username/password for onboarding</div>
       </div>
-      <div style="font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aac;">Full App Overview</div>
-      <div style="font-size:12px;color:#b8cfe0;">Add: skoda-full-overview.png — all screens, flows, and states</div>
+      <p class="cs-decision-body">Traditional connected car apps require email, password, and sometimes dealer account verification before the user can even see the app. This creates a significant drop-off. OTP authentication using a phone number means zero memory load — you already know your phone number. The app sends a 4-digit code, you enter it, and you're in.</p>
+      <div class="cs-decision-outcome">
+        <div class="cs-decision-outcome-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#419468"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Reduces time-to-first-value from ~4 minutes to under 60 seconds. Eliminates forgotten password flows entirely.
+      </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:100px;">
-      <div style="background:#f0f6fc;border-radius:20px;height:440px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#aac;">
-        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Home Screen</span>
-        <span style="font-size:11px;color:#b8cfe0;">Add: home-final.png</span>
+
+    <div class="cs-decision fade-up" style="transition-delay:0.1s">
+      <div class="cs-decision-header">
+        <div class="cs-decision-num">02</div>
+        <div class="cs-decision-title">Dark header, light body — not a pure dark mode</div>
       </div>
-      <div style="background:#f0f6fc;border-radius:20px;height:440px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#aac;">
-        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Remote Controls</span>
-        <span style="font-size:11px;color:#b8cfe0;">Add: remote-final.png</span>
+      <p class="cs-decision-body">A fully dark interface creates legibility issues when switching between dark (inside a garage) and bright (direct sunlight) environments. The solution was a hybrid: the car and status area uses the dark forest green (which reads better in sunlight than black), while control panels and forms use white backgrounds for clarity and accessibility.</p>
+      <div class="cs-decision-outcome">
+        <div class="cs-decision-outcome-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#419468"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        All text elements meet WCAG AA contrast requirements in both lighting conditions tested.
       </div>
-      <div style="background:#f0f6fc;border-radius:20px;height:440px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#aac;">
-        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Trip &amp; Diagnostics</span>
-        <span style="font-size:11px;color:#b8cfe0;">Add: trip-final.png</span>
+    </div>
+
+    <div class="cs-decision fade-up" style="transition-delay:0.2s">
+      <div class="cs-decision-header">
+        <div class="cs-decision-num">03</div>
+        <div class="cs-decision-title">Mint (#78faae) reserved exclusively for active/success states</div>
+      </div>
+      <p class="cs-decision-body">Colour in an automotive UI carries high stakes — users need to instantly understand if their car is locked, if climate is running, or if a key share was successful. By using the mint green colour for active and success states only (and never for decorative purposes), we train a colour-to-meaning association that becomes second nature after just a few sessions.</p>
+      <div class="cs-decision-outcome">
+        <div class="cs-decision-outcome-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#419468"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Creates an unambiguous visual grammar — users don't need to read labels to understand system state.
+      </div>
+    </div>
+
+    <div class="cs-decision fade-up" style="transition-delay:0.3s">
+      <div class="cs-decision-header">
+        <div class="cs-decision-num">04</div>
+        <div class="cs-decision-title">Granular permissions for key sharing (not all-or-nothing)</div>
+      </div>
+      <p class="cs-decision-body">The existing paradigm for sharing car access is binary — you either hand over the physical key (full access) or you don't share at all. This concept introduces permission-level sharing: the primary owner can independently toggle unlock/lock, engine start, climate, and location visibility for each shared key. Each share can also be time-limited.</p>
+      <div class="cs-decision-outcome">
+        <div class="cs-decision-outcome-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#419468"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Unlocks genuinely new use cases: valets, repair shops, temporary loan to a family member — each with the right level of trust.
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer style="background:#FF6101;color:#fff;">
-    <div style="max-width:1280px;margin:0 auto;padding:40px 100px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;">
-      <div style="display:flex;gap:32px;">
-        <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener" style="color:#fff;font-size:18px;font-weight:500;text-decoration:none;">LinkedIn</a>
-        <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener" style="color:#fff;font-size:18px;font-weight:500;text-decoration:none;">Dribbble</a>
-        <a href="https://instagram.com/santhosh.r777" target="_blank" rel="noopener" style="color:#fff;font-size:18px;font-weight:500;text-decoration:none;">Instagram</a>
+  <!-- ════ What We Didn't Build ════ -->
+  <section class="cs-section">
+    <div class="cs-label">Trade-offs</div>
+    <h2 class="cs-heading">What we cut and why</h2>
+    <p class="cs-body" style="max-width:680px; margin-bottom:8px;">Deciding what <em>not</em> to build is as important as what you ship. These were all scoped into v1 — and all deliberately cut.</p>
+    <div class="cs-tradeoff-grid">
+      <div class="cs-tradeoff-card fade-up">
+        <div class="cs-tradeoff-header">
+          <div class="cs-tradeoff-title">Live Map / GPS Tracking</div>
+          <div class="cs-tradeoff-badge cut">Cut</div>
+        </div>
+        <p class="cs-tradeoff-body">A full live map showing the car's real-time location was in v1 scope. It tested well in concept but created two hard problems: continuous GPS polling drains battery significantly, and it raised privacy concerns (who else can see this?). We replaced it with a discrete "last parked location" string — honest about what we can reliably show without battery or privacy cost.</p>
+        <div class="cs-tradeoff-reason">
+          <span>⚡</span> Engineering constraint + privacy risk outweighed the feature value at v1.
+        </div>
       </div>
-      <div style="display:flex;gap:40px;font-size:16px;flex-wrap:wrap;">
-        <a href="tel:+919894249490" style="color:#fff;display:flex;align-items:center;gap:8px;text-decoration:none;">
+      <div class="cs-tradeoff-card fade-up" style="transition-delay:0.1s">
+        <div class="cs-tradeoff-header">
+          <div class="cs-tradeoff-title">Trip History & Analytics</div>
+          <div class="cs-tradeoff-badge deferred">Deferred to v2</div>
+        </div>
+        <p class="cs-tradeoff-body">Fuel consumption graphs, trip logs, driving efficiency scores — all compelling features. But they require persistent data logging, which adds backend complexity and surfaces questions about data ownership that need product + legal alignment before design can proceed. This is a v2 strategic feature, not a v1 UX feature.</p>
+        <div class="cs-tradeoff-reason">
+          <span>🔒</span> Needs product + legal sign-off on data retention policy before design should proceed.
+        </div>
+      </div>
+      <div class="cs-tradeoff-card fade-up" style="transition-delay:0.2s">
+        <div class="cs-tradeoff-header">
+          <div class="cs-tradeoff-title">In-car Audio / Media Control</div>
+          <div class="cs-tradeoff-badge cut">Cut</div>
+        </div>
+        <p class="cs-tradeoff-body">Remote music/podcast control from the phone sounded useful until I mapped the actual user journey: you control audio when you're in the car, not from outside it. The feature was solving a problem that didn't exist in practice. It would have added 3 screens and a new API dependency for zero observable user value.</p>
+        <div class="cs-tradeoff-reason">
+          <span>🎯</span> Failed the "real usage scenario" test — no one asked for it unprompted.
+        </div>
+      </div>
+      <div class="cs-tradeoff-card fade-up" style="transition-delay:0.3s">
+        <div class="cs-tradeoff-header">
+          <div class="cs-tradeoff-title">EV-specific Charging Flow</div>
+          <div class="cs-tradeoff-badge deferred">Deferred to v2</div>
+        </div>
+        <p class="cs-tradeoff-body">Škoda's EV lineup is growing fast — charging station maps, charge scheduling, and battery preconditioning are all highly relevant. But designing them well requires EV-specific user research (range anxiety, charging behaviour) that would have doubled the project scope. I scoped the design system to make EV screens additive, not a redesign.</p>
+        <div class="cs-tradeoff-reason">
+          <span>🌱</span> Design system is EV-ready. Feature scoped out to preserve research integrity.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cs-divider">
+
+  <!-- ════ Reflection ════ -->
+  <section class="cs-reflection-section">
+    <div class="cs-reflection-inner">
+      <div class="cs-reflection-label">Reflection</div>
+      <h2 class="cs-reflection-heading">What I'd do differently</h2>
+      <div class="cs-reflection-grid">
+        <div class="cs-reflection-card fade-up">
+          <div class="cs-reflection-card-label">What I'd do differently</div>
+          <div class="cs-reflection-card-title">Start with a stakeholder alignment doc</div>
+          <p class="cs-reflection-card-body">I jumped into flows before writing down my assumptions about scope, success metrics, and what we were optimising for. Halfway through, I realised my "north star" and a PM's "north star" for the same product could easily diverge. In a real team context, I'd anchor everyone on a shared problem statement and KPIs before opening Figma.</p>
+        </div>
+        <div class="cs-reflection-card fade-up" style="transition-delay:0.1s">
+          <div class="cs-reflection-card-label">Where I held firm</div>
+          <div class="cs-reflection-card-title">Safety friction is non-negotiable</div>
+          <p class="cs-reflection-card-body">Three informal testers pushed back on the 2-tap engine start. The feedback felt valid — it is slower. But I made a deliberate decision: a connected car is not a social app, and "move fast" design thinking doesn't apply when a misfire could leave your engine running in a garage. I documented the decision and the reasoning, because I'd need to defend it to a sceptical PM.</p>
+        </div>
+        <div class="cs-reflection-card fade-up" style="transition-delay:0.2s">
+          <div class="cs-reflection-card-label">Biggest gap in this concept</div>
+          <div class="cs-reflection-card-title">No real user validation</div>
+          <p class="cs-reflection-card-body">The home dashboard information hierarchy, the 4-action grid, the OTP flow — all of these are my best hypotheses, not validated patterns. I'd want to run 6–8 moderated sessions with Škoda owners before treating any of this as directionally correct. The concept is a strong hypothesis. That's all it is.</p>
+        </div>
+        <div class="cs-reflection-card fade-up" style="transition-delay:0.3s">
+          <div class="cs-reflection-card-label">The bigger opportunity</div>
+          <div class="cs-reflection-card-title">Move from reactive to proactive</div>
+          <p class="cs-reflection-card-body">This concept is still fundamentally reactive — you open it to check on your car. The 10x opportunity is proactive intelligence: "Your rear-right tyre pressure dropped 4psi overnight. You have a 280km drive on Friday — I'd top it up before then." That's the product vision that would make a Škoda owner genuinely loyal to the app.</p>
+        </div>
+      </div>
+      <div class="cs-reflection-quote fade-up">
+        "The best connected car app isn't the one with the most features — it's the one that <em>gets out of your way</em> so you can focus on driving."
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Case Study Nav ════ -->
+  <div class="cs-case-nav">
+    <div class="cs-case-nav-inner">
+      <a href="poshmark.html" class="cs-case-nav-card cs-case-nav-prev">
+        <div class="cs-case-nav-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Previous Case Study</div>
+        <div class="cs-case-nav-project">Marketplace · Product Redesign</div>
+        <div class="cs-case-nav-title">Poshmark App Redesign</div>
+      </a>
+      <a href="superops.html" class="cs-case-nav-card cs-case-nav-next">
+        <div class="cs-case-nav-label">Next Case Study <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="cs-case-nav-project">SaaS · B2B Design</div>
+        <div class="cs-case-nav-title">SuperOps AI</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ════ Footer ════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener">LinkedIn <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener">Dribbble <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://instagram.com/santhosh.r777" target="_blank" rel="noopener">Instagram <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="footer-contact">
+        <a href="tel:+919894249490">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
           +91 989 424 9490
         </a>
-        <a href="mailto:santhosh.r777@live.in" style="color:#fff;display:flex;align-items:center;gap:8px;text-decoration:none;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          santhosh.r777@live.in
+        <a href="mailto:santhosh@poshmark.com">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/></svg>
+          santhosh@poshmark.com
         </a>
       </div>
     </div>
   </footer>
 
   <script>
-    // IntersectionObserver scroll animation
+    // Scroll-based fade-up
     const fadeEls = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    fadeEls.forEach(el => observer.observe(el));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => io.observe(el));
   </script>
 </body>
 </html>
