@@ -400,7 +400,7 @@
       margin: 0 auto 16px;
       box-shadow: 0 0 30px rgba(120,250,174,0.15);
     }
-    .screen-dkey .dkey-icon { font-size: 28px; }
+    .screen-dkey .dkey-icon { display:flex; align-items:center; justify-content:center; }
     .screen-dkey .dkey-status { font-size: 8px; color: #78faae; text-align: center; margin-bottom: 16px; }
     .screen-dkey .dkey-action-row {
       display: flex; gap: 6px; margin-bottom: 10px;
@@ -410,7 +410,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 10px; padding: 8px 6px; text-align: center;
     }
-    .screen-dkey .dkey-action-icon { font-size: 14px; margin-bottom: 3px; }
+    .screen-dkey .dkey-action-icon { display:flex; align-items:center; justify-content:center; margin-bottom: 3px; }
     .screen-dkey .dkey-action-lbl { font-size: 7px; color: rgba(255,255,255,0.5); }
     .screen-dkey .dkey-share-btn {
       background: #419468; color: #fff; border-radius: 20px;
@@ -483,7 +483,7 @@
       background: #f8f8f8; border-radius: 8px; padding: 8px;
     }
     .screen-vctrl .vctrl-item.active { background: #eef9f4; border: 1px solid rgba(65,148,104,0.2); }
-    .screen-vctrl .vctrl-icon { font-size: 14px; margin-bottom: 3px; }
+    .screen-vctrl .vctrl-icon { display:flex; align-items:center; margin-bottom: 3px; }
     .screen-vctrl .vctrl-name { font-size: 8px; font-weight: 600; color: #171717; margin-bottom: 2px; }
     .screen-vctrl .vctrl-val { font-size: 7px; color: #888; }
     .screen-vctrl .vctrl-val.green { color: #419468; font-weight: 700; }
@@ -995,12 +995,12 @@
         <p class="cs-messy-body">The original scope included a live vehicle location map as a top-level tab. Engineering flagged that GPS polling in background would drain battery by ~18% per hour, a dealbreaker for trust. Instead of fighting the constraint, I reframed: location becomes a contextual detail (parking floor, last seen) rather than a live feed. Smaller scope, but more honest.</p>
       </div>
       <div class="cs-messy-card tension fade-up" style="transition-delay:0.2s">
-        <div class="cs-messy-eyebrow">⚡ Design tension</div>
+        <div class="cs-messy-eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Design tension</div>
         <div class="cs-messy-title">Safety friction vs. speed</div>
         <p class="cs-messy-body">Engine start requires 2 taps by design. Early feedback from 3 informal testers said "just make it one tap." But a one-tap engine start on a car is a safety risk, accidental activation, pocket starts. I held the friction. The right UX and the comfortable UX aren't always the same thing. I documented this explicitly in the design rationale.</p>
       </div>
       <div class="cs-messy-card learned fade-up" style="transition-delay:0.3s">
-        <div class="cs-messy-eyebrow">✅ Corrected mid-flight</div>
+        <div class="cs-messy-eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Corrected mid-flight</div>
         <div class="cs-messy-title">OTP was an afterthought, then became the lead</div>
         <p class="cs-messy-body">The original brief had a standard email+password onboarding with OTP as a secondary verification. Midway through, I audited 6 competitor apps, every single one had a "forgot password" as the #2 action after login. Onboarding friction was the real problem. I reframed the entire flow around phone number + OTP. This became the most distinctive part of the concept.</p>
       </div>
@@ -1131,7 +1131,7 @@
               <div style="font-size:7px; color:#888; margin-bottom:16px;">Choose how to connect your Škoda</div>
               <div style="display:flex; flex-direction:column; gap:8px;">
                 <div style="background:#eef9f4; border:1.5px solid #419468; border-radius:10px; padding:10px 10px; display:flex; align-items:center; gap:8px;">
-                  <div style="width:28px; height:28px; background:#419468; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px;">📱</div>
+                  <div style="width:28px; height:28px; background:#419468; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
                   <div>
                     <div style="font-size:9px; font-weight:700; color:#171717;">Scan QR Code</div>
                     <div style="font-size:7px; color:#419468;">Recommended · Instant</div>
@@ -1222,28 +1222,28 @@
               </div>
               <div class="home-actions">
                 <div class="home-action">
-                  <div class="home-action-icon">🔑</div>
+                  <div class="home-action-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#419468" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6M15.5 7.5l3 3"/></svg></div>
                   <div>
                     <div class="home-action-name">Keyless</div>
                     <div class="home-action-state" style="color:#419468;">Active</div>
                   </div>
                 </div>
                 <div class="home-action">
-                  <div class="home-action-icon">🌡️</div>
+                  <div class="home-action-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#419468" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
                   <div>
                     <div class="home-action-name">Climate</div>
                     <div class="home-action-state">Off</div>
                   </div>
                 </div>
                 <div class="home-action">
-                  <div class="home-action-icon">📍</div>
+                  <div class="home-action-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#419468" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
                   <div>
                     <div class="home-action-name">Location</div>
                     <div class="home-action-state">B3, P2 Level</div>
                   </div>
                 </div>
                 <div class="home-action">
-                  <div class="home-action-icon">🔐</div>
+                  <div class="home-action-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#419468" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
                   <div>
                     <div class="home-action-name">Digital Key</div>
                     <div class="home-action-state">1 shared</div>
@@ -1273,20 +1273,20 @@
               <div class="dkey-title">Digital Key</div>
               <div class="dkey-sub">Your phone is your car key</div>
               <div class="dkey-ring">
-                <div class="dkey-icon">🔐</div>
+                <div class="dkey-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
               </div>
               <div class="dkey-status">NFC & Bluetooth Active · Ready to unlock</div>
               <div class="dkey-action-row">
                 <div class="dkey-action">
-                  <div class="dkey-action-icon">🔓</div>
+                  <div class="dkey-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
                   <div class="dkey-action-lbl">Unlock</div>
                 </div>
                 <div class="dkey-action">
-                  <div class="dkey-action-icon">🔒</div>
+                  <div class="dkey-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
                   <div class="dkey-action-lbl">Lock</div>
                 </div>
                 <div class="dkey-action">
-                  <div class="dkey-action-icon">🚗</div>
+                  <div class="dkey-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9l3-6h14l3 6v6a2 2 0 0 1-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg></div>
                   <div class="dkey-action-lbl">Start</div>
                 </div>
               </div>
@@ -1423,22 +1423,22 @@
                 <img src="images/skoda/car.png" alt="car" class="vctrl-car-mini">
                 <div class="vctrl-grid">
                   <div class="vctrl-item active">
-                    <div class="vctrl-icon">💡</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#419468" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div>
                     <div class="vctrl-name">Headlights</div>
                     <div class="vctrl-val green">On · DRL</div>
                   </div>
                   <div class="vctrl-item">
-                    <div class="vctrl-icon">🔦</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
                     <div class="vctrl-name">Fog Lights</div>
                     <div class="vctrl-val">Off</div>
                   </div>
                   <div class="vctrl-item active">
-                    <div class="vctrl-icon">🚨</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#419468" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
                     <div class="vctrl-name">Hazards</div>
                     <div class="vctrl-val">Available</div>
                   </div>
                   <div class="vctrl-item">
-                    <div class="vctrl-icon">🌙</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
                     <div class="vctrl-name">Ambient</div>
                     <div class="vctrl-val">Off</div>
                   </div>
@@ -1457,22 +1457,22 @@
                 <img src="images/skoda/car.png" alt="car" class="vctrl-car-mini">
                 <div class="vctrl-grid">
                   <div class="vctrl-item">
-                    <div class="vctrl-icon">💧</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
                     <div class="vctrl-name">Front Wiper</div>
                     <div class="vctrl-val">Off</div>
                   </div>
                   <div class="vctrl-item">
-                    <div class="vctrl-icon">💧</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
                     <div class="vctrl-name">Rear Wiper</div>
                     <div class="vctrl-val">Off</div>
                   </div>
                   <div class="vctrl-item active">
-                    <div class="vctrl-icon">🚿</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#419468" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
                     <div class="vctrl-name">Washer</div>
                     <div class="vctrl-val green">Level OK</div>
                   </div>
                   <div class="vctrl-item">
-                    <div class="vctrl-icon">❄️</div>
+                    <div class="vctrl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
                     <div class="vctrl-name">De-ice</div>
                     <div class="vctrl-val">Off</div>
                   </div>
@@ -1711,7 +1711,7 @@
         </div>
         <p class="cs-tradeoff-body">A full live map showing the car's real-time location was in v1 scope. It tested well in concept but created two hard problems: continuous GPS polling drains battery significantly, and it raised privacy concerns (who else can see this?). I replaced it with a discrete "last parked location" string, honest about what can reliably be shown without battery or privacy cost.</p>
         <div class="cs-tradeoff-reason">
-          <span>⚡</span> Engineering constraint + privacy risk outweighed the feature value at v1.
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Engineering constraint + privacy risk outweighed the feature value at v1.
         </div>
       </div>
       <div class="cs-tradeoff-card fade-up" style="transition-delay:0.1s">
@@ -1721,7 +1721,7 @@
         </div>
         <p class="cs-tradeoff-body">Fuel consumption graphs, trip logs, driving efficiency scores, all compelling features. But they require persistent data logging, which adds backend complexity and surfaces questions about data ownership that need product + legal alignment before design can proceed. This is a v2 strategic feature, not a v1 UX feature.</p>
         <div class="cs-tradeoff-reason">
-          <span>🔒</span> Needs product + legal sign-off on data retention policy before design should proceed.
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Needs product + legal sign-off on data retention policy before design should proceed.
         </div>
       </div>
       <div class="cs-tradeoff-card fade-up" style="transition-delay:0.2s">
@@ -1731,7 +1731,7 @@
         </div>
         <p class="cs-tradeoff-body">Remote music/podcast control from the phone sounded useful until I mapped the actual user journey: you control audio when you're in the car, not from outside it. The feature was solving a problem that didn't exist in practice. It would have added 3 screens and a new API dependency for zero observable user value.</p>
         <div class="cs-tradeoff-reason">
-          <span>🎯</span> Failed the "real usage scenario" test, no one asked for it unprompted.
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Failed the "real usage scenario" test, no one asked for it unprompted.
         </div>
       </div>
       <div class="cs-tradeoff-card fade-up" style="transition-delay:0.3s">
@@ -1741,7 +1741,7 @@
         </div>
         <p class="cs-tradeoff-body">Škoda's EV lineup is growing fast, charging station maps, charge scheduling, and battery preconditioning are all highly relevant. But designing them well requires EV-specific user research (range anxiety, charging behaviour) that would have doubled the project scope. I scoped the design system to make EV screens additive, not a redesign.</p>
         <div class="cs-tradeoff-reason">
-          <span>🌱</span> Design system is EV-ready. Feature scoped out to preserve research integrity.
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><path d="M17 8C8 10 5.9 16.17 3.82 19.5c2.43.98 6.66 1.5 11.18-2.5 1-1 2-2.5 2-4"/><path d="M3.82 19.5c2.16-2.31 3.93-3.5 9.18-5.5"/></svg> Design system is EV-ready. Feature scoped out to preserve research integrity.
         </div>
       </div>
     </div>
