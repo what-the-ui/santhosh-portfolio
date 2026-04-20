@@ -96,14 +96,16 @@
       font-size: 18px; color: rgba(0,0,0,0.5); line-height: 1.7; max-width: 520px; margin-top: 4px;
     }
 
-    /* Hero right, car visual */
-    .cs-hero-right {
+    /* Hero right, image panel */
+    .cs-hero-img-ph {
+      align-self: stretch;
+      border-radius: 20px;
+      overflow: hidden;
       position: relative; z-index: 1;
-      display: flex; align-items: flex-end; justify-content: center;
+      min-height: 520px;
     }
-    .cs-hero-car-wrap {
-      width: 100%; max-width: 560px;
-      filter: drop-shadow(0 40px 80px rgba(65,148,104,0.18));
+    .cs-hero-img-ph img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
     }
 
     /* ── Meta bar ── */
@@ -851,10 +853,8 @@
       <h1 class="cs-hero-title">Škoda<br><em>Connected</em><br>App</h1>
       <p class="cs-hero-sub">A conceptual redesign of a connected car app for Škoda vehicle owners, bringing keyless access, remote controls, and real-time vehicle insights into a seamless mobile experience.</p>
     </div>
-    <div class="cs-hero-right">
-      <div class="cs-hero-car-wrap">
-        <img src="images/skoda/car.png" alt="Škoda car" style="width:100%;">
-      </div>
+    <div class="cs-hero-img-ph">
+      <img src="images/skoda/SkodaHero.png" alt="Škoda Connected App">
     </div>
   </section>
 
