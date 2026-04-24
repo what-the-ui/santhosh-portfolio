@@ -1008,7 +1008,7 @@
       </div></a>
 
       <!-- Card 2: Škoda Connected App -->
-      <div class="work-card-link work-card-disabled" onclick="showComingSoon()"><div class="work-card c-teal fade-up">
+      <a href="skoda.html" class="work-card-link"><div class="work-card c-teal fade-up">
         <div class="work-left">
           <div class="work-icon dark">
             <div class="icon-skoda">Š</div>
@@ -1025,7 +1025,7 @@
             <img src="images/skoda/SkodaHero.png" alt="Škoda App" style="width:100%; height:100%; object-fit:cover; object-position:center center; display:block; border-radius:18px;">
           </div>
         </div>
-      </div></div>
+      </div></a>
 
       <!-- Card 3: SuperOps AI -->
       <div class="work-card-link work-card-disabled" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'SuperOps AI'});showComingSoon()"><div class="work-card c-pink fade-up">
@@ -1337,6 +1337,39 @@
       hud.classList.add('show');
       clearTimeout(hudTimer);
       hudTimer = setTimeout(() => hud.classList.remove('show'), 2000);
+    }
+
+    // ── Parallax ──
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      const profilePhoto = document.querySelector('.profile-photo');
+      const heroName     = document.querySelector('.hero-name');
+      const heroTagline  = document.querySelector('.hero-tagline');
+      const heroBio      = document.querySelector('.hero-bio');
+      const heroBtns     = document.querySelector('.hero-btns');
+      const pingCard     = document.querySelector('.ping-card');
+
+      let ticking = false;
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+
+            // Hero left — each layer moves at a slightly different rate
+            if (profilePhoto) profilePhoto.style.transform = `translateY(${y * 0.12}px)`;
+            if (heroName)     heroName.style.transform     = `translateY(${y * 0.08}px)`;
+            if (heroTagline)  heroTagline.style.transform  = `translateY(${y * 0.06}px)`;
+            if (heroBio)      heroBio.style.transform      = `translateY(${y * 0.04}px)`;
+            if (heroBtns)     heroBtns.style.transform     = `translateY(${y * 0.02}px)`;
+
+            // Ping card drifts upward slightly faster for depth
+            if (pingCard) pingCard.style.transform = `translateY(${y * -0.06}px)`;
+
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
     }
   </script>
 
