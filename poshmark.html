@@ -813,10 +813,10 @@
       </div>
       <div class="cs-stat">
         <div class="cs-stat-num">3<span class="cs-stat-unit">rd</span></div>
-        <div class="cs-stat-label">Ranking in fashion resale, Depop and Vestiaire gaining ground on our core demographic</div>
+        <div class="cs-stat-label">Ranking in fashion resale, Depop and Vinted gaining ground on our core demographic</div>
       </div>
       <div class="cs-stat">
-        <div class="cs-stat-num">40<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-num">22<span class="cs-stat-unit">%</span></div>
         <div class="cs-stat-label">New seller activation rate, well below industry benchmark, driven by a broken listing flow</div>
       </div>
     </div>
@@ -835,7 +835,7 @@
           <div class="cs-problem-col-title">Stalled growth threatening platform viability</div>
           <ul class="cs-problem-list">
             <li>DAU declining quarter-over-quarter with no reversal signal</li>
-            <li>Seller drop-off accelerating, new cohort activation rates below 40%</li>
+            <li>Seller drop-off accelerating, new cohort activation rates below 32%</li>
             <li>Competitive pressure from lighter, faster-feeling alternatives</li>
             <li>Engineering platform shift creating a rare redesign window</li>
           </ul>
@@ -914,7 +914,7 @@
         <div class="cs-pillar">
           <div class="cs-pillar-num">01</div>
           <div class="cs-pillar-title">Speed</div>
-          <p class="cs-pillar-body">Reduce listing friction to the point where it feels effortless. Target: under 90 seconds from tap to live. This meant redesigning photo upload, auto-fill intelligence, and step consolidation in parallel.</p>
+          <p class="cs-pillar-body">Reduce listing friction to the point where it feels effortless. This meant redesigning photo upload, auto-fill intelligence, and step consolidation, removing every unnecessary decision a seller has to make.</p>
         </div>
         <div class="cs-pillar">
           <div class="cs-pillar-num">02</div>
@@ -954,7 +954,7 @@
       <div class="cs-insight-card highlight">
         <div class="cs-insight-eyebrow">Direction-changing insight</div>
         <div class="cs-insight-title">Sellers don't abandon because listing is complex, they abandon because photo upload is broken</div>
-        <p class="cs-insight-body">We assumed the listing flow's step count was the core problem. It wasn't. Session recordings showed sellers were crashing out before step 2, at photo upload. On mobile, the upload flow was slow, crashed mid-session, and lost progress silently. Fixing step count without fixing photo upload would have shipped a faster path to the same abandonment point.</p>
+        <p class="cs-insight-body">We assumed the listing flow's step count was the core problem. It wasn't. Session recordings (LogRocket) showed sellers were crashing out before step 2, at photo upload. On mobile, the upload flow was slow, crashed mid-session, and lost progress silently. Fixing step count without fixing photo upload would have shipped a faster path to the same abandonment point.</p>
       </div>
       <div class="cs-insight-card highlight">
         <div class="cs-insight-eyebrow">The surprise</div>
@@ -1001,10 +1001,10 @@
         <div class="cs-decision-num">02</div>
         <div class="cs-decision-title">Bottom nav restructure, pushed back by PM</div>
       </div>
-      <p class="cs-decision-body">The IA team proposed consolidating three navigation patterns into a single bottom tab bar. The PM pushed back, the existing nav had known session depth metrics attached to it, and any restructure risked regression. Rather than accepting or rejecting the pushback, we ran a controlled A/B test across a 10% traffic split for 3 weeks.</p>
+      <p class="cs-decision-body">The business team proposed having a six new navigation patterns into a single bottom tab bar. The PM pushed back, the existing nav had known session depth metrics attached to it, and any restructure risked regression. Rather than accepting or rejecting the pushback, we ran a controlled A/B test across a 10% traffic split for 2 weeks.</p>
       <div class="cs-decision-outcome">
         <div class="cs-decision-outcome-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>A/B test showed 12% improvement in session depth with the new nav. The data cleared the path, we shipped with full PM alignment, not compromise.</div>
+        <div>A/B test showed 8% improvement in session depth with the new nav. The data cleared the path, we shipped with full Business and PM alignment, not compromise.</div>
       </div>
     </div>
 
@@ -1040,7 +1040,7 @@
         <div class="cs-exec-phase">
           <div class="cs-exec-badge">Phase 2 · Q3</div>
           <div class="cs-exec-title">Home feed + IA restructure</div>
-          <p class="cs-exec-body">New bottom tab nav rolled out with A/B test validation. Feed personalisation v1 using manual curation signals, full algorithmic personalisation scoped to Phase 3. IA restructure eliminated the hamburger menu entirely.</p>
+          <p class="cs-exec-body">New bottom tab nav rolled out with A/B test validation. Feed personalisation v1 using manual curation signals, full algorithmic personalisation scoped to Phase 3.</p>
         </div>
         <div class="cs-exec-phase">
           <div class="cs-exec-badge">Phase 3 · Q4</div>
@@ -1055,7 +1055,7 @@
         </div>
         <div class="cs-challenge-card">
           <div class="cs-challenge-title">Edge case: accessibility at scale</div>
-          <p class="cs-challenge-body" style="font-size:15px;">500+ component variants had to meet WCAG 2.1 AA. We built accessibility checks directly into the design system documentation, each component shipped with a pass/fail status before it was available for use.</p>
+          <p class="cs-challenge-body" style="font-size:15px;">500+ component variants had to meet WCAG 2.1 AA. We built accessibility checks directly into the design system, ensuring every component was validated before it was available for use.</p>
         </div>
       </div>
     </div>
@@ -1070,12 +1070,12 @@
     <p class="cs-body" style="margin-bottom: 0;">The redesign hit or exceeded every success criterion. The listing flow improvement alone drove the strongest seller retention lift in Poshmark's history for a single product change.</p>
     <div class="cs-stats-row">
       <div class="cs-stat">
-        <div class="cs-stat-num">+31<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-num">+24<span class="cs-stat-unit">%</span></div>
         <div class="cs-stat-label">Listing completion rate, sellers who started a listing and published it successfully</div>
       </div>
       <div class="cs-stat">
-        <div class="cs-stat-num">128<span class="cs-stat-unit">s</span></div>
-        <div class="cs-stat-label">Average listing time, down from 4.2 minutes, a 50% reduction in time-to-list</div>
+        <div class="cs-stat-num">156<span class="cs-stat-unit">s</span></div>
+        <div class="cs-stat-label">Average listing time, down from 4.2 minutes, a 38% reduction in time-to-list</div>
       </div>
       <div class="cs-stat">
         <div class="cs-stat-num">+18<span class="cs-stat-unit">%</span></div>
