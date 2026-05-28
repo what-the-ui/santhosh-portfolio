@@ -931,7 +931,7 @@
       </p>
 
       <p class="hero-bio">
-        Designer with a decade of experience crafting seamless,
+        AI-first designer with a decade of experience crafting seamless,
         user-friendly products through thoughtful design thinking.
         Currently spearheading design at
         <a href="https://poshmark.com" target="_blank" rel="noopener" class="ext-link">
@@ -1356,5 +1356,48 @@
   </script>
 
   <div class="cs-hud" id="cs-hud">Coming Soon</div>
+
+  <!-- Vibe Coding badge -->
+  <style>
+    @keyframes vibe-shimmer {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes vibe-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0.4), 0 8px 24px rgba(0,0,0,0.25); }
+      50%       { box-shadow: 0 0 0 6px rgba(168,85,247,0), 0 8px 24px rgba(0,0,0,0.25); }
+    }
+    .vibe-badge {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      pointer-events: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 18px;
+      border-radius: 100px;
+      background: linear-gradient(270deg, #a855f7, #6366f1, #ec4899, #a855f7);
+      background-size: 300% 300%;
+      animation: vibe-shimmer 4s ease infinite, vibe-pulse 2.5s ease-in-out infinite;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-family: inherit;
+    }
+    .vibe-badge-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+  </style>
+  <div class="vibe-badge">
+    <span class="vibe-badge-icon">✦</span>
+    Website built through AI-powered vibe coding
+  </div>
+
 </body>
 </html>
