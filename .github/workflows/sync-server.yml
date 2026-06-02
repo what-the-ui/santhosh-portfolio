@@ -24,7 +24,7 @@ jobs:
 
       - name: Copy nexus-server files
         run: |
-          rsync -av --delete portfolio/nexus-server/ job-tracker/
+          rsync -av --delete --exclude='.git' nexus-server/ job-tracker/
           cd job-tracker
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
