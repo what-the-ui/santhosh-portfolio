@@ -3416,6 +3416,20 @@ function renderAllJobs() {
           : `<span style="font-size:0.65rem;font-family:monospace;color:var(--text-muted);opacity:0.4;">—</span>`
         }
       </td>
+      <td style="padding:11px 16px;white-space:nowrap;">
+        ${job.coldEmailSent === true
+          ? `<span title="Cold email sent to ${escHtml(job.hiringManagerName || job.hiringManagerEmail || 'hiring manager')}" style="display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;font-family:monospace;padding:3px 8px;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.3);color:#00ff88;border-radius:4px;cursor:default;">
+              <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" fill="rgba(0,255,136,0.2)" stroke="#00ff88"/><path d="M2.5 5l1.8 1.8L7.5 3.5" stroke="#00ff88" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              EMAIL SENT${job.hiringManagerName ? ' · ' + escHtml(job.hiringManagerName) : ''}
+            </span>`
+          : job.coldEmailSent === false
+            ? `<span title="${escHtml(job.coldEmailError || 'No hiring manager found')}" style="display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;font-family:monospace;padding:3px 8px;background:rgba(255,160,0,0.06);border:1px solid rgba(255,160,0,0.2);color:rgba(255,160,0,0.7);border-radius:4px;cursor:default;">
+                <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" fill="rgba(255,160,0,0.15)" stroke="rgba(255,160,0,0.7)"/><path d="M5 3v2.5M5 7h.01" stroke="rgba(255,160,0,0.9)" stroke-width="1.2" stroke-linecap="round"/></svg>
+                NO MATCH
+              </span>`
+            : `<span style="font-size:0.65rem;font-family:monospace;color:var(--text-muted);opacity:0.3;">—</span>`
+        }
+      </td>
     </tr>
   `).join('');
 }

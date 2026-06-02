@@ -121,11 +121,22 @@ async function scanConnection(conn) {
             resume: entries[0]?.resume || null,
           });
           log(`  ✓ Cold email sent to ${manager.email}`);
+          // Tag the first entry with cold email status
+          const firstEntry = db.jobs.find(j => j.id === entries[0]?.id);
+          if (firstEntry) {
+            firstEntry.coldEmailSent = true;
+            firstEntry.hiringManagerName = manager.fullName || manager.name || null;
+            firstEntry.hiringManagerEmail = manager.email;
+          }
         } else {
           log(`  · No hiring manager found on Apollo for ${conn.name}`);
+          const firstEntry = db.jobs.find(j => j.id === entries[0]?.id);
+          if (firstEntry) firstEntry.coldEmailSent = false;
         }
       } catch (e) {
         log(`  ✗ Apollo/cold email error: ${e.message}`);
+        const firstEntry = db.jobs.find(j => j.id === entries[0]?.id);
+        if (firstEntry) { firstEntry.coldEmailSent = false; firstEntry.coldEmailError = e.message; }
       }
     }
   } else {
