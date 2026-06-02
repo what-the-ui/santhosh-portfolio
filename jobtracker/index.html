@@ -2218,6 +2218,9 @@ footer span {
         <div id="platform-global-msg" style="display:none;font-size:0.72rem;color:var(--cyan);opacity:0.75;padding:0.5rem 0;font-family:monospace;">
           ⬡ Will search the entire platform using your keywords below
         </div>
+        <div id="linkedin-api-note" style="display:none;font-size:0.72rem;color:#f0a500;padding:0.5rem 0;font-family:monospace;line-height:1.5;">
+          ⬡ Uses JSearch API to bypass LinkedIn's login wall.<br>Add <strong>JSEARCH_API_KEY</strong> in Render env vars → <a href="https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch" target="_blank" style="color:#f0a500;">Get free key on RapidAPI</a>
+        </div>
         <div class="input-group" id="platform-query-group">
           <label class="input-label">Company Name</label>
           <input type="text" class="input-field" id="platform-query" placeholder="e.g. Airbnb, Stripe, Google">
@@ -2841,12 +2844,15 @@ function selectPlatform(el, name, emoji, baseUrl, type) {
   document.getElementById('platform-global-msg').style.display = isGlobal ? 'block' : 'none';
   document.getElementById('platform-query-group').style.display = isGlobal ? 'none' : 'block';
   document.getElementById('platform-url-group').style.display = isGlobal ? 'none' : 'block';
+  const linkedinNote = document.getElementById('linkedin-api-note');
   if (type === 'linkedin') {
     document.querySelector('#platform-query-group .input-label').textContent = 'Company Name';
-    document.getElementById('platform-query').placeholder = 'e.g. Stripe, Poshmark, Google';
+    document.getElementById('platform-query').placeholder = 'e.g. Puffy, Stripe, Google';
+    if (linkedinNote) linkedinNote.style.display = 'block';
   } else {
     document.querySelector('#platform-query-group .input-label').textContent = 'Company Name';
     document.getElementById('platform-query').placeholder = 'e.g. Airbnb, Stripe, Google';
+    if (linkedinNote) linkedinNote.style.display = 'none';
   }
   if (!isGlobal) document.getElementById('platform-query').focus();
 }
@@ -2873,9 +2879,8 @@ function addConnection() {
       url = urls[selectedPlatform.type] || selectedPlatform.baseUrl + kw;
     } else if (selectedPlatform.type === 'linkedin') {
       if (!query) { showToast('Enter a company name for LinkedIn', 'error'); return; }
-      const slug = query.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
       const kw = encodeURIComponent(keywords.join(' OR '));
-      url = urlOverride || `https://www.linkedin.com/jobs/search/?keywords=${kw}&company=${encodeURIComponent(query)}`;
+      url = `https://www.linkedin.com/jobs/search/?keywords=${kw}&company=${encodeURIComponent(query)}`;
     } else {
       url = urlOverride || selectedPlatform.baseUrl + encodeURIComponent(query);
     }
@@ -2893,6 +2898,7 @@ function addConnection() {
       keywords,
       matchMode: document.getElementById('platform-match-mode').value,
       frequency: document.getElementById('platform-frequency').value,
+      ...(selectedPlatform.type === 'linkedin' && query ? { companyName: query } : {}),
     };
   } else {
     const name = document.getElementById('url-company-name').value.trim();

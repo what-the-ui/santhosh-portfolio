@@ -138,4 +138,33 @@ async function scrape(url, type) {
   }
 }
 
-module.exports = { scrape };
+async function scrapeLinkedIn(companyName, keywords) {
+  const apiKey = process.env.JSEARCH_API_KEY;
+  if (!apiKey) return { ok: false, jobs: [], error: 'JSEARCH_API_KEY not set — add it in Render env vars' };
+
+  const query = keywords.length > 0
+    ? `${keywords.join(' OR ')} at ${companyName}`
+    : companyName;
+
+  try {
+    const resp = await axios.get('https://jsearch.p.rapidapi.com/search', {
+      params: { query, num_results: '20', date_posted: 'all' },
+      headers: {
+        'X-RapidAPI-Key': apiKey,
+        'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
+      },
+      timeout: 15000,
+    });
+
+    const jobs = (resp.data.data || []).map(j => ({
+      title: j.job_title,
+      link: j.job_apply_link || j.job_google_link || `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(j.job_title)}`,
+    }));
+
+    return { ok: true, jobs };
+  } catch (e) {
+    return { ok: false, jobs: [], error: `JSearch error: ${e.message}` };
+  }
+}
+
+module.exports = { scrape, scrapeLinkedIn };

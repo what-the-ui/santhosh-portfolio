@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const cron = require('node-cron');
 const { load, save } = require('./store');
-const { scrape } = require('./scraper');
+const { scrape, scrapeLinkedIn } = require('./scraper');
 const { sendJobAlert, sendColdEmail } = require('./mailer');
 const { findHiringManager } = require('./apollo');
 const { generateTailoredResume } = require('./resume-generator');
@@ -31,7 +31,9 @@ async function scanConnection(conn) {
   conn.scanning = true;
   save(db);
 
-  const result = await scrape(conn.url, conn.type);
+  const result = conn.type === 'linkedin'
+    ? await scrapeLinkedIn(conn.companyName || conn.name.replace('LinkedIn · ', ''), conn.keywords || [])
+    : await scrape(conn.url, conn.type);
 
   conn.scanning = false;
   conn.totalScans = (conn.totalScans || 0) + 1;
