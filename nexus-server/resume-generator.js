@@ -1,4 +1,4 @@
-const Anthropic = require('@anthropic-ai/sdk');
+const axios = require('axios');
 
 const BASE_RESUME = `
 Santhosh Rajendran
@@ -61,17 +61,10 @@ SRM Institute of Science and Technology — B.B.A Digital Marketing (Expected 20
 `;
 
 async function generateTailoredResume(jobTitle, companyName) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error('GEMINI_API_KEY not set');
 
-  const client = new Anthropic({ apiKey });
-
-  const message = await client.messages.create({
-    model: 'claude-opus-4-7',
-    max_tokens: 2048,
-    messages: [{
-      role: 'user',
-      content: `You are an expert ATS resume writer. Given the base resume below, create a tailored ATS-friendly version optimized for the role: "${jobTitle}" at "${companyName}".
+  const prompt = `You are an expert ATS resume writer. Given the base resume below, create a tailored ATS-friendly version optimized for the role: "${jobTitle}" at "${companyName}".
 
 Rules:
 - Keep all real experience, dates, company names, and metrics EXACTLY as written — never fabricate anything
@@ -84,11 +77,15 @@ Rules:
 BASE RESUME:
 ${BASE_RESUME}
 
-Output the tailored resume now:`
-    }],
-  });
+Output the tailored resume now:`;
 
-  return message.content[0].text;
+  const res = await axios.post(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+    { contents: [{ parts: [{ text: prompt }] }], generationConfig: { maxOutputTokens: 2048 } },
+    { headers: { 'Content-Type': 'application/json' }, timeout: 30000 }
+  );
+
+  return res.data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }
 
 module.exports = { generateTailoredResume };

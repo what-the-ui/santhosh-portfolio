@@ -64,7 +64,7 @@ async function scanConnection(conn) {
     log(`  ✓ ${newJobs.length} new job(s) found`);
     const entries = await Promise.all(newJobs.map(async j => {
       let resume = null;
-      if (process.env.ANTHROPIC_API_KEY) {
+      if (process.env.GEMINI_API_KEY) {
         try {
           resume = await generateTailoredResume(j.title, conn.name);
           log(`  ✓ Resume generated for: ${j.title}`);
