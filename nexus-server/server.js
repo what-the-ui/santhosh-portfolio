@@ -173,6 +173,7 @@ startCron();
 app.get('/api/health', (req, res) => {
   res.json({
     ok: true,
+    version: 'd73fd6b',
     uptime: Math.floor(process.uptime()),
     connections: db.connections.length,
     activeConnections: db.connections.filter(c => c.active).length,
