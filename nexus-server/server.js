@@ -319,11 +319,12 @@ app.post('/api/test-email', async (req, res) => {
 // Portfolio analytics
 app.get('/api/analytics', async (req, res) => {
   try {
-    const data = await getPortfolioVisitors(db.settings.gaRefreshToken);
+    const token = process.env.GOOGLE_REFRESH_TOKEN || db.settings.gaRefreshToken;
+    const data = await getPortfolioVisitors(token);
     res.json({ ok: true, ...data });
   } catch (e) {
     log(`Analytics error: ${e.message}`);
-    res.status(500).json({ ok: false, error: e.message, needsAuth: !db.settings.gaRefreshToken });
+    res.status(500).json({ ok: false, error: e.message, needsAuth: true });
   }
 });
 
@@ -343,6 +344,7 @@ app.get('/auth/callback', async (req, res) => {
     db.settings.gaRefreshToken = tokens.refresh_token;
     save(db);
     log('GA refresh token saved successfully');
+    log(`ACTION REQUIRED: Add this to Render env vars → GOOGLE_REFRESH_TOKEN=${tokens.refresh_token}`);
     res.send(`
       <html><body style="font-family:monospace;background:#000d1a;color:#00cfff;padding:40px;text-align:center;">
         <h2>✓ Google Analytics Connected</h2>
