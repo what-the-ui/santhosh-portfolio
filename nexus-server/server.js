@@ -370,6 +370,7 @@ app.post('/api/test-cold-email', async (req, res) => {
       },
       jobTitle: req.body?.jobTitle || 'Head of Design (Test)',
       companyName: req.body?.companyName || 'Acme Corp',
+      resume: req.body?.resume || null,
     });
     log('Test cold email sent');
     res.json({ ok: true });
