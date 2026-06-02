@@ -49,7 +49,7 @@ async function scanConnection(conn) {
 
   // Apply keyword filter — always merge connection keywords with global defaults
   const DEFAULT_KEYWORDS = [
-    'ux manager','ui/ux manager','ux design manager','ui/ux design manager','design manager',
+    'ux manager','ui/ux manager','ux design manager','ui/ux design manager','design manager','senior design manager',
     'ux designer manager','manager, product design','senior manager, product design',
     'lead product designer','principle product designer','staff product designer',
     'head of design','director of design','associate director of design',
