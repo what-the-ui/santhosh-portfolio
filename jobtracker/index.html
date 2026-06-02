@@ -3319,9 +3319,16 @@ async function scanConnection(id, silent = false) {
   updateStats();
 }
 
+function isDue(conn) {
+  if (!conn.lastScan) return true;
+  const intervals = { '1h': 3600000, '6h': 21600000, '12h': 43200000, '24h': 86400000 };
+  const ms = intervals[conn.frequency || '6h'] || 21600000;
+  return Date.now() - new Date(conn.lastScan).getTime() >= ms;
+}
+
 async function scanAll() {
-  const active = state.connections.filter(c => c.active);
-  if (active.length === 0) { showToast('No active sources to scan', 'error'); return; }
+  const active = state.connections.filter(c => c.active && isDue(c));
+  if (active.length === 0) { showToast('No active sources due for scan', 'info'); return; }
 
   showToast(`🚀 Scanning ${active.length} source${active.length > 1 ? 's' : ''}…`, 'info');
   for (const conn of active) {
