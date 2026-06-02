@@ -2116,6 +2116,7 @@ footer span {
           <strong id="stat-today-visitors">—</strong> Visitors Today
         </div>
       </div>
+      <div id="locations-anchor" style="width:100%;display:flex;justify-content:center;"></div>
     </div>
   </section>
 
@@ -3775,9 +3776,9 @@ async function fetchPortfolioAnalytics() {
       if (!locEl) {
         locEl = document.createElement('div');
         locEl.id = 'stat-locations-panel';
-        locEl.style.cssText = 'margin-top:4px;padding:14px 20px;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.12);border-radius:10px;max-width:480px;margin-left:auto;margin-right:auto;';
-        const section = document.querySelector('.connections-section') || document.querySelector('section:nth-of-type(2)');
-        if (section) section.insertAdjacentElement('beforebegin', locEl);
+        locEl.style.cssText = 'margin-top:12px;padding:14px 20px;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.12);border-radius:10px;width:480px;';
+        const anchor = document.getElementById('locations-anchor');
+        if (anchor) anchor.appendChild(locEl);
         else document.getElementById('stat-today-chip')?.parentElement?.appendChild(locEl);
       }
       locEl.innerHTML = `
