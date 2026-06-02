@@ -304,8 +304,12 @@ app.post('/api/test-email', async (req, res) => {
 app.post('/api/test-cold-email', async (req, res) => {
   try {
     await sendColdEmail({
-      hiringManager: { name: 'Hiring Manager', email: process.env.ALERT_EMAIL, fullName: 'Test Hiring Manager' },
-      jobTitle: 'Head of Design (Test)',
+      hiringManager: {
+        name: req.body?.managerName || 'Hiring Manager',
+        email: req.body?.managerEmail || process.env.ALERT_EMAIL,
+        fullName: req.body?.managerName || 'Test Hiring Manager',
+      },
+      jobTitle: req.body?.jobTitle || 'Head of Design (Test)',
       companyName: req.body?.companyName || 'Acme Corp',
     });
     log('Test cold email sent');
