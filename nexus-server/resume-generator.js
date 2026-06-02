@@ -72,6 +72,7 @@ Rules:
 - Rewrite the summary (2-3 sentences) to directly address what "${jobTitle}" at "${companyName}" needs
 - Add a "Core Competencies" section with 8-12 keywords/phrases most relevant to this role (drawn from the resume, not invented)
 - Keep the EDUCATION section exactly as written — do not change, move, or omit it
+- Always include the line "Portfolio password: w3lcome!" in the header exactly as written — never remove it
 - Use clean plain formatting with clear section headers — no tables, no columns, no special characters
 - Output ONLY the resume text, no commentary
 
