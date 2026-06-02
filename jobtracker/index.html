@@ -3789,16 +3789,20 @@ window.updateFrequency = async function() {
   } catch {}
 };
 
-// ── Init server connection if URL saved ──
-if (serverUrl) {
-  document.getElementById('cfg-server-url').value = serverUrl;
-  checkServerHealth().then(ok => {
-    if (ok) {
-      document.getElementById('server-fields').classList.add('visible');
-      startServerSync();
-    }
-  });
+// ── Init server connection ──
+// Use saved URL, or fall back to the default Render deployment
+const DEFAULT_SERVER = 'https://santhosh-job-tracker.onrender.com';
+if (!serverUrl) {
+  serverUrl = DEFAULT_SERVER;
+  localStorage.setItem('nexus_server_url', serverUrl);
 }
+document.getElementById('cfg-server-url').value = serverUrl;
+checkServerHealth().then(ok => {
+  if (ok) {
+    document.getElementById('server-fields').classList.add('visible');
+    startServerSync();
+  }
+});
 
 console.log('%cNEXUS JOB INTEL', 'color:#00cfff;font-family:monospace;font-size:24px;font-weight:bold;');
 console.log('%cJarvis AI Career Surveillance · Active', 'color:#0af;font-family:monospace;');
