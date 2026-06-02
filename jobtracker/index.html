@@ -3780,12 +3780,23 @@ async function fetchPortfolioAnalytics() {
       if (!locEl) {
         locEl = document.createElement('div');
         locEl.id = 'stat-locations-panel';
-        locEl.style.cssText = 'margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;';
-        document.getElementById('stat-today-chip')?.parentElement?.after(locEl);
+        locEl.style.cssText = 'margin-top:20px;padding:14px 20px;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.12);border-radius:10px;max-width:480px;margin-left:auto;margin-right:auto;';
+        const section = document.querySelector('.connections-section') || document.querySelector('section:nth-of-type(2)');
+        if (section) section.insertAdjacentElement('beforebegin', locEl);
+        else document.getElementById('stat-today-chip')?.parentElement?.appendChild(locEl);
       }
-      locEl.innerHTML = data.topLocations.map(l =>
-        `<span style="font-size:0.65rem;font-family:monospace;padding:3px 10px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:20px;color:var(--text-dim);">${l.country} <strong style="color:var(--cyan)">${l.users}</strong></span>`
-      ).join('');
+      locEl.innerHTML = `
+        <div style="font-family:monospace;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-transform:uppercase;margin-bottom:10px;">Portfolio Visitors by Country</div>
+        ${data.topLocations.map(l => `
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(0,229,255,0.06);">
+            <span style="font-size:0.78rem;color:var(--text-dim);">${l.country}</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:80px;height:3px;background:rgba(0,229,255,0.1);border-radius:2px;overflow:hidden;">
+                <div style="height:100%;width:${Math.round((l.users/data.topLocations[0].users)*100)}%;background:var(--cyan);border-radius:2px;"></div>
+              </div>
+              <span style="font-size:0.78rem;font-family:monospace;color:var(--cyan);min-width:24px;text-align:right;">${l.users}</span>
+            </div>
+          </div>`).join('')}`;
     }
   } catch (e) { /* silently skip if GA not configured */ }
 }
