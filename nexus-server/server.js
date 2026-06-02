@@ -6,7 +6,7 @@ const { scrape } = require('./scraper');
 const { sendJobAlert, sendColdEmail } = require('./mailer');
 const { findHiringManager } = require('./apollo');
 const { generateTailoredResume } = require('./resume-generator');
-const { getPortfolioVisitors } = require('./analytics');
+const { getAuthUrl, getOAuthClient, getPortfolioVisitors } = require('./analytics');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
@@ -317,11 +317,41 @@ app.post('/api/test-email', async (req, res) => {
 // Portfolio analytics
 app.get('/api/analytics', async (req, res) => {
   try {
-    const data = await getPortfolioVisitors();
+    const data = await getPortfolioVisitors(db.settings.gaRefreshToken);
     res.json({ ok: true, ...data });
   } catch (e) {
     log(`Analytics error: ${e.message}`);
-    res.status(500).json({ ok: false, error: e.message });
+    res.status(500).json({ ok: false, error: e.message, needsAuth: !db.settings.gaRefreshToken });
+  }
+});
+
+// Google OAuth2 flow — visit once to authorize GA access
+app.get('/auth/google', (req, res) => {
+  if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+    return res.send('Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in Render environment variables first.');
+  }
+  res.redirect(getAuthUrl());
+});
+
+app.get('/auth/callback', async (req, res) => {
+  const { code } = req.query;
+  if (!code) return res.status(400).send('Missing authorization code');
+  try {
+    const oauth2Client = getOAuthClient();
+    const { tokens } = await oauth2Client.getToken(code);
+    db.settings.gaRefreshToken = tokens.refresh_token;
+    save(db);
+    log('GA refresh token saved successfully');
+    res.send(`
+      <html><body style="font-family:monospace;background:#000d1a;color:#00cfff;padding:40px;text-align:center;">
+        <h2>✓ Google Analytics Connected</h2>
+        <p style="color:#4a9abe;">Portfolio visitor data will now appear on your job tracker.</p>
+        <p style="color:#4a9abe;">You can close this tab.</p>
+      </body></html>
+    `);
+  } catch (e) {
+    log(`OAuth callback error: ${e.message}`);
+    res.status(500).send(`Auth failed: ${e.message}`);
   }
 });
 

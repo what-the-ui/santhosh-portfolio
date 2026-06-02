@@ -1,23 +1,39 @@
-const { BetaAnalyticsDataClient } = require('@google-analytics/data');
+const { google } = require('googleapis');
 
-async function getPortfolioVisitors() {
-  const clientEmail = process.env.GA_CLIENT_EMAIL;
-  const privateKey = process.env.GA_PRIVATE_KEY?.replace(/\\n/g, '\n');
-  const propertyId = process.env.GA_PROPERTY_ID || '506959180';
+function getOAuthClient() {
+  return new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    'https://santhosh-job-tracker.onrender.com/auth/callback'
+  );
+}
 
-  if (!clientEmail || !privateKey) throw new Error('GA credentials not configured');
+function getAuthUrl() {
+  const oauth2Client = getOAuthClient();
+  return oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    prompt: 'consent',
+    scope: ['https://www.googleapis.com/auth/analytics.readonly'],
+  });
+}
 
-  const client = new BetaAnalyticsDataClient({
-    credentials: { client_email: clientEmail, private_key: privateKey },
+async function getPortfolioVisitors(refreshToken) {
+  if (!refreshToken) throw new Error('No refresh token — visit /auth/google to authorize');
+
+  const oauth2Client = getOAuthClient();
+  oauth2Client.setCredentials({ refresh_token: refreshToken });
+
+  const analyticsData = google.analyticsdata({ version: 'v1beta', auth: oauth2Client });
+
+  const response = await analyticsData.properties.runReport({
+    property: `properties/506959180`,
+    requestBody: {
+      dateRanges: [{ startDate: '2020-01-01', endDate: 'today' }],
+      metrics: [{ name: 'totalUsers' }, { name: 'sessions' }],
+    },
   });
 
-  const [response] = await client.runReport({
-    property: `properties/${propertyId}`,
-    dateRanges: [{ startDate: '2020-01-01', endDate: 'today' }],
-    metrics: [{ name: 'totalUsers' }, { name: 'sessions' }],
-  });
-
-  const row = response.rows?.[0]?.metricValues;
+  const row = response.data.rows?.[0]?.metricValues;
   return {
     totalUsers: parseInt(row?.[0]?.value || '0'),
     sessions: parseInt(row?.[1]?.value || '0'),
@@ -25,4 +41,4 @@ async function getPortfolioVisitors() {
   };
 }
 
-module.exports = { getPortfolioVisitors };
+module.exports = { getAuthUrl, getOAuthClient, getPortfolioVisitors };
