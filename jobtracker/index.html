@@ -2028,13 +2028,54 @@ footer span {
       </div>
     </div>
 
-    <div class="nav-right">
+    <div class="nav-right" style="display:flex;align-items:center;gap:0.75rem;">
+      <button onclick="openSettingsModal()" style="background:transparent;border:1px solid rgba(0,207,255,0.2);border-radius:8px;color:rgba(0,207,255,0.7);cursor:pointer;padding:0.4rem 0.65rem;font-size:0.75rem;letter-spacing:0.08em;font-family:'Orbitron',monospace;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(0,207,255,0.5)';this.style.color='#00cfff'" onmouseout="this.style.borderColor='rgba(0,207,255,0.2)';this.style.color='rgba(0,207,255,0.7)'">⚙ CONFIG</button>
       <div class="status-chip">
         <div class="status-dot" id="global-status-dot"></div>
         <span id="global-status-label">SYSTEM ONLINE</span>
       </div>
     </div>
   </nav>
+
+  <!-- SETTINGS MODAL -->
+  <div class="edit-kw-overlay" id="settings-modal-overlay" onclick="if(event.target===this)closeSettingsModal()">
+    <div class="edit-kw-modal" style="max-width:500px;">
+      <div class="edit-kw-header">
+        <div class="edit-kw-title">⬡ System Configuration</div>
+        <button class="modal-close" onclick="closeSettingsModal()">✕</button>
+      </div>
+
+      <!-- Server -->
+      <div style="margin-top:1rem;">
+        <label style="font-size:0.6rem;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+          Backend Server
+          <span id="server-status-chip" class="status-chip" style="font-size:0.55rem;padding:0.2rem 0.65rem;">
+            <span class="status-dot" style="background:var(--text-dim);box-shadow:none;animation:none;" id="server-status-dot-mini"></span>
+            <span id="server-status-text">NOT CONNECTED</span>
+          </span>
+        </label>
+        <div style="display:flex;gap:0.5rem;">
+          <input type="text" class="input-field" id="cfg-server-url" placeholder="https://santhosh-job-tracker.onrender.com" style="flex:1;font-size:0.72rem;" oninput="saveServerUrl()">
+          <button class="btn-primary" onclick="connectServer()" style="white-space:nowrap;font-size:0.65rem;padding:0.6rem 1rem;">Connect</button>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div id="server-fields" style="margin-top:1.25rem;">
+        <label style="font-size:0.6rem;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.75rem;">Email Alerts (Resend)</label>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <input type="email" class="input-field" id="cfg-email" placeholder="Alert email address" style="font-size:0.78rem;">
+          <input type="text" class="input-field" id="cfg-smtp-user" placeholder="Resend SMTP user (resend)" style="font-size:0.78rem;">
+          <input type="password" class="input-field" id="cfg-smtp-pass" placeholder="Resend API key or SMTP password" style="font-size:0.78rem;">
+          <input type="text" class="input-field" id="cfg-smtp-host" placeholder="SMTP host (leave blank for default)" style="font-size:0.78rem;display:none;">
+        </div>
+        <div style="display:flex;gap:0.5rem;margin-top:1rem;">
+          <button class="btn-primary" onclick="saveEmailConfig();showToast('Email config saved','success');" style="flex:1;justify-content:center;font-size:0.68rem;">💾 Save Email Config</button>
+          <button class="btn-secondary" onclick="sendTestEmail()" style="font-size:0.68rem;">✉ Send Test Email</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -2743,6 +2784,16 @@ function removeModalKw(tab, idx) {
 
 function handleKwKey(e, tab) {
   if (e.key === 'Enter') { e.preventDefault(); addKeyword(tab); }
+}
+
+function openSettingsModal() {
+  document.getElementById('settings-modal-overlay').classList.add('open');
+  const el = document.getElementById('cfg-server-url');
+  if (el) el.value = serverUrl || '';
+  loadEmailConfig();
+}
+function closeSettingsModal() {
+  document.getElementById('settings-modal-overlay').classList.remove('open');
 }
 
 function openModal() {
