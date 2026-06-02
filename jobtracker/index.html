@@ -3637,12 +3637,13 @@ let serverConnected = false;
 let serverPollInterval = null;
 
 function saveServerUrl() {
-  serverUrl = document.getElementById('cfg-server-url').value.trim().replace(/\/$/, '');
-  localStorage.setItem('nexus_server_url', serverUrl);
+  const el = document.getElementById('cfg-server-url');
+  if (el) { serverUrl = el.value.trim().replace(/\/$/, ''); localStorage.setItem('nexus_server_url', serverUrl); }
 }
 
 async function connectServer() {
-  serverUrl = document.getElementById('cfg-server-url').value.trim().replace(/\/$/, '');
+  const el = document.getElementById('cfg-server-url');
+  if (el) serverUrl = el.value.trim().replace(/\/$/, '');
   if (!serverUrl) { showToast('Enter a server URL first', 'error'); return; }
   localStorage.setItem('nexus_server_url', serverUrl);
 
@@ -3650,7 +3651,7 @@ async function connectServer() {
   const ok = await checkServerHealth();
   if (ok) {
     showToast('✓ Server connected — running 24/7', 'success');
-    document.getElementById('server-fields').classList.add('visible');
+    const sf = document.getElementById('server-fields'); if (sf) sf.classList.add('visible');
     startServerSync();
   }
 }
@@ -3799,19 +3800,12 @@ async function updateKeywordsOnServer(id, keywords, matchMode) {
 
 // ── Email config — stored in localStorage so it survives page refresh ──
 function getEmailCfgFromInputs() {
-  return {
-    enabled:  true,
-    address:  document.getElementById('cfg-email').value.trim(),
-    smtpUser: document.getElementById('cfg-smtp-user').value.trim(),
-    smtpPass: document.getElementById('cfg-smtp-pass').value.trim(),
-    smtpHost: document.getElementById('cfg-smtp-host').value.trim() || 'smtp.gmail.com',
-    smtpPort: 587,
-  };
+  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  return { enabled: true, address: g('cfg-email'), smtpUser: g('cfg-smtp-user'), smtpPass: g('cfg-smtp-pass'), smtpHost: g('cfg-smtp-host') || 'smtp.gmail.com', smtpPort: 587 };
 }
 
 function saveEmailConfig() {
   const cfg = getEmailCfgFromInputs();
-  // Don't save empty values
   if (!cfg.address && !cfg.smtpUser) return;
   localStorage.setItem('nexus_email_cfg', JSON.stringify(cfg));
 }
@@ -3821,12 +3815,11 @@ function loadEmailConfig() {
     const saved = localStorage.getItem('nexus_email_cfg');
     if (!saved) return;
     const cfg = JSON.parse(saved);
-    if (cfg.address)  document.getElementById('cfg-email').value = cfg.address;
-    if (cfg.smtpUser) document.getElementById('cfg-smtp-user').value = cfg.smtpUser;
-    if (cfg.smtpPass) document.getElementById('cfg-smtp-pass').value = cfg.smtpPass;
-    if (cfg.smtpHost && cfg.smtpHost !== 'smtp.gmail.com') document.getElementById('cfg-smtp-host').value = cfg.smtpHost;
-    // Show the email fields panel
-    document.getElementById('server-fields').classList.add('visible');
+    const s = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+    s('cfg-email', cfg.address);
+    s('cfg-smtp-user', cfg.smtpUser);
+    s('cfg-smtp-pass', cfg.smtpPass);
+    if (cfg.smtpHost && cfg.smtpHost !== 'smtp.gmail.com') s('cfg-smtp-host', cfg.smtpHost);
   } catch(e) {}
 }
 
@@ -4028,14 +4021,15 @@ if (!serverUrl) {
   serverUrl = DEFAULT_SERVER;
   localStorage.setItem('nexus_server_url', serverUrl);
 }
-document.getElementById('cfg-server-url').value = serverUrl;
+const cfgServerUrlEl = document.getElementById('cfg-server-url');
+if (cfgServerUrlEl) cfgServerUrlEl.value = serverUrl;
 
 // Load saved email config from localStorage (persists across refreshes)
 loadEmailConfig();
 
 checkServerHealth().then(ok => {
   if (ok) {
-    document.getElementById('server-fields').classList.add('visible');
+    const sf = document.getElementById('server-fields'); if (sf) sf.classList.add('visible');
     startServerSync();
   }
 });
