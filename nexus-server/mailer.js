@@ -90,7 +90,7 @@ async function sendColdEmail({ hiringManager, jobTitle, companyName, resume }) {
   await resend.emails.send({
     from: fromAddress,
     to: hiringManager.email,
-    reply_to: 'santhosh.r777@live.in',
+    replyTo: 'santhosh.r777@live.in',
     subject: `Product Design Manager — ${escHtml(companyName)}`,
     html,
   });
