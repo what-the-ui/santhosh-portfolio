@@ -2158,6 +2158,32 @@ footer span {
   </section>
 
   <!-- FOOTER -->
+  <!-- ALL JOBS TABLE -->
+  <section class="section" id="all-jobs" style="padding-bottom:3rem;">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Full Archive</div>
+        <h2 class="section-title">All Jobs Found</h2>
+      </div>
+      <span id="all-jobs-count" style="font-family:monospace;font-size:0.75rem;color:var(--cyan);opacity:0.7;"></span>
+    </div>
+    <div style="background:rgba(0,15,35,0.7);border:1px solid rgba(0,170,255,0.1);border-radius:16px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;" id="all-jobs-table">
+        <thead>
+          <tr style="background:rgba(0,229,255,0.04);border-bottom:1px solid rgba(0,170,255,0.15);">
+            <th style="padding:12px 16px;text-align:left;font-family:monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--text-muted);text-transform:uppercase;font-weight:500;">Source</th>
+            <th style="padding:12px 16px;text-align:left;font-family:monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--text-muted);text-transform:uppercase;font-weight:500;">Job Title</th>
+            <th style="padding:12px 16px;text-align:left;font-family:monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--text-muted);text-transform:uppercase;font-weight:500;">Found</th>
+            <th style="padding:12px 16px;text-align:left;font-family:monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--text-muted);text-transform:uppercase;font-weight:500;">Link</th>
+          </tr>
+        </thead>
+        <tbody id="all-jobs-body">
+          <tr><td colspan="4" style="padding:2rem;text-align:center;color:var(--text-muted);font-size:0.8rem;">No jobs found yet. Run a scan to populate.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <footer>
     <p>NEXUS Job Intel · <span>AI Career Surveillance Agent</span> · Scanning every <span id="footer-freq">6h</span></p>
   </footer>
@@ -3206,10 +3232,40 @@ document.addEventListener('visibilitychange', () => {
 // ═══════════════════════════════════════════
 // FEED
 // ═══════════════════════════════════════════
+function renderAllJobs() {
+  const tbody = document.getElementById('all-jobs-body');
+  const countEl = document.getElementById('all-jobs-count');
+  if (!tbody) return;
+  if (state.jobs.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="padding:2rem;text-align:center;color:var(--text-muted);font-size:0.8rem;">No jobs found yet. Run a scan to populate.</td></tr>';
+    if (countEl) countEl.textContent = '';
+    return;
+  }
+  if (countEl) countEl.textContent = `${state.jobs.length} role${state.jobs.length !== 1 ? 's' : ''}`;
+  tbody.innerHTML = state.jobs.map((job, i) => `
+    <tr style="border-bottom:1px solid rgba(0,170,255,0.07);transition:background 0.15s;" onmouseover="this.style.background='rgba(0,229,255,0.03)'" onmouseout="this.style.background=''">
+      <td style="padding:11px 16px;white-space:nowrap;">
+        <span style="font-size:1rem;margin-right:6px;">${job.connectionEmoji || '🔍'}</span>
+        <span style="font-size:0.75rem;color:var(--text-dim);">${escHtml(job.connectionName || '')}</span>
+      </td>
+      <td style="padding:11px 16px;">
+        <span style="font-size:0.82rem;color:var(--text-bright);font-weight:500;">${escHtml(job.title)}</span>
+      </td>
+      <td style="padding:11px 16px;white-space:nowrap;">
+        <span style="font-size:0.7rem;font-family:monospace;color:var(--text-muted);">${formatTime(job.foundAt)}</span>
+      </td>
+      <td style="padding:11px 16px;">
+        <a href="${escHtml(job.link)}" target="_blank" rel="noopener" style="font-size:0.68rem;font-family:monospace;color:var(--cyan);text-decoration:none;word-break:break-all;opacity:0.8;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">${escHtml(job.link)}</a>
+      </td>
+    </tr>
+  `).join('');
+}
+
 function renderFeed() {
   const list = document.getElementById('feed-list');
   const count = document.getElementById('feed-count');
   count.textContent = state.jobs.length;
+  renderAllJobs();
 
   if (state.jobs.length === 0) {
     list.innerHTML = '<div class="feed-empty">No signals received yet. Connect sources and initiate scan.</div>';
