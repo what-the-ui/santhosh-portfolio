@@ -6,7 +6,7 @@ const { scrape } = require('./scraper');
 const { sendJobAlert, sendColdEmail } = require('./mailer');
 const { findHiringManager } = require('./apollo');
 const { generateTailoredResume } = require('./resume-generator');
-const { getAuthUrl, getOAuthClient, getPortfolioVisitors } = require('./analytics');
+const { getAuthUrl, exchangeCode, getPortfolioVisitors } = require('./analytics');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
@@ -337,8 +337,7 @@ app.get('/auth/callback', async (req, res) => {
   const { code } = req.query;
   if (!code) return res.status(400).send('Missing authorization code');
   try {
-    const oauth2Client = getOAuthClient();
-    const { tokens } = await oauth2Client.getToken(code);
+    const tokens = await exchangeCode(code);
     db.settings.gaRefreshToken = tokens.refresh_token;
     save(db);
     log('GA refresh token saved successfully');
