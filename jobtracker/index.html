@@ -1937,6 +1937,12 @@ footer span {
         <div class="hero-stat-chip">
           Next scan in <strong id="stat-countdown">–:––:––</strong>
         </div>
+        <div class="hero-stat-chip">
+          <strong id="stat-total-scans">0</strong> Total Scans Run
+        </div>
+        <div class="hero-stat-chip">
+          <strong id="stat-total-jobs">0</strong> Total Jobs Found
+        </div>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -3360,6 +3366,8 @@ function updateStats() {
   document.getElementById('nav-sources').textContent = total;
   document.getElementById('nav-signals').textContent = todayJobs;
   document.getElementById('total-scans').textContent = state.settings.totalScans;
+  document.getElementById('stat-total-scans').textContent = state.settings.totalScans || 0;
+  document.getElementById('stat-total-jobs').textContent = state.jobs.length;
 }
 
 function updateCountdown() {
