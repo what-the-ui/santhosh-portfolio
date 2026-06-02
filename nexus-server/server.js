@@ -300,6 +300,22 @@ app.post('/api/test-email', async (req, res) => {
   }
 });
 
+// Test cold email
+app.post('/api/test-cold-email', async (req, res) => {
+  try {
+    await sendColdEmail({
+      hiringManager: { name: 'Hiring Manager', email: process.env.ALERT_EMAIL, fullName: 'Test Hiring Manager' },
+      jobTitle: 'Head of Design (Test)',
+      companyName: req.body?.companyName || 'Acme Corp',
+    });
+    log('Test cold email sent');
+    res.json({ ok: true });
+  } catch (e) {
+    log(`Test cold email failed: ${e.message}`);
+    res.status(500).json({ ok: false, error: e.message });
+  }
+});
+
 // ──────────────────────────────────────────
 app.listen(PORT, () => {
   log(`NEXUS server running on port ${PORT}`);
