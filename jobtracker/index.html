@@ -3683,6 +3683,7 @@ async function syncFromServer() {
     if (!connRes.ok) throw new Error('server error');
 
     state.connections = await connRes.json();
+    state.connections.forEach(c => { if (!c.keywords || c.keywords.length === 0) c.keywords = [...DEFAULT_KEYWORDS]; });
     state.jobs = await jobRes.json();
     const health = await healthRes.json();
 
