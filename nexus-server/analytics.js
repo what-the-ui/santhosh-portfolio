@@ -42,20 +42,38 @@ async function getPortfolioVisitors(refreshToken) {
   if (!refreshToken) throw new Error('No refresh token — visit /auth/google to authorize');
 
   const accessToken = await getAccessToken(refreshToken);
+  const headers = { Authorization: `Bearer ${accessToken}` };
 
-  const res = await axios.post(
-    `https://analyticsdata.googleapis.com/v1beta/properties/${PROPERTY_ID}:runReport`,
-    {
+  const [allTimeRes, todayRes, locationRes] = await Promise.all([
+    axios.post(`https://analyticsdata.googleapis.com/v1beta/properties/${PROPERTY_ID}:runReport`, {
       dateRanges: [{ startDate: '2020-01-01', endDate: 'today' }],
       metrics: [{ name: 'totalUsers' }, { name: 'sessions' }],
-    },
-    { headers: { Authorization: `Bearer ${accessToken}` } }
-  );
+    }, { headers }),
+    axios.post(`https://analyticsdata.googleapis.com/v1beta/properties/${PROPERTY_ID}:runReport`, {
+      dateRanges: [{ startDate: 'today', endDate: 'today' }],
+      metrics: [{ name: 'totalUsers' }],
+    }, { headers }),
+    axios.post(`https://analyticsdata.googleapis.com/v1beta/properties/${PROPERTY_ID}:runReport`, {
+      dateRanges: [{ startDate: '2020-01-01', endDate: 'today' }],
+      dimensions: [{ name: 'country' }],
+      metrics: [{ name: 'totalUsers' }],
+      orderBys: [{ metric: { metricName: 'totalUsers' }, desc: true }],
+      limit: 5,
+    }, { headers }),
+  ]);
 
-  const row = res.data.rows?.[0]?.metricValues;
+  const allTimeRow = allTimeRes.data.rows?.[0]?.metricValues;
+  const todayRow = todayRes.data.rows?.[0]?.metricValues;
+  const locations = (locationRes.data.rows || []).map(r => ({
+    country: r.dimensionValues?.[0]?.value || 'Unknown',
+    users: parseInt(r.metricValues?.[0]?.value || '0'),
+  }));
+
   return {
-    totalUsers: parseInt(row?.[0]?.value || '0'),
-    sessions: parseInt(row?.[1]?.value || '0'),
+    totalUsers: parseInt(allTimeRow?.[0]?.value || '0'),
+    sessions: parseInt(allTimeRow?.[1]?.value || '0'),
+    todayUsers: parseInt(todayRow?.[0]?.value || '0'),
+    topLocations: locations,
     fetchedAt: new Date().toISOString(),
   };
 }

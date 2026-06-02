@@ -2111,6 +2111,9 @@ footer span {
         <div class="hero-stat-chip" id="stat-portfolio-chip" style="display:none;">
           <strong id="stat-portfolio-visitors">—</strong> Portfolio Visitors
         </div>
+        <div class="hero-stat-chip" id="stat-today-chip" style="display:none;">
+          <strong id="stat-today-visitors">—</strong> Visitors Today
+        </div>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -3756,11 +3759,33 @@ async function fetchPortfolioAnalytics() {
     const res = await fetch(`${serverUrl}/api/analytics`);
     if (!res.ok) return;
     const data = await res.json();
-    if (data.ok && data.totalUsers) {
+    if (!data.ok) return;
+
+    if (data.totalUsers) {
       const el = document.getElementById('stat-portfolio-visitors');
       const chip = document.getElementById('stat-portfolio-chip');
       if (el) el.textContent = data.totalUsers.toLocaleString();
       if (chip) chip.style.display = '';
+    }
+
+    if (data.todayUsers !== undefined) {
+      const el = document.getElementById('stat-today-visitors');
+      const chip = document.getElementById('stat-today-chip');
+      if (el) el.textContent = data.todayUsers.toLocaleString();
+      if (chip) chip.style.display = '';
+    }
+
+    if (data.topLocations?.length) {
+      let locEl = document.getElementById('stat-locations-panel');
+      if (!locEl) {
+        locEl = document.createElement('div');
+        locEl.id = 'stat-locations-panel';
+        locEl.style.cssText = 'margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;';
+        document.getElementById('stat-today-chip')?.parentElement?.after(locEl);
+      }
+      locEl.innerHTML = data.topLocations.map(l =>
+        `<span style="font-size:0.65rem;font-family:monospace;padding:3px 10px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:20px;color:var(--text-dim);">${l.country} <strong style="color:var(--cyan)">${l.users}</strong></span>`
+      ).join('');
     }
   } catch (e) { /* silently skip if GA not configured */ }
 }
