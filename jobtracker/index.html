@@ -2302,6 +2302,45 @@ footer span {
 </div>
 
 <!-- EDIT KEYWORDS OVERLAY -->
+<!-- EDIT CONNECTION MODAL -->
+<div class="edit-kw-overlay" id="edit-conn-overlay" onclick="if(event.target===this)closeEditConn()">
+  <div class="edit-kw-modal" style="max-width:480px;">
+    <div class="edit-kw-header">
+      <div class="edit-kw-title">⬡ Edit Source</div>
+      <button class="modal-close" onclick="closeEditConn()">✕</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.85rem;margin-top:1rem;">
+      <div style="display:flex;gap:0.6rem;">
+        <div style="flex:0 0 60px;">
+          <label style="font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.35rem;">Emoji</label>
+          <input type="text" class="input-field" id="edit-conn-emoji" maxlength="2" style="text-align:center;font-size:1.2rem;padding:0.5rem;">
+        </div>
+        <div style="flex:1;">
+          <label style="font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.35rem;">Name</label>
+          <input type="text" class="input-field" id="edit-conn-name" placeholder="Company or platform name">
+        </div>
+      </div>
+      <div>
+        <label style="font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.35rem;">Careers URL</label>
+        <input type="text" class="input-field" id="edit-conn-url" placeholder="https://...">
+      </div>
+      <div>
+        <label style="font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.35rem;">Scan Frequency</label>
+        <select class="match-mode-select" id="edit-conn-frequency" style="width:100%;">
+          <option value="1h">Every 1 hour</option>
+          <option value="6h">Every 6 hours</option>
+          <option value="12h">Every 12 hours</option>
+          <option value="24h">Every 24 hours</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.5rem;margin-top:1.25rem;">
+      <button class="btn-secondary" onclick="closeEditConn()" style="font-size:0.65rem;">Cancel</button>
+      <button class="btn-primary" onclick="saveEditConn()" style="flex:1;justify-content:center;font-size:0.72rem;">Save Changes</button>
+    </div>
+  </div>
+</div>
+
 <div class="edit-kw-overlay" id="edit-kw-overlay" onclick="handleEditKwOverlay(event)">
   <div class="edit-kw-modal">
     <div class="edit-kw-header">
@@ -2778,6 +2817,7 @@ function renderConnections() {
             <div class="toggle-track"></div>
             <div class="toggle-thumb"></div>
           </label>
+          <button class="btn-icon" onclick="openEditConn('${conn.id}')" title="Edit source" style="font-size:0.85rem;">✎</button>
           <button class="btn-icon" onclick="deleteConnection('${conn.id}')" title="Remove source">✕</button>
         </div>
       </div>
@@ -2805,7 +2845,7 @@ function renderConnections() {
       <div class="scan-status">
         <div class="scan-indicator">
           <div class="scan-dot"></div>
-          <span>${conn.active ? 'Active · Auto-scanning' : 'Paused'}</span>
+          <span>${conn.active ? `Active · every ${conn.frequency || '6h'}` : 'Paused'}</span>
         </div>
         <button class="scan-btn" onclick="scanConnection('${conn.id}')" id="scanbtn-${conn.id}">
           ⟳ Scan Now
@@ -3314,6 +3354,44 @@ function showToast(msg, type = 'info') {
 // ═══════════════════════════════════════════
 // EDIT KEYWORDS OVERLAY
 // ═══════════════════════════════════════════
+let editConnId = null;
+function openEditConn(connId) {
+  editConnId = connId;
+  const conn = state.connections.find(c => c.id === connId);
+  if (!conn) return;
+  document.getElementById('edit-conn-emoji').value = conn.emoji || '🏢';
+  document.getElementById('edit-conn-name').value = conn.name || '';
+  document.getElementById('edit-conn-url').value = conn.url || '';
+  document.getElementById('edit-conn-frequency').value = conn.frequency || '6h';
+  document.getElementById('edit-conn-overlay').classList.add('open');
+}
+function closeEditConn() {
+  document.getElementById('edit-conn-overlay').classList.remove('open');
+  editConnId = null;
+}
+async function saveEditConn() {
+  if (!editConnId) return;
+  const conn = state.connections.find(c => c.id === editConnId);
+  if (!conn) return;
+  conn.emoji = document.getElementById('edit-conn-emoji').value.trim() || '🏢';
+  conn.name = document.getElementById('edit-conn-name').value.trim() || conn.name;
+  conn.url = document.getElementById('edit-conn-url').value.trim() || conn.url;
+  conn.frequency = document.getElementById('edit-conn-frequency').value;
+  saveState();
+  renderConnections();
+  if (serverConnected) {
+    try {
+      await fetch(`${serverUrl}/api/connections/${editConnId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: conn.name, emoji: conn.emoji, url: conn.url, frequency: conn.frequency }),
+      });
+    } catch(e) { /* ignore */ }
+  }
+  showToast('Source updated', 'success');
+  closeEditConn();
+}
+
 function openEditKw(connId) {
   editKwConnId = connId;
   const conn = state.connections.find(c => c.id === connId);
