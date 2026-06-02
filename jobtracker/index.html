@@ -3785,7 +3785,7 @@ async function fetchPortfolioAnalytics() {
         <div style="font-family:monospace;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-transform:uppercase;margin-bottom:10px;">Portfolio Visitors by Country</div>
         ${data.topLocations.map(l => `
           <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(0,229,255,0.06);">
-            <span style="font-size:0.78rem;color:var(--text-dim);">${l.country}</span>
+            <span style="font-size:0.78rem;color:rgba(160,220,240,0.9);">${l.country}</span>
             <div style="display:flex;align-items:center;gap:8px;">
               <div style="width:80px;height:3px;background:rgba(0,229,255,0.1);border-radius:2px;overflow:hidden;">
                 <div style="height:100%;width:${Math.round((l.users/data.topLocations[0].users)*100)}%;background:var(--cyan);border-radius:2px;"></div>
