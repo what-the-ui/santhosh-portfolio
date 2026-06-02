@@ -2615,6 +2615,11 @@ footer span {
 // ═══════════════════════════════════════════
 const PROXY_URL = 'https://api.allorigins.win/get?url=';
 const DEFAULT_FREQUENCY = 21600000; // 6h
+const DEFAULT_KEYWORDS = [
+  'UX Designer Manager','Manager, Product Design','Senior Manager, Product Design',
+  'Lead Product Designer','Principle Product Designer','Staff Product Designer',
+  'Head of Design','Director of Design','Associate Director of Design'
+];
 
 let state = {
   connections: [],
@@ -2636,6 +2641,8 @@ function loadState() {
     if (saved) {
       const parsed = JSON.parse(saved);
       state.connections = parsed.connections || [];
+      // Backfill default keywords for connections that have none
+      state.connections.forEach(c => { if (!c.keywords || c.keywords.length === 0) c.keywords = [...DEFAULT_KEYWORDS]; });
       state.jobs = parsed.jobs || [];
       state.settings = { ...state.settings, ...parsed.settings };
       state.nextScan = parsed.nextScan ? new Date(parsed.nextScan) : null;
@@ -2765,7 +2772,7 @@ function addConnection() {
       lastScan: null,
       jobsFound: 0,
       totalScans: 0,
-      keywords: [...modalKeywords.platform],
+      keywords: modalKeywords.platform.length > 0 ? [...modalKeywords.platform] : [...DEFAULT_KEYWORDS],
       matchMode: document.getElementById('platform-match-mode').value,
     };
   } else {
@@ -2787,7 +2794,7 @@ function addConnection() {
       lastScan: null,
       jobsFound: 0,
       totalScans: 0,
-      keywords: [...modalKeywords.url],
+      keywords: modalKeywords.url.length > 0 ? [...modalKeywords.url] : [...DEFAULT_KEYWORDS],
       matchMode: document.getElementById('url-match-mode').value,
     };
   }
@@ -3838,7 +3845,7 @@ window.addConnection = async function() {
       name: query ? `${selectedPlatform.name} · ${query}` : selectedPlatform.name,
       emoji: selectedPlatform.emoji, url, type: selectedPlatform.type,
       platform: selectedPlatform.name,
-      keywords: [...modalKeywords.platform],
+      keywords: modalKeywords.platform.length > 0 ? [...modalKeywords.platform] : [...DEFAULT_KEYWORDS],
       matchMode: document.getElementById('platform-match-mode').value,
     };
   } else {
@@ -3849,7 +3856,7 @@ window.addConnection = async function() {
     if (!url || !url.startsWith('http')) { showToast('Enter a valid URL', 'error'); return; }
     conn = {
       name, emoji: icon, url, type: 'custom', platform: 'Custom',
-      keywords: [...modalKeywords.url],
+      keywords: modalKeywords.url.length > 0 ? [...modalKeywords.url] : [...DEFAULT_KEYWORDS],
       matchMode: document.getElementById('url-match-mode').value,
     };
   }
