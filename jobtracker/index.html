@@ -2919,7 +2919,7 @@ function addConnection() {
   if (Notification.permission === 'default') {
     Notification.requestPermission().then(p => {
       if (p === 'granted') {
-        document.getElementById('notif-toggle').checked = true;
+        // notif-toggle removed
         state.settings.notifications = true;
         saveState();
       }
@@ -3448,31 +3448,18 @@ setInterval(updateCountdown, 1000);
 // ═══════════════════════════════════════════
 // SETTINGS
 // ═══════════════════════════════════════════
-function updateFrequency() {
-  const freq = parseInt(document.getElementById('scan-frequency').value);
-  state.settings.frequency = freq;
-  saveState();
-  scheduleNextScan();
-
-  const labels = { 3600000:'1h', 21600000:'6h', 43200000:'12h', 86400000:'24h' };
-  document.getElementById('footer-freq').textContent = labels[freq] || '6h';
-  showToast(`Scan frequency updated to ${labels[freq]}`, 'success');
-}
-
-function saveSettings() {
-  state.settings.autoResume = document.getElementById('auto-resume-toggle').checked;
-  saveState();
-}
+function updateFrequency() {}
+function saveSettings() {}
 
 async function toggleNotifications() {
-  const checked = document.getElementById('notif-toggle').checked;
+  const checked = false;
   if (checked) {
     const perm = await Notification.requestPermission();
     if (perm === 'granted') {
       state.settings.notifications = true;
       showToast('Browser notifications enabled', 'success');
     } else {
-      document.getElementById('notif-toggle').checked = false;
+      // notif-toggle removed
       state.settings.notifications = false;
       showToast('Notification permission denied. Enable in browser settings.', 'error');
     }
@@ -3666,12 +3653,7 @@ updateStats();
 initScheduler();
 initCardTilt();
 
-// Restore settings UI
-document.getElementById('scan-frequency').value = state.settings.frequency;
-document.getElementById('notif-toggle').checked = state.settings.notifications;
-document.getElementById('auto-resume-toggle').checked = state.settings.autoResume;
-const freqLabels = { 3600000:'1h', 21600000:'6h', 43200000:'12h', 86400000:'24h' };
-document.getElementById('footer-freq').textContent = freqLabels[state.settings.frequency] || '6h';
+// Settings UI elements removed — state preserved in memory only
 
 // Keyboard shortcut
 document.addEventListener('keydown', e => {
@@ -4043,27 +4025,7 @@ window.saveEditKw = async function() {
   } catch(e) { console.warn('Keyword sync error:', e); }
 };
 
-// ── Frequency setting to server ──
-const _localUpdateFrequency = updateFrequency;
-window.updateFrequency = async function() {
-  _localUpdateFrequency();
-  if (!serverConnected) return;
-  const freq = document.getElementById('scan-frequency').value;
-  const cronMap = {
-    '3600000':  '0 * * * *',
-    '21600000': '0 */6 * * *',
-    '43200000': '0 */12 * * *',
-    '86400000': '0 0 * * *',
-  };
-  const labelMap = { '3600000':'1h','21600000':'6h','43200000':'12h','86400000':'24h' };
-  try {
-    await fetch(`${serverUrl}/api/settings`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ frequency: cronMap[freq], frequencyLabel: labelMap[freq] }),
-    });
-  } catch {}
-};
+// frequency UI removed — per-connection frequency used instead
 
 // ── Init server connection ──
 const DEFAULT_SERVER = 'https://santhosh-job-tracker.onrender.com';
