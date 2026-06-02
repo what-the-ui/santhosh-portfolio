@@ -6,6 +6,7 @@ const { scrape } = require('./scraper');
 const { sendJobAlert, sendColdEmail } = require('./mailer');
 const { findHiringManager } = require('./apollo');
 const { generateTailoredResume } = require('./resume-generator');
+const { getPortfolioVisitors } = require('./analytics');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
@@ -309,6 +310,17 @@ app.post('/api/test-email', async (req, res) => {
     res.json({ ok: true });
   } catch (e) {
     log(`Test email failed: ${e.message}`);
+    res.status(500).json({ ok: false, error: e.message });
+  }
+});
+
+// Portfolio analytics
+app.get('/api/analytics', async (req, res) => {
+  try {
+    const data = await getPortfolioVisitors();
+    res.json({ ok: true, ...data });
+  } catch (e) {
+    log(`Analytics error: ${e.message}`);
     res.status(500).json({ ok: false, error: e.message });
   }
 });

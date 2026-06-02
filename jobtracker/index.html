@@ -2108,6 +2108,9 @@ footer span {
         <div class="hero-stat-chip">
           <strong id="stat-total-jobs">0</strong> Total Jobs Found
         </div>
+        <div class="hero-stat-chip" id="stat-portfolio-chip" style="display:none;">
+          <strong id="stat-portfolio-visitors">—</strong> Portfolio Visitors
+        </div>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -3742,7 +3745,24 @@ function updateServerStatusChip(connected, data) {
 function startServerSync() {
   if (serverPollInterval) clearInterval(serverPollInterval);
   syncFromServer();
+  fetchPortfolioAnalytics();
   serverPollInterval = setInterval(syncFromServer, 30000);
+  setInterval(fetchPortfolioAnalytics, 5 * 60 * 1000); // refresh every 5 min
+}
+
+async function fetchPortfolioAnalytics() {
+  if (!serverUrl) return;
+  try {
+    const res = await fetch(`${serverUrl}/api/analytics`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.ok && data.totalUsers) {
+      const el = document.getElementById('stat-portfolio-visitors');
+      const chip = document.getElementById('stat-portfolio-chip');
+      if (el) el.textContent = data.totalUsers.toLocaleString();
+      if (chip) chip.style.display = '';
+    }
+  } catch (e) { /* silently skip if GA not configured */ }
 }
 
 async function syncFromServer() {
