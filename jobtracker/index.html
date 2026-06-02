@@ -2257,6 +2257,15 @@ footer span {
             <option value="all">All keywords (AND)</option>
           </select>
         </div>
+        <div class="match-mode-row" style="margin-top:0.5rem;">
+          <span class="match-mode-label">SCAN FREQUENCY</span>
+          <select class="match-mode-select" id="platform-frequency">
+            <option value="1h">Every 1 hour</option>
+            <option value="6h" selected>Every 6 hours</option>
+            <option value="12h">Every 12 hours</option>
+            <option value="24h">Every 24 hours</option>
+          </select>
+        </div>
         <div class="keyword-input-row">
           <input type="text" class="input-field" id="platform-kw-input" placeholder="Add a custom keyword…" onkeydown="handleKwKey(event,'platform')">
           <button class="btn-add-kw" onclick="addKeyword('platform')">+ Add</button>
@@ -2289,6 +2298,15 @@ footer span {
           <select class="match-mode-select" id="url-match-mode">
             <option value="any">Any keyword (OR)</option>
             <option value="all">All keywords (AND)</option>
+          </select>
+        </div>
+        <div class="match-mode-row" style="margin-top:0.5rem;">
+          <span class="match-mode-label">SCAN FREQUENCY</span>
+          <select class="match-mode-select" id="url-frequency">
+            <option value="1h">Every 1 hour</option>
+            <option value="6h" selected>Every 6 hours</option>
+            <option value="12h">Every 12 hours</option>
+            <option value="24h">Every 24 hours</option>
           </select>
         </div>
         <div class="keyword-input-row">
@@ -2774,6 +2792,7 @@ function addConnection() {
       totalScans: 0,
       keywords,
       matchMode: document.getElementById('platform-match-mode').value,
+      frequency: document.getElementById('platform-frequency').value,
     };
   } else {
     const name = document.getElementById('url-company-name').value.trim();
@@ -2796,6 +2815,7 @@ function addConnection() {
       totalScans: 0,
       keywords: modalKeywords.url.length > 0 ? [...modalKeywords.url] : [...DEFAULT_KEYWORDS],
       matchMode: document.getElementById('url-match-mode').value,
+      frequency: document.getElementById('url-frequency').value,
     };
   }
 
