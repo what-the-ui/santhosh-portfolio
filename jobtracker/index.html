@@ -2666,7 +2666,7 @@ function saveState() {
 // ═══════════════════════════════════════════
 let selectedPlatform = null;
 let currentTab = 'platform';
-let modalKeywords = { platform: [], url: [] };
+let modalKeywords = { platform: [...DEFAULT_KEYWORDS], url: [...DEFAULT_KEYWORDS] };
 let editKwConnId = null;
 
 // ── Keyword helpers (modal) ──
@@ -2711,7 +2711,7 @@ function openModal() {
   document.getElementById('modal-overlay').classList.add('open');
   selectedPlatform = null;
   currentTab = 'platform';
-  modalKeywords = { platform: [], url: [] };
+  modalKeywords = { platform: [...DEFAULT_KEYWORDS], url: [...DEFAULT_KEYWORDS] };
   document.querySelectorAll('.platform-tile').forEach(t => t.classList.remove('selected'));
   document.getElementById('platform-config').style.display = 'none';
   document.getElementById('platform-query').value = '';
