@@ -2829,7 +2829,7 @@ function switchTab(tab, el) {
   document.getElementById(`tab-${tab}`).classList.add('active');
 }
 
-const GLOBAL_PLATFORMS = ['linkedin', 'indeed', 'wellfound'];
+const GLOBAL_PLATFORMS = ['indeed', 'wellfound'];
 
 function selectPlatform(el, name, emoji, baseUrl, type) {
   document.querySelectorAll('.platform-tile').forEach(t => t.classList.remove('selected'));
@@ -2841,6 +2841,13 @@ function selectPlatform(el, name, emoji, baseUrl, type) {
   document.getElementById('platform-global-msg').style.display = isGlobal ? 'block' : 'none';
   document.getElementById('platform-query-group').style.display = isGlobal ? 'none' : 'block';
   document.getElementById('platform-url-group').style.display = isGlobal ? 'none' : 'block';
+  if (type === 'linkedin') {
+    document.querySelector('#platform-query-group .input-label').textContent = 'Company Name';
+    document.getElementById('platform-query').placeholder = 'e.g. Stripe, Poshmark, Google';
+  } else {
+    document.querySelector('#platform-query-group .input-label').textContent = 'Company Name';
+    document.getElementById('platform-query').placeholder = 'e.g. Airbnb, Stripe, Google';
+  }
   if (!isGlobal) document.getElementById('platform-query').focus();
 }
 
@@ -2860,11 +2867,15 @@ function addConnection() {
     if (isGlobal) {
       const kw = encodeURIComponent(keywords.join(' OR '));
       const urls = {
-        linkedin: `https://www.linkedin.com/jobs/search/?keywords=${kw}`,
         indeed: `https://www.indeed.com/jobs?q=${kw}`,
         wellfound: `https://wellfound.com/jobs?role=design&keywords=${kw}`,
       };
       url = urls[selectedPlatform.type] || selectedPlatform.baseUrl + kw;
+    } else if (selectedPlatform.type === 'linkedin') {
+      if (!query) { showToast('Enter a company name for LinkedIn', 'error'); return; }
+      const slug = query.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      const kw = encodeURIComponent(keywords.join(' OR '));
+      url = urlOverride || `https://www.linkedin.com/jobs/search/?keywords=${kw}&company=${encodeURIComponent(query)}`;
     } else {
       url = urlOverride || selectedPlatform.baseUrl + encodeURIComponent(query);
     }
