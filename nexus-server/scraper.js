@@ -63,18 +63,33 @@ function parseJobs(html, url, type) {
     });
   }
 
+  // ── Framer sites (careers.puffy.com etc.) ──
+  $('p.framer-text, [class*="framer"] p').each((_, el) => {
+    const text = $(el).text().trim();
+    if (!isJobTitle(text)) return;
+    const link = $(el).closest('a').attr('href') || $(el).parents().toArray().reduce((found, p) => {
+      if (found) return found;
+      const a = $(p).find('a[href]').first();
+      return a.length ? a.attr('href') : null;
+    }, null);
+    add(text, link);
+  });
+
   // ── Generic selectors ──
   const selectors = [
     '[class*="job-title"] a', '[class*="jobtitle"] a', '[class*="position-title"] a',
     '[class*="role-title"] a', '[class*="opening-title"] a',
     'h2 a', 'h3 a', 'h4 a',
+    'a h2', 'a h3', 'a h4', 'a p',
     '[class*="job"] h2', '[class*="job"] h3', '[class*="job"] h4',
     '[class*="position"] h2', '[class*="position"] h3',
     '[class*="career"] h2', '[class*="career"] h3',
+    '[class*="role"] h2', '[class*="role"] h3', '[class*="role"] p',
     '[data-qa*="job"] a', '[data-testid*="job"] a',
     'li[class*="job"] a', 'li[class*="posting"] a', 'li[class*="opening"] a',
     '.job-card a', '.job-listing a', '.career-listing a', '.jobs-list a',
     '[class*="job-card"] a', '[class*="job-item"] a',
+    'a[href*="/role"] p', 'a[href*="/roles"] p', 'a[href*="/job"] p', 'a[href*="/careers"] p',
   ];
 
   selectors.forEach(sel => {
