@@ -3567,8 +3567,9 @@ function renderEditConnKwPreview(keywords) {
 }
 function openEditKwFromConn() {
   if (!editConnId) return;
+  const id = editConnId;
   closeEditConn();
-  openEditKw(editConnId);
+  openEditKw(id);
 }
 function closeEditConn() {
   document.getElementById('edit-conn-overlay').classList.remove('open');
