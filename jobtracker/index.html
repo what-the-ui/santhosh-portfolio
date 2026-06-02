@@ -3710,8 +3710,22 @@ async function syncFromServer() {
     ]);
     if (!connRes.ok) throw new Error('server error');
 
-    state.connections = await connRes.json();
-    state.connections.forEach(c => { if (!c.keywords || c.keywords.length === 0) c.keywords = [...DEFAULT_KEYWORDS]; });
+    const serverConns = await connRes.json();
+    // If server lost connections (restart/wipe) but we have them locally, re-upload
+    if (serverConns.length === 0 && state.connections.length > 0) {
+      for (const conn of state.connections) {
+        try {
+          await fetch(`${serverUrl}/api/connections`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(conn),
+          });
+        } catch(e) {}
+      }
+    } else {
+      state.connections = serverConns;
+      state.connections.forEach(c => { if (!c.keywords || c.keywords.length === 0) c.keywords = [...DEFAULT_KEYWORDS]; });
+    }
     state.jobs = await jobRes.json();
     const health = await healthRes.json();
 
