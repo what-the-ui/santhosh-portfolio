@@ -47,13 +47,20 @@ async function scanConnection(conn) {
     return [];
   }
 
-  // Apply keyword filter
-  const keywords = conn.keywords || [];
+  // Apply keyword filter — always merge connection keywords with global defaults
+  const DEFAULT_KEYWORDS = [
+    'ux manager','ui/ux manager','ux design manager','ui/ux design manager','design manager',
+    'ux designer manager','manager, product design','senior manager, product design',
+    'lead product designer','principle product designer','staff product designer',
+    'head of design','director of design','associate director of design',
+  ];
+  const customKeywords = (conn.keywords || []).map(k => k.toLowerCase());
+  const allKeywords = [...new Set([...DEFAULT_KEYWORDS, ...customKeywords])];
   const matchMode = conn.matchMode || 'any';
-  const filtered = keywords.length === 0 ? result.jobs : result.jobs.filter(j => {
+  const filtered = result.jobs.filter(j => {
     const title = j.title.toLowerCase();
-    if (matchMode === 'all') return keywords.every(k => title.includes(k.toLowerCase()));
-    return keywords.some(k => title.includes(k.toLowerCase()));
+    if (matchMode === 'all') return allKeywords.every(k => title.includes(k));
+    return allKeywords.some(k => title.includes(k));
   });
 
   // Find genuinely new jobs
