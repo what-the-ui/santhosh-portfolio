@@ -2233,9 +2233,12 @@ footer span {
 
       <div id="platform-config" class="platform-config" style="display:none;">
         <div class="platform-config-title">Configure <span id="platform-config-name"></span></div>
-        <div class="input-group">
-          <label class="input-label">Company / Search Term</label>
-          <input type="text" class="input-field" id="platform-query" placeholder="e.g. company name or job title">
+        <div id="platform-global-msg" style="display:none;font-size:0.72rem;color:var(--cyan);opacity:0.75;padding:0.5rem 0;font-family:monospace;">
+          ⬡ Will search the entire platform using your keywords below
+        </div>
+        <div class="input-group" id="platform-query-group">
+          <label class="input-label">Company Name</label>
+          <input type="text" class="input-field" id="platform-query" placeholder="e.g. Airbnb, Stripe, Google">
         </div>
         <div class="input-group" id="platform-url-group">
           <label class="input-label">Specific URL (optional override)</label>
@@ -2254,19 +2257,8 @@ footer span {
             <option value="all">All keywords (AND)</option>
           </select>
         </div>
-        <div class="preset-chips">
-          <span class="preset-chip" onclick="addPresetKw('platform','UX Designer Manager')">UX Designer Manager</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Manager, Product Design')">Manager, Product Design</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Senior Manager, Product Design')">Senior Manager, Product Design</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Lead Product Designer')">Lead Product Designer</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Principle Product Designer')">Principle Product Designer</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Staff Product Designer')">Staff Product Designer</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Head of Design')">Head of Design</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Director of Design')">Director of Design</span>
-          <span class="preset-chip" onclick="addPresetKw('platform','Associate Director of Design')">Associate Director of Design</span>
-        </div>
         <div class="keyword-input-row">
-          <input type="text" class="input-field" id="platform-kw-input" placeholder="Type a keyword and press Enter or +" onkeydown="handleKwKey(event,'platform')">
+          <input type="text" class="input-field" id="platform-kw-input" placeholder="Add a custom keyword…" onkeydown="handleKwKey(event,'platform')">
           <button class="btn-add-kw" onclick="addKeyword('platform')">+ Add</button>
         </div>
         <div class="keyword-tags" id="platform-kw-tags"></div>
@@ -2299,19 +2291,8 @@ footer span {
             <option value="all">All keywords (AND)</option>
           </select>
         </div>
-        <div class="preset-chips">
-          <span class="preset-chip" onclick="addPresetKw('url','UX Designer Manager')">UX Designer Manager</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Manager, Product Design')">Manager, Product Design</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Senior Manager, Product Design')">Senior Manager, Product Design</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Lead Product Designer')">Lead Product Designer</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Principle Product Designer')">Principle Product Designer</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Staff Product Designer')">Staff Product Designer</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Head of Design')">Head of Design</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Director of Design')">Director of Design</span>
-          <span class="preset-chip" onclick="addPresetKw('url','Associate Director of Design')">Associate Director of Design</span>
-        </div>
         <div class="keyword-input-row">
-          <input type="text" class="input-field" id="url-kw-input" placeholder="Type a keyword and press Enter or +" onkeydown="handleKwKey(event,'url')">
+          <input type="text" class="input-field" id="url-kw-input" placeholder="Add a custom keyword…" onkeydown="handleKwKey(event,'url')">
           <button class="btn-add-kw" onclick="addKeyword('url')">+ Add</button>
         </div>
         <div class="keyword-tags" id="url-kw-tags"></div>
@@ -2741,13 +2722,19 @@ function switchTab(tab, el) {
   document.getElementById(`tab-${tab}`).classList.add('active');
 }
 
+const GLOBAL_PLATFORMS = ['linkedin', 'indeed', 'wellfound'];
+
 function selectPlatform(el, name, emoji, baseUrl, type) {
   document.querySelectorAll('.platform-tile').forEach(t => t.classList.remove('selected'));
   el.classList.add('selected');
   selectedPlatform = { name, emoji, baseUrl, type };
   document.getElementById('platform-config').style.display = 'block';
   document.getElementById('platform-config-name').textContent = name;
-  document.getElementById('platform-query').focus();
+  const isGlobal = GLOBAL_PLATFORMS.includes(type);
+  document.getElementById('platform-global-msg').style.display = isGlobal ? 'block' : 'none';
+  document.getElementById('platform-query-group').style.display = isGlobal ? 'none' : 'block';
+  document.getElementById('platform-url-group').style.display = isGlobal ? 'none' : 'block';
+  if (!isGlobal) document.getElementById('platform-query').focus();
 }
 
 // ═══════════════════════════════════════════
@@ -2758,12 +2745,25 @@ function addConnection() {
 
   if (currentTab === 'platform') {
     if (!selectedPlatform) { showToast('Select a platform first', 'error'); return; }
+    const isGlobal = GLOBAL_PLATFORMS.includes(selectedPlatform.type);
     const query = document.getElementById('platform-query').value.trim();
     const urlOverride = document.getElementById('platform-url-override').value.trim();
-    const url = urlOverride || selectedPlatform.baseUrl + encodeURIComponent(query);
+    const keywords = modalKeywords.platform.length > 0 ? [...modalKeywords.platform] : [...DEFAULT_KEYWORDS];
+    let url;
+    if (isGlobal) {
+      const kw = encodeURIComponent(keywords.join(' OR '));
+      const urls = {
+        linkedin: `https://www.linkedin.com/jobs/search/?keywords=${kw}`,
+        indeed: `https://www.indeed.com/jobs?q=${kw}`,
+        wellfound: `https://wellfound.com/jobs?role=design&keywords=${kw}`,
+      };
+      url = urls[selectedPlatform.type] || selectedPlatform.baseUrl + kw;
+    } else {
+      url = urlOverride || selectedPlatform.baseUrl + encodeURIComponent(query);
+    }
     conn = {
       id: Date.now().toString(),
-      name: query ? `${selectedPlatform.name} · ${query}` : selectedPlatform.name,
+      name: isGlobal ? selectedPlatform.name : (query ? `${selectedPlatform.name} · ${query}` : selectedPlatform.name),
       emoji: selectedPlatform.emoji,
       url,
       type: selectedPlatform.type,
@@ -2772,7 +2772,7 @@ function addConnection() {
       lastScan: null,
       jobsFound: 0,
       totalScans: 0,
-      keywords: modalKeywords.platform.length > 0 ? [...modalKeywords.platform] : [...DEFAULT_KEYWORDS],
+      keywords,
       matchMode: document.getElementById('platform-match-mode').value,
     };
   } else {
