@@ -3668,9 +3668,10 @@ async function sendTestEmail() {
   if (!cfg.smtpUser || !cfg.smtpPass || !cfg.address) {
     showToast('Fill in and save your email config first', 'error'); return;
   }
-  if (!serverConnected) { showToast('Server not connected', 'error'); return; }
+  const url = serverUrl || localStorage.getItem('nexus_server_url') || 'https://santhosh-job-tracker.onrender.com';
   try {
-    const r = await fetch(`${serverUrl}/api/test-email`, {
+    showToast('Sending test email...', 'info');
+    const r = await fetch(`${url}/api/test-email`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ emailCfg: cfg }),
