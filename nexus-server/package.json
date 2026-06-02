@@ -13,7 +13,8 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.9.14"
+    "resend": "^4.0.0",
+    "@anthropic-ai/sdk": "^0.39.0"
   },
   "engines": {
     "node": ">=18.0.0"

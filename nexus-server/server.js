@@ -5,6 +5,7 @@ const { load, save } = require('./store');
 const { scrape } = require('./scraper');
 const { sendJobAlert, sendColdEmail } = require('./mailer');
 const { findHiringManager } = require('./apollo');
+const { generateTailoredResume } = require('./resume-generator');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
@@ -59,14 +60,26 @@ async function scanConnection(conn) {
 
   if (newJobs.length > 0) {
     log(`  ✓ ${newJobs.length} new job(s) found`);
-    const entries = newJobs.map(j => ({
-      id: Date.now().toString() + Math.random().toString(36).slice(2),
-      connectionId: conn.id,
-      connectionName: conn.name,
-      connectionEmoji: conn.emoji,
-      title: j.title,
-      link: j.link,
-      foundAt: new Date().toISOString(),
+    const entries = await Promise.all(newJobs.map(async j => {
+      let resume = null;
+      if (process.env.ANTHROPIC_API_KEY) {
+        try {
+          resume = await generateTailoredResume(j.title, conn.name);
+          log(`  ✓ Resume generated for: ${j.title}`);
+        } catch (e) {
+          log(`  ✗ Resume generation failed: ${e.message}`);
+        }
+      }
+      return {
+        id: Date.now().toString() + Math.random().toString(36).slice(2),
+        connectionId: conn.id,
+        connectionName: conn.name,
+        connectionEmoji: conn.emoji,
+        title: j.title,
+        link: j.link,
+        foundAt: new Date().toISOString(),
+        resume,
+      };
     }));
 
     db.jobs = [...entries, ...db.jobs].slice(0, 1000);
