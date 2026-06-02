@@ -836,6 +836,10 @@ nav::after {
   color: var(--text-dim);
   letter-spacing: 0.05em;
 }
+.scan-next {
+  color: var(--cyan);
+  opacity: 0.75;
+}
 
 .scan-indicator {
   display: flex;
@@ -3012,7 +3016,10 @@ function renderConnections() {
       <div class="scan-status">
         <div class="scan-indicator">
           <div class="scan-dot"></div>
-          <span>${conn.active ? `Active · ${nextScanIn(conn)}` : 'Paused'}</span>
+          ${conn.active
+            ? `<span>Active · </span><span class="scan-next">${nextScanIn(conn)}</span>`
+            : `<span>Paused</span>`
+          }
         </div>
         <button class="scan-btn" onclick="scanConnection('${conn.id}')" id="scanbtn-${conn.id}">
           ⟳ Scan Now
