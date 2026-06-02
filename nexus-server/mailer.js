@@ -82,7 +82,6 @@ async function sendColdEmail({ hiringManager, jobTitle, companyName, resume }) {
     <p>Thanks,<br>Santhosh</p>
     ${resume ? `
     <hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0;">
-    <div style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Tailored Resume — ${escHtml(jobTitle)} at ${escHtml(companyName)}</div>
     <pre style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:1.6;color:#1a1a1a;white-space:pre-wrap;word-break:break-word;">${escHtml(resume)}</pre>` : ''}
   </div>
 </body>
