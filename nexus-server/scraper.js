@@ -1,4 +1,4 @@
-// v2.2 — JSON APIs + hardened generic scraper
+// v2.3 — JSON APIs + hardened generic scraper
 const axios = require('axios');
 const cheerio = require('cheerio');
 
