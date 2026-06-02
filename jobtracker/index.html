@@ -1833,6 +1833,131 @@ footer span {
   font-weight: 600;
 }
 
+/* ═══════════════════════════════════
+   JARVIS VISUAL ENHANCEMENTS
+═══════════════════════════════════ */
+
+/* Arc reactor pulse on nav logo */
+.nav-logo-ring {
+  animation: arcReactor 2s ease-in-out infinite;
+}
+@keyframes arcReactor {
+  0%, 100% { filter: drop-shadow(0 0 4px #00cfff) drop-shadow(0 0 8px #00aaff); }
+  50% { filter: drop-shadow(0 0 10px #00cfff) drop-shadow(0 0 20px #00aaff) drop-shadow(0 0 35px rgba(0,207,255,0.4)); }
+}
+
+/* Holographic corner brackets on cards */
+.connection-card::before { pointer-events: none; }
+.connection-card {
+  --corner: rgba(0,207,255,0.6);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(0,170,255,0.06),
+              0 0 0 1px rgba(0,170,255,0.08);
+}
+.connection-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, var(--corner) 12px, transparent 12px) top left / 12px 2px no-repeat,
+    linear-gradient(to bottom, var(--corner) 12px, transparent 12px) top left / 2px 12px no-repeat,
+    linear-gradient(to left, var(--corner) 12px, transparent 12px) top right / 12px 2px no-repeat,
+    linear-gradient(to bottom, var(--corner) 12px, transparent 12px) top right / 2px 12px no-repeat,
+    linear-gradient(to right, var(--corner) 12px, transparent 12px) bottom left / 12px 2px no-repeat,
+    linear-gradient(to top, var(--corner) 12px, transparent 12px) bottom left / 2px 12px no-repeat,
+    linear-gradient(to left, var(--corner) 12px, transparent 12px) bottom right / 12px 2px no-repeat,
+    linear-gradient(to top, var(--corner) 12px, transparent 12px) bottom right / 2px 12px no-repeat;
+  opacity: 0.5;
+  z-index: 1;
+}
+.connection-card.active::after {
+  opacity: 0.9;
+  animation: cornerPulse 3s ease-in-out infinite;
+}
+@keyframes cornerPulse {
+  0%, 100% { --corner: rgba(0,207,255,0.6); opacity: 0.9; }
+  50% { opacity: 1; filter: drop-shadow(0 0 4px rgba(0,207,255,0.8)); }
+}
+
+/* HUD-style stat values */
+.card-stat-value {
+  text-shadow: 0 0 12px currentColor, 0 0 25px currentColor !important;
+  letter-spacing: 0.05em;
+}
+
+/* Section title with side lines */
+.section-title::before,
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+.section-title { position: relative; display: inline-block; }
+.section-title::before { left: 0; width: 40%; }
+.section-title::after { right: 0; width: 20%; background: linear-gradient(270deg, var(--purple), transparent); }
+
+/* Blueprint grid on hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,207,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,207,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Glowing scan button */
+.scan-btn {
+  text-shadow: 0 0 8px var(--cyan-glow);
+  letter-spacing: 0.08em;
+}
+.scan-btn:hover {
+  box-shadow: 0 0 16px var(--cyan-glow), 0 0 32px rgba(0,207,255,0.2) !important;
+}
+
+/* Jarvis-style data readout for all-jobs table */
+#all-jobs-table thead th {
+  letter-spacing: 0.18em !important;
+  text-shadow: 0 0 8px var(--cyan-glow);
+}
+#all-jobs-table tr:hover td {
+  text-shadow: 0 0 6px rgba(0,207,255,0.3);
+}
+
+/* Hero stat chips: sharper HUD look */
+.hero-stat-chip {
+  border: 1px solid rgba(0,207,255,0.2) !important;
+  box-shadow: 0 0 12px rgba(0,207,255,0.06), inset 0 0 12px rgba(0,207,255,0.03) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 0.05em;
+}
+.hero-stat-chip strong {
+  text-shadow: 0 0 10px var(--cyan-glow), 0 0 20px rgba(0,207,255,0.4) !important;
+}
+
+/* Animated HUD border on all-jobs section */
+#all-jobs {
+  position: relative;
+}
+#all-jobs::before {
+  content: 'INTEL ARCHIVE';
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: var(--cyan);
+  opacity: 0.3;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   nav { padding: 0 1.25rem; }
@@ -1926,7 +2051,7 @@ footer span {
         </div>
       </div>
       <h1 class="hero-title">Santhosh's<br>Job Tracker</h1>
-      <p class="hero-subtitle">Automated career surveillance · Every 6 hours · Zero misses</p>
+      <p class="hero-subtitle">Autonomous career surveillance · Continuous threat detection · Zero misses</p>
       <div class="hero-stats">
         <div class="hero-stat-chip">
           <strong id="stat-connections">0</strong> Intelligence Sources
@@ -3203,34 +3328,7 @@ function renderAllJobs() {
 }
 
 function renderFeed() {
-  const list = document.getElementById('feed-list');
-  const count = document.getElementById('feed-count');
-  count.textContent = state.jobs.length;
   renderAllJobs();
-
-  if (state.jobs.length === 0) {
-    list.innerHTML = '<div class="feed-empty">No signals received yet. Connect sources and initiate scan.</div>';
-    return;
-  }
-
-  list.innerHTML = state.jobs.slice(0, 100).map(job => `
-    <div class="feed-item ${job.isNew ? 'new-highlight' : ''}">
-      <div class="feed-item-badge">${job.connectionEmoji || '🔍'}</div>
-      <div class="feed-item-content">
-        <div class="feed-item-title">${escHtml(job.title)}</div>
-        <div class="feed-item-meta">
-          <span class="feed-item-company">${escHtml(job.connectionName || '')}</span>
-          <span class="feed-item-time">${formatTime(job.foundAt)}</span>
-        </div>
-      </div>
-      <div class="feed-item-actions">
-        ${job.isNew ? '<span class="feed-new-tag">NEW</span>' : ''}
-        <a href="${escHtml(job.link)}" target="_blank" rel="noopener" class="feed-view-link">VIEW →</a>
-      </div>
-    </div>
-  `).join('');
-
-  // Clear "new" flag after render
   setTimeout(() => {
     state.jobs.forEach(j => j.isNew = false);
     saveState();
@@ -3273,7 +3371,7 @@ function updateStats() {
   document.getElementById('stat-jobs-today').textContent = todayJobs;
   document.getElementById('nav-sources').textContent = total;
   document.getElementById('nav-signals').textContent = todayJobs;
-  document.getElementById('total-scans').textContent = state.settings.totalScans;
+  const totalScansEl = document.getElementById('total-scans'); if (totalScansEl) totalScansEl.textContent = state.settings.totalScans;
   document.getElementById('stat-total-scans').textContent = state.settings.totalScans || 0;
   document.getElementById('stat-total-jobs').textContent = state.jobs.length;
 }
