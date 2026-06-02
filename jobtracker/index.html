@@ -2016,10 +2016,6 @@ footer span {
 
     <div class="nav-center">
       <div class="nav-stat">
-        <span>NEXT SCAN</span>
-        <span class="nav-stat-value" id="nav-countdown">–:––:––</span>
-      </div>
-      <div class="nav-stat">
         <span>SOURCES</span>
         <span class="nav-stat-value" id="nav-sources">0</span>
       </div>
@@ -3485,24 +3481,7 @@ function updateStats() {
   document.getElementById('stat-total-jobs').textContent = state.jobs.length;
 }
 
-function updateCountdown() {
-  if (!state.nextScan) {
-    document.getElementById('nav-countdown').textContent = '–';
-    document.getElementById('stat-countdown').textContent = '–';
-    return;
-  }
-
-  const remaining = Math.max(0, new Date(state.nextScan).getTime() - Date.now());
-  const h = Math.floor(remaining / 3600000);
-  const m = Math.floor((remaining % 3600000) / 60000);
-  const s = Math.floor((remaining % 60000) / 1000);
-  const str = `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-
-  document.getElementById('nav-countdown').textContent = str;
-  document.getElementById('stat-countdown').textContent = str;
-}
-
-setInterval(updateCountdown, 1000);
+setInterval(() => renderConnections(), 60000); // refresh per-card countdowns every minute
 
 // ═══════════════════════════════════════════
 // SETTINGS
