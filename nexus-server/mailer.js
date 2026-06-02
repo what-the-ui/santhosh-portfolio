@@ -76,7 +76,7 @@ async function sendColdEmail({ hiringManager, jobTitle, companyName, resume }) {
 <body style="margin:0;padding:0;background:#ffffff;font-family:'Segoe UI',Arial,sans-serif;">
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;color:#1a1a1a;font-size:15px;line-height:1.7;">
     <p>Hi ${escHtml(firstName)},</p>
-    <p>I've been following ${escHtml(companyName)}'s work and genuinely admire the product direction you're taking. I'm a Product Design Manager currently exploring new opportunities, and I'd love to get your perspective on my portfolio if you have a few minutes. Attached my resume for reference as well.</p>
+    <p>I've been following ${escHtml(companyName)}'s work and genuinely admire the product direction you're taking. I'm a Product Design Manager currently exploring new opportunities, and I'd love to get your perspective on my portfolio if you have a few minutes.${resume ? ' Attached my resume for reference as well.' : ''}</p>
     <p><a href="https://www.santhoshr.com" style="color:#003a6b;">www.santhoshr.com</a> (Password for case study: w3lcome!)</p>
     <p>No pressure at all, even a quick gut reaction would be valuable. Thanks for considering it!</p>
     <p>Thanks,<br>Santhosh</p>
