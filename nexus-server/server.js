@@ -109,6 +109,7 @@ async function scanConnection(conn) {
             hiringManager: manager,
             jobTitle: newJobs[0].title,
             companyName: conn.name,
+            resume: entries[0]?.resume || null,
           });
           log(`  ✓ Cold email sent to ${manager.email}`);
         } else {

@@ -60,7 +60,7 @@ function escHtml(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-async function sendColdEmail({ hiringManager, jobTitle, companyName }) {
+async function sendColdEmail({ hiringManager, jobTitle, companyName, resume }) {
   const apiKey = process.env.RESEND_API_KEY;
   const fromAddress = process.env.COLD_EMAIL_FROM || 'Santhosh Rajendran <santhosh@santhoshr.com>';
 
@@ -80,6 +80,10 @@ async function sendColdEmail({ hiringManager, jobTitle, companyName }) {
     <p><a href="https://www.santhoshr.com" style="color:#003a6b;">www.santhoshr.com</a> (Password for case study: w3lcome!)</p>
     <p>No pressure at all, even a quick gut reaction would be valuable. Thanks for considering it!</p>
     <p>Thanks,<br>Santhosh</p>
+    ${resume ? `
+    <hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0;">
+    <div style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Tailored Resume — ${escHtml(jobTitle)} at ${escHtml(companyName)}</div>
+    <pre style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:1.6;color:#1a1a1a;white-space:pre-wrap;word-break:break-word;">${escHtml(resume)}</pre>` : ''}
   </div>
 </body>
 </html>`;
