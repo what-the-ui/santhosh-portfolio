@@ -237,9 +237,36 @@ function resolveLink(link, base) {
   try { return new URL(link, base).href; } catch { return base; }
 }
 
+// ── Cutshort API ──
+async function scrapeCutshort(url) {
+  try {
+    // Extract keyword from URL if present, otherwise use design-related search
+    const u = new URL(url);
+    const keyword = u.searchParams.get('keyword') || 'design manager';
+    const resp = await axios.post('https://cutshort.io/api/web/jobs/search', {
+      keyword,
+      limit: 50,
+      offset: 0,
+    }, {
+      headers: { ...HEADERS, 'Content-Type': 'application/json', 'Referer': 'https://cutshort.io/jobs' },
+      timeout: 15000,
+    });
+    const jobs = (resp.data?.data || resp.data?.jobs || []).map(j => ({
+      title: j.title || j.role,
+      link: j.shortUrl || `https://cutshort.io/job/${j.id}`,
+    })).filter(j => j.title);
+    if (jobs.length) return { ok: true, jobs };
+  } catch {}
+  return null;
+}
+
 async function scrape(url, type) {
   try {
     // Try JSON APIs first for known platforms
+    if (type === 'cutshort' || url.includes('cutshort.io')) {
+      const result = await scrapeCutshort(url);
+      if (result) return result;
+    }
     if (type === 'greenhouse' || url.includes('greenhouse.io')) {
       const result = await scrapeGreenhouse(url);
       if (result) return result;

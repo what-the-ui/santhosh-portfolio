@@ -2220,6 +2220,10 @@ footer span {
           <span class="platform-emoji">🔴</span>
           <div class="platform-name">Indeed</div>
         </div>
+        <div class="platform-tile" onclick="selectPlatform(this, 'Cutshort', '✂️', 'https://cutshort.io/jobs', 'cutshort')">
+          <span class="platform-emoji">✂️</span>
+          <div class="platform-name">Cutshort</div>
+        </div>
       </div>
 
       <div id="platform-config" class="platform-config" style="display:none;">
@@ -2849,7 +2853,7 @@ function switchTab(tab, el) {
   document.getElementById(`tab-${tab}`).classList.add('active');
 }
 
-const GLOBAL_PLATFORMS = ['indeed', 'wellfound'];
+const GLOBAL_PLATFORMS = ['indeed', 'wellfound', 'cutshort'];
 
 function selectPlatform(el, name, emoji, baseUrl, type) {
   document.querySelectorAll('.platform-tile').forEach(t => t.classList.remove('selected'));
