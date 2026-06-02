@@ -3,7 +3,8 @@ const cors = require('cors');
 const cron = require('node-cron');
 const { load, save } = require('./store');
 const { scrape } = require('./scraper');
-const { sendJobAlert } = require('./mailer');
+const { sendJobAlert, sendColdEmail } = require('./mailer');
+const { findHiringManager } = require('./apollo');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
@@ -72,7 +73,7 @@ async function scanConnection(conn) {
     conn.jobsFound = (conn.jobsFound || 0) + newJobs.length;
     conn.lastError = null;
 
-    // Send email
+    // Send job alert email
     try {
       await sendJobAlert({
         emailCfg: db.settings.email,
@@ -80,7 +81,27 @@ async function scanConnection(conn) {
         connectionName: conn.name,
       });
     } catch (e) {
-      log(`  ✗ Email error: ${e.message}`);
+      log(`  ✗ Job alert email error: ${e.message}`);
+    }
+
+    // Apollo: find hiring manager and send cold email (once per connection, not per job)
+    if (process.env.APOLLO_API_KEY) {
+      try {
+        const manager = await findHiringManager(conn.name);
+        if (manager?.email) {
+          log(`  → Hiring manager found: ${manager.fullName} <${manager.email}>`);
+          await sendColdEmail({
+            hiringManager: manager,
+            jobTitle: newJobs[0].title,
+            companyName: conn.name,
+          });
+          log(`  ✓ Cold email sent to ${manager.email}`);
+        } else {
+          log(`  · No hiring manager found on Apollo for ${conn.name}`);
+        }
+      } catch (e) {
+        log(`  ✗ Apollo/cold email error: ${e.message}`);
+      }
     }
   } else {
     log(`  · No new matches`);
@@ -91,9 +112,16 @@ async function scanConnection(conn) {
   return newJobs;
 }
 
+function isDue(conn) {
+  if (!conn.lastScan) return true;
+  const intervals = { '1h': 3600000, '6h': 21600000, '12h': 43200000, '24h': 86400000 };
+  const ms = intervals[conn.frequency || '6h'] || 21600000;
+  return Date.now() - new Date(conn.lastScan).getTime() >= ms;
+}
+
 async function scanAll() {
-  const active = db.connections.filter(c => c.active);
-  if (active.length === 0) { log('No active connections to scan'); return; }
+  const active = db.connections.filter(c => c.active && isDue(c));
+  if (active.length === 0) { log('No connections due for scan'); return; }
 
   log(`=== Auto-scan starting: ${active.length} connection(s) ===`);
   db.lastScanAt = new Date().toISOString();
@@ -115,7 +143,7 @@ let cronJob = null;
 
 function startCron() {
   if (cronJob) cronJob.stop();
-  const expr = db.settings.frequency || '0 */6 * * *';
+  const expr = '0 * * * *'; // run hourly; per-connection frequency checked in isDue()
   cronJob = cron.schedule(expr, () => { scanAll(); }, { timezone: 'UTC' });
   log(`Cron scheduled: "${expr}"`);
 }
@@ -181,7 +209,7 @@ app.post('/api/connections', (req, res) => {
 app.patch('/api/connections/:id', (req, res) => {
   const conn = db.connections.find(c => c.id === req.params.id);
   if (!conn) return res.status(404).json({ error: 'not found' });
-  const allowed = ['active', 'keywords', 'matchMode', 'name', 'emoji', 'url'];
+  const allowed = ['active', 'keywords', 'matchMode', 'name', 'emoji', 'url', 'frequency'];
   allowed.forEach(k => { if (req.body[k] !== undefined) conn[k] = req.body[k]; });
   save(db);
   res.json(conn);
@@ -198,6 +226,8 @@ app.delete('/api/connections/:id', (req, res) => {
 
 // Scan triggers
 app.post('/api/scan', async (req, res) => {
+  // Accept emailCfg from browser so email works even before env vars are set
+  if (req.body?.emailCfg) db.settings.email = { ...db.settings.email, ...req.body.emailCfg };
   res.json({ ok: true, message: 'Scan started' });
   await scanAll();
 });
@@ -205,6 +235,7 @@ app.post('/api/scan', async (req, res) => {
 app.post('/api/scan/:id', async (req, res) => {
   const conn = db.connections.find(c => c.id === req.params.id);
   if (!conn) return res.status(404).json({ error: 'not found' });
+  if (req.body?.emailCfg) db.settings.email = { ...db.settings.email, ...req.body.emailCfg };
   res.json({ ok: true, message: `Scanning ${conn.name}` });
   await scanConnection(conn);
 });
@@ -251,16 +282,20 @@ app.post('/api/settings', (req, res) => {
   res.json(safe);
 });
 
-// Test email
+// Test email — accepts emailCfg from request body (browser localStorage)
+// or falls back to server-stored config or env vars
 app.post('/api/test-email', async (req, res) => {
   try {
+    const emailCfg = req.body?.emailCfg || db.settings.email;
     await sendJobAlert({
-      emailCfg: db.settings.email,
+      emailCfg,
       jobs: [{ title: 'Senior Product Designer (Test)', link: 'https://example.com/careers' }],
-      connectionName: 'NEXUS Test Connection',
+      connectionName: "Santhosh's Job Tracker — Test",
     });
+    log('Test email sent successfully');
     res.json({ ok: true });
   } catch (e) {
+    log(`Test email failed: ${e.message}`);
     res.status(500).json({ ok: false, error: e.message });
   }
 });
@@ -269,4 +304,14 @@ app.post('/api/test-email', async (req, res) => {
 app.listen(PORT, () => {
   log(`NEXUS server running on port ${PORT}`);
   log(`Connections: ${db.connections.length}, Jobs stored: ${db.jobs.length}`);
+
+  // Keep-alive self-ping (prevents Render free tier from sleeping)
+  const selfUrl = process.env.RENDER_EXTERNAL_URL || process.env.SELF_URL;
+  if (selfUrl) {
+    const http = require('https');
+    setInterval(() => {
+      http.get(`${selfUrl}/api/health`, () => {}).on('error', () => {});
+      log('Keep-alive ping sent');
+    }, 10 * 60 * 1000); // every 10 minutes
+  }
 });
