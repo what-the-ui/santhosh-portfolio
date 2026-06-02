@@ -2576,6 +2576,87 @@ footer span {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
+  // ── STAR FIELD ──
+  const starCount = 400;
+  const starPos = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount; i++) {
+    starPos[i*3]   = (Math.random() - 0.5) * 400;
+    starPos[i*3+1] = 20 + Math.random() * 150;
+    starPos[i*3+2] = (Math.random() - 0.5) * 300 - 30;
+  }
+  const starGeo = new THREE.BufferGeometry();
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  const starMat = new THREE.PointsMaterial({ size: 0.5, color: '#aaddff', transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false });
+  scene.add(new THREE.Points(starGeo, starMat));
+
+  // ── RADAR SWEEP RING ──
+  const radarR = 50;
+  const radarSegments = 120;
+  const radarPos = [];
+  for (let i = 0; i <= radarSegments; i++) {
+    const a = (i / radarSegments) * Math.PI * 2;
+    radarPos.push(Math.cos(a) * radarR, 0, Math.sin(a) * radarR);
+  }
+  const radarGeo = new THREE.BufferGeometry();
+  radarGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(radarPos), 3));
+  const radarMat = new THREE.LineBasicMaterial({ color: '#00ffaa', transparent: true, opacity: 0.12, blending: THREE.AdditiveBlending, depthWrite: false });
+  scene.add(new THREE.LineLoop(radarGeo, radarMat));
+
+  // Radar sweep arm
+  const sweepGeo = new THREE.BufferGeometry();
+  sweepGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0, 0, 0, radarR, 0, 0]), 3));
+  const sweepMat = new THREE.LineBasicMaterial({ color: '#00ffaa', transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false });
+  const sweepArm = new THREE.LineSegments(sweepGeo, sweepMat);
+  sweepArm.position.y = -5;
+  scene.add(sweepArm);
+
+  // ── ORBITING SATELLITES ──
+  const satellites = [];
+  const satSpecs = [
+    { r: 42, y: 5,  speed: 0.007, col: '#00cfff', size: 1.8 },
+    { r: 55, y: -3, speed: -0.005, col: '#7b2fff', size: 1.4 },
+    { r: 35, y: 10, speed: 0.012, col: '#00ff88', size: 1.2 },
+  ];
+  satSpecs.forEach(s => {
+    const geo = new THREE.SphereGeometry(s.size, 6, 6);
+    const mat = new THREE.MeshBasicMaterial({ color: s.col, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
+    const mesh = new THREE.Mesh(geo, mat);
+    // orbit trail
+    const trailPos = [];
+    for (let i = 0; i <= 40; i++) {
+      const a = (i / 40) * Math.PI * 2;
+      trailPos.push(Math.cos(a) * s.r, s.y, Math.sin(a) * s.r);
+    }
+    const trailGeo = new THREE.BufferGeometry();
+    trailGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(trailPos), 3));
+    const trailMat = new THREE.LineBasicMaterial({ color: s.col, transparent: true, opacity: 0.08, blending: THREE.AdditiveBlending, depthWrite: false });
+    scene.add(new THREE.LineLoop(trailGeo, trailMat));
+    scene.add(mesh);
+    satellites.push({ mesh, r: s.r, y: s.y, speed: s.speed, angle: Math.random() * Math.PI * 2 });
+  });
+
+  // ── FLOATING HEXAGONS ──
+  const hexagons = [];
+  for (let h = 0; h < 8; h++) {
+    const size = 1.5 + Math.random() * 3;
+    const hexPts = [];
+    for (let i = 0; i <= 6; i++) {
+      const a = (i / 6) * Math.PI * 2;
+      hexPts.push(new THREE.Vector3(Math.cos(a) * size, Math.sin(a) * size, 0));
+    }
+    const hexGeo = new THREE.BufferGeometry().setFromPoints(hexPts);
+    const hexMat = new THREE.LineBasicMaterial({
+      color: Math.random() < 0.5 ? '#00cfff' : '#7b2fff',
+      transparent: true, opacity: 0.1 + Math.random() * 0.15,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    const hex = new THREE.LineLoop(hexGeo, hexMat);
+    hex.position.set((Math.random()-0.5)*120, 5 + Math.random()*40, (Math.random()-0.5)*60 - 20);
+    hex.rotation.z = Math.random() * Math.PI;
+    scene.add(hex);
+    hexagons.push({ mesh: hex, rotSpeed: (Math.random()-0.5)*0.008, floatSpeed: 0.003 + Math.random()*0.004, phase: Math.random()*Math.PI*2, baseY: hex.position.y });
+  }
+
   // ── ANIMATE ──
   let t = 0;
   function animate() {
@@ -2606,6 +2687,22 @@ footer span {
     });
 
     // Camera parallax
+    // Radar sweep
+    sweepArm.rotation.y = t * 1.2;
+
+    // Satellites orbit
+    satellites.forEach(s => {
+      s.angle += s.speed;
+      s.mesh.position.set(Math.cos(s.angle) * s.r, s.y, Math.sin(s.angle) * s.r);
+    });
+
+    // Floating hexagons
+    hexagons.forEach(h => {
+      h.mesh.rotation.z += h.rotSpeed;
+      h.mesh.position.y = h.baseY + Math.sin(t * h.floatSpeed * 10 + h.phase) * 3;
+      h.mesh.material.opacity = 0.08 + Math.sin(t * 2 + h.phase) * 0.06;
+    });
+
     camera.position.x += (mouseX * 5 - camera.position.x) * 0.03;
     camera.position.y += (-mouseY * 3 + 18 - camera.position.y) * 0.03;
     camera.lookAt(0, 0, 0);
