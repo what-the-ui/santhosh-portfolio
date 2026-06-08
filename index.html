@@ -16,7 +16,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
@@ -46,6 +45,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
     }
     .nav-logo {
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -63,6 +63,9 @@
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 100px;
       padding: 5px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .nav-pills-wrap a {
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -114,106 +117,109 @@
       justify-content: space-between;
       padding: 130px 48px 52px;
     }
-    /* Solid purple hero — no photo bg */
+    /* Solid purple hero */
     .hero { background: #7342E2; }
     .hero-bg { display: none; }
 
-    /* ── Liquid Glass Background ── */
-    .glass-bg {
+    /* ── Keyword marquee ── */
+    .hero-marquee {
       position: absolute;
-      inset: 0;
-      z-index: 0;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      transform: translateY(-50%);
       overflow: hidden;
       pointer-events: none;
-    }
-    .g-slab {
-      position: absolute;
-      left: 50%;
-      top: -60%;
-      height: 220%;
-      border-radius: 60px;
-      will-change: transform;
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(255,255,255,0.03) 20%,
-        rgba(255,255,255,0.1) 50%,
-        rgba(255,255,255,0.03) 80%,
-        transparent 100%
-      );
-      border-left: 1px solid rgba(255,255,255,0.22);
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
-    @keyframes slab-drift {
-      from { transform: rotate(-35deg) translateX(-130vw); }
-      to   { transform: rotate(-35deg) translateX(130vw);  }
-    }
-    .g-s1 { width: 80px;  animation: slab-drift 22s linear  -2s infinite; }
-    .g-s2 { width: 155px; animation: slab-drift 28s linear -10s infinite; }
-    .g-s3 { width: 52px;  animation: slab-drift 17s linear  -5s infinite; }
-    .g-s4 { width: 190px; animation: slab-drift 34s linear -18s infinite; }
-    .g-s5 { width: 95px;  animation: slab-drift 24s linear  -3s infinite; }
-    .g-s6 { width: 65px;  animation: slab-drift 19s linear -14s infinite; }
-    .g-s7 { width: 130px; animation: slab-drift 26s linear  -8s infinite; }
-    .g-s8 { width: 44px;  animation: slab-drift 15s linear -21s infinite; }
-
-    /* Purple liquid blob — follows cursor on hero */
-    .g-blob {
-      position: absolute;
-      width: 360px;
-      height: 360px;
-      pointer-events: none;
-      opacity: 0;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.5s ease;
-      will-change: left, top;
       z-index: 1;
+      opacity: 0.07;
     }
-    .g-blob::before {
-      content: '';
+    .hero-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 40s linear infinite;
+    }
+    .hero-marquee-track span {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(40px, 6vw, 96px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      white-space: nowrap;
+      color: #f0ede8;
+      filter: blur(4px);
+      padding-right: clamp(24px, 3vw, 48px);
+    }
+    .hero-marquee-track .marquee-diamond {
+      font-size: clamp(22px, 2.5vw, 44px);
+      font-weight: 400;
+      letter-spacing: 0;
+      filter: blur(2px);
+      align-self: center;
+      padding-right: clamp(24px, 3vw, 48px);
+      opacity: 0.6;
+      line-height: 1;
+    }
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Cone gradient overlay ── */
+    .hero-cone {
       position: absolute;
       inset: 0;
-      border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%;
-      background: radial-gradient(circle at 38% 38%,
-        rgba(225, 190, 255, 0.75),
-        rgba(160, 100, 255, 0.5) 35%,
-        rgba(115, 66, 226, 0.22) 62%,
-        transparent 78%
-      );
-      filter: blur(32px);
-      animation: blob-morph 9s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
-    .g-blob::after {
-      content: '';
+    .cone-navy {
       position: absolute;
-      inset: 28px;
-      border-radius: 40% 60% 30% 70% / 65% 35% 70% 30%;
-      background: radial-gradient(circle,
-        rgba(255, 245, 255, 0.45),
-        rgba(185, 130, 255, 0.22) 48%,
-        transparent 70%
-      );
+      width: 150%; height: 150%;
+      top: -25%; left: -25%;
+      background: radial-gradient(ellipse 58% 68% at 50% 5%,
+        rgba(18, 8, 70, 0.88) 0%,
+        rgba(28, 10, 88, 0.52) 44%,
+        transparent 70%);
+      animation: liquid-navy 10.8s linear infinite;
+    }
+    .cone-warm {
+      position: absolute;
+      width: 150%; height: 150%;
+      bottom: -25%; left: -25%;
+      background: radial-gradient(ellipse 52% 60% at 50% 95%,
+        rgba(255, 145, 80, 0.28) 0%,
+        rgba(230, 85, 145, 0.14) 40%,
+        transparent 66%);
       filter: blur(18px);
-      animation: blob-morph 6s ease-in-out infinite reverse;
+      animation: liquid-warm 13.5s linear infinite;
     }
-    @keyframes blob-morph {
-      0%,100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%; transform: scale(1);    }
-      25%     { border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; transform: scale(1.08);  }
-      50%     { border-radius: 70% 30% 50% 50% / 30% 70% 60% 40%; transform: scale(0.94);  }
-      75%     { border-radius: 30% 70% 40% 60% / 70% 30% 50% 50%; transform: scale(1.05);  }
-    }
-    .g-blob.active { opacity: 1; }
 
-    /* ── Cursor trail canvas ── */
-    #trail-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      mix-blend-mode: screen;
+    /* Orbital circuits — linear timing makes end→start seamless */
+    @keyframes liquid-navy {
+      0%   { transform: translate(  0%,  0%) scale(1.00); }
+      11%  { transform: translate(  4%,  5%) scale(1.04); }
+      22%  { transform: translate(  7%,  1%) scale(1.07); }
+      33%  { transform: translate(  4%, -5%) scale(1.04); }
+      44%  { transform: translate( -1%, -7%) scale(0.97); }
+      55%  { transform: translate( -6%, -3%) scale(0.94); }
+      66%  { transform: translate( -6%,  3%) scale(0.96); }
+      77%  { transform: translate( -2%,  6%) scale(1.00); }
+      88%  { transform: translate(  3%,  5%) scale(1.03); }
+      100% { transform: translate(  0%,  0%) scale(1.00); }
     }
+    @keyframes liquid-warm {
+      0%   { transform: translate(  0%,  0%) scale(1.00); }
+      11%  { transform: translate( -4%, -4%) scale(1.05); }
+      22%  { transform: translate( -7%,  1%) scale(1.08); }
+      33%  { transform: translate( -3%,  6%) scale(1.04); }
+      44%  { transform: translate(  2%,  7%) scale(0.98); }
+      55%  { transform: translate(  6%,  3%) scale(0.94); }
+      66%  { transform: translate(  6%, -3%) scale(0.96); }
+      77%  { transform: translate(  2%, -6%) scale(1.00); }
+      88%  { transform: translate( -2%, -4%) scale(1.03); }
+      100% { transform: translate(  0%,  0%) scale(1.00); }
+    }
+
+
 
     .hero-top {
       position: relative;
@@ -234,11 +240,80 @@
     }
     .hero-label-sub {
       font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #f0ede8;
+      max-width: 520px;
+    }
+    .hero-location {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .hero-location-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c8b0ff;
+      box-shadow: 0 0 8px 2px rgba(200, 176, 255, 0.6);
+      animation: pulse-dot 2s ease-in-out infinite;
+      align-self: flex-end;
+      margin-bottom: 2px;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px 2px rgba(168, 245, 160, 0.6); }
+      50%       { opacity: 0.6; box-shadow: 0 0 14px 4px rgba(200, 176, 255, 0.3); }
+    }
+    .hero-inline-link {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(240, 237, 232, 0.3);
+      text-underline-offset: 3px;
+      transition: opacity 0.2s ease;
+    }
+    .hero-inline-link:hover { opacity: 0.7; }
+    .hero-location-city {
+      font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 20px;
       font-weight: 500;
+      color: #f0ede8;
+      letter-spacing: -0.5px;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(240, 237, 232, 0.3);
+      text-underline-offset: 4px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .hero-location-city:hover { opacity: 0.7; }
+    .hero-location-time {
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(240, 237, 232, 0.50);
+      letter-spacing: 0.5px;
+    }
+    .hero-label-sub--tagline {
+      margin-top: 12px;
+      color: rgba(240, 237, 232, 0.55);
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.3px;
+    }
+    .hero-name-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-tagline {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
       line-height: 1.4;
       color: #f0ede8;
-      max-width: 280px;
     }
     .hero-desc {
       text-align: right;
@@ -943,37 +1018,68 @@
   <!-- ════ HERO ════ -->
   <section id="home" class="hero">
 
-    <!-- Cursor trail canvas -->
-    <canvas id="trail-canvas" aria-hidden="true"></canvas>
+    <!-- Keyword marquee -->
+    <div class="hero-marquee">
+      <div class="hero-marquee-track">
+        <span>Product Designer</span><span class="marquee-diamond">✦</span>
+        <span>Design Leadership</span><span class="marquee-diamond">✦</span>
+        <span>Strategic Thinking</span><span class="marquee-diamond">✦</span>
+        <span>Product Management</span><span class="marquee-diamond">✦</span>
+        <span>Product &amp; Strategy</span><span class="marquee-diamond">✦</span>
+        <span>Data Driven Design</span><span class="marquee-diamond">✦</span>
+        <span>UX Researcher</span><span class="marquee-diamond">✦</span>
+        <span>Design System</span><span class="marquee-diamond">✦</span>
+        <span>Prototyping</span><span class="marquee-diamond">✦</span>
+        <span>Design Ops</span><span class="marquee-diamond">✦</span>
+        <span>Design Thinker</span><span class="marquee-diamond">✦</span>
+        <span>Problem Solver</span><span class="marquee-diamond">✦</span>
+        <span>Design Mentorship</span><span class="marquee-diamond">✦</span>
+        <span>Hiring &amp; Team Scaling</span><span class="marquee-diamond">✦</span>
+        <span>Product Designer</span><span class="marquee-diamond">✦</span>
+        <span>Design Leadership</span><span class="marquee-diamond">✦</span>
+        <span>Strategic Thinking</span><span class="marquee-diamond">✦</span>
+        <span>Product Management</span><span class="marquee-diamond">✦</span>
+        <span>Product &amp; Strategy</span><span class="marquee-diamond">✦</span>
+        <span>Data Driven Design</span><span class="marquee-diamond">✦</span>
+        <span>UX Researcher</span><span class="marquee-diamond">✦</span>
+        <span>Design System</span><span class="marquee-diamond">✦</span>
+        <span>Prototyping</span><span class="marquee-diamond">✦</span>
+        <span>Design Ops</span><span class="marquee-diamond">✦</span>
+        <span>Design Thinker</span><span class="marquee-diamond">✦</span>
+        <span>Problem Solver</span><span class="marquee-diamond">✦</span>
+        <span>Design Mentorship</span><span class="marquee-diamond">✦</span>
+        <span>Hiring &amp; Team Scaling</span><span class="marquee-diamond">✦</span>
+      </div>
+    </div>
 
-    <!-- Liquid glass drifting panels + hover blob -->
-    <div class="glass-bg" aria-hidden="true">
-      <div class="g-slab g-s1"></div>
-      <div class="g-slab g-s2"></div>
-      <div class="g-slab g-s3"></div>
-      <div class="g-slab g-s4"></div>
-      <div class="g-slab g-s5"></div>
-      <div class="g-slab g-s6"></div>
-      <div class="g-slab g-s7"></div>
-      <div class="g-slab g-s8"></div>
-      <div class="g-blob" id="glass-blob"></div>
+    <!-- Cone gradient background -->
+    <div class="hero-cone">
+      <div class="cone-navy"></div>
+      <div class="cone-warm"></div>
     </div>
 
     <!-- Top row: label left · bio right -->
     <div class="hero-top">
       <div class="hero-label">
         <span class="hero-label-tag">Product Design Partner</span>
-        <p class="hero-label-sub">AI-first designer with a decade of experience at Poshmark.</p>
+        <p class="hero-label-sub">AI-first designer with a decade of experience crafting seamless, user-friendly products through thoughtful design thinking. Currently spearheading design at <a href="https://www.poshmark.com" target="_blank" rel="noopener noreferrer" class="hero-inline-link">Poshmark</a></p>
+        <p class="hero-label-sub hero-label-sub--tagline">Your 0 → 1 → Unlimited Design Partner</p>
       </div>
       <div class="hero-desc">
-        <p>Crafting seamless, user-friendly<br>products through thoughtful<br>design thinking.</p>
-        <div class="hero-keywords">Visual Systems · AI-first · Zero → One · Growth</div>
+        <div class="hero-location">
+          <span class="hero-location-dot"></span>
+          <a href="https://www.tamilnadutourism.tn.gov.in/destinations/chennai" target="_blank" rel="noopener noreferrer" class="hero-location-city">Chennai, India</a>
+          <span class="hero-location-time" id="chennai-time"></span>
+        </div>
       </div>
     </div>
 
     <!-- Bottom row: huge name left · stat cards right -->
     <div class="hero-bottom">
-      <h1 class="hero-name">Santhosh<br>Rajendran</h1>
+      <div class="hero-name-wrap">
+        <p class="hero-tagline">Product Design Manager and Vibe Coder</p>
+        <h1 class="hero-name">Santhosh<br>Rajendran</h1>
+      </div>
       <div class="hero-stats">
         <div class="stat-card">
           <span class="stat-num">10+</span>
@@ -1327,93 +1433,26 @@
       hudTimer = setTimeout(() => hud.classList.remove('show'), 2000);
     }
 
-    // ── Cursor trail (light smear through glass) ──
-    (function() {
-      const hero   = document.querySelector('.hero');
-      const canvas = document.getElementById('trail-canvas');
-      if (!hero || !canvas) return;
-      const ctx = canvas.getContext('2d');
 
-      function resize() {
-        canvas.width  = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      let pts = [];
-      const MAX_AGE = 1000; // ms trail persists
-
-      hero.addEventListener('mousemove', e => {
-        const r = hero.getBoundingClientRect();
-        pts.push({ x: e.clientX - r.left, y: e.clientY - r.top, t: Date.now() });
-      });
-
-      (function draw() {
-        const now = Date.now();
-        pts = pts.filter(p => now - p.t < MAX_AGE);
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        pts.forEach(p => {
-          const life = 1 - (now - p.t) / MAX_AGE;   // 1=fresh → 0=gone
-          const radius = 130 + (1 - life) * 70;      // grows as it fades
-
-          const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
-          g.addColorStop(0,    `rgba(240, 215, 255, ${life * 0.85})`);
-          g.addColorStop(0.25, `rgba(195, 145, 255, ${life * 0.6})`);
-          g.addColorStop(0.55, `rgba(140,  90, 240, ${life * 0.3})`);
-          g.addColorStop(1,    `rgba(115,  66, 226, 0)`);
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = g;
-          ctx.fill();
-        });
-
-        requestAnimationFrame(draw);
-      })();
-    })();
-
-    // ── Liquid glass blob follows cursor on hero ──
-    (function() {
-      const hero     = document.querySelector('.hero');
-      const blob     = document.getElementById('glass-blob');
-      if (!hero || !blob) return;
-
-      let bX = 0, bY = 0, tX = 0, tY = 0, ready = false;
-
-      hero.addEventListener('mousemove', e => {
-        const r = hero.getBoundingClientRect();
-        tX = e.clientX - r.left;
-        tY = e.clientY - r.top;
-        if (!ready) { bX = tX; bY = tY; ready = true; }
-        blob.classList.add('active');
-      });
-      hero.addEventListener('mouseleave', () => blob.classList.remove('active'));
-
-      (function tick() {
-        bX += (tX - bX) * 0.055;
-        bY += (tY - bY) * 0.055;
-        blob.style.left = bX + 'px';
-        blob.style.top  = bY + 'px';
-        requestAnimationFrame(tick);
-      })();
-    })();
   </script>
 
   <script>
-    // ── Lenis smooth scroll ──
-    if (typeof Lenis !== 'undefined') {
-      const lenis = new Lenis({
-        duration: 1.4,
-        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smooth: true
+    // ── Chennai live clock ──
+    function updateChennaiTime() {
+      const el = document.getElementById('chennai-time');
+      if (!el) return;
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
       });
-      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-      requestAnimationFrame(raf);
+      el.textContent = time + ' IST';
     }
-
+    updateChennaiTime();
+    setInterval(updateChennaiTime, 1000);
 
     // ── Magnetic buttons ──
     document.querySelectorAll('.nav-cta, .work-card-link').forEach(el => {
