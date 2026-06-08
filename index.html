@@ -36,18 +36,13 @@
 
     /* ── Nav ── */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(12, 12, 15, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 0;
     }
     nav {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 18px 100px;
+      padding: 0 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,262 +54,183 @@
       color: #f0ede8;
     }
     .nav-logo span { color: #FF6101; }
-    .nav-links {
+    .nav-pills-wrap {
       display: flex;
-      gap: 36px;
+      gap: 4px;
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 5px;
     }
-    .nav-links a {
+    .nav-pills-wrap a {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 18px;
-      font-weight: 500;
-      color: #a0a0a0;
-      transition: color 0.2s;
-      position: relative;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      padding: 8px 22px;
+      border-radius: 100px;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
     }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
+    .nav-pills-wrap a:hover,
+    .nav-pills-wrap a.nav-active {
+      background: #fff;
+      color: #0c0c0f;
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #f0ede8;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+    .nav-cta:hover {
       background: #FF6101;
-      transition: width 0.2s;
+      border-color: #FF6101;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(255,97,1,0.35);
     }
-    .nav-links a:hover { color: #FF6101; }
-    .nav-links a:hover::after { width: 100%; }
 
     /* ── Hero ── */
     .hero {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 80px 100px 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-    .profile-photo {
       position: relative;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
+      height: 100vh;
+      min-height: 700px;
       overflow: hidden;
-      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 130px 48px 52px;
     }
-    .profile-photo .bg {
+    .hero-bg {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
+      z-index: 0;
     }
-    .profile-photo img.face {
-      position: absolute;
-      inset: 0;
+    .hero-bg img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 15%;
     }
-    .hero-name {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 52px;
-      font-weight: 700;
-      line-height: 1.1;
-      color: #f0ede8;
-      margin-bottom: 16px;
-    }
-    .hero-tagline {
-      font-size: 20px;
-      color: #a0a0a0;
-      font-weight: 500;
-      margin-bottom: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 2px;
-    }
-    .hero-tagline .accent { color: #FF6101; font-weight: 700; }
-    .hero-tagline .arrow { color: #FF6101; margin: 0 2px; }
-    .hero-bio {
-      font-size: 20px;
-      color: #c0bdb8;
-      line-height: 1.65;
-      margin-bottom: 36px;
-      max-width: 520px;
-    }
-    .hero-bio strong { font-weight: 700; }
-    .hero-bio .ext-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: #c0bdb8;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .hero-bio .ext-link:hover { color: #FF6101; }
-    .hero-bio .ext-link:hover svg path { stroke: #FF6101; }
-    .hero-btns {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .btn-sayhi {
-      display: none;
-    }
-    .btn-resume {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #FF6101;
-      color: #fff;
-      border: none;
-      padding: 16px 30px;
-      border-radius: 17px;
-      font-family: 'Lato', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .btn-resume::after {
+    .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.15);
-      opacity: 0;
-      transition: opacity 0.3s;
+      background: linear-gradient(
+        to bottom,
+        rgba(12,12,15,0.55) 0%,
+        rgba(12,12,15,0.1) 35%,
+        rgba(12,12,15,0.5) 65%,
+        rgba(12,12,15,0.97) 100%
+      );
     }
-    .btn-resume:hover::after { opacity: 1; }
-    .btn-resume:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(255,97,1,0.4);
-    }
-
-    /* ── PingandVibe Card (Hero Right) ── */
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      padding-top: 40px;
-    }
-    .ping-card {
+    .hero-top {
       position: relative;
-      width: 246px;
-    }
-    .ping-header-bar {
-      background: #FF6101;
-      border-radius: 20px 20px 0 0;
-      padding: 14px 20px;
+      z-index: 1;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      justify-content: space-between;
+      align-items: flex-start;
     }
-    .ping-logo { width: 28px; height: 28px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
-    .ping-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .ping-title {
+    .hero-label-tag {
+      display: block;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 12px;
+    }
+    .hero-label-sub {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 20px;
-      color: #fff;
-      font-weight: 400;
-    }
-    .ping-ticket-body {
-      position: relative;
-      background: #1a1008;
-      border-radius: 0 0 20px 20px;
-    }
-    .ping-qr-section {
-      padding: 20px 20px 20px;
-    }
-    .ping-qr-box {
-      background: #110e07;
-      border-radius: 16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    .ping-qr-label {
-      font-family: 'Lato', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
+      font-weight: 500;
+      line-height: 1.4;
       color: #f0ede8;
-      letter-spacing: 0.48px;
+      max-width: 280px;
     }
-    .ping-qr-wrap {
+    .hero-desc {
+      text-align: right;
+      max-width: 320px;
+    }
+    .hero-desc p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 14px;
+    }
+    .hero-keywords {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .hero-bottom {
       position: relative;
-      width: 160px;
-      height: 160px;
-    }
-    .ping-qr-img {
-      width: 160px;
-      height: 160px;
-      object-fit: contain;
-      display: block;
-    }
-    .ping-qr-logo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-    }
-    .ping-divider-wrap {
-      padding: 0;
-      position: relative;
+      z-index: 1;
       display: flex;
-      align-items: center;
-      margin: 0 -1px;
+      justify-content: space-between;
+      align-items: flex-end;
     }
-    .ping-divider-wrap::before,
-    .ping-divider-wrap::after {
-      background: #0c0c0f;
-      content: '';
-      width: 16px;
-      height: 16px;
-      background: #fff;
-      border-radius: 50%;
-      flex-shrink: 0;
+    .hero-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(54px, 8vw, 130px);
+      font-weight: 700;
+      line-height: 0.9;
+      color: #f0ede8;
+      letter-spacing: -3px;
     }
-    .ping-divider-line {
-      flex: 1;
-      border-top: 2px dashed rgba(255,255,255,0.1);
+    .hero-stats {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
     }
-    .ping-spotify-section {
-      padding: 12px 16px 16px;
+    .stat-card {
+      background: rgba(245,242,238,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 22px 26px;
+      min-width: 148px;
+      text-align: left;
     }
-    .ping-spotify-section iframe {
-      border-radius: 12px;
+    .stat-num {
       display: block;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 6px;
+      color: #0c0c0f;
+      letter-spacing: -1px;
     }
+    .stat-label {
+      display: block;
+      font-size: 13px;
+      color: #777;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .hero-btns { display: none; }
+    .btn-sayhi { display: none; }
+    .btn-resume { display: none; }
 
     /* ── Social Bar ── */
-    .social-bar {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 100px 72px;
-      display: flex;
-      gap: 24px;
-    }
-    .social-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 0;
-      font-size: 16px;
-      color: #a0a0a0;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    .social-pill:hover { color: #FF6101; }
-    .social-pill .arrow { color: #999; }
-    .social-pill svg.arrow { flex-shrink: 0; }
+    .social-bar { display: none; }
 
     /* ── Section Headings ── */
     .section-heading {
@@ -329,7 +245,7 @@
     .selected-works {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 100px 80px;
+      padding: 80px 100px 80px;
     }
     .works-list {
       display: flex;
@@ -726,24 +642,21 @@
 
     /* ── Responsive ── */
     @media (max-width: 1100px) {
-      nav, .hero, .selected-works, .social-bar,
-      .showcase-header, .story-header, .story-columns, .footer-inner {
+      .selected-works, .showcase-header, .story-header, .story-columns, .footer-inner {
         padding-left: 48px;
         padding-right: 48px;
       }
       .bento-wrap { padding: 0 24px; }
-      .hero-name { font-size: 44px; }
       .work-card { padding: 32px 36px; min-height: 340px; }
     }
 
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; gap: 48px; }
-      .hero-right { align-items: flex-start; }
-      .hero-name { font-size: 40px; }
+      .hero { padding: 110px 32px 40px; }
+      .hero-name { letter-spacing: -2px; }
+      .hero-desc { max-width: 240px; }
       .work-card { grid-template-columns: 1fr; min-height: auto; gap: 20px; padding: 24px 0 0 24px; }
       .work-preview { aspect-ratio: 2/1; margin-right: 0; }
       .story-columns { grid-template-columns: 1fr; gap: 48px; }
-      /* Flatten bento on tablet */
       .b-img1, .b-img3 { grid-column: span 6; }
       .b-img2, .b-img4 { grid-column: span 6; }
       .b-img2, .b-img3 { grid-row: span 1; min-height: 280px; }
@@ -754,15 +667,20 @@
     }
 
     @media (max-width: 640px) {
-      nav, .hero, .selected-works, .social-bar,
-      .showcase-header, .story-header, .story-columns, .footer-inner {
+      nav { padding: 0 20px; }
+      .hero { padding: 100px 20px 36px; }
+      .hero-top { flex-direction: column; gap: 16px; }
+      .hero-desc { text-align: left; max-width: 100%; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .hero-stats { width: 100%; }
+      .stat-card { flex: 1; min-width: 0; }
+      .nav-pills-wrap a { padding: 7px 14px; font-size: 13px; }
+      .selected-works, .showcase-header, .story-header, .story-columns, .footer-inner {
         padding-left: 20px;
         padding-right: 20px;
       }
       .bento-wrap { padding: 0 16px; }
-      .hero { padding-top: 48px; padding-left: 20px; padding-right: 20px; }
-      .hero-name { font-size: 32px; }
-      .section-heading { font-size: 36px; }
+      .section-heading { font-size: 36px; text-align: center; }
       .work-card { padding: 24px 20px; }
       .bento-grid { gap: 12px; }
       .b-img1, .b-img2, .b-img3, .b-img4,
@@ -776,57 +694,6 @@
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
       .footer-contact { flex-direction: column; gap: 10px; }
       .footer-links { flex-wrap: wrap; gap: 16px; }
-
-      /* ── Mobile hero content ── */
-      .hero-left {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      .hero-bio { text-align: center; }
-      .hero-tagline { justify-content: center; }
-      .hero-btns {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-      }
-      .btn-sayhi {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        background: rgba(255,255,255,0.08);
-        color: #f0ede8;
-        padding: 16px 30px;
-        border-radius: 17px;
-        font-family: 'Lato', sans-serif;
-        font-size: 18px;
-        font-weight: 700;
-        transition: background 0.2s, transform 0.15s;
-      }
-      .btn-resume {
-        width: 100%;
-        justify-content: center;
-        background: #FF6101;
-        color: #fff;
-        font-size: 18px;
-        padding: 16px 30px;
-      }
-      .btn-resume:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,97,1,0.4); }
-
-      /* ── Hide Ping & Vibe + QR on mobile ── */
-      .hero-right { display: none; }
-      .ping-qr-section { display: none; }
-
-      /* ── Nav spacing ── */
-      .nav-links { gap: 16px; }
-
-      /* ── Hide social bar (LinkedIn/Dribbble) ── */
-      .social-bar { display: none; }
-
-      /* ── Center section titles ── */
-      .section-heading { text-align: center; }
     }
 
     /* ── Keyframes ── */
@@ -849,18 +716,11 @@
 
     /* ── Hero entrance ── */
     @media (prefers-reduced-motion: no-preference) {
-      .hero-left > * {
-        opacity: 0;
-        animation: heroFadeUp 0.7s ease forwards;
-      }
-      .profile-photo      { animation-delay: 0.05s; }
-      .hero-name          { animation-delay: 0.15s; }
-      .hero-tagline       { animation-delay: 0.25s; }
-      .hero-bio           { animation-delay: 0.35s; }
-      .hero-btns          { animation-delay: 0.45s; }
-
-      /* Ping card floats gently */
-      .ping-card { animation: float 5s ease-in-out infinite; }
+      .hero-label { opacity: 0; animation: heroFadeUp 0.8s ease 0.3s forwards; }
+      .hero-desc  { opacity: 0; animation: heroFadeUp 0.8s ease 0.45s forwards; }
+      .hero-name  { opacity: 0; animation: heroFadeUp 1s ease 0.1s forwards; }
+      .stat-card:nth-child(1) { opacity: 0; animation: heroFadeUp 0.7s ease 0.55s forwards; }
+      .stat-card:nth-child(2) { opacity: 0; animation: heroFadeUp 0.7s ease 0.7s forwards; }
 
       /* Nav logo subtle pulse on load */
       .nav-logo { animation: heroFadeUp 0.5s ease forwards; }
@@ -1047,86 +907,51 @@
   <header>
     <nav>
       <div class="nav-logo">SR<span>.</span></div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
+      <div class="nav-pills-wrap">
+        <a href="#home" class="nav-active">Home</a>
         <a href="#works">Works</a>
         <a href="#my-story">My Story</a>
       </div>
+      <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="nav-cta" onclick="gtag('event','resume_download',{event_category:'engagement',event_label:'Download Resume'})">Download Resume ↗</a>
     </nav>
   </header>
 
   <!-- ════ HERO ════ -->
   <section id="home" class="hero">
-    <!-- Left -->
-    <div class="hero-left">
-      <div class="profile-photo">
-        <div class="bg" style="background:#FF6101;"></div>
-        <img class="face" src="images/profile-photo.png" alt="Santhosh Rajendran">
+
+    <!-- Full-viewport background photo -->
+    <div class="hero-bg">
+      <img src="images/profile-photo.png" alt="Santhosh Rajendran">
+    </div>
+
+    <!-- Top row: label left · bio right -->
+    <div class="hero-top">
+      <div class="hero-label">
+        <span class="hero-label-tag">Product Design Partner</span>
+        <p class="hero-label-sub">AI-first designer with a decade of experience at Poshmark.</p>
       </div>
-
-      <h1 class="hero-name">Santhosh Rajendran</h1>
-
-      <p class="hero-tagline">
-        Your &nbsp;
-        <span class="accent">ZERO</span>
-        <span class="arrow">→</span>
-        <span class="accent">ONE</span>
-        <span class="arrow">→</span>
-        <span class="accent">TEN</span>
-        &nbsp; Product Design Partner
-      </p>
-
-      <p class="hero-bio">
-        AI-first designer with a decade of experience crafting seamless,
-        user-friendly products through thoughtful design thinking.
-        Currently spearheading design at
-        <a href="https://poshmark.com" target="_blank" rel="noopener" class="ext-link">
-          <strong>Poshmark</strong>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </p>
-
-      <div class="hero-btns">
-        <a href="http://wa.me/919894249490" target="_blank" rel="noopener" class="btn-sayhi">Say Hi</a>
-        <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="btn-resume" onclick="gtag('event','resume_download',{event_category:'engagement',event_label:'Download Resume'})">Download Resume</a>
+      <div class="hero-desc">
+        <p>Crafting seamless, user-friendly<br>products through thoughtful<br>design thinking.</p>
+        <div class="hero-keywords">Visual Systems · AI-first · Zero → One · Growth</div>
       </div>
     </div>
 
-    <!-- Right: Ping & Vibe Card -->
-    <div class="hero-right">
-      <div class="ping-card">
-        <!-- Orange header bar -->
-        <div class="ping-header-bar">
-          <div class="ping-logo">
-            <img src="images/whatsapp.png" alt="WhatsApp">
-          </div>
-          <span class="ping-title">Ping &amp; Vibe</span>
+    <!-- Bottom row: huge name left · stat cards right -->
+    <div class="hero-bottom">
+      <h1 class="hero-name">Santhosh<br>Rajendran</h1>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-num">10+</span>
+          <span class="stat-label">Years of experience</span>
         </div>
-        <!-- Ticket body -->
-        <div class="ping-ticket-body">
-          <!-- QR section -->
-          <div class="ping-qr-section">
-            <div class="ping-qr-box">
-              <span class="ping-qr-label">Scan to Say Hi!</span>
-              <div class="ping-qr-wrap">
-                <img class="ping-qr-img" src="images/qr.png" alt="QR code">
-              </div>
-            </div>
-          </div>
+        <div class="stat-card">
+          <span class="stat-num">50M+</span>
+          <span class="stat-label">Users reached</span>
         </div>
       </div>
     </div>
+
   </section>
-
-  <!-- ════ SOCIAL BAR ════ -->
-  <div class="social-bar">
-    <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener" class="social-pill">
-      LinkedIn <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="arrow"><path d="M6.99997 7H17V17" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener" class="social-pill">
-      Dribbble <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="arrow"><path d="M6.99997 7H17V17" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
 
   <!-- ════ SELECTED WORKS ════ -->
   <section id="works" class="selected-works">
@@ -1467,32 +1292,15 @@
       hudTimer = setTimeout(() => hud.classList.remove('show'), 2000);
     }
 
-    // ── Parallax ──
+    // ── Hero parallax — bg image drifts slightly on scroll ──
     if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-      const profilePhoto = document.querySelector('.profile-photo');
-      const heroName     = document.querySelector('.hero-name');
-      const heroTagline  = document.querySelector('.hero-tagline');
-      const heroBio      = document.querySelector('.hero-bio');
-      const heroBtns     = document.querySelector('.hero-btns');
-      const pingCard     = document.querySelector('.ping-card');
-
+      const heroBgImg = document.querySelector('.hero-bg img');
       let ticking = false;
-
       window.addEventListener('scroll', () => {
         if (!ticking) {
           requestAnimationFrame(() => {
             const y = window.scrollY;
-
-            // Hero left — each layer moves at a slightly different rate
-            if (profilePhoto) profilePhoto.style.transform = `translateY(${y * 0.12}px)`;
-            if (heroName)     heroName.style.transform     = `translateY(${y * 0.08}px)`;
-            if (heroTagline)  heroTagline.style.transform  = `translateY(${y * 0.06}px)`;
-            if (heroBio)      heroBio.style.transform      = `translateY(${y * 0.04}px)`;
-            if (heroBtns)     heroBtns.style.transform     = `translateY(${y * 0.02}px)`;
-
-            // Ping card drifts upward slightly faster for depth
-            if (pingCard) pingCard.style.transform = `translateY(${y * -0.06}px)`;
-
+            if (heroBgImg) heroBgImg.style.transform = `translateY(${y * 0.18}px)`;
             ticking = false;
           });
           ticking = true;
@@ -1532,7 +1340,7 @@
     animateCursor();
 
     // ── Magnetic buttons ──
-    document.querySelectorAll('.btn-resume, .work-card-link').forEach(el => {
+    document.querySelectorAll('.nav-cta, .work-card-link').forEach(el => {
       el.addEventListener('mousemove', e => {
         const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
