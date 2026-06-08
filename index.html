@@ -786,34 +786,86 @@
       100% { transform: translate(0, 0); }
     }
 
-    /* ── Custom cursor ── */
+    /* ── Futuristic Cursor ── */
     #cursor {
       position: fixed;
-      width: 40px;
-      height: 40px;
-      border: 1.5px solid rgba(115,66,226,0.7);
-      border-radius: 50%;
+      width: 48px;
+      height: 48px;
       pointer-events: none;
       z-index: 10000;
       transform: translate(-50%, -50%);
-      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      transition: width 0.35s cubic-bezier(0.34,1.56,0.64,1),
+                  height 0.35s cubic-bezier(0.34,1.56,0.64,1);
     }
+    /* Outer ring — CW spin, partial arc */
+    #cursor::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      border-top-color: #fff;
+      border-right-color: rgba(255,255,255,0.35);
+      border-bottom-color: transparent;
+      border-left-color: rgba(255,255,255,0.15);
+      animation: cur-cw 1.8s linear infinite;
+    }
+    /* Inner ring — CCW spin */
+    #cursor::after {
+      content: '';
+      position: absolute;
+      inset: 11px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      border-top-color: transparent;
+      border-right-color: rgba(255,255,255,0.6);
+      border-bottom-color: rgba(255,255,255,0.2);
+      border-left-color: transparent;
+      animation: cur-ccw 1.2s linear infinite;
+    }
+    @keyframes cur-cw  { to { transform: rotate(360deg);  } }
+    @keyframes cur-ccw { to { transform: rotate(-360deg); } }
+
+    /* Tick marks — 4 short lines outside the ring */
+    #cursor-tick-t, #cursor-tick-r, #cursor-tick-b, #cursor-tick-l {
+      position: fixed;
+      background: rgba(255,255,255,0.7);
+      pointer-events: none;
+      z-index: 10000;
+    }
+    #cursor-tick-t, #cursor-tick-b { width: 1.5px; height: 7px; }
+    #cursor-tick-l, #cursor-tick-r { width: 7px; height: 1.5px; }
+
+    /* Glowing center dot */
     #cursor-dot {
       position: fixed;
       width: 5px;
       height: 5px;
-      background: #7342E2;
+      background: #fff;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 10001;
+      z-index: 10002;
       transform: translate(-50%, -50%);
+      box-shadow: 0 0 6px 2px rgba(255,255,255,0.6),
+                  0 0 14px 4px rgba(115,66,226,0.5);
     }
+
+    /* Hover state — expand rings */
     body:has(a:hover) #cursor,
     body:has(button:hover) #cursor {
-      width: 60px;
-      height: 60px;
-      background: rgba(115,66,226,0.1);
-      border-color: #7342E2;
+      width: 64px;
+      height: 64px;
+    }
+    body:has(a:hover) #cursor::before,
+    body:has(button:hover) #cursor::before {
+      border-top-color: #7342E2;
+      border-right-color: rgba(115,66,226,0.4);
+      border-left-color: rgba(115,66,226,0.2);
+    }
+    body:has(a:hover) #cursor::after,
+    body:has(button:hover) #cursor::after {
+      border-right-color: rgba(115,66,226,0.7);
+      border-bottom-color: rgba(115,66,226,0.3);
     }
 
     /* ── Floating orbs ── */
@@ -1287,20 +1339,46 @@
       requestAnimationFrame(raf);
     }
 
-    // ── Custom cursor ──
-    const cursor = document.getElementById('cursor');
+    // ── Futuristic cursor ──
+    const cursor    = document.getElementById('cursor');
     const cursorDot = document.getElementById('cursor-dot');
+    const tickT = document.getElementById('cursor-tick-t');
+    const tickR = document.getElementById('cursor-tick-r');
+    const tickB = document.getElementById('cursor-tick-b');
+    const tickL = document.getElementById('cursor-tick-l');
+    const TICK_OFFSET = 30; // distance of ticks from cursor centre
+
     let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
     document.addEventListener('mousemove', e => {
-      mouseX = e.clientX; mouseY = e.clientY;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      // Dot snaps instantly
       cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top = mouseY + 'px';
+      cursorDot.style.top  = mouseY + 'px';
     });
+
     function animateCursor() {
       cursorX += (mouseX - cursorX) * 0.12;
       cursorY += (mouseY - cursorY) * 0.12;
+
+      // Rings lag behind
       cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
+      cursor.style.top  = cursorY + 'px';
+
+      // Ticks follow at a slightly faster lag, offset outward
+      const tx = cursorX, ty = cursorY;
+      tickT.style.left = (tx - 0.75) + 'px';
+      tickT.style.top  = (ty - TICK_OFFSET - 3.5) + 'px';
+
+      tickB.style.left = (tx - 0.75) + 'px';
+      tickB.style.top  = (ty + TICK_OFFSET - 3.5) + 'px';
+
+      tickL.style.left = (tx - TICK_OFFSET - 3.5) + 'px';
+      tickL.style.top  = (ty - 0.75) + 'px';
+
+      tickR.style.left = (tx + TICK_OFFSET - 3.5) + 'px';
+      tickR.style.top  = (ty - 0.75) + 'px';
+
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
@@ -1342,8 +1420,12 @@
 
   <div class="cs-hud" id="cs-hud">Coming Soon</div>
 
-  <!-- ── Dark theme overlay elements ── -->
+  <!-- ── Futuristic cursor elements ── -->
   <div id="cursor"></div>
+  <div id="cursor-tick-t"></div>
+  <div id="cursor-tick-r"></div>
+  <div id="cursor-tick-b"></div>
+  <div id="cursor-tick-l"></div>
   <div id="cursor-dot"></div>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
