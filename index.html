@@ -117,6 +117,92 @@
     /* Solid purple hero — no photo bg */
     .hero { background: #7342E2; }
     .hero-bg { display: none; }
+
+    /* ── Liquid Glass Background ── */
+    .glass-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .g-slab {
+      position: absolute;
+      left: 50%;
+      top: -60%;
+      height: 220%;
+      border-radius: 60px;
+      will-change: transform;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255,255,255,0.03) 20%,
+        rgba(255,255,255,0.1) 50%,
+        rgba(255,255,255,0.03) 80%,
+        transparent 100%
+      );
+      border-left: 1px solid rgba(255,255,255,0.22);
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    @keyframes slab-drift {
+      from { transform: rotate(-35deg) translateX(-130vw); }
+      to   { transform: rotate(-35deg) translateX(130vw);  }
+    }
+    .g-s1 { width: 80px;  animation: slab-drift 22s linear  -2s infinite; }
+    .g-s2 { width: 155px; animation: slab-drift 28s linear -10s infinite; }
+    .g-s3 { width: 52px;  animation: slab-drift 17s linear  -5s infinite; }
+    .g-s4 { width: 190px; animation: slab-drift 34s linear -18s infinite; }
+    .g-s5 { width: 95px;  animation: slab-drift 24s linear  -3s infinite; }
+    .g-s6 { width: 65px;  animation: slab-drift 19s linear -14s infinite; }
+    .g-s7 { width: 130px; animation: slab-drift 26s linear  -8s infinite; }
+    .g-s8 { width: 44px;  animation: slab-drift 15s linear -21s infinite; }
+
+    /* Purple liquid blob — follows cursor on hero */
+    .g-blob {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.5s ease;
+      will-change: left, top;
+      z-index: 1;
+    }
+    .g-blob::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%;
+      background: radial-gradient(circle at 38% 38%,
+        rgba(225, 190, 255, 0.75),
+        rgba(160, 100, 255, 0.5) 35%,
+        rgba(115, 66, 226, 0.22) 62%,
+        transparent 78%
+      );
+      filter: blur(32px);
+      animation: blob-morph 9s ease-in-out infinite;
+    }
+    .g-blob::after {
+      content: '';
+      position: absolute;
+      inset: 28px;
+      border-radius: 40% 60% 30% 70% / 65% 35% 70% 30%;
+      background: radial-gradient(circle,
+        rgba(255, 245, 255, 0.45),
+        rgba(185, 130, 255, 0.22) 48%,
+        transparent 70%
+      );
+      filter: blur(18px);
+      animation: blob-morph 6s ease-in-out infinite reverse;
+    }
+    @keyframes blob-morph {
+      0%,100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%; transform: scale(1);    }
+      25%     { border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; transform: scale(1.08);  }
+      50%     { border-radius: 70% 30% 50% 50% / 30% 70% 60% 40%; transform: scale(0.94);  }
+      75%     { border-radius: 30% 70% 40% 60% / 70% 30% 50% 50%; transform: scale(1.05);  }
+    }
+    .g-blob.active { opacity: 1; }
     .hero-top {
       position: relative;
       z-index: 1;
@@ -963,9 +1049,17 @@
   <!-- ════ HERO ════ -->
   <section id="home" class="hero">
 
-    <!-- Full-viewport background photo -->
-    <div class="hero-bg">
-      <img src="images/profile-photo.png" alt="Santhosh Rajendran">
+    <!-- Liquid glass drifting panels + hover blob -->
+    <div class="glass-bg" aria-hidden="true">
+      <div class="g-slab g-s1"></div>
+      <div class="g-slab g-s2"></div>
+      <div class="g-slab g-s3"></div>
+      <div class="g-slab g-s4"></div>
+      <div class="g-slab g-s5"></div>
+      <div class="g-slab g-s6"></div>
+      <div class="g-slab g-s7"></div>
+      <div class="g-slab g-s8"></div>
+      <div class="g-blob" id="glass-blob"></div>
     </div>
 
     <!-- Top row: label left · bio right -->
@@ -1336,7 +1430,31 @@
       hudTimer = setTimeout(() => hud.classList.remove('show'), 2000);
     }
 
-    // No hero parallax — solid colour background
+    // ── Liquid glass blob follows cursor on hero ──
+    (function() {
+      const hero     = document.querySelector('.hero');
+      const blob     = document.getElementById('glass-blob');
+      if (!hero || !blob) return;
+
+      let bX = 0, bY = 0, tX = 0, tY = 0, ready = false;
+
+      hero.addEventListener('mousemove', e => {
+        const r = hero.getBoundingClientRect();
+        tX = e.clientX - r.left;
+        tY = e.clientY - r.top;
+        if (!ready) { bX = tX; bY = tY; ready = true; }
+        blob.classList.add('active');
+      });
+      hero.addEventListener('mouseleave', () => blob.classList.remove('active'));
+
+      (function tick() {
+        bX += (tX - bX) * 0.055;
+        bY += (tY - bY) * 0.055;
+        blob.style.left = bX + 'px';
+        blob.style.top  = bY + 'px';
+        requestAnimationFrame(tick);
+      })();
+    })();
   </script>
 
   <script>
