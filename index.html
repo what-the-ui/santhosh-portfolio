@@ -114,40 +114,9 @@
       justify-content: space-between;
       padding: 130px 48px 52px;
     }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-    .hero-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
-    }
-    /* Purple hue tint over photo background */
-    .hero-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: #7342E2;
-      mix-blend-mode: color;
-      opacity: 0.55;
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background: linear-gradient(
-        to bottom,
-        rgba(12,12,15,0.5) 0%,
-        rgba(12,12,15,0.08) 35%,
-        rgba(12,12,15,0.45) 65%,
-        rgba(12,12,15,0.97) 100%
-      );
-    }
+    /* Solid purple hero — no photo bg */
+    .hero { background: #7342E2; }
+    .hero-bg { display: none; }
     .hero-top {
       position: relative;
       z-index: 1;
@@ -1303,21 +1272,7 @@
       hudTimer = setTimeout(() => hud.classList.remove('show'), 2000);
     }
 
-    // ── Hero parallax — bg image drifts slightly on scroll ──
-    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-      const heroBgImg = document.querySelector('.hero-bg img');
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const y = window.scrollY;
-            if (heroBgImg) heroBgImg.style.transform = `translateY(${y * 0.18}px)`;
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
-    }
+    // No hero parallax — solid colour background
   </script>
 
   <script>
