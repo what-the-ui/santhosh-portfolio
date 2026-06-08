@@ -53,7 +53,7 @@
       font-size: 18px;
       color: #f0ede8;
     }
-    .nav-logo span { color: #FF6101; }
+    .nav-logo span { color: #7342E2; }
     .nav-pills-wrap {
       display: flex;
       gap: 4px;
@@ -97,10 +97,10 @@
       cursor: pointer;
     }
     .nav-cta:hover {
-      background: #FF6101;
-      border-color: #FF6101;
+      background: #7342E2;
+      border-color: #7342E2;
       color: #fff;
-      box-shadow: 0 8px 30px rgba(255,97,1,0.35);
+      box-shadow: 0 8px 30px rgba(115,66,226,0.35);
     }
 
     /* ── Hero ── */
@@ -125,15 +125,26 @@
       object-fit: cover;
       object-position: center 15%;
     }
+    /* Purple hue tint over photo background */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: #7342E2;
+      mix-blend-mode: color;
+      opacity: 0.55;
+    }
     .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
+      z-index: 2;
       background: linear-gradient(
         to bottom,
-        rgba(12,12,15,0.55) 0%,
-        rgba(12,12,15,0.1) 35%,
-        rgba(12,12,15,0.5) 65%,
+        rgba(12,12,15,0.5) 0%,
+        rgba(12,12,15,0.08) 35%,
+        rgba(12,12,15,0.45) 65%,
         rgba(12,12,15,0.97) 100%
       );
     }
@@ -295,8 +306,8 @@
     }
     .work-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,97,1,0.2);
-      border-color: rgba(255,97,1,0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(115,66,226,0.2);
+      border-color: rgba(115,66,226,0.3);
     }
     .work-left { padding: 20px 0; display: flex; flex-direction: column; justify-content: center; }
     .work-card.c-lime { background: rgba(255,255,255,0.04) !important; }
@@ -594,13 +605,13 @@
       top: 10px;
       width: 12px;
       height: 12px;
-      border: 2px solid #FF6101;
+      border: 2px solid #7342E2;
       border-radius: 50%;
     }
 
     /* ── Footer ── */
     footer {
-      background: #FF6101;
+      background: #7342E2;
       color: #fff;
     }
     .footer-inner {
@@ -706,8 +717,8 @@
       50%       { transform: translateY(-8px); }
     }
     @keyframes subtlePulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 97, 1, 0); }
-      50%       { box-shadow: 0 0 0 8px rgba(255, 97, 1, 0.08); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(115, 66, 226, 0); }
+      50%       { box-shadow: 0 0 0 8px rgba(115, 66, 226, 0.08); }
     }
     @keyframes shimmer {
       0%   { background-position: -200% center; }
@@ -751,7 +762,7 @@
 
       /* Section headings shimmer on scroll-in */
       .section-heading.visible {
-        background: linear-gradient(90deg, #f0ede8 40%, #FF6101 50%, #f0ede8 60%);
+        background: linear-gradient(90deg, #f0ede8 40%, #7342E2 50%, #f0ede8 60%);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -811,7 +822,7 @@
       position: fixed;
       width: 40px;
       height: 40px;
-      border: 1.5px solid rgba(255,97,1,0.7);
+      border: 1.5px solid rgba(115,66,226,0.7);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
@@ -822,7 +833,7 @@
       position: fixed;
       width: 5px;
       height: 5px;
-      background: #FF6101;
+      background: #7342E2;
       border-radius: 50%;
       pointer-events: none;
       z-index: 10001;
@@ -832,8 +843,8 @@
     body:has(button:hover) #cursor {
       width: 60px;
       height: 60px;
-      background: rgba(255,97,1,0.1);
-      border-color: #FF6101;
+      background: rgba(115,66,226,0.1);
+      border-color: #7342E2;
     }
 
     /* ── Floating orbs ── */
@@ -848,7 +859,7 @@
     .orb-1 {
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(255,97,1,0.5), transparent 70%);
+      background: radial-gradient(circle, rgba(115,66,226,0.5), transparent 70%);
       top: -150px;
       left: -100px;
       animation: orb-float-1 12s ease-in-out infinite;
@@ -856,7 +867,7 @@
     .orb-2 {
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(255,140,50,0.3), transparent 70%);
+      background: radial-gradient(circle, rgba(140,90,240,0.3), transparent 70%);
       bottom: 20%;
       right: -80px;
       animation: orb-float-2 15s ease-in-out infinite;
@@ -864,7 +875,7 @@
     .orb-3 {
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, rgba(255,60,0,0.25), transparent 70%);
+      background: radial-gradient(circle, rgba(90,40,200,0.25), transparent 70%);
       top: 50%;
       left: 40%;
       animation: orb-float-3 10s ease-in-out infinite;
