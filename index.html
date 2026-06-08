@@ -29,7 +29,7 @@
       color: #f0ede8;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      cursor: none;
+      cursor: auto;
     }
     img { max-width: 100%; display: block; }
     a { text-decoration: none; color: inherit; }
@@ -872,99 +872,6 @@
       100% { transform: translate(0, 0); }
     }
 
-    /* ── Futuristic Cursor ── */
-    /* Hidden until mouse enters page */
-    #cursor, #cursor-dot,
-    #cursor-tick-t, #cursor-tick-r,
-    #cursor-tick-b, #cursor-tick-l {
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    body.cursor-ready #cursor,
-    body.cursor-ready #cursor-dot,
-    body.cursor-ready #cursor-tick-t,
-    body.cursor-ready #cursor-tick-r,
-    body.cursor-ready #cursor-tick-b,
-    body.cursor-ready #cursor-tick-l { opacity: 1; }
-
-    #cursor {
-      position: fixed;
-      width: 56px;
-      height: 56px;
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.3s,
-                  width 0.35s cubic-bezier(0.34,1.56,0.64,1),
-                  height 0.35s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    /* Outer ring — CW spin */
-    #cursor::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      border-top-color: #fff;
-      border-right-color: rgba(255,255,255,0.45);
-      border-bottom-color: transparent;
-      border-left-color: rgba(255,255,255,0.2);
-      animation: cur-cw 1.8s linear infinite;
-    }
-    /* Inner ring — CCW spin */
-    #cursor::after {
-      content: '';
-      position: absolute;
-      inset: 13px;
-      border-radius: 50%;
-      border: 1.5px solid transparent;
-      border-top-color: transparent;
-      border-right-color: rgba(255,255,255,0.7);
-      border-bottom-color: rgba(255,255,255,0.25);
-      border-left-color: transparent;
-      animation: cur-ccw 1.2s linear infinite;
-    }
-    @keyframes cur-cw  { to { transform: rotate(360deg);  } }
-    @keyframes cur-ccw { to { transform: rotate(-360deg); } }
-
-    /* Tick marks — crosshair lines outside the ring */
-    #cursor-tick-t, #cursor-tick-r, #cursor-tick-b, #cursor-tick-l {
-      position: fixed;
-      background: rgba(255,255,255,0.8);
-      pointer-events: none;
-      z-index: 10001;
-      transition: opacity 0.3s;
-    }
-    #cursor-tick-t, #cursor-tick-b { width: 2px; height: 8px; }
-    #cursor-tick-l, #cursor-tick-r { width: 8px; height: 2px; }
-
-    /* Glowing center dot */
-    #cursor-dot {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: #fff;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10002;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.3s;
-      box-shadow: 0 0 8px 3px rgba(255,255,255,0.7),
-                  0 0 20px 6px rgba(115,66,226,0.6);
-    }
-
-    /* Hover state — rings expand */
-    body.cursor-ready:has(a:hover) #cursor,
-    body.cursor-ready:has(button:hover) #cursor {
-      width: 72px;
-      height: 72px;
-    }
-    body.cursor-ready:has(a:hover) #cursor::before,
-    body.cursor-ready:has(button:hover) #cursor::before {
-      border-top-color: #c4a8ff;
-      border-right-color: rgba(196,168,255,0.4);
-      border-left-color: rgba(196,168,255,0.2);
-    }
 
     /* ── Floating orbs ── */
     .orb {
@@ -1469,62 +1376,6 @@
       requestAnimationFrame(raf);
     }
 
-    // ── Futuristic cursor ──
-    const cursor    = document.getElementById('cursor');
-    const cursorDot = document.getElementById('cursor-dot');
-    const tickT = document.getElementById('cursor-tick-t');
-    const tickR = document.getElementById('cursor-tick-r');
-    const tickB = document.getElementById('cursor-tick-b');
-    const tickL = document.getElementById('cursor-tick-l');
-    const TICK_GAP = 34; // px from centre to tick midpoint
-
-    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
-    let cursorVisible = false;
-
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      // Snap everything to mouse on first move so nothing "flies in"
-      if (!cursorVisible) {
-        cursorX = mouseX;
-        cursorY = mouseY;
-        cursorVisible = true;
-        document.body.classList.add('cursor-ready');
-      }
-
-      // Dot snaps instantly
-      cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top  = mouseY + 'px';
-    });
-
-    // Hide cursor when it leaves the window
-    document.addEventListener('mouseleave', () => document.body.classList.remove('cursor-ready'));
-    document.addEventListener('mouseenter', () => { if (cursorVisible) document.body.classList.add('cursor-ready'); });
-
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.1;
-      cursorY += (mouseY - cursorY) * 0.1;
-
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top  = cursorY + 'px';
-
-      // Ticks offset outward from lagged ring centre
-      tickT.style.left = (cursorX - 1)          + 'px';
-      tickT.style.top  = (cursorY - TICK_GAP - 4) + 'px';
-
-      tickB.style.left = (cursorX - 1)          + 'px';
-      tickB.style.top  = (cursorY + TICK_GAP - 4) + 'px';
-
-      tickL.style.left = (cursorX - TICK_GAP - 4) + 'px';
-      tickL.style.top  = (cursorY - 1)          + 'px';
-
-      tickR.style.left = (cursorX + TICK_GAP - 4) + 'px';
-      tickR.style.top  = (cursorY - 1)          + 'px';
-
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
 
     // ── Magnetic buttons ──
     document.querySelectorAll('.nav-cta, .work-card-link').forEach(el => {
@@ -1563,13 +1414,6 @@
 
   <div class="cs-hud" id="cs-hud">Coming Soon</div>
 
-  <!-- ── Futuristic cursor elements ── -->
-  <div id="cursor"></div>
-  <div id="cursor-tick-t"></div>
-  <div id="cursor-tick-r"></div>
-  <div id="cursor-tick-b"></div>
-  <div id="cursor-tick-l"></div>
-  <div id="cursor-dot"></div>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
