@@ -16,18 +16,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
     /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Lato', sans-serif;
-      background-color: #fff;
-      background-image: radial-gradient(circle, rgba(255, 97, 1, 0.12) 1.5px, transparent 1.5px);
-      background-size: 24px 24px;
-      color: #171717;
+      background-color: #0c0c0f;
+      color: #f0ede8;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      cursor: none;
     }
     img { max-width: 100%; display: block; }
     a { text-decoration: none; color: inherit; }
@@ -37,10 +39,10 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(12, 12, 15, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
     nav {
       max-width: 1280px;
@@ -54,7 +56,7 @@
       font-family: 'Bricolage Grotesque', sans-serif;
       font-weight: 700;
       font-size: 18px;
-      color: #171717;
+      color: #f0ede8;
     }
     .nav-logo span { color: #FF6101; }
     .nav-links {
@@ -65,7 +67,7 @@
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 18px;
       font-weight: 500;
-      color: #171717;
+      color: #a0a0a0;
       transition: color 0.2s;
       position: relative;
     }
@@ -119,12 +121,12 @@
       font-size: 52px;
       font-weight: 700;
       line-height: 1.1;
-      color: #171717;
+      color: #f0ede8;
       margin-bottom: 16px;
     }
     .hero-tagline {
       font-size: 20px;
-      color: #171717;
+      color: #a0a0a0;
       font-weight: 500;
       margin-bottom: 28px;
       display: flex;
@@ -136,7 +138,7 @@
     .hero-tagline .arrow { color: #FF6101; margin: 0 2px; }
     .hero-bio {
       font-size: 20px;
-      color: #171717;
+      color: #c0bdb8;
       line-height: 1.65;
       margin-bottom: 36px;
       max-width: 520px;
@@ -146,7 +148,7 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      color: #171717;
+      color: #c0bdb8;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -165,16 +167,31 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #171717;
+      background: #FF6101;
       color: #fff;
+      border: none;
       padding: 16px 30px;
       border-radius: 17px;
       font-family: 'Lato', sans-serif;
       font-size: 20px;
       font-weight: 700;
-      transition: background 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn-resume:hover { background: #333; transform: translateY(-2px); }
+    .btn-resume::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-resume:hover::after { opacity: 1; }
+    .btn-resume:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255,97,1,0.4);
+    }
 
     /* ── PingandVibe Card (Hero Right) ── */
     .hero-right {
@@ -206,14 +223,14 @@
     }
     .ping-ticket-body {
       position: relative;
-      background: #fff5f0;
+      background: #1a1008;
       border-radius: 0 0 20px 20px;
     }
     .ping-qr-section {
       padding: 20px 20px 20px;
     }
     .ping-qr-box {
-      background: #fff;
+      background: #110e07;
       border-radius: 16px;
       padding: 16px;
       display: flex;
@@ -225,7 +242,7 @@
       font-family: 'Lato', sans-serif;
       font-size: 16px;
       font-weight: 700;
-      color: #121212;
+      color: #f0ede8;
       letter-spacing: 0.48px;
     }
     .ping-qr-wrap {
@@ -257,6 +274,7 @@
     }
     .ping-divider-wrap::before,
     .ping-divider-wrap::after {
+      background: #0c0c0f;
       content: '';
       width: 16px;
       height: 16px;
@@ -266,7 +284,7 @@
     }
     .ping-divider-line {
       flex: 1;
-      border-top: 2px dashed rgba(0,0,0,0.12);
+      border-top: 2px dashed rgba(255,255,255,0.1);
     }
     .ping-spotify-section {
       padding: 12px 16px 16px;
@@ -290,7 +308,7 @@
       gap: 6px;
       padding: 6px 0;
       font-size: 16px;
-      color: #171717;
+      color: #a0a0a0;
       font-weight: 600;
       transition: color 0.2s;
     }
@@ -303,7 +321,7 @@
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 48px;
       font-weight: 700;
-      color: #171717;
+      color: #f0ede8;
       margin-bottom: 36px;
     }
 
@@ -355,12 +373,19 @@
       align-items: stretch;
       min-height: 400px;
       overflow: hidden;
+      background: rgba(255,255,255,0.04) !important;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
     }
-    .work-card:hover { transform: translateY(-4px) scale(1.015); }
+    .work-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,97,1,0.2);
+      border-color: rgba(255,97,1,0.3);
+    }
     .work-left { padding: 20px 0; display: flex; flex-direction: column; justify-content: center; }
-    .work-card.c-lime { background: #FFF3F1; }
-    .work-card.c-pink { background: #FFF3F1; }
-    .work-card.c-teal { background: #F9FBD1; }
+    .work-card.c-lime { background: rgba(255,255,255,0.04) !important; }
+    .work-card.c-pink { background: rgba(255,255,255,0.04) !important; }
+    .work-card.c-teal { background: rgba(255,255,255,0.04) !important; }
 
     .work-icon {
       width: 70px;
@@ -406,11 +431,11 @@
       font-size: 26px;
       font-weight: 700;
       margin-bottom: 10px;
-      color: #171717;
+      color: #f0ede8 !important;
     }
     .work-desc {
       font-size: 16px;
-      color: #555;
+      color: #888 !important;
       line-height: 1.6;
       margin-bottom: 28px;
       max-width: 320px;
@@ -425,10 +450,11 @@
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      border: 1.5px solid rgba(0, 0, 0, 0.15);
+      background: rgba(255,255,255,0.08) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
       padding: 5px 14px;
       border-radius: 100px;
-      color: rgba(0, 0, 0, 0.4);
+      color: #a0a0a0 !important;
     }
     .work-preview {
       background: transparent;
@@ -459,6 +485,7 @@
 
     /* ── Design Showcase ── */
     .design-showcase {
+      background: #0f0f13;
       padding: 0 0 80px;
     }
     .showcase-header {
@@ -530,7 +557,7 @@
     .story-bio {
       font-size: 20px;
       line-height: 1.75;
-      color: #171717;
+      color: #c0bdb8;
       margin-bottom: 60px;
     }
     .story-columns {
@@ -564,9 +591,9 @@
       align-items: center;
       gap: 6px;
       padding: 6px 14px 6px 6px;
-      background: #ffffff;
+      background: rgba(255,255,255,0.06);
       border-radius: 100px;
-      border: 1px solid rgba(0,0,0,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
       cursor: default;
     }
     .skill-icon {
@@ -578,13 +605,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #fff;
+      background: rgba(255,255,255,0.1);
     }
     .skill-icon img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
     .skill-name {
       font-size: 15px;
       font-weight: 600;
-      color: #171717;
+      color: #c0bdb8;
       white-space: nowrap;
     }
 
@@ -616,18 +643,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f5f5f5;
+      background: rgba(255,255,255,0.08);
     }
     .exp-logo img { width: 100%; height: 100%; object-fit: cover; }
     .exp-meta {}
     .exp-role {
       font-size: 20px;
       font-weight: 700;
-      color: #171717;
+      color: #f0ede8 !important;
     }
     .exp-company-date {
       font-size: 14px;
-      color: #888;
+      color: #888 !important;
       margin-top: 2px;
     }
     .exp-bullets {
@@ -639,7 +666,7 @@
     }
     .exp-bullets li {
       font-size: 16px;
-      color: #444;
+      color: #a0a0a0 !important;
       line-height: 1.7;
       padding-left: 24px;
       position: relative;
@@ -769,8 +796,8 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        background: #171717;
-        color: #fff;
+        background: rgba(255,255,255,0.08);
+        color: #f0ede8;
         padding: 16px 30px;
         border-radius: 17px;
         font-family: 'Lato', sans-serif;
@@ -781,13 +808,12 @@
       .btn-resume {
         width: 100%;
         justify-content: center;
-        background: transparent;
-        color: #171717;
-        box-shadow: inset 0 0 0 2px #171717;
+        background: #FF6101;
+        color: #fff;
         font-size: 18px;
         padding: 16px 30px;
       }
-      .btn-resume:hover { background: #f5f5f5; transform: translateY(-2px); }
+      .btn-resume:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,97,1,0.4); }
 
       /* ── Hide Ping & Vibe + QR on mobile ── */
       .hero-right { display: none; }
@@ -865,7 +891,7 @@
 
       /* Section headings shimmer on scroll-in */
       .section-heading.visible {
-        background: linear-gradient(90deg, #171717 40%, #FF6101 50%, #171717 60%);
+        background: linear-gradient(90deg, #f0ede8 40%, #FF6101 50%, #f0ede8 60%);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -893,6 +919,126 @@
     .work-card {
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
+
+    /* ── Grain overlay ── */
+    .grain {
+      position: fixed;
+      inset: -200%;
+      width: 400%;
+      height: 400%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9998;
+      animation: grain-move 8s steps(10) infinite;
+    }
+    @keyframes grain-move {
+      0%   { transform: translate(0, 0); }
+      10%  { transform: translate(-2%, -3%); }
+      20%  { transform: translate(3%, 1%); }
+      30%  { transform: translate(-1%, 4%); }
+      40%  { transform: translate(4%, -2%); }
+      50%  { transform: translate(-3%, 3%); }
+      60%  { transform: translate(2%, -4%); }
+      70%  { transform: translate(-4%, 2%); }
+      80%  { transform: translate(1%, -1%); }
+      90%  { transform: translate(3%, 4%); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* ── Custom cursor ── */
+    #cursor {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid rgba(255,97,1,0.7);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+    #cursor-dot {
+      position: fixed;
+      width: 5px;
+      height: 5px;
+      background: #FF6101;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10001;
+      transform: translate(-50%, -50%);
+    }
+    body:has(a:hover) #cursor,
+    body:has(button:hover) #cursor {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,97,1,0.1);
+      border-color: #FF6101;
+    }
+
+    /* ── Floating orbs ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,97,1,0.5), transparent 70%);
+      top: -150px;
+      left: -100px;
+      animation: orb-float-1 12s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,140,50,0.3), transparent 70%);
+      bottom: 20%;
+      right: -80px;
+      animation: orb-float-2 15s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,60,0,0.25), transparent 70%);
+      top: 50%;
+      left: 40%;
+      animation: orb-float-3 10s ease-in-out infinite;
+    }
+    @keyframes orb-float-1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(60px, 80px) scale(1.1); }
+      66% { transform: translate(-40px, 40px) scale(0.9); }
+    }
+    @keyframes orb-float-2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-80px, -60px) scale(1.15); }
+    }
+    @keyframes orb-float-3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(40px, -50px) scale(1.05); }
+      66% { transform: translate(-30px, 30px) scale(0.95); }
+    }
+
+    /* ── Text reveal ── */
+    .reveal-text {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Dark theme h3 ── */
+    .my-story-section { background: #0c0c0f; }
+    .story-header h2 { color: #f0ede8; }
+    h3 { color: #f0ede8; }
   </style>
 </head>
 <body>
@@ -1355,7 +1501,80 @@
     }
   </script>
 
+  <script>
+    // ── Lenis smooth scroll ──
+    if (typeof Lenis !== 'undefined') {
+      const lenis = new Lenis({
+        duration: 1.4,
+        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true
+      });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+
+    // ── Custom cursor ──
+    const cursor = document.getElementById('cursor');
+    const cursorDot = document.getElementById('cursor-dot');
+    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+    });
+    function animateCursor() {
+      cursorX += (mouseX - cursorX) * 0.12;
+      cursorY += (mouseY - cursorY) * 0.12;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // ── Magnetic buttons ──
+    document.querySelectorAll('.btn-resume, .work-card-link').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+      });
+    });
+
+    // ── GSAP text reveal on scroll ──
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.section-heading, .work-title, .story-header h2').forEach(el => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 85%' }
+          }
+        );
+      });
+      gsap.utils.toArray('.work-card').forEach((el, i) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 60 },
+          { opacity: 1, y: 0, duration: 0.9, delay: i * 0.15, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%' }
+          }
+        );
+      });
+    }
+  </script>
+
   <div class="cs-hud" id="cs-hud">Coming Soon</div>
+
+  <!-- ── Dark theme overlay elements ── -->
+  <div id="cursor"></div>
+  <div id="cursor-dot"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grain"></div>
 
   <!-- Vibe Coding badge -->
   <style>
