@@ -203,9 +203,21 @@
       75%     { border-radius: 30% 70% 40% 60% / 70% 30% 50% 50%; transform: scale(1.05);  }
     }
     .g-blob.active { opacity: 1; }
+
+    /* ── Cursor trail canvas ── */
+    #trail-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: screen;
+    }
+
     .hero-top {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -247,7 +259,7 @@
     }
     .hero-bottom {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -931,6 +943,9 @@
   <!-- ════ HERO ════ -->
   <section id="home" class="hero">
 
+    <!-- Cursor trail canvas -->
+    <canvas id="trail-canvas" aria-hidden="true"></canvas>
+
     <!-- Liquid glass drifting panels + hover blob -->
     <div class="glass-bg" aria-hidden="true">
       <div class="g-slab g-s1"></div>
@@ -1311,6 +1326,54 @@
       clearTimeout(hudTimer);
       hudTimer = setTimeout(() => hud.classList.remove('show'), 2000);
     }
+
+    // ── Cursor trail (light smear through glass) ──
+    (function() {
+      const hero   = document.querySelector('.hero');
+      const canvas = document.getElementById('trail-canvas');
+      if (!hero || !canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      function resize() {
+        canvas.width  = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let pts = [];
+      const MAX_AGE = 1000; // ms trail persists
+
+      hero.addEventListener('mousemove', e => {
+        const r = hero.getBoundingClientRect();
+        pts.push({ x: e.clientX - r.left, y: e.clientY - r.top, t: Date.now() });
+      });
+
+      (function draw() {
+        const now = Date.now();
+        pts = pts.filter(p => now - p.t < MAX_AGE);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        pts.forEach(p => {
+          const life = 1 - (now - p.t) / MAX_AGE;   // 1=fresh → 0=gone
+          const radius = 130 + (1 - life) * 70;      // grows as it fades
+
+          const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
+          g.addColorStop(0,    `rgba(240, 215, 255, ${life * 0.85})`);
+          g.addColorStop(0.25, `rgba(195, 145, 255, ${life * 0.6})`);
+          g.addColorStop(0.55, `rgba(140,  90, 240, ${life * 0.3})`);
+          g.addColorStop(1,    `rgba(115,  66, 226, 0)`);
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      })();
+    })();
 
     // ── Liquid glass blob follows cursor on hero ──
     (function() {
