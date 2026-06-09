@@ -39,6 +39,21 @@
       top: 0; left: 0; right: 0;
       z-index: 200;
       padding: 22px 0;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    header.scrolled .nav-logo { color: #0c0c0f; }
+    header.scrolled .nav-logo span { color: #7342E2; }
+    header.scrolled .nav-text-link { color: #0c0c0f; -webkit-text-fill-color: #0c0c0f; }
+    header.scrolled .nav-cta {
+      background: #7342E2;
+      border-color: #7342E2;
+      color: #fff;
     }
     nav {
       padding: 0 48px;
@@ -52,6 +67,7 @@
       font-weight: 700;
       font-size: 18px;
       color: #f0ede8;
+      transition: color 0.3s ease;
     }
     .nav-logo span { color: #7342E2; }
     .nav-pills-wrap {
@@ -105,6 +121,44 @@
       color: #fff;
       box-shadow: 0 8px 30px rgba(115,66,226,0.35);
     }
+    .nav-social-icons {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(240,237,232,0.7);
+      transition: all 0.25s;
+    }
+    .nav-social-icon:hover {
+      background: rgba(115,66,226,0.25);
+      border-color: rgba(115,66,226,0.5);
+      color: #f0ede8;
+    }
+    .nav-social-icon svg { display: block; }
+    .nav-text-link {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #f0ede8;
+      transition: color 0.3s ease;
+      letter-spacing: 0.3px;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s;
+    }
+    .nav-text-link:hover { opacity: 0.75; }
 
     /* ── Hero ── */
     .hero {
@@ -115,7 +169,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 130px 48px 52px;
+      padding: 130px 48px 108px;
     }
     /* Solid purple hero */
     .hero { background: #7342E2; }
@@ -124,10 +178,12 @@
     /* ── Keyword marquee ── */
     .hero-marquee {
       position: absolute;
-      top: 50%;
+      top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
-      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
       overflow: hidden;
       pointer-events: none;
       z-index: 1;
@@ -173,24 +229,45 @@
     }
     .cone-navy {
       position: absolute;
-      width: 150%; height: 150%;
-      top: -25%; left: -25%;
-      background: radial-gradient(ellipse 58% 68% at 50% 5%,
-        rgba(18, 8, 70, 0.88) 0%,
-        rgba(28, 10, 88, 0.52) 44%,
-        transparent 70%);
+      width: 160%; height: 160%;
+      top: -30%; left: -30%;
+      background: radial-gradient(ellipse 65% 72% at 50% 5%,
+        rgba(18, 8, 80, 1) 0%,
+        rgba(30, 10, 110, 0.80) 35%,
+        transparent 65%);
       animation: liquid-navy 10.8s linear infinite;
     }
     .cone-warm {
       position: absolute;
-      width: 150%; height: 150%;
-      bottom: -25%; left: -25%;
-      background: radial-gradient(ellipse 52% 60% at 50% 95%,
-        rgba(255, 145, 80, 0.28) 0%,
-        rgba(230, 85, 145, 0.14) 40%,
-        transparent 66%);
-      filter: blur(18px);
+      width: 160%; height: 160%;
+      bottom: -30%; left: -30%;
+      background: radial-gradient(ellipse 65% 72% at 50% 95%,
+        rgba(255, 90, 40, 0.80) 0%,
+        rgba(230, 60, 150, 0.55) 35%,
+        transparent 62%);
+      filter: blur(10px);
       animation: liquid-warm 13.5s linear infinite;
+    }
+    .cone-mid {
+      position: absolute;
+      width: 150%; height: 150%;
+      top: 5%; left: -25%;
+      background: radial-gradient(ellipse 60% 55% at 70% 50%,
+        rgba(115, 50, 240, 0.38) 0%,
+        transparent 58%);
+      filter: blur(18px);
+      animation: liquid-mid 16s linear infinite;
+    }
+    .cone-accent {
+      position: absolute;
+      width: 120%; height: 120%;
+      top: 20%; left: 30%;
+      background: radial-gradient(ellipse 45% 40% at 30% 60%,
+        rgba(180, 80, 255, 0.28) 0%,
+        rgba(100, 40, 220, 0.14) 45%,
+        transparent 68%);
+      filter: blur(22px);
+      animation: liquid-mid 20s linear infinite reverse;
     }
 
     /* Orbital circuits — linear timing makes end→start seamless */
@@ -216,6 +293,16 @@
       66%  { transform: translate(  6%, -3%) scale(0.96); }
       77%  { transform: translate(  2%, -6%) scale(1.00); }
       88%  { transform: translate( -2%, -4%) scale(1.03); }
+      100% { transform: translate(  0%,  0%) scale(1.00); }
+    }
+    @keyframes liquid-mid {
+      0%   { transform: translate(  0%,  0%) scale(1.00); }
+      14%  { transform: translate(  8%, -5%) scale(1.06); }
+      28%  { transform: translate( 12%,  4%) scale(1.10); }
+      42%  { transform: translate(  5%, 10%) scale(1.05); }
+      57%  { transform: translate( -6%,  8%) scale(0.97); }
+      71%  { transform: translate(-10%, -2%) scale(0.93); }
+      85%  { transform: translate( -4%, -8%) scale(0.97); }
       100% { transform: translate(  0%,  0%) scale(1.00); }
     }
 
@@ -253,18 +340,19 @@
       gap: 6px;
     }
     .hero-location-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #c8b0ff;
-      box-shadow: 0 0 8px 2px rgba(200, 176, 255, 0.6);
-      animation: pulse-dot 2s ease-in-out infinite;
-      align-self: flex-end;
-      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c8b0ff;
+      animation: pin-bounce 5s ease-in-out infinite;
+      transform-origin: center bottom;
     }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; box-shadow: 0 0 8px 2px rgba(168, 245, 160, 0.6); }
-      50%       { opacity: 0.6; box-shadow: 0 0 14px 4px rgba(200, 176, 255, 0.3); }
+    @keyframes pin-bounce {
+      0%, 100% { transform: scale(1);    opacity: 1; }
+      14%       { transform: scale(1.35); opacity: 1; }
+      28%       { transform: scale(1);    opacity: 1; }
+      42%       { transform: scale(1.2);  opacity: 1; }
+      56%       { transform: scale(1);    opacity: 0.85; }
     }
     .hero-inline-link {
       color: inherit;
@@ -382,8 +470,108 @@
     .btn-sayhi { display: none; }
     .btn-resume { display: none; }
 
+    /* ── Open to Work circular marquee ── */
+    .otw-ring {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    .otw-ring svg {
+      width: 100%;
+      height: 100%;
+      animation: otw-spin 10s linear infinite;
+      transform-origin: center;
+    }
+    .otw-ring .otw-text {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      fill: rgba(240,237,232,0.9);
+    }
+    .otw-ring .otw-dot {
+      font-size: 9px;
+      fill: rgba(240,237,232,0.5);
+    }
+    .otw-center-dot {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7342E2 0%, #ff5a28 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .otw-center-dot svg {
+      animation: none !important;
+      width: 13px; height: 13px;
+    }
+    @keyframes otw-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
     /* ── Social Bar ── */
     .social-bar { display: none; }
+
+    /* ── What I Do ── */
+    .what-i-do {
+      width: 100%;
+      background: #fff;
+      position: relative;
+    }
+    .what-i-do-inner {
+      padding: 100px 48px 48px;
+    }
+    .what-i-do-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: #0c0c0f;
+      letter-spacing: -1px;
+      margin-bottom: 48px;
+    }
+    .what-i-do-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .wid-card {
+      background: transparent;
+      border: 1px solid #d8d8d8;
+      border-radius: 20px;
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wid-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-radius: 10px;
+      color: #0c0c0f;
+      flex-shrink: 0;
+    }
+    .wid-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #0c0c0f;
+      line-height: 1.2;
+    }
+    .wid-desc {
+      font-size: 15px;
+      color: #888;
+      line-height: 1.4;
+      font-weight: 400;
+    }
 
     /* ── Section Headings ── */
     .section-heading {
@@ -394,23 +582,205 @@
       margin-bottom: 36px;
     }
 
+    /* ── Design Spectrum Banner ── */
+    .spectrum-banner {
+      width: 100%;
+      background: #0c0c0f;
+      position: relative;
+      z-index: 2;
+    }
+    .spectrum-inner {
+      width: 100%;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .spectrum-label {
+      flex-shrink: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #7342E2 0%, #ff5a28 50%, #c8b0ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      white-space: nowrap;
+    }
+    .spectrum-track-wrap {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .spectrum-track {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      animation: spectrum-scroll 32s linear infinite;
+    }
+    .spectrum-track span {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+      padding: 0 22px;
+      letter-spacing: 0.01em;
+    }
+    .spectrum-dot {
+      font-size: 10px !important;
+      font-style: normal !important;
+      color: rgba(255,255,255,0.95) !important;
+      padding: 0 2px !important;
+    }
+    @keyframes spectrum-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Selected Works ── */
     /* ── Selected Works ── */
     .selected-works {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 80px 100px 80px;
+      width: 100%;
+      background: #fff;
+      position: relative;
     }
-    .works-list {
+    .works-sticky-head {
+      padding: 100px 60px 48px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    .works-sticky-head .section-heading,
+    .works-sticky-head .section-heading.visible {
+      font-size: 48px;
+      font-weight: 700;
+      color: #0c0c0f !important;
+      -webkit-text-fill-color: #0c0c0f !important;
+      background: none !important;
+      animation: none !important;
+      margin-bottom: 0;
+      letter-spacing: -1px;
+      line-height: 1;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* 2-col full-bleed card grid */
+    .works-cards-grid {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 60px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Each card = image + caption below, fused as one unit */
+    .wc2 {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-    }
-    .work-card-link {
-      display: block;
-      width: 100%;
+      gap: 0;
       text-decoration: none;
       color: inherit;
+      background: #0c0c0f;
+      border-radius: 20px;
     }
+    .wc2.wc2-wide {
+      grid-column: 1 / -1;
+    }
+    .wc2.wc2-wide .wc2-img-wrap {
+      aspect-ratio: 4 / 1;
+    }
+
+    .wc2-img-wrap {
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4 / 3;
+      display: block;
+      cursor: pointer;
+      background: #0c0c0f;
+    }
+    .wc2-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .wc2:hover .wc2-img-wrap img { transform: scale(1.03); }
+
+    .wc2-hover-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.92);
+      background: rgba(255, 255, 255, 0.95);
+      color: #0c0c0f;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.1px;
+      padding: 12px 24px;
+      border-radius: 100px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 2;
+    }
+    .wc2:hover .wc2-hover-btn {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    /* Subtle dark overlay on hover */
+    .wc2-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .wc2:hover .wc2-img-wrap::after { opacity: 1; }
+
+    /* Caption bar — black footer fused to bottom of image */
+    .wc2-caption {
+      background: #0c0c0f;
+      padding: 16px 24px 20px;
+      border-radius: 0 0 20px 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .wc2-caption-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -0.1px;
+      margin: 0;
+    }
+    .wc2-tags {
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.04em;
+    }
+
     .work-card-disabled { cursor: pointer; opacity: 0.5; }
     .cs-hud {
       position: fixed;
@@ -433,28 +803,6 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
-    .work-card {
-      border-radius: 20px;
-      padding: 0 20px 0 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: stretch;
-      min-height: 400px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.04) !important;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-    }
-    .work-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(115,66,226,0.2);
-      border-color: rgba(115,66,226,0.3);
-    }
-    .work-left { padding: 20px 0; display: flex; flex-direction: column; justify-content: center; }
-    .work-card.c-lime { background: rgba(255,255,255,0.04) !important; }
-    .work-card.c-pink { background: rgba(255,255,255,0.04) !important; }
-    .work-card.c-teal { background: rgba(255,255,255,0.04) !important; }
 
     .work-icon {
       width: 70px;
@@ -524,22 +872,6 @@
       padding: 5px 14px;
       border-radius: 100px;
       color: #a0a0a0 !important;
-    }
-    .work-preview {
-      background: transparent;
-      border-radius: 18px;
-      aspect-ratio: 1.45 / 1;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .work-preview-inner {
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.5);
-      filter: blur(2px);
     }
     .coming-soon {
       position: relative;
@@ -795,7 +1127,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 1100px) {
-      .selected-works, .showcase-header, .story-header, .story-columns, .footer-inner {
+      .works-cards-wrap, .showcase-header, .story-header, .story-columns, .footer-inner {
         padding-left: 48px;
         padding-right: 48px;
       }
@@ -828,7 +1160,7 @@
       .hero-stats { width: 100%; }
       .stat-card { flex: 1; min-width: 0; }
       .nav-pills-wrap a { padding: 7px 14px; font-size: 13px; }
-      .selected-works, .showcase-header, .story-header, .story-columns, .footer-inner {
+      .works-cards-wrap, .showcase-header, .story-header, .story-columns, .footer-inner {
         padding-left: 20px;
         padding-right: 20px;
       }
@@ -1011,7 +1343,13 @@
         <a href="#works">Works</a>
         <a href="#my-story">My Story</a>
       </div>
-      <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="nav-cta" onclick="gtag('event','resume_download',{event_category:'engagement',event_label:'Download Resume'})">Download Resume ↗</a>
+      <div style="display:flex;align-items:center;gap:24px;">
+        <div class="nav-social-icons">
+          <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener" class="nav-text-link">LinkedIn</a>
+          <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener" class="nav-text-link">Dribbble</a>
+        </div>
+        <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="nav-cta" onclick="gtag('event','resume_download',{event_category:'engagement',event_label:'Download Resume'})">Download Resume</a>
+      </div>
     </nav>
   </header>
 
@@ -1035,6 +1373,7 @@
         <span>Problem Solver</span><span class="marquee-diamond">✦</span>
         <span>Design Mentorship</span><span class="marquee-diamond">✦</span>
         <span>Hiring &amp; Team Scaling</span><span class="marquee-diamond">✦</span>
+        <span>Vibe Coder</span><span class="marquee-diamond">✦</span>
         <span>Product Designer</span><span class="marquee-diamond">✦</span>
         <span>Design Leadership</span><span class="marquee-diamond">✦</span>
         <span>Strategic Thinking</span><span class="marquee-diamond">✦</span>
@@ -1049,6 +1388,7 @@
         <span>Problem Solver</span><span class="marquee-diamond">✦</span>
         <span>Design Mentorship</span><span class="marquee-diamond">✦</span>
         <span>Hiring &amp; Team Scaling</span><span class="marquee-diamond">✦</span>
+        <span>Vibe Coder</span><span class="marquee-diamond">✦</span>
       </div>
     </div>
 
@@ -1056,21 +1396,27 @@
     <div class="hero-cone">
       <div class="cone-navy"></div>
       <div class="cone-warm"></div>
+      <div class="cone-mid"></div>
+      <div class="cone-accent"></div>
     </div>
 
     <!-- Top row: label left · bio right -->
     <div class="hero-top">
       <div class="hero-label">
-        <span class="hero-label-tag">Product Design Partner</span>
-        <p class="hero-label-sub">AI-first designer with a decade of experience crafting seamless, user-friendly products through thoughtful design thinking. Currently spearheading design at <a href="https://www.poshmark.com" target="_blank" rel="noopener noreferrer" class="hero-inline-link">Poshmark</a></p>
-        <p class="hero-label-sub hero-label-sub--tagline">Your 0 → 1 → Unlimited Design Partner</p>
+        <span class="hero-label-tag">Your 0 → 1 | 1 → N Product Design Partner</span>
+        <p class="hero-label-sub">AI-first designer with more than a decade of experience crafting seamless, user-friendly products through thoughtful design thinking. Currently spearheading design at <a href="https://www.poshmark.com" target="_blank" rel="noopener noreferrer" class="hero-inline-link">Poshmark</a></p>
       </div>
       <div class="hero-desc">
         <div class="hero-location">
-          <span class="hero-location-dot"></span>
+          <span class="hero-location-dot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </span>
           <a href="https://www.tamilnadutourism.tn.gov.in/destinations/chennai" target="_blank" rel="noopener noreferrer" class="hero-location-city">Chennai, India</a>
           <span class="hero-location-time" id="chennai-time"></span>
         </div>
+
       </div>
     </div>
 
@@ -1078,130 +1424,240 @@
     <div class="hero-bottom">
       <div class="hero-name-wrap">
         <p class="hero-tagline">Product Design Manager and Vibe Coder</p>
-        <h1 class="hero-name">Santhosh<br>Rajendran</h1>
+        <h1 class="hero-name" id="hero-name-scramble">Santhosh<br>Rajendran</h1>
       </div>
       <div class="hero-stats">
         <div class="stat-card">
-          <span class="stat-num">10+</span>
+          <span class="stat-num" data-target="12" data-suffix="+">0+</span>
           <span class="stat-label">Years of experience</span>
         </div>
         <div class="stat-card">
-          <span class="stat-num">50M+</span>
-          <span class="stat-label">Users reached</span>
+          <span class="stat-num" data-target="200" data-suffix="+">0+</span>
+          <span class="stat-label">Projects completed</span>
         </div>
+
+        <!-- Open to Work ring -->
+        <div class="otw-ring">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="otw-circle-path" d="M 60,60 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"/>
+            </defs>
+            <text class="otw-text">
+              <textPath href="#otw-circle-path" startOffset="0%">
+                ✦ OPEN TO WORK  ✦ OPEN TO WORK
+              </textPath>
+            </text>
+          </svg>
+          <div class="otw-center-dot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+        </div>
+
       </div>
     </div>
 
+  </section>
+
+  <!-- ════ WHAT I DO ════ -->
+  <section class="what-i-do">
+    <div class="what-i-do-inner">
+      <h2 class="what-i-do-heading">What I Bring to the Table</h2>
+      <div class="what-i-do-grid">
+
+        <!-- Row 1: Think & Strategize — upstream from research to roadmap -->
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <p class="wid-title">UX Research</p>
+          <p class="wid-desc">User interviews, usability tests and synthesis that validate every design decision before it ships.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 3-1.8 5.4-4 6.5V18H9v-2.5C6.8 14.4 5 12 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/><path d="M10 18h4"/></svg>
+          </div>
+          <p class="wid-title">Design Thinking</p>
+          <p class="wid-desc">Human-centered problem solving that moves from deep user insight to impactful, tested solutions.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <p class="wid-title">Design Leadership</p>
+          <p class="wid-desc">Being the go-to design partner, owning the craft end-to-end and delivering solutions teams trust and ship with confidence.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <p class="wid-title">Strategy &amp; Direction</p>
+          <p class="wid-desc">Aligning design with business goals through clear roadmaps and purposeful creative direction that moves the needle.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <p class="wid-title">Product Management</p>
+          <p class="wid-desc">Bridging design and delivery — defining scope, aligning stakeholders, and keeping product momentum moving forward.</p>
+        </div>
+
+        <!-- Row 2: Make & Ship — downstream craft to launch -->
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <p class="wid-title">Interface Design</p>
+          <p class="wid-desc">Pixel-perfect UI that strikes the balance between visual beauty, clarity and seamless interaction.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <p class="wid-title">Web &amp; Product Design</p>
+          <p class="wid-desc">End-to-end digital experiences built for conversion, engagement and genuine user delight.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <p class="wid-title">Prototyping</p>
+          <p class="wid-desc">Interactive, high-fidelity prototypes that bring ideas to life and test concepts before a single line of code.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </div>
+          <p class="wid-title">Design Systems</p>
+          <p class="wid-desc">Scalable, token-driven component libraries that keep teams consistent and ship velocity high.</p>
+        </div>
+
+        <div class="wid-card">
+          <div class="wid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <p class="wid-title">Launch-ready Delivery</p>
+          <p class="wid-desc">Polished, developer-handoff-ready assets and specs that keep launches on time and on point.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ DESIGN SPECTRUM BANNER ════ -->
+  <section class="spectrum-banner">
+    <div class="spectrum-inner">
+      <span class="spectrum-label">My Design Spectrum</span>
+      <div class="spectrum-track-wrap">
+        <div class="spectrum-track">
+          <span>Ecommerce</span><span class="spectrum-dot">✦</span>
+          <span>Fintech</span><span class="spectrum-dot">✦</span>
+          <span>Crypto Space</span><span class="spectrum-dot">✦</span>
+          <span>Travel &amp; Living</span><span class="spectrum-dot">✦</span>
+          <span>Healthcare</span><span class="spectrum-dot">✦</span>
+          <span>Answering Service</span><span class="spectrum-dot">✦</span>
+          <span>Telecom</span><span class="spectrum-dot">✦</span>
+          <span>SaaS</span><span class="spectrum-dot">✦</span>
+          <span>NFTs</span><span class="spectrum-dot">✦</span>
+          <span>Banking</span><span class="spectrum-dot">✦</span>
+          <span>Aviation</span><span class="spectrum-dot">✦</span>
+          <!-- duplicate for seamless loop -->
+          <span>Ecommerce</span><span class="spectrum-dot">✦</span>
+          <span>Fintech</span><span class="spectrum-dot">✦</span>
+          <span>Crypto Space</span><span class="spectrum-dot">✦</span>
+          <span>Travel &amp; Living</span><span class="spectrum-dot">✦</span>
+          <span>Healthcare</span><span class="spectrum-dot">✦</span>
+          <span>Answering Service</span><span class="spectrum-dot">✦</span>
+          <span>Telecom</span><span class="spectrum-dot">✦</span>
+          <span>SaaS</span><span class="spectrum-dot">✦</span>
+          <span>NFTs</span><span class="spectrum-dot">✦</span>
+          <span>Banking</span><span class="spectrum-dot">✦</span>
+          <span>Aviation</span><span class="spectrum-dot">✦</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ════ SELECTED WORKS ════ -->
   <section id="works" class="selected-works">
-    <h2 class="section-heading fade-up">Selected Works</h2>
-    <div class="works-list">
+    <div class="works-sticky-head">
+      <h2 class="section-heading">Selected Works</h2>
+    </div>
 
-      <!-- Card 1: Poshmark App Redesign -->
-      <a href="poshmark.html" class="work-card-link" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Poshmark App Redesign'})"><div class="work-card c-lime fade-up">
-        <div class="work-left">
-          <div class="work-icon" style="overflow:hidden; padding:0;">
-            <img src="icons/poshmark.png" alt="Poshmark" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <h3 class="work-title">Poshmark App Redesign</h3>
-          <p class="work-desc">The new look encompasses a redesigned navigational tools, and a new, streamlined aesthetic.</p>
-          <div class="work-tags">
-            <span class="tag">iOS design</span>
-            <span class="tag">Android design</span>
-          </div>
-        </div>
-        <div class="work-preview" style="align-self: stretch; border-radius: 0; aspect-ratio: unset;">
-          <div class="work-preview-inner" style="position:absolute; inset:12px 0 12px 12px; overflow:hidden; border-radius:18px; background:#FFF3F1; filter:none;">
-            <img src="images/pm-card.webp" alt="Poshmark App" style="width:100%; height:100%; object-fit:cover; object-position:center center; display:block; border-radius:18px;">
-          </div>
-        </div>
-      </div></a>
+    <div class="works-cards-grid">
 
-      <!-- Card 2: Škoda Connected App -->
-      <a href="skoda.html" class="work-card-link"><div class="work-card c-teal fade-up">
-        <div class="work-left">
-          <div class="work-icon dark">
-            <img src="images/skoda/skoda-logo.svg" alt="Škoda" style="width:36px; height:36px; display:block;">
-          </div>
-          <h3 class="work-title">Škoda Connected App Concept</h3>
-          <p class="work-desc">In-car connectivity app redesigned for seamless interaction between driver and vehicle experience.</p>
-          <div class="work-tags">
-            <span class="tag">iOS design</span>
-            <span class="tag">Android design</span>
-          </div>
+      <!-- Card 1: Poshmark -->
+      <a href="poshmark.html" class="wc2"
+         onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Poshmark App Redesign'})">
+        <div class="wc2-img-wrap">
+          <img src="images/pm-card.webp" alt="Poshmark App Redesign">
+          <span class="wc2-hover-btn">View Case Study</span>
         </div>
-        <div class="work-preview" style="align-self: stretch; border-radius: 0; aspect-ratio: unset;">
-          <div class="work-preview-inner" style="position:absolute; inset:12px 0 12px 12px; overflow:hidden; border-radius:18px; background:#F9FBD1; filter:none;">
-            <img src="images/skoda/SkodaHero.png" alt="Škoda App" style="width:100%; height:100%; object-fit:cover; object-position:center center; display:block; border-radius:18px;">
-          </div>
+        <div class="wc2-caption">
+          <p class="wc2-caption-title">Reimagining the Poshmark app experience</p>
+          <span class="wc2-tags">iOS Design / Android Design / E-commerce</span>
         </div>
-      </div></a>
+      </a>
+
+      <!-- Card 2: Škoda -->
+      <a href="skoda.html" class="wc2">
+        <div class="wc2-img-wrap">
+          <img src="images/skoda/SkodaHero.png" alt="Škoda Connected App">
+          <span class="wc2-hover-btn">View Case Study</span>
+        </div>
+        <div class="wc2-caption">
+          <p class="wc2-caption-title">Connected car experience for the modern driver</p>
+          <span class="wc2-tags">iOS Design / Android Design / Automotive</span>
+        </div>
+      </a>
+
+      <!-- Card 3: Wide full-span -->
+      <a href="#" class="wc2 wc2-wide">
+        <div class="wc2-img-wrap">
+          <img src="images/Img7.png" alt="Wide Placeholder Project">
+          <span class="wc2-hover-btn">View Case Study</span>
+        </div>
+        <div class="wc2-caption">
+          <p class="wc2-caption-title">Building a seamless design system for a fintech at scale</p>
+          <span class="wc2-tags">Design Systems / Tokens / Multi-platform</span>
+        </div>
+      </a>
+
+      <!-- Card 4: Placeholder -->
+      <a href="#" class="wc2">
+        <div class="wc2-img-wrap">
+          <img src="images/Img1.png" alt="Placeholder Project">
+          <span class="wc2-hover-btn">View Case Study</span>
+        </div>
+        <div class="wc2-caption">
+          <p class="wc2-caption-title">Redesigning the enterprise IT management experience</p>
+          <span class="wc2-tags">SaaS Design / Dashboard / B2B</span>
+        </div>
+      </a>
+
+      <!-- Card 4: Placeholder -->
+      <a href="#" class="wc2">
+        <div class="wc2-img-wrap">
+          <img src="images/Img3.png" alt="Placeholder Project">
+          <span class="wc2-hover-btn">View Case Study</span>
+        </div>
+        <div class="wc2-caption">
+          <p class="wc2-caption-title">Crafting a next-gen job search platform for professionals</p>
+          <span class="wc2-tags">Web Design / Mobile / Career Tech</span>
+        </div>
+      </a>
 
     </div>
   </section>
 
-  <!-- ════ DESIGN SHOWCASE ════ -->
-  <section class="design-showcase">
-    <div class="showcase-header">
-      <h2 class="section-heading fade-up">Design Showcase</h2>
-    </div>
-    <div class="bento-wrap">
-      <div class="bento-grid">
-        <!-- Img1 -->
-        <div class="bento-item b-img1 fade-up">
-          <img src="images/Img1.png?v=2" alt="Design showcase">
-        </div>
-
-        <!-- Img2 -->
-        <div class="bento-item b-img2 fade-up">
-          <img src="images/Img2.png?v=2" alt="Design showcase">
-        </div>
-
-        <!-- Img3 -->
-        <div class="bento-item b-img3 fade-up">
-          <img src="images/Img3.png" alt="Design showcase">
-        </div>
-
-        <!-- Img4 -->
-        <div class="bento-item b-img4 fade-up">
-          <img src="images/Img4.png" alt="Design showcase">
-        </div>
-
-        <!-- Img5 -->
-        <div class="bento-item b-img5 fade-up">
-          <img src="images/Img5.png" alt="Design showcase">
-        </div>
-
-        <!-- Img6 -->
-        <div class="bento-item b-img6 fade-up">
-          <img src="images/Img6.png" alt="Design showcase">
-        </div>
-
-        <!-- Img7 -->
-        <div class="bento-item b-img7 fade-up">
-          <img src="images/Img7.png" alt="Design showcase">
-        </div>
-
-        <!-- Img8 -->
-        <div class="bento-item b-img8 fade-up">
-          <img src="images/Img8.png" alt="Design showcase">
-        </div>
-
-        <!-- Img9 -->
-        <div class="bento-item b-img9 fade-up">
-          <img src="images/Img9.png?v=2" alt="Design showcase">
-        </div>
-
-        <!-- Img10 -->
-        <div class="bento-item b-img10 fade-up">
-          <img src="images/Img10.png" alt="Design showcase">
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- ════ MY STORY ════ -->
   <section id="my-story" class="my-story">
@@ -1437,6 +1893,48 @@
   </script>
 
   <script>
+    // ── 1. Text scramble on hero name ──
+    (function() {
+      const el = document.getElementById('hero-name-scramble');
+      if (!el) return;
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      const original = ['Santhosh', 'Rajendran'];
+      let frame = 0;
+      const totalFrames = 60;
+      const frameDelay = 40; // ms per frame → ~2.4s total
+      function scramble() {
+        el.innerHTML = original.map(word => {
+          return word.split('').map((ch, i) => {
+            const reveal = Math.floor((frame / totalFrames) * word.length);
+            if (ch === ' ' || i < reveal) return ch;
+            return chars[Math.floor(Math.random() * chars.length)];
+          }).join('');
+        }).join('<br>');
+        frame++;
+        if (frame <= totalFrames) setTimeout(scramble, frameDelay);
+        else el.innerHTML = original.join('<br>');
+      }
+      setTimeout(scramble, 300);
+    })();
+
+    // ── 3. Stat counter ──
+    (function() {
+      document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(ease * target) + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        setTimeout(() => requestAnimationFrame(update), 600);
+      });
+    })();
+
     // ── Chennai live clock ──
     function updateChennaiTime() {
       const el = document.getElementById('chennai-time');
@@ -1454,8 +1952,14 @@
     updateChennaiTime();
     setInterval(updateChennaiTime, 1000);
 
-    // ── Magnetic buttons ──
-    document.querySelectorAll('.nav-cta, .work-card-link').forEach(el => {
+    // Nav scroll background
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Magnetic buttons (nav-cta only) ──
+    document.querySelectorAll('.nav-cta').forEach(el => {
       el.addEventListener('mousemove', e => {
         const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
@@ -1470,7 +1974,7 @@
     // ── GSAP text reveal on scroll ──
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
-      gsap.utils.toArray('.section-heading, .work-title, .story-header h2').forEach(el => {
+      gsap.utils.toArray('.section-heading:not(.works-sticky-head .section-heading), .work-title, .story-header h2').forEach(el => {
         gsap.fromTo(el,
           { opacity: 0, y: 40 },
           { opacity: 1, y: 0, duration: 1, ease: 'power3.out',
@@ -1478,14 +1982,8 @@
           }
         );
       });
-      gsap.utils.toArray('.work-card').forEach((el, i) => {
-        gsap.fromTo(el,
-          { opacity: 0, y: 60 },
-          { opacity: 1, y: 0, duration: 0.9, delay: i * 0.15, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 88%' }
-          }
-        );
-      });
+      // Fade out sticky heading as first card enters
+
     }
   </script>
 
@@ -1544,7 +2042,7 @@
   </style>
   <div class="vibe-badge">
     <span class="vibe-badge-icon">✦</span>
-    <span style="display:inline-flex;align-items:center;gap:3px;">Designed with<span class="vibe-heart"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#ff3b3b" stroke="#ff3b3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>and Built with AI.</span>
+    <span style="display:inline-flex;align-items:center;gap:3px;">Designed with <span class="vibe-heart"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#ff3b3b" stroke="#ff3b3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span> &nbsp;|&nbsp; Vibe coded with passion</span>
   </div>
 
 </body>
