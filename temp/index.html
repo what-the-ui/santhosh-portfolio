@@ -21,13 +21,20 @@
   <style>
     /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;       /* Prevent horizontal scroll on Windows */
+      scrollbar-gutter: stable; /* Reserve scrollbar space so layout doesn't shift */
+    }
     body {
       font-family: 'Lato', sans-serif;
       background-color: #0c0c0f;
       color: #f0ede8;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;  /* Firefox on Mac */
+      text-rendering: optimizeLegibility;  /* Cross-platform text clarity */
+      overflow-x: hidden;                  /* Belt-and-suspenders for Windows */
       cursor: auto;
     }
     img { max-width: 100%; display: block; }
@@ -164,8 +171,9 @@
     .hero {
       position: relative;
       height: 100vh;
+      height: 100dvh; /* Dynamic viewport height — accounts for browser chrome on Windows/mobile */
       min-height: 700px;
-      overflow: hidden;
+      overflow-x: hidden; /* Clip marquee/orbs horizontally without cutting off vertical content */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
