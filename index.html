@@ -591,6 +591,115 @@
     }
 
     /* ── Design Spectrum Banner ── */
+    /* ── Tools Banner ── */
+    .tools-banner {
+      width: 100%;
+      background: #0c0c0f;
+      padding: 80px 60px 100px;
+    }
+    .tools-banner-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 52px;
+    }
+    .tools-banner-label {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+      color: #f0ede8;
+    }
+
+    /* ── Orbit / fan card deck ── */
+    .tools-deck-wrap {
+      position: relative;
+      height: 90px;           /* collapsed height */
+      display: flex;
+      align-items: flex-end;
+    }
+    .tools-deck {
+      position: relative;
+      width: 72px;           /* collapsed width — cards stack here */
+      height: 72px;
+      flex-shrink: 0;
+    }
+    .tool-card {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 8px 8px;
+      cursor: pointer;
+      transform-origin: bottom center;
+      transition:
+        transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1),
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+      will-change: transform;
+    }
+    .tool-card img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      display: block;
+    }
+    .tool-card .tc-name {
+      font-family: 'Lato', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      color: rgba(240,237,232,0.55);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    /* Default stacked state — tight deck with rotation */
+    .tool-card:nth-child(1)  { transform: translateX(0px)   rotate(-18deg); z-index: 10; }
+    .tool-card:nth-child(2)  { transform: translateX(5px)   rotate(-13deg); z-index: 9; }
+    .tool-card:nth-child(3)  { transform: translateX(10px)  rotate(-8deg);  z-index: 8; }
+    .tool-card:nth-child(4)  { transform: translateX(15px)  rotate(-3deg);  z-index: 7; }
+    .tool-card:nth-child(5)  { transform: translateX(20px)  rotate(2deg);   z-index: 6; }
+    .tool-card:nth-child(6)  { transform: translateX(25px)  rotate(7deg);   z-index: 5; }
+    .tool-card:nth-child(7)  { transform: translateX(30px)  rotate(12deg);  z-index: 4; }
+    .tool-card:nth-child(8)  { transform: translateX(35px)  rotate(17deg);  z-index: 3; }
+    .tool-card:nth-child(9)  { transform: translateX(40px)  rotate(22deg);  z-index: 2; }
+    .tool-card:nth-child(10) { transform: translateX(45px)  rotate(27deg);  z-index: 1; }
+
+    /* Fanned out on hover */
+    .tools-deck:hover .tool-card { background: rgba(255,255,255,0.1); }
+    .tools-deck:hover .tool-card:nth-child(1)  { transform: translateX(0px);   box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .tools-deck:hover .tool-card:nth-child(2)  { transform: translateX(88px);  box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(3)  { transform: translateX(176px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(4)  { transform: translateX(264px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(5)  { transform: translateX(352px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(6)  { transform: translateX(440px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(7)  { transform: translateX(528px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(8)  { transform: translateX(616px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(9)  { transform: translateX(704px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card:nth-child(10) { transform: translateX(792px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .tools-deck:hover .tool-card .tc-name { opacity: 1; transform: translateY(0); }
+
+    /* Individual card hover lift */
+    .tools-deck:hover .tool-card:hover {
+      transform: translateY(-12px) !important;
+      background: rgba(255,255,255,0.16) !important;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
+    }
+
     .spectrum-banner {
       width: 100%;
       background: #0c0c0f;
@@ -1666,195 +1775,27 @@
     </div>
   </section>
 
-
-  <!-- ════ MY STORY ════ -->
-  <section id="my-story" class="my-story">
-    <div class="story-header">
-      <h2 class="section-heading fade-up">My Story</h2>
-    </div>
-
-    <div class="story-photo-wrap">
-      <img src="images/story-photo.jpg" alt="Santhosh Rajendran in Singapore">
-    </div>
-
-    <div class="story-header">
-      <p class="story-bio fade-up">
-        With over ten years of experience in web and product design, I bring a genuine curiosity,
-        a passion for my craft, and an eagerness to keep growing. I love tackling complex challenges,
-        using a thoughtful and strategic approach that strikes a balance between creativity and data.
-        My goal is to turn intricate problems into straightforward, actionable solutions that truly make a difference.
-      </p>
-    </div>
-
-    <div class="story-columns">
-      <!-- Experience (now first) -->
-      <div class="exp-col fade-up">
-        <h3>Experience</h3>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Manager, Product Design</div>
-              <div class="exp-company-date">2024 - Present · Poshmark India Private Limited</div>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Led and scaled a team of 4 designers across multiple product areas, driving design quality and delivery efficiency and contributing to 18% YoY DAU growth.</li>
-            <li>Defined marketplace design strategy, improving listing completion by 31%.</li>
-            <li>Partnered with product and engineering to deliver high-impact initiatives and scale a design system, reducing inconsistencies by 35%.</li>
-            <li>Established team processes including design critiques, planning, and reviews to improve execution.</li>
-            <li>Mentored designers and supported career growth, improving team capability and output.</li>
-          </ul>
-        </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Lead Product Designer</div>
-              <div class="exp-company-date">2022 - 2024 · Poshmark India Private Limited</div>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Owned end-to-end design for core marketplace journeys including listing, discovery, and onboarding.</li>
-            <li>Led cross-functional collaboration to define product direction and improve user experience.</li>
-            <li>Identified key friction points through research and translated insights into product improvements.</li>
-            <li>Delivered UX improvements that increased seller activation and improved conversion flows.</li>
-            <li>Mentored junior designers and elevated overall design quality within the team.</li>
-          </ul>
-        </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Senior Product Designer</div>
-              <div class="exp-company-date">2020 - 2022 · Poshmark India Private Limited</div>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Designed scalable web and mobile experiences across key product flows.</li>
-            <li>Improved usability of complex workflows, reducing friction in core user actions.</li>
-            <li>Conducted competitive analysis to identify opportunities for product enhancements.</li>
-            <li>Presented design solutions to stakeholders and drove alignment across teams.</li>
-          </ul>
-        </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Product Designer</div>
-              <div class="exp-company-date">2017 - 2020 · Poshmark India Private Limited</div>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Executed design solutions for new features across core product areas.</li>
-            <li>Collaborated closely with engineering to ensure high-quality implementation.</li>
-            <li>Contributed to improving usability and consistency across the product.</li>
-          </ul>
-        </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Product Designer</div>
-              <div class="exp-company-date">2014 - 2017 · AnywhereWorks</div>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Created wireframes, visual designs, and interaction flows for digital products.</li>
-            <li>Iterated on designs based on user feedback and usability insights.</li>
-            <li>Built strong foundations in user-centered design and interface design.</li>
-          </ul>
-        </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Product Designer Intern</div>
-              <div class="exp-company-date">2014 (3 months) · AnywhereWorks</div>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Supported senior designers in creating wireframes and visual designs.</li>
-            <li>Assisted in user research and usability testing activities.</li>
-            <li>Gained foundational experience in UX and product design workflows.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Tools & Skills (now below) -->
-      <div class="skills-col fade-up">
-        <h3>Tools &amp; Skills</h3>
-
-        <div class="skills-grid">
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/figma.png" alt="Figma">
-            </div>
-            <div class="skill-name">Figma</div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/sketch.png" alt="Sketch">
-            </div>
-            <div class="skill-name">Sketch</div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/principle.png" alt="Principle For Mac">
-            </div>
-            <div class="skill-name">Principle For Mac</div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/framer.png" alt="Framer">
-            </div>
-            <div class="skill-name">Framer</div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/protopie.png" alt="Protopie">
-            </div>
-            <div class="skill-name">Protopie</div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/aftereffects.svg" alt="After Effects">
-            </div>
-            <div class="skill-name">After Effects</div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/illustrator.svg" alt="Illustrator">
-            </div>
-            <div class="skill-name">Illustrator</div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-icon">
-              <img src="icons/photoshop.svg" alt="Photoshop">
-            </div>
-            <div class="skill-name">Photoshop</div>
-          </div>
-
+  <!-- ════ TOOLS BANNER ════ -->
+  <section class="tools-banner">
+    <div class="tools-banner-inner">
+      <span class="tools-banner-label">Tools &amp; Stack</span>
+      <div class="tools-deck-wrap">
+        <div class="tools-deck">
+          <div class="tool-card"><img src="icons/figma.png" alt="Figma"><span class="tc-name">Figma</span></div>
+          <div class="tool-card"><img src="icons/sketch.png" alt="Sketch"><span class="tc-name">Sketch</span></div>
+          <div class="tool-card"><img src="icons/principle.png" alt="Principle"><span class="tc-name">Principle</span></div>
+          <div class="tool-card"><img src="icons/framer.png" alt="Framer"><span class="tc-name">Framer</span></div>
+          <div class="tool-card"><img src="icons/protopie.png" alt="Protopie"><span class="tc-name">Protopie</span></div>
+          <div class="tool-card"><img src="icons/aftereffects.svg" alt="After Effects"><span class="tc-name">After Effects</span></div>
+          <div class="tool-card"><img src="icons/illustrator.svg" alt="Illustrator"><span class="tc-name">Illustrator</span></div>
+          <div class="tool-card"><img src="icons/photoshop.svg" alt="Photoshop"><span class="tc-name">Photoshop</span></div>
+          <div class="tool-card"><img src="icons/jira.svg" alt="Jira"><span class="tc-name">Jira</span></div>
+          <div class="tool-card"><img src="icons/claude.svg" alt="Claude AI"><span class="tc-name">Claude AI</span></div>
         </div>
       </div>
-
     </div>
   </section>
+
 
   <!-- ════ FOOTER ════ -->
   <footer>
