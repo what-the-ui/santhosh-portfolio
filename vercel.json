@@ -1,12 +1,4 @@
 {
-  "rewrites": [
-    {
-      "source": "/temp",
-      "destination": "https://santhosh-staging.vercel.app"
-    },
-    {
-      "source": "/temp/:path*",
-      "destination": "https://santhosh-staging.vercel.app/:path*"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
