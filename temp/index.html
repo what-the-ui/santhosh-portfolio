@@ -12,7 +12,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Santhosh Rajendran, Product Design Partner</title>
-  <link rel="icon" type="image/png" href="images/favicon-profile.png">
+  <link rel="icon" type="image/png" href="../images/favicon-profile.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -173,7 +173,7 @@
       height: 100vh;
       height: 100dvh; /* Dynamic viewport height — accounts for browser chrome on Windows/mobile */
       min-height: 700px;
-      overflow-x: hidden; /* Clip marquee/orbs horizontally without cutting off vertical content */
+      overflow: hidden; /* Clip orbs to hero bounds */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -485,6 +485,7 @@
       height: 120px;
       flex-shrink: 0;
       align-self: center;
+      margin-top: 16px;
     }
     .otw-ring svg {
       width: 100%;
@@ -581,6 +582,7 @@
       font-weight: 400;
     }
 
+
     /* ── Section Headings ── */
     .section-heading {
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -589,115 +591,205 @@
       color: #f0ede8;
       margin-bottom: 36px;
     }
+    .my-story .section-heading,
+    .my-story .section-heading.visible {
+      color: #171717 !important;
+      background: none !important;
+      -webkit-text-fill-color: #171717 !important;
+      margin-bottom: 0;
+      animation: none !important;
+    }
 
     /* ── Design Spectrum Banner ── */
     /* ── Tools Banner ── */
     .tools-banner {
       width: 100%;
-      background: #0c0c0f;
-      padding: 80px 60px 100px;
+      background: #fff;
+      padding: 40px 60px 56px;
     }
     .tools-banner-inner {
       max-width: 1600px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 52px;
+      align-items: center;
+      gap: 36px;
     }
     .tools-banner-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #b0b0b0;
+    }
+    .tools-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0.45;
+      filter: grayscale(1);
+      transition: opacity 0.2s, filter 0.2s;
+    }
+    .tool-item:hover {
+      opacity: 0.75;
+      filter: grayscale(0);
+    }
+    .tool-item img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      display: block;
+    }
+    .tool-item-name {
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0c0c0f;
+      white-space: nowrap;
+    }
+
+    /* ── Testimonials ── */
+    .testimonials-section {
+      width: 100%;
+      background: #f5f4f2;
+      padding: 80px 60px 100px;
+      overflow: hidden;
+    }
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .testimonials-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      margin-bottom: 56px;
+      white-space: nowrap;
+    }
+    .testimonials-badge {
+      display: inline-block;
+      border: 1.5px solid #e0ddd8;
+      border-radius: 8px;
+      padding: 4px 16px;
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #0c0c0f;
+      letter-spacing: 0.02em;
+    }
+    .testimonials-title {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 48px;
       font-weight: 700;
       letter-spacing: -1px;
-      line-height: 1;
-      color: #f0ede8;
+      line-height: 1.1;
+      color: #0c0c0f;
+      margin: 0;
     }
-
-    /* ── Orbit / fan card deck ── */
-    .tools-deck-wrap {
-      position: relative;
-      height: 90px;           /* collapsed height */
+    .testimonials-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #888;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .testimonials-columns {
       display: flex;
-      align-items: flex-end;
+      justify-content: center;
+      gap: 24px;
+      max-height: 680px;
+      overflow: hidden;
+      width: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
     }
-    .tools-deck {
-      position: relative;
-      width: 72px;           /* collapsed width — cards stack here */
-      height: 72px;
-      flex-shrink: 0;
-    }
-    .tool-card {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 72px;
-      height: 72px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.08);
+    .testimonials-col {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 12px 8px 8px;
-      cursor: pointer;
-      transform-origin: bottom center;
-      transition:
-        transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1),
-        box-shadow 0.3s ease,
-        background 0.3s ease;
-      will-change: transform;
+      flex-shrink: 0;
     }
-    .tool-card img {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-      display: block;
+    .testimonials-col:nth-child(2) { display: none; }
+    .testimonials-col:nth-child(3) { display: none; }
+    @media (min-width: 768px) {
+      .testimonials-col:nth-child(2) { display: flex; }
     }
-    .tool-card .tc-name {
+    @media (min-width: 1024px) {
+      .testimonials-col:nth-child(3) { display: flex; }
+    }
+    .testimonials-track {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 20px;
+      animation: testi-scroll linear infinite;
+    }
+    .testimonials-col:nth-child(1) .testimonials-track { animation-duration: 28s; }
+    .testimonials-col:nth-child(2) .testimonials-track { animation-duration: 36s; }
+    .testimonials-col:nth-child(3) .testimonials-track { animation-duration: 32s; }
+    @keyframes testi-scroll {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    .testi-card {
+      background: #fff;
+      border: 1.5px solid #eeebe5;
+      border-radius: 24px;
+      padding: 28px;
+      width: 300px;
+      box-shadow: 0 4px 24px rgba(12,12,15,0.06);
+      flex-shrink: 0;
+    }
+    .testi-text {
       font-family: 'Lato', sans-serif;
-      font-size: 9px;
-      font-weight: 600;
-      color: rgba(240,237,232,0.55);
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #888;
     }
-
-    /* Default stacked state — tight deck with rotation */
-    .tool-card:nth-child(1)  { transform: translateX(0px)   rotate(-18deg); z-index: 10; }
-    .tool-card:nth-child(2)  { transform: translateX(5px)   rotate(-13deg); z-index: 9; }
-    .tool-card:nth-child(3)  { transform: translateX(10px)  rotate(-8deg);  z-index: 8; }
-    .tool-card:nth-child(4)  { transform: translateX(15px)  rotate(-3deg);  z-index: 7; }
-    .tool-card:nth-child(5)  { transform: translateX(20px)  rotate(2deg);   z-index: 6; }
-    .tool-card:nth-child(6)  { transform: translateX(25px)  rotate(7deg);   z-index: 5; }
-    .tool-card:nth-child(7)  { transform: translateX(30px)  rotate(12deg);  z-index: 4; }
-    .tool-card:nth-child(8)  { transform: translateX(35px)  rotate(17deg);  z-index: 3; }
-    .tool-card:nth-child(9)  { transform: translateX(40px)  rotate(22deg);  z-index: 2; }
-    .tool-card:nth-child(10) { transform: translateX(45px)  rotate(27deg);  z-index: 1; }
-
-    /* Fanned out on hover */
-    .tools-deck:hover .tool-card { background: rgba(255,255,255,0.1); }
-    .tools-deck:hover .tool-card:nth-child(1)  { transform: translateX(0px);   box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-    .tools-deck:hover .tool-card:nth-child(2)  { transform: translateX(88px);  box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(3)  { transform: translateX(176px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(4)  { transform: translateX(264px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(5)  { transform: translateX(352px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(6)  { transform: translateX(440px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(7)  { transform: translateX(528px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(8)  { transform: translateX(616px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(9)  { transform: translateX(704px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card:nth-child(10) { transform: translateX(792px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    .tools-deck:hover .tool-card .tc-name { opacity: 1; transform: translateY(0); }
-
-    /* Individual card hover lift */
-    .tools-deck:hover .tool-card:hover {
-      transform: translateY(-12px) !important;
-      background: rgba(255,255,255,0.16) !important;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
+    .testi-person {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .testi-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .testi-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0c0c0f;
+      line-height: 1.2;
+      letter-spacing: -0.2px;
+    }
+    .testi-role {
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #888;
+      line-height: 1.4;
     }
 
     .spectrum-banner {
@@ -773,9 +865,7 @@
       position: relative;
     }
     .works-sticky-head {
-      padding: 100px 60px 48px;
-      max-width: 1600px;
-      margin: 0 auto;
+      padding: 100px 48px 48px;
     }
     .works-sticky-head .section-heading,
     .works-sticky-head .section-heading.visible {
@@ -794,9 +884,7 @@
 
     /* 2-col full-bleed card grid */
     .works-cards-grid {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 0 60px 100px;
+      padding: 0 48px 56px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
@@ -828,6 +916,9 @@
       cursor: pointer;
       background: #0c0c0f;
     }
+    .wc2-ph-1 { background: linear-gradient(135deg, #fde8e8 0%, #f9c6d0 40%, #e8c5e0 100%); }
+    .wc2-ph-2 { background: linear-gradient(135deg, #fcecd5 0%, #f9d4c8 40%, #f2c0cc 100%); }
+    .wc2-ph-3 { background: linear-gradient(135deg, #f5e6f0 0%, #eecede 40%, #ddc5e8 100%); }
     .wc2-img-wrap img {
       width: 100%;
       height: 100%;
@@ -875,7 +966,7 @@
     /* Caption bar — black footer fused to bottom of image */
     .wc2-caption {
       background: #0c0c0f;
-      padding: 16px 24px 20px;
+      padding: 20px 24px 28px;
       border-radius: 0 0 20px 20px;
       margin: 0;
       display: flex;
@@ -1053,11 +1144,9 @@
 
 
     /* ── My Story ── */
-    .my-story { padding-bottom: 80px; }
+    .my-story { background: #fff; padding-bottom: 80px; }
     .story-header {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 100px;
+      padding: 80px 48px 48px;
     }
     .story-photo-wrap {
       width: 100%;
@@ -1073,9 +1162,12 @@
       display: block;
     }
     .story-bio {
-      font-size: 20px;
-      line-height: 1.75;
-      color: #c0bdb8;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: -1px;
+      line-height: 1.3;
+      color: #171717;
       margin-bottom: 60px;
     }
     .story-columns {
@@ -1386,7 +1478,7 @@
 
     /* ── Floating orbs ── */
     .orb {
-      position: fixed;
+      position: absolute;
       border-radius: 50%;
       filter: blur(80px);
       pointer-events: none;
@@ -1443,10 +1535,160 @@
       transform: translateY(0);
     }
 
-    /* ── Dark theme h3 ── */
-    .my-story-section { background: #0c0c0f; }
-    .story-header h2 { color: #f0ede8; }
-    h3 { color: #f0ede8; }
+    /* ── ProfileCard ── */
+    .pc-card-wrapper {
+      perspective: 500px; transform: translate3d(0,0,0.1px);
+      position: relative; touch-action: none;
+      --pointer-x: 50%; --pointer-y: 50%;
+      --pointer-from-center: 0; --pointer-from-top: 0.5; --pointer-from-left: 0.5;
+      --card-opacity: 0; --rotate-x: 0deg; --rotate-y: 0deg;
+      --background-x: 50%; --background-y: 50%;
+      --grain: none; --icon: none;
+      --behind-glow-color: rgba(125,190,255,0.67); --behind-glow-size: 50%;
+      --inner-gradient: linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%);
+      --sunpillar-1: hsl(2,100%,73%); --sunpillar-2: hsl(53,100%,69%);
+      --sunpillar-3: hsl(93,100%,69%); --sunpillar-4: hsl(176,100%,76%);
+      --sunpillar-5: hsl(228,100%,74%); --sunpillar-6: hsl(283,100%,73%);
+      --card-radius: 30px;
+    }
+    .pc-card-wrapper:hover, .pc-card-wrapper.active { --card-opacity: 1; }
+    .pc-behind { display: none; }
+    .pc-card-shell { position: relative; z-index: 1; }
+    .pc-card {
+      height: 80svh; max-height: 540px; display: grid; aspect-ratio: 0.718;
+      border-radius: var(--card-radius); position: relative;
+      animation: pc-glow-bg 12s linear infinite;
+      box-shadow: rgba(0,0,0,0.8) calc((var(--pointer-from-left)*10px) - 3px) calc((var(--pointer-from-top)*20px) - 6px) 20px -5px;
+      transition: transform 1s ease;
+      transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+      background: rgba(0,0,0,0.9); backface-visibility: hidden; overflow: hidden;
+    }
+    .pc-card:hover, .pc-card.active { transition: none; transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x)); }
+    .pc-card-shell.entering .pc-card { transition: transform 180ms ease-out; }
+    .pc-card * { display: grid; grid-area: 1/-1; border-radius: var(--card-radius); pointer-events: none; }
+    .pc-inside {
+      inset: 0; position: absolute;
+      background-image: var(--inner-gradient); background-color: rgba(0,0,0,0.9); transform: none;
+    }
+    .pc-shine {
+      mask-image: var(--icon); mask-mode: luminance; mask-repeat: repeat; mask-size: 150%;
+      mask-position: top calc(200% - (var(--background-y)*5)) left calc(100% - var(--background-x));
+      transition: filter 0.8s ease; filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
+      animation: pc-holo-bg 18s linear infinite; mix-blend-mode: color-dodge;
+    }
+    .pc-shine, .pc-shine::after {
+      --space: 5%; --angle: -45deg;
+      transform: translate3d(0,0,1px); overflow: hidden; z-index: 3;
+      background: transparent; background-size: cover; background-position: center;
+      background-image:
+        repeating-linear-gradient(0deg, var(--sunpillar-1) calc(var(--space)*1), var(--sunpillar-2) calc(var(--space)*2), var(--sunpillar-3) calc(var(--space)*3), var(--sunpillar-4) calc(var(--space)*4), var(--sunpillar-5) calc(var(--space)*5), var(--sunpillar-6) calc(var(--space)*6), var(--sunpillar-1) calc(var(--space)*7)),
+        repeating-linear-gradient(var(--angle), #0e152e 0%, hsl(180,10%,60%) 3.8%, hsl(180,29%,66%) 4.5%, hsl(180,10%,60%) 5.2%, #0e152e 10%, #0e152e 12%),
+        radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y), hsla(0,0%,0%,0.1) 12%, hsla(0,0%,0%,0.15) 20%, hsla(0,0%,0%,0.25) 120%);
+      background-position: 0 var(--background-y), var(--background-x) var(--background-y), center;
+      background-blend-mode: color, hard-light;
+      background-size: 500% 500%, 300% 300%, 200% 200%; background-repeat: repeat;
+    }
+    .pc-shine::before, .pc-shine::after { content: ''; background-position: center; background-size: cover; grid-area: 1/1; opacity: 0; transition: opacity 0.8s ease; }
+    .pc-card:hover .pc-shine, .pc-card.active .pc-shine { filter: brightness(0.85) contrast(1.5) saturate(0.5) opacity(0.4); animation-play-state: paused; }
+    .pc-card:hover .pc-shine::before, .pc-card.active .pc-shine::before,
+    .pc-card:hover .pc-shine::after,  .pc-card.active .pc-shine::after  { opacity: 0.4; }
+    .pc-shine::before {
+      background-image:
+        linear-gradient(45deg, var(--sunpillar-4), var(--sunpillar-5), var(--sunpillar-6), var(--sunpillar-1), var(--sunpillar-2), var(--sunpillar-3)),
+        radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(0,0%,70%) 0%, hsla(0,0%,30%,0.2) 90%),
+        var(--grain);
+      background-size: 250% 250%, 100% 100%, 220px 220px;
+      background-position: var(--pointer-x) var(--pointer-y), center, calc(var(--pointer-x)*0.01) calc(var(--pointer-y)*0.01);
+      background-blend-mode: color-dodge;
+      filter: brightness(calc(2 - var(--pointer-from-center))) contrast(calc(var(--pointer-from-center) + 2)) saturate(calc(0.5 + var(--pointer-from-center)));
+      mix-blend-mode: luminosity;
+    }
+    .pc-shine::after {
+      background-position: 0 var(--background-y), calc(var(--background-x)*0.4) calc(var(--background-y)*0.5), center;
+      background-size: 200% 300%, 700% 700%, 100% 100%;
+      mix-blend-mode: difference; filter: brightness(0.8) contrast(1.5);
+    }
+    .pc-glare {
+      transform: translate3d(0,0,1.1px); overflow: hidden;
+      background-image: radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y), hsl(248,25%,80%) 12%, hsla(207,40%,30%,0.8) 90%);
+      mix-blend-mode: overlay; filter: brightness(0.8) contrast(1.2); z-index: 4;
+    }
+    .pc-avatar-content { mix-blend-mode: luminosity; overflow: visible; transform: translateZ(2); backface-visibility: hidden; }
+    .pc-avatar-content .avatar {
+      width: 115%; position: absolute; left: 50%; transform-origin: 50% 100%;
+      transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5)*18px)) translateY(calc((var(--pointer-from-top) - 0.5)*12px)) translateZ(20px) scaleY(calc(1 + (var(--pointer-from-top) - 0.5)*0.04)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5)*0.03));
+      bottom: -1px; backface-visibility: hidden; will-change: transform; transition: transform 120ms ease-out;
+    }
+    .pc-user-info { display: none !important; }
+    .pc-user-info-hidden {
+      position: absolute; --ui-inset: 20px; --ui-radius-bias: 6px;
+      bottom: var(--ui-inset); left: var(--ui-inset); right: var(--ui-inset); z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(30px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: calc(max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias)));
+      padding: 12px 14px; pointer-events: auto;
+    }
+    .pc-user-details { display: flex; align-items: center; gap: 12px; }
+    .pc-mini-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+    .pc-mini-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .pc-user-text { display: flex; align-items: flex-start; flex-direction: column; gap: 6px; }
+    .pc-handle { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.9); line-height: 1; }
+    .pc-status { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1; }
+    .pc-contact-btn {
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px;
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.9); cursor: pointer;
+      transition: all 0.2s ease; backdrop-filter: blur(10px); background: transparent;
+    }
+    .pc-contact-btn:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-1px); }
+    .pc-content:not(.pc-avatar-content) {
+      max-height: 100%; overflow: hidden; text-align: center; position: relative;
+      transform: translate3d(calc(var(--pointer-from-left)*-6px + 3px), calc(var(--pointer-from-top)*-6px + 3px), 0.1px);
+      z-index: 5; mix-blend-mode: luminosity;
+    }
+    .pc-details { width: 100%; position: absolute; top: 3em; display: flex; flex-direction: column; }
+    .pc-details h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 500; margin: 0;
+      font-size: clamp(32px, 5vw, 48px);
+      white-space: normal; letter-spacing: -1px;
+      line-height: 1.1;
+      background-image: linear-gradient(to bottom, #fff, #6f6fbe);
+      background-size: 1em 1.5em; -webkit-text-fill-color: transparent;
+      background-clip: text; -webkit-background-clip: text;
+    }
+    .pc-name-first,
+    .pc-name-last {
+      display: block !important;
+      grid-area: auto !important;
+    }
+    .pc-name-last {
+      font-size: 0.6em;
+      font-weight: 400;
+      background-image: none !important;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0.65) !important;
+    }
+    .pc-details p { display: none; }
+    @keyframes pc-glow-bg { 0% { --bgrotate: 0deg; } 100% { --bgrotate: 360deg; } }
+    @keyframes pc-holo-bg {
+      0%   { background-position: 0 var(--background-y), 0 0, center; }
+      100% { background-position: 0 var(--background-y), 90% 90%, center; }
+    }
+    .story-intro-row {
+      padding: 0 48px 48px;
+      display: flex; align-items: center; gap: 60px;
+    }
+    .story-profile-card-wrap {
+      flex-shrink: 0;
+    }
+    .story-bio-col {
+      flex: 1; display: flex; align-items: center;
+    }
+    .story-bio-col .story-bio {
+      margin-bottom: 0;
+    }
+
+
   </style>
 </head>
 <body>
@@ -1712,10 +1954,10 @@
     <div class="works-cards-grid">
 
       <!-- Card 1: Poshmark -->
-      <a href="poshmark.html" class="wc2"
+      <a href="../poshmark.html" class="wc2"
          onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Poshmark App Redesign'})">
         <div class="wc2-img-wrap">
-          <img src="images/pm-card.webp" alt="Poshmark App Redesign">
+          <img src="../images/pm-card.webp" alt="Poshmark App Redesign">
           <span class="wc2-hover-btn">View Case Study</span>
         </div>
         <div class="wc2-caption">
@@ -1725,9 +1967,9 @@
       </a>
 
       <!-- Card 2: Škoda -->
-      <a href="skoda.html" class="wc2">
+      <a href="../skoda.html" class="wc2">
         <div class="wc2-img-wrap">
-          <img src="images/skoda/SkodaHero.png" alt="Škoda Connected App">
+          <img src="../images/skoda/SkodaHero.png" alt="Škoda Connected App">
           <span class="wc2-hover-btn">View Case Study</span>
         </div>
         <div class="wc2-caption">
@@ -1736,22 +1978,9 @@
         </div>
       </a>
 
-      <!-- Card 3: Wide full-span -->
-      <a href="#" class="wc2 wc2-wide">
-        <div class="wc2-img-wrap">
-          <img src="images/Img7.png" alt="Wide Placeholder Project">
-          <span class="wc2-hover-btn">View Case Study</span>
-        </div>
-        <div class="wc2-caption">
-          <p class="wc2-caption-title">Building a seamless design system for a fintech at scale</p>
-          <span class="wc2-tags">Design Systems / Tokens / Multi-platform</span>
-        </div>
-      </a>
-
       <!-- Card 4: Placeholder -->
       <a href="#" class="wc2">
-        <div class="wc2-img-wrap">
-          <img src="images/Img1.png" alt="Placeholder Project">
+        <div class="wc2-img-wrap wc2-ph-2">
           <span class="wc2-hover-btn">View Case Study</span>
         </div>
         <div class="wc2-caption">
@@ -1762,8 +1991,7 @@
 
       <!-- Card 4: Placeholder -->
       <a href="#" class="wc2">
-        <div class="wc2-img-wrap">
-          <img src="images/Img3.png" alt="Placeholder Project">
+        <div class="wc2-img-wrap wc2-ph-3">
           <span class="wc2-hover-btn">View Case Study</span>
         </div>
         <div class="wc2-caption">
@@ -1779,23 +2007,356 @@
   <section class="tools-banner">
     <div class="tools-banner-inner">
       <span class="tools-banner-label">Tools &amp; Stack</span>
-      <div class="tools-deck-wrap">
-        <div class="tools-deck">
-          <div class="tool-card"><img src="icons/figma.png" alt="Figma"><span class="tc-name">Figma</span></div>
-          <div class="tool-card"><img src="icons/sketch.png" alt="Sketch"><span class="tc-name">Sketch</span></div>
-          <div class="tool-card"><img src="icons/principle.png" alt="Principle"><span class="tc-name">Principle</span></div>
-          <div class="tool-card"><img src="icons/framer.png" alt="Framer"><span class="tc-name">Framer</span></div>
-          <div class="tool-card"><img src="icons/protopie.png" alt="Protopie"><span class="tc-name">Protopie</span></div>
-          <div class="tool-card"><img src="icons/aftereffects.svg" alt="After Effects"><span class="tc-name">After Effects</span></div>
-          <div class="tool-card"><img src="icons/illustrator.svg" alt="Illustrator"><span class="tc-name">Illustrator</span></div>
-          <div class="tool-card"><img src="icons/photoshop.svg" alt="Photoshop"><span class="tc-name">Photoshop</span></div>
-          <div class="tool-card"><img src="icons/jira.svg" alt="Jira"><span class="tc-name">Jira</span></div>
-          <div class="tool-card"><img src="icons/claude.svg" alt="Claude AI"><span class="tc-name">Claude AI</span></div>
+      <div class="tools-row">
+        <div class="tool-item">
+          <img src="../icons/figma.png" alt="Figma">
+          <span class="tool-item-name">Figma</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/sketch.png" alt="Sketch">
+          <span class="tool-item-name">Sketch</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/principle.png" alt="Principle">
+          <span class="tool-item-name">Principle</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/framer.png" alt="Framer">
+          <span class="tool-item-name">Framer</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/protopie.png" alt="Protopie">
+          <span class="tool-item-name">ProtoPie</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/aftereffects.svg" alt="After Effects">
+          <span class="tool-item-name">After Effects</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/illustrator.svg" alt="Illustrator">
+          <span class="tool-item-name">Illustrator</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/photoshop.svg" alt="Photoshop">
+          <span class="tool-item-name">Photoshop</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/jira.svg" alt="Jira">
+          <span class="tool-item-name">Jira</span>
+        </div>
+        <div class="tool-item">
+          <img src="../icons/claude.svg" alt="Claude AI">
+          <span class="tool-item-name">Claude AI</span>
         </div>
       </div>
     </div>
   </section>
 
+
+  <!-- ════ TESTIMONIALS ════ -->
+  <section class="testimonials-section">
+    <div class="testimonials-inner">
+      <div class="testimonials-header">
+        <h2 class="testimonials-title">Don't Take My Word for It</h2>
+        <p class="testimonials-sub">From PMs and engineers to founders. Here's what people I've worked with have to say.</p>
+      </div>
+      <div class="testimonials-columns">
+
+        <!-- Column 1 -->
+        <div class="testimonials-col">
+          <div class="testimonials-track">
+            <!-- Set 1 -->
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh has an incredible ability to translate complex product requirements into clean, intuitive interfaces. Working with him was a masterclass in collaborative design."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arjun Nair">
+                <div><div class="testi-name">Arjun Nair</div><div class="testi-role">Senior Product Manager</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"The design system Santhosh built for us saved our engineering team hundreds of hours. Every component was thoughtfully documented and pixel-perfect."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma">
+                <div><div class="testi-name">Priya Sharma</div><div class="testi-role">Engineering Lead</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh brings an rare mix of design craft and product thinking. He doesn't just make things look good — he makes them work better for users."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/58.jpg" alt="David Kim">
+                <div><div class="testi-name">David Kim</div><div class="testi-role">VP of Product, Poshmark</div></div>
+              </div>
+            </div>
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh has an incredible ability to translate complex product requirements into clean, intuitive interfaces. Working with him was a masterclass in collaborative design."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arjun Nair">
+                <div><div class="testi-name">Arjun Nair</div><div class="testi-role">Senior Product Manager</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"The design system Santhosh built for us saved our engineering team hundreds of hours. Every component was thoughtfully documented and pixel-perfect."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma">
+                <div><div class="testi-name">Priya Sharma</div><div class="testi-role">Engineering Lead</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh brings an rare mix of design craft and product thinking. He doesn't just make things look good — he makes them work better for users."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/58.jpg" alt="David Kim">
+                <div><div class="testi-name">David Kim</div><div class="testi-role">VP of Product, Poshmark</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="testimonials-col">
+          <div class="testimonials-track">
+            <!-- Set 1 -->
+            <div class="testi-card">
+              <p class="testi-text">"I've worked with a lot of designers, but Santhosh stands out for his speed and precision. He shipped production-ready designs faster than most engineers ship code."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sarah Chen">
+                <div><div class="testi-name">Sarah Chen</div><div class="testi-role">Founder & CEO</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"His prototypes were so high-fidelity that our investors thought they were the actual product. Santhosh's work directly contributed to closing our Series A."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/77.jpg" alt="Rohan Mehta">
+                <div><div class="testi-name">Rohan Mehta</div><div class="testi-role">Co-founder, FinFlow</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh redesigned our seller dashboard and immediately reduced support tickets by 40%. He understood our users better than we did going in."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Meera Iyer">
+                <div><div class="testi-name">Meera Iyer</div><div class="testi-role">Head of Growth</div></div>
+              </div>
+            </div>
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="testi-card">
+              <p class="testi-text">"I've worked with a lot of designers, but Santhosh stands out for his speed and precision. He shipped production-ready designs faster than most engineers ship code."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sarah Chen">
+                <div><div class="testi-name">Sarah Chen</div><div class="testi-role">Founder & CEO</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"His prototypes were so high-fidelity that our investors thought they were the actual product. Santhosh's work directly contributed to closing our Series A."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/77.jpg" alt="Rohan Mehta">
+                <div><div class="testi-name">Rohan Mehta</div><div class="testi-role">Co-founder, FinFlow</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh redesigned our seller dashboard and immediately reduced support tickets by 40%. He understood our users better than we did going in."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Meera Iyer">
+                <div><div class="testi-name">Meera Iyer</div><div class="testi-role">Head of Growth</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="testimonials-col">
+          <div class="testimonials-track">
+            <!-- Set 1 -->
+            <div class="testi-card">
+              <p class="testi-text">"Every handoff from Santhosh came with detailed specs, edge cases considered, and a thorough walkthrough. It made implementation a pleasure, not a guessing game."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/11.jpg" alt="Karan Verma">
+                <div><div class="testi-name">Karan Verma</div><div class="testi-role">Frontend Engineer</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh led our design org through a complete rebrand in 6 weeks. His process, composure under pressure, and final output were all exceptional."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/55.jpg" alt="Ananya Bose">
+                <div><div class="testi-name">Ananya Bose</div><div class="testi-role">Chief Product Officer</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"What sets Santhosh apart is how he balances aesthetics with function. Every pixel has a purpose, and that discipline shows in the product's retention numbers."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/42.jpg" alt="James Wu">
+                <div><div class="testi-name">James Wu</div><div class="testi-role">Product Director</div></div>
+              </div>
+            </div>
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="testi-card">
+              <p class="testi-text">"Every handoff from Santhosh came with detailed specs, edge cases considered, and a thorough walkthrough. It made implementation a pleasure, not a guessing game."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/11.jpg" alt="Karan Verma">
+                <div><div class="testi-name">Karan Verma</div><div class="testi-role">Frontend Engineer</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"Santhosh led our design org through a complete rebrand in 6 weeks. His process, composure under pressure, and final output were all exceptional."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/55.jpg" alt="Ananya Bose">
+                <div><div class="testi-name">Ananya Bose</div><div class="testi-role">Chief Product Officer</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <p class="testi-text">"What sets Santhosh apart is how he balances aesthetics with function. Every pixel has a purpose, and that discipline shows in the product's retention numbers."</p>
+              <div class="testi-person">
+                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/42.jpg" alt="James Wu">
+                <div><div class="testi-name">James Wu</div><div class="testi-role">Product Director</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ MY STORY ════ -->
+  <section id="my-story" class="my-story">
+    <div class="story-header">
+      <h2 class="section-heading fade-up">My Story</h2>
+    </div>
+
+    <div class="story-intro-row">
+      <div class="story-profile-card-wrap">
+        <div class="pc-card-wrapper" id="profileCard">
+          <div class="pc-behind"></div>
+          <div class="pc-card-shell" id="profileCardShell">
+            <section class="pc-card">
+              <div class="pc-inside">
+                <div class="pc-shine"></div>
+                <div class="pc-glare"></div>
+                <div class="pc-content pc-avatar-content">
+                  <img class="avatar" src="../images/saaaaa.png" alt="Santhosh Rajendran avatar" loading="lazy">
+                </div>
+                <div class="pc-content">
+                  <div class="pc-details">
+                    <h3><span class="pc-name-first">Santhosh</span><span class="pc-name-last">Rajendran</span></h3>
+                    <p>Manager, Product Design</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-bio-col">
+        <p class="story-bio fade-up">
+          With over 12 years of experience in web and product design, I bring a genuine curiosity,
+          a passion for my craft, and an eagerness to keep growing. I love tackling complex challenges,
+          using a thoughtful and strategic approach that strikes a balance between creativity and data.
+          My goal is to turn intricate problems into straightforward, actionable solutions that truly make a difference.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-columns">
+      <div class="exp-col fade-up">
+        <h3>Experience</h3>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="../icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Manager, Product Design</div>
+              <div class="exp-company-date">2024 - Present · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Led and scaled a team of 4 designers across multiple product areas, driving design quality and delivery efficiency and contributing to 18% YoY DAU growth.</li>
+            <li>Defined marketplace design strategy, improving listing completion by 31%.</li>
+            <li>Partnered with product and engineering to deliver high-impact initiatives and scale a design system, reducing inconsistencies by 35%.</li>
+            <li>Established team processes including design critiques, planning, and reviews to improve execution.</li>
+            <li>Mentored designers and supported career growth, improving team capability and output.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="../icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Lead Product Designer</div>
+              <div class="exp-company-date">2022 - 2024 · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Owned end-to-end design for core marketplace journeys including listing, discovery, and onboarding.</li>
+            <li>Led cross-functional collaboration to define product direction and improve user experience.</li>
+            <li>Identified key friction points through research and translated insights into product improvements.</li>
+            <li>Delivered UX improvements that increased seller activation and improved conversion flows.</li>
+            <li>Mentored junior designers and elevated overall design quality within the team.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="../icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Senior Product Designer</div>
+              <div class="exp-company-date">2020 - 2022 · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Designed scalable web and mobile experiences across key product flows.</li>
+            <li>Improved usability of complex workflows, reducing friction in core user actions.</li>
+            <li>Conducted competitive analysis to identify opportunities for product enhancements.</li>
+            <li>Presented design solutions to stakeholders and drove alignment across teams.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="../icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Product Designer</div>
+              <div class="exp-company-date">2017 - 2020 · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Executed design solutions for new features across core product areas.</li>
+            <li>Collaborated closely with engineering to ensure high-quality implementation.</li>
+            <li>Contributed to improving usability and consistency across the product.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="../icons/anywhereworks.png" alt="AnywhereWorks"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Product Designer</div>
+              <div class="exp-company-date">2014 - 2017 · AnywhereWorks</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Created wireframes, visual designs, and interaction flows for digital products.</li>
+            <li>Iterated on designs based on user feedback and usability insights.</li>
+            <li>Built strong foundations in user-centered design and interface design.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="../icons/anywhereworks.png" alt="AnywhereWorks"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Product Designer Intern</div>
+              <div class="exp-company-date">2014 (3 months) · AnywhereWorks</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Supported senior designers in creating wireframes and visual designs.</li>
+            <li>Assisted in user research and usability testing activities.</li>
+            <li>Gained foundational experience in UX and product design workflows.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ════ FOOTER ════ -->
   <footer>
@@ -1920,6 +2481,76 @@
       });
     });
 
+    // ── ProfileCard tilt ──
+    (function() {
+      const wrap  = document.getElementById('profileCard');
+      const shell = document.getElementById('profileCardShell');
+      if (!wrap || !shell) return;
+
+      const clamp  = (v, lo=0, hi=100) => Math.min(Math.max(v, lo), hi);
+      const round  = (v, p=3) => parseFloat(v.toFixed(p));
+      const adjust = (v, fMin, fMax, tMin, tMax) => round(tMin + ((tMax-tMin)*(v-fMin))/(fMax-fMin));
+
+      let rafId=null, running=false, lastTs=0;
+      let cx=0, cy=0, tx=0, ty=0;
+      const DEFAULT_TAU=0.14, INITIAL_TAU=0.6;
+      let initialUntil=0;
+
+      function setVars(x, y) {
+        const w = shell.clientWidth||1, h = shell.clientHeight||1;
+        const px = clamp((100/w)*x), py = clamp((100/h)*y);
+        const cx2=px-50, cy2=py-50;
+        const props = {
+          '--pointer-x': px+'%', '--pointer-y': py+'%',
+          '--background-x': adjust(px,0,100,35,65)+'%',
+          '--background-y': adjust(py,0,100,35,65)+'%',
+          '--pointer-from-center': clamp(Math.hypot(py-50,px-50)/50,0,1),
+          '--pointer-from-top': py/100, '--pointer-from-left': px/100,
+          '--rotate-x': round(-(cx2/5))+'deg', '--rotate-y': round(cy2/4)+'deg'
+        };
+        for (const [k,v] of Object.entries(props)) wrap.style.setProperty(k, v);
+      }
+
+      function step(ts) {
+        if (!running) return;
+        if (!lastTs) lastTs = ts;
+        const dt = (ts-lastTs)/1000; lastTs=ts;
+        const tau = ts<initialUntil ? INITIAL_TAU : DEFAULT_TAU;
+        const k = 1 - Math.exp(-dt/tau);
+        cx += (tx-cx)*k; cy += (ty-cy)*k;
+        setVars(cx, cy);
+        if (Math.abs(tx-cx)>0.05 || Math.abs(ty-cy)>0.05 || document.hasFocus()) {
+          rafId = requestAnimationFrame(step);
+        } else { running=false; lastTs=0; }
+      }
+
+      function start() { if (running) return; running=true; lastTs=0; rafId=requestAnimationFrame(step); }
+      function setTarget(x,y) { tx=x; ty=y; start(); }
+      function toCenter() { setTarget(shell.clientWidth/2, shell.clientHeight/2); }
+
+      function getOff(e) { const r=shell.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; }
+
+      shell.addEventListener('pointerenter', e => {
+        wrap.classList.add('active'); shell.classList.add('entering');
+        setTimeout(()=>shell.classList.remove('entering'), 180);
+        const {x,y}=getOff(e); setTarget(x,y);
+      });
+      shell.addEventListener('pointermove', e => { const {x,y}=getOff(e); setTarget(x,y); });
+      shell.addEventListener('pointerleave', () => {
+        toCenter();
+        function check() {
+          if (Math.hypot(tx-cx,ty-cy)<0.6) { wrap.classList.remove('active'); }
+          else requestAnimationFrame(check);
+        }
+        requestAnimationFrame(check);
+      });
+
+      // Initial animation
+      cx = (shell.clientWidth||0) - 70; cy = 60;
+      setVars(cx, cy); toCenter();
+      initialUntil = performance.now() + 1200; start();
+    })();
+
     // ── GSAP text reveal on scroll ──
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
@@ -1966,6 +2597,7 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
       z-index: 9999;
       pointer-events: none;
       white-space: nowrap;
@@ -1988,11 +2620,28 @@
       font-size: 13px;
       line-height: 1;
     }
+    .vibe-badge.hidden {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
   </style>
-  <div class="vibe-badge">
+  <div class="vibe-badge" id="vibeBadge">
     <span class="vibe-badge-icon">✦</span>
     <span style="display:inline-flex;align-items:center;gap:3px;">Designed with <span class="vibe-heart"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#ff3b3b" stroke="#ff3b3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span> &nbsp;|&nbsp; Vibe coded with passion</span>
   </div>
+  <script>
+    (function() {
+      const badge = document.getElementById('vibeBadge');
+      const hero = document.getElementById('home');
+      if (!badge || !hero) return;
+      const obs = new IntersectionObserver(([entry]) => {
+        badge.classList.toggle('hidden', !entry.isIntersecting);
+      }, { threshold: 0.1 });
+      obs.observe(hero);
+    })();
+  </script>
+
 
 </body>
 </html>
