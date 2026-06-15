@@ -2045,9 +2045,71 @@
     }
 
 
+    /* ── Mobile gate ── */
+    .mobile-gate {
+      display: none;
+      position: fixed; inset: 0; z-index: 99999;
+      background: #0c0c0f;
+      flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px 32px; text-align: center;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+    .mobile-gate-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-size: 48px 48px;
+      background-image: linear-gradient(to right, rgba(240,237,232,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(240,237,232,0.04) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+    .mobile-gate-glow {
+      position: absolute; left: 50%; top: 50%;
+      width: 80vw; height: 50vh; transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(115,66,226,0.3) 0%, transparent 70%);
+      filter: blur(60px); pointer-events: none;
+    }
+    .mobile-gate-logo {
+      position: relative; z-index: 1;
+      font-size: 28px; font-weight: 900; color: #f0ede8; letter-spacing: -0.04em;
+      margin-bottom: 48px;
+    }
+    .mobile-gate-logo span { color: #7342E2; }
+    .mobile-gate-icon {
+      position: relative; z-index: 1;
+      width: 64px; height: 64px; margin-bottom: 28px;
+      opacity: 0.25;
+    }
+    .mobile-gate-title {
+      position: relative; z-index: 1;
+      font-size: clamp(24px, 6vw, 36px); font-weight: 800;
+      color: #f0ede8; letter-spacing: -0.03em; line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .mobile-gate-sub {
+      position: relative; z-index: 1;
+      font-size: 15px; color: rgba(240,237,232,0.4); line-height: 1.6;
+      max-width: 300px;
+    }
+    @media (max-width: 1024px) {
+      .mobile-gate { display: flex; }
+      body > *:not(.mobile-gate) { display: none !important; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ════ MOBILE GATE ════ -->
+  <div class="mobile-gate">
+    <div class="mobile-gate-grid"></div>
+    <div class="mobile-gate-glow"></div>
+    <div class="mobile-gate-logo">SR<span>.</span></div>
+    <svg class="mobile-gate-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="12" width="56" height="36" rx="4" stroke="#f0ede8" stroke-width="3"/>
+      <path d="M20 52h24M32 48v4" stroke="#f0ede8" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <h1 class="mobile-gate-title">Open this page on<br>your computer browser</h1>
+    <p class="mobile-gate-sub">This portfolio is crafted for a desktop experience. Visit on a larger screen to see it in full.</p>
+  </div>
 
   <!-- ════ NAV ════ -->
   <header>
