@@ -32,54 +32,78 @@
 
     /* ── Nav ── */
     header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 0;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    header.scrolled .nav-logo { color: #0c0c0f; }
+    header.scrolled .nav-logo span { color: #7342E2; }
+    header.scrolled .nav-text-link { color: #0c0c0f; }
+    header.scrolled .nav-cta {
+      background: #7342E2;
+      border-color: #7342E2;
+      color: #fff;
     }
     nav {
-      max-width: 1280px; margin: 0 auto;
-      padding: 0 48px; height: 64px;
-      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: relative;
     }
     .nav-logo {
       font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px;
-      color: #171717; text-decoration: none;
+      color: #0c0c0f; text-decoration: none;
+      transition: color 0.3s ease;
     }
     .nav-logo span { color: #7342E2; }
     .nav-pills-wrap {
       display: flex; gap: 4px;
-      background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 100px; padding: 5px;
       position: absolute; left: 50%; transform: translateX(-50%);
     }
     .nav-pills-wrap a {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14px; font-weight: 600; color: rgba(23,23,23,0.5);
-      padding: 8px 20px; border-radius: 100px;
+      font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.55);
+      padding: 8px 22px; border-radius: 100px;
       transition: all 0.2s; letter-spacing: 0.3px;
       text-decoration: none; white-space: nowrap;
     }
-    .nav-pills-wrap a:hover { background: #171717; color: #fff; }
+    .nav-pills-wrap a:hover,
+    .nav-pills-wrap a.nav-active { background: #fff; color: #0c0c0f; }
     .nav-right { display: flex; align-items: center; gap: 24px; }
     .nav-text-link {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14px; font-weight: 400; color: #171717;
+      font-size: 14px; font-weight: 400; color: #0c0c0f;
       text-decoration: underline; text-decoration-thickness: 1px;
-      text-underline-offset: 3px; transition: opacity 0.2s; white-space: nowrap;
+      text-underline-offset: 3px; transition: opacity 0.2s, color 0.3s; white-space: nowrap;
     }
-    .nav-text-link:hover { opacity: 0.5; }
+    .nav-text-link:hover { opacity: 0.75; }
     .nav-cta {
       display: inline-flex; align-items: center; gap: 6px;
-      background: #171717; color: #fff;
-      padding: 10px 22px; border-radius: 100px;
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #f0ede8;
+      padding: 10px 24px; border-radius: 100px;
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 14px; font-weight: 600;
       transition: all 0.25s; text-decoration: none; white-space: nowrap;
     }
-    .nav-cta:hover { background: #7342E2; box-shadow: 0 8px 30px rgba(115,66,226,0.35); }
+    .nav-cta:hover { background: #7342E2; border-color: #7342E2; color: #fff; box-shadow: 0 8px 30px rgba(115,66,226,0.35); }
 
     /* ── Hero ── */
     .cs-hero {
@@ -104,7 +128,7 @@
       padding-bottom: 8px;
     }
     .cs-back {
-      position: absolute; top: 40px; left: 100px;
+      position: absolute; top: 84px; left: 100px;
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 14px; font-weight: 600; color: rgba(0,0,0,0.4);
       transition: color 0.2s;
@@ -195,13 +219,13 @@
     }
     .cs-problem-quote em { color: #c4b5fd; font-style: normal; }
     .cs-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 52px; }
-    .cs-problem-col-label { font-size: 11px; font-weight: 700; color: rgba(196,181,253,0.7); text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 16px; }
+    .cs-problem-col-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 16px; }
     .cs-problem-col-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 16px; }
     .cs-problem-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .cs-problem-list li { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.65; padding-left: 20px; position: relative; }
-    .cs-problem-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; background: #c4b5fd; border-radius: 50%; opacity: 0.7; }
+    .cs-problem-list li { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.65; padding-left: 20px; position: relative; }
+    .cs-problem-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; background: #7342E2; border-radius: 50%; }
     .cs-problem-why { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); }
-    .cs-problem-why-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; margin-top: 12px; }
+    .cs-problem-why-body { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-top: 12px; }
 
     /* ── Process grid ── */
     .cs-process-grid {
@@ -644,9 +668,9 @@
     }
     .cs-reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .cs-reflection-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; }
-    .cs-reflection-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(196,181,253,0.7); margin-bottom: 14px; }
+    .cs-reflection-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #7342E2; margin-bottom: 14px; }
     .cs-reflection-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
-    .cs-reflection-card-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; }
+    .cs-reflection-card-body { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; }
     .cs-reflection-quote {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 28px; font-weight: 500; line-height: 1.5;
@@ -1643,6 +1667,12 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
     }, { threshold: 0.1 });
     fadeEls.forEach(el => io.observe(el));
+  </script>
+  <script>
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>
