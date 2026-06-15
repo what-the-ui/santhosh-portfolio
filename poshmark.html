@@ -32,54 +32,78 @@
 
     /* ── Nav ── */
     header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 0;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    header.scrolled .nav-logo { color: #0c0c0f; }
+    header.scrolled .nav-logo span { color: #7342E2; }
+    header.scrolled .nav-text-link { color: #0c0c0f; -webkit-text-fill-color: #0c0c0f; }
+    header.scrolled .nav-cta {
+      background: #7342E2;
+      border-color: #7342E2;
+      color: #fff;
     }
     nav {
-      max-width: 1280px; margin: 0 auto;
-      padding: 0 48px; height: 64px;
-      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: relative;
     }
     .nav-logo {
       font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px;
-      color: #171717; text-decoration: none;
+      color: #f0ede8; text-decoration: none;
+      transition: color 0.3s ease;
     }
     .nav-logo span { color: #7342E2; }
     .nav-pills-wrap {
       display: flex; gap: 4px;
-      background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 100px; padding: 5px;
       position: absolute; left: 50%; transform: translateX(-50%);
     }
     .nav-pills-wrap a {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14px; font-weight: 600; color: rgba(23,23,23,0.5);
-      padding: 8px 20px; border-radius: 100px;
+      font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.55);
+      padding: 8px 22px; border-radius: 100px;
       transition: all 0.2s; letter-spacing: 0.3px;
       text-decoration: none; white-space: nowrap;
     }
-    .nav-pills-wrap a:hover { background: #171717; color: #fff; }
+    .nav-pills-wrap a:hover,
+    .nav-pills-wrap a.nav-active { background: #fff; color: #0c0c0f; }
     .nav-right { display: flex; align-items: center; gap: 24px; }
     .nav-text-link {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14px; font-weight: 400; color: #171717;
+      font-size: 14px; font-weight: 400; color: #f0ede8;
       text-decoration: underline; text-decoration-thickness: 1px;
-      text-underline-offset: 3px; transition: opacity 0.2s; white-space: nowrap;
+      text-underline-offset: 3px; transition: opacity 0.2s, color 0.3s; white-space: nowrap;
     }
-    .nav-text-link:hover { opacity: 0.5; }
+    .nav-text-link:hover { opacity: 0.75; }
     .nav-cta {
       display: inline-flex; align-items: center; gap: 6px;
-      background: #171717; color: #fff;
-      padding: 10px 22px; border-radius: 100px;
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #f0ede8;
+      padding: 10px 24px; border-radius: 100px;
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 14px; font-weight: 600;
       transition: all 0.25s; text-decoration: none; white-space: nowrap;
     }
-    .nav-cta:hover { background: #7342E2; box-shadow: 0 8px 30px rgba(115,66,226,0.35); }
+    .nav-cta:hover { background: #7342E2; border-color: #7342E2; color: #fff; box-shadow: 0 8px 30px rgba(115,66,226,0.35); }
 
     /* ── Hero ── */
     .cs-hero {
@@ -123,7 +147,7 @@
       box-shadow: 0 0 80px rgba(115,66,226,0.3), 0 40px 80px rgba(0,0,0,0.5);
     }
     .cs-back {
-      position: absolute; top: 40px; left: 100px;
+      position: absolute; top: 84px; left: 100px;
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 14px; font-weight: 600; color: rgba(240,237,232,0.4);
       transition: color 0.2s; z-index: 3;
@@ -1163,7 +1187,7 @@
     <div style="margin-top: 32px;">
       <div class="ba-wrap"><div class="ba-slider" id="baSlider">
         <!-- New UI (after), full width base -->
-        <img class="ba-img ba-after" src="images/after.png" alt="New UI">
+        <img class="ba-img ba-after" src="images/After-black.png" alt="New UI">
         <!-- Old UI (before), clipped by slider position -->
         <div class="ba-before-clip" id="baClip">
           <img class="ba-img ba-before" src="images/before.png" alt="Old UI">
@@ -1375,6 +1399,12 @@
       window.addEventListener('touchmove', e => { if (dragging) setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
       window.addEventListener('touchend', () => { dragging = false; });
     })();
+  </script>
+  <script>
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>
