@@ -1109,7 +1109,7 @@
         <div class="cs-decision-title">Shift from feature-centric to goal-centric navigation</div>
       </div>
       <p class="cs-decision-body"><strong>Business problem:</strong> Navigation had been built by teams optimising for feature visibility, not by users trying to complete goals. The result was a tab bar that reflected internal ownership rather than customer intent - users spent time navigating, not doing. We had data showing navigation-related abandonment was among the top 3 exit patterns across the funnel.</p>
-      <p class="cs-decision-body" style="margin-top:12px;">We restructured from 7 feature-owned tab items to 3 intent-based destinations: Shop, Sell, and Manage. Features became contextual within those journeys rather than competing for tab real estate. We ran a controlled A/B test on a 10% traffic split for 2 weeks - success criterion was no regression in session depth, with improvement as the target.</p>
+      <p class="cs-decision-body" style="margin-top:12px;">The original navigation had 5 tabs - Home, Search, Sell, News, and Others. The Others tab had become a catch-all for every feature that didn't have a clear home, with no discernible logic or hierarchy behind it. We rebuilt this into 3 intent-based destinations: Shop, Sell, and Manage - restructuring the Others menu entirely around what users were trying to accomplish rather than which team owned the feature. We ran a controlled A/B test on a 10% traffic split for 2 weeks - success criterion was no regression in session depth, with improvement as the target.</p>
       <div class="cs-decision-outcome">
         <div class="cs-decision-outcome-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div>The variant won on every session quality metric. The data resolved the stakeholder debate without compromise - no one could argue with a 2-week live test. We shipped to 100% of users after a 4-week ramp.</div>
@@ -1239,7 +1239,7 @@
     <div style="margin-top: 32px;">
       <div class="ba-wrap"><div class="ba-slider" id="baSlider">
         <!-- New UI (after), full width base -->
-        <img class="ba-img ba-after" src="images/After-black.png" alt="New UI">
+        <img class="ba-img ba-after" src="images/After-black-new.png" alt="New UI">
         <!-- Old UI (before), clipped by slider position -->
         <div class="ba-before-clip" id="baClip">
           <img class="ba-img ba-before" src="images/before.png" alt="Old UI">
