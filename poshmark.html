@@ -1109,7 +1109,7 @@
         <div class="cs-decision-title">Shift from feature-centric to goal-centric navigation</div>
       </div>
       <p class="cs-decision-body"><strong>Business problem:</strong> Navigation had been built by teams optimising for feature visibility, not by users trying to complete goals. The result was a tab bar that reflected internal ownership rather than customer intent - users spent time navigating, not doing. We had data showing navigation-related abandonment was among the top 3 exit patterns across the funnel.</p>
-      <p class="cs-decision-body" style="margin-top:12px;">The original navigation had 5 tabs - Home, Search, Sell, News, and Others. The Others tab had become a catch-all for every feature that didn't have a clear home, with no discernible logic or hierarchy behind it. We rebuilt this into 3 intent-based destinations: Shop, Sell, and Manage - restructuring the Others menu entirely around what users were trying to accomplish rather than which team owned the feature. We ran a controlled A/B test on a 10% traffic split for 2 weeks - success criterion was no regression in session depth, with improvement as the target.</p>
+      <p class="cs-decision-body" style="margin-top:12px;">There was no discernible logic or hierarchy tying the navigation together. We redesigned it around user intent - organising every feature around what users were trying to accomplish rather than which team owned it. We ran a controlled A/B test on a 10% traffic split for 2 weeks - success criterion was no regression in session depth, with improvement as the target.</p>
       <div class="cs-decision-outcome">
         <div class="cs-decision-outcome-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div>The variant won on every session quality metric. The data resolved the stakeholder debate without compromise - no one could argue with a 2-week live test. We shipped to 100% of users after a 4-week ramp.</div>
@@ -1209,11 +1209,11 @@
     <p class="cs-body" style="margin-bottom: 0;">The redesign delivered measurable improvement across supply, demand, conversion, retention, and operational efficiency. The DAU lift was the strongest single-year platform improvement since the launch of social selling features. Supply-side gains held through the following two quarters.</p>
     <div class="cs-stats-row">
       <div class="cs-stat">
-        <div class="cs-stat-num">+8.7<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-num">+6.4<span class="cs-stat-unit">%</span></div>
         <div class="cs-stat-label">Marketplace GMV - the most direct measure of the flywheel working</div>
       </div>
       <div class="cs-stat">
-        <div class="cs-stat-num">+18<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-num">+8<span class="cs-stat-unit">%</span></div>
         <div class="cs-stat-label">DAU year-over-year, the strongest platform-wide engagement growth in five years</div>
       </div>
       <div class="cs-stat">
@@ -1239,7 +1239,7 @@
     <div style="margin-top: 32px;">
       <div class="ba-wrap"><div class="ba-slider" id="baSlider">
         <!-- New UI (after), full width base -->
-        <img class="ba-img ba-after" src="images/After-black-new.png" alt="New UI">
+        <img class="ba-img ba-after" src="images/NewAfter.png" alt="New UI">
         <!-- Old UI (before), clipped by slider position -->
         <div class="ba-before-clip" id="baClip">
           <img class="ba-img ba-before" src="images/before.png" alt="Old UI">
@@ -1332,7 +1332,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             +91 989 424 9490
           </div>
-          <button class="cs-footer-pill" id="footerEmailBtn" data-tooltip="Click to copy email" onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('footerEmailBtn');var orig=b.innerHTML;var origTip=b.getAttribute('data-tooltip');b.setAttribute('data-tooltip','Copied!');b.innerHTML='<svg width=\'18\' height=\'18\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;b.setAttribute('data-tooltip',origTip);},2000);})">
+          <button class="cs-footer-pill" id="footerEmailBtn" data-tooltip="Click to copy email" onclick="copyEmail()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             santhosh.r777@live.in
           </button>
@@ -1349,6 +1349,38 @@
   </footer>
 
   <script>
+    function copyEmail() {
+      var email = 'santhosh.r777@live.in';
+      var btn = document.getElementById('footerEmailBtn');
+      var origHTML = btn.innerHTML;
+      var origTip = btn.getAttribute('data-tooltip');
+      var checkSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      function showCopied() {
+        btn.innerHTML = checkSVG + ' Copied!';
+        btn.setAttribute('data-tooltip', 'Copied!');
+        setTimeout(function() {
+          btn.innerHTML = origHTML;
+          btn.setAttribute('data-tooltip', origTip);
+        }, 2000);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(function() {
+          fallbackCopy(email, showCopied);
+        });
+      } else {
+        fallbackCopy(email, showCopied);
+      }
+    }
+    function fallbackCopy(text, cb) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); cb(); } catch(e) {}
+      document.body.removeChild(ta);
+    }
     const PASS = 'w3lcome!';
     const gate = document.getElementById('pw-gate');
     const input = document.getElementById('pw-input');
