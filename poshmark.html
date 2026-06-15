@@ -33,21 +33,53 @@
     /* ── Nav ── */
     header {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(0,0,0,0.06);
     }
     nav {
       max-width: 1280px; margin: 0 auto;
-      padding: 18px 100px;
+      padding: 0 48px; height: 64px;
       display: flex; justify-content: space-between; align-items: center;
+      position: relative;
     }
-    .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; }
+    .nav-logo {
+      font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px;
+      color: #171717; text-decoration: none;
+    }
     .nav-logo span { color: #7342E2; }
-    .nav-links { display: flex; gap: 36px; }
-    .nav-links a { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: #7342E2; }
+    .nav-pills-wrap {
+      display: flex; gap: 4px;
+      background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 100px; padding: 5px;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .nav-pills-wrap a {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 600; color: rgba(23,23,23,0.5);
+      padding: 8px 20px; border-radius: 100px;
+      transition: all 0.2s; letter-spacing: 0.3px;
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-pills-wrap a:hover { background: #171717; color: #fff; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-text-link {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 400; color: #171717;
+      text-decoration: underline; text-decoration-thickness: 1px;
+      text-underline-offset: 3px; transition: opacity 0.2s; white-space: nowrap;
+    }
+    .nav-text-link:hover { opacity: 0.5; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #171717; color: #fff;
+      padding: 10px 22px; border-radius: 100px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 600;
+      transition: all 0.25s; text-decoration: none; white-space: nowrap;
+    }
+    .nav-cta:hover { background: #7342E2; box-shadow: 0 8px 30px rgba(115,66,226,0.35); }
 
     /* ── Hero ── */
     .cs-hero {
@@ -332,17 +364,37 @@
     .cs-divider { border: none; border-top: 1px solid rgba(0,0,0,0.07); margin: 0 100px; }
 
     /* ── Footer ── */
-    footer { background: #7342E2; color: #fff; }
-    .footer-inner {
-      max-width: 1280px; margin: 0 auto; padding: 40px 100px;
-      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    .cs-footer { background: #0c0c0f; position: relative; overflow: hidden; }
+    .cs-footer-aurora {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at 50% 60%, rgba(115,66,226,0.25) 0%, rgba(115,66,226,0.08) 40%, transparent 70%);
     }
-    .footer-links { display: flex; gap: 32px; }
-    .footer-links a { color: #fff; font-size: 16px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; transition: opacity 0.2s; }
-    .footer-links a:hover { opacity: 0.8; }
-    .footer-contact { display: flex; gap: 40px; font-size: 16px; }
-    .footer-contact a { color: #fff; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s; }
-    .footer-contact a:hover { opacity: 0.8; }
+    .cs-footer-inner { max-width: 1280px; margin: 0 auto; padding: 80px 48px 40px; position: relative; z-index: 1; }
+    .cs-footer-main { text-align: center; margin-bottom: 64px; }
+    .cs-footer-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: rgba(240,237,232,0.35); margin-bottom: 20px; }
+    .cs-footer-logo span { color: #7342E2; }
+    .cs-footer-heading { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(36px,6vw,72px); font-weight: 900; line-height: 1; letter-spacing: -0.04em; color: #fff; margin-bottom: 40px; }
+    .cs-footer-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cs-footer-pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(240,237,232,0.8); padding: 12px 22px; border-radius: 100px;
+      font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 500;
+      text-decoration: none; transition: all 0.25s;
+    }
+    button.cs-footer-pill { cursor: pointer; background: rgba(255,255,255,0.06); }
+    button.cs-footer-pill:hover { background: rgba(115,66,226,0.2); border-color: rgba(115,66,226,0.4); color: #fff; }
+    .cs-footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap; gap: 16px;
+    }
+    .cs-footer-copyright { font-size: 13px; color: rgba(240,237,232,0.3); font-family: 'Bricolage Grotesque', sans-serif; }
+    .cs-footer-links { display: flex; gap: 28px; }
+    .cs-footer-links a { font-family: 'Bricolage Grotesque', sans-serif; font-size: 14px; font-weight: 500; color: rgba(240,237,232,0.5); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color 0.2s; }
+    .cs-footer-links a:hover { color: #f0ede8; }
+    .cs-footer-back-top { display: inline-flex; align-items: center; gap: 7px; background: none; border: none; font-family: 'Bricolage Grotesque', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(240,237,232,0.35); cursor: pointer; transition: color 0.2s; }
+    .cs-footer-back-top:hover { color: #f0ede8; }
 
     /* ── Task / Role grid ── */
     .cs-task-role-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; padding:48px 0; border-top:1px solid rgba(0,0,0,0.08); }
@@ -432,7 +484,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 1100px) {
-      nav, .cs-hero, .cs-section, .cs-problem-inner, .footer-inner { padding-left: 48px; padding-right: 48px; }
+      nav, .cs-hero, .cs-section, .cs-problem-inner { padding-left: 48px; padding-right: 48px; }
       .cs-back { left: 48px; }
       .cs-hero-title { font-size: 60px; }
       .cs-meta-bar-inner { padding-left: 48px; padding-right: 48px; }
@@ -457,12 +509,12 @@
       .cs-improvements-grid { grid-template-columns: 1fr; }
       .cs-compare-layout { grid-template-columns: 1fr; gap: 32px; }
       .cs-compare-screens { grid-template-columns: 1fr 1fr; }
-      .nav-links a { font-size: 15px; }
+      .nav-pills-wrap { display: none; }
       .cs-hero { grid-template-columns: 1fr; min-height: auto; padding: 80px 48px 60px; align-items: start; gap: 32px; }
       .cs-hero-img-ph { min-height: 360px; align-self: auto; }
     }
     @media (max-width: 640px) {
-      nav, .cs-hero, .cs-section, .cs-problem-inner, .footer-inner { padding-left: 24px; padding-right: 24px; }
+      nav, .cs-hero, .cs-section, .cs-problem-inner { padding-left: 24px; padding-right: 24px; }
       .cs-back { left: 24px; }
       .cs-hero-title { font-size: 36px; letter-spacing: -1px; }
       .cs-heading { font-size: 28px; }
@@ -471,15 +523,15 @@
       .cs-meta-bar-inner { grid-template-columns: 1fr; padding-left: 24px; padding-right: 24px; gap: 0; }
       .cs-meta-cell { padding: 16px 0; border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); padding-left: 0 !important; }
       .cs-meta-cell:last-child { border-bottom: none; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .footer-contact { flex-direction: column; gap: 10px; }
+      .cs-footer-inner { padding: 60px 24px 32px; }
+      .cs-footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
       .cs-divider { margin: 0 24px; }
       .cs-screens-row { grid-template-columns: 1fr; }
       .cs-context-heading { font-size: 32px; }
       .cs-task-title { font-size: 22px; }
       .cs-goal-value { font-size: 36px; }
       .cs-compare-screens { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .nav-right { display: none; }
       .cs-hero { padding: 72px 24px 48px; gap: 24px; }
       .cs-hero-title { font-size: 32px; letter-spacing: -1px; }
       .cs-hero-img-ph { min-height: 240px; }
@@ -747,10 +799,15 @@
   <header>
     <nav>
       <a href="index.html" class="nav-logo">SR<span>.</span></a>
-      <div class="nav-links">
-        <a href="index.html#home">Home</a>
+      <div class="nav-pills-wrap">
+        <a href="index.html">Home</a>
         <a href="index.html#works">Works</a>
         <a href="index.html#my-story">My Story</a>
+      </div>
+      <div class="nav-right">
+        <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener" class="nav-text-link">LinkedIn</a>
+        <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener" class="nav-text-link">Dribbble</a>
+        <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="nav-cta" onclick="gtag('event','resume_download',{event_category:'engagement',event_label:'Download Resume'})">Download Resume</a>
       </div>
     </nav>
   </header>
@@ -1182,22 +1239,33 @@
   </div>
 
   <!-- ════ FOOTER ════ -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener">LinkedIn <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener">Dribbble <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="https://instagram.com/santhosh.r777" target="_blank" rel="noopener">Instagram <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <footer class="cs-footer">
+    <div class="cs-footer-aurora"></div>
+    <div class="cs-footer-inner">
+      <div class="cs-footer-main">
+        <div class="cs-footer-logo">SR<span>.</span></div>
+        <h2 class="cs-footer-heading">Let's Work Together</h2>
+        <div class="cs-footer-ctas">
+          <div class="cs-footer-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 989 424 9490
+          </div>
+          <button class="cs-footer-pill" id="footerEmailBtn" onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('footerEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'18\' height=\'18\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            santhosh.r777@live.in
+          </button>
+        </div>
       </div>
-      <div class="footer-contact">
-        <a href="tel:+919894249490">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          +91 989 424 9490
-        </a>
-        <a href="mailto:santhosh.r777@live.in">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          santhosh.r777@live.in
-        </a>
+      <div class="cs-footer-bottom">
+        <div class="cs-footer-copyright">© 2026 SR. All rights reserved.</div>
+        <div class="cs-footer-links">
+          <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener">Dribbble</a>
+        </div>
+        <button class="cs-footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+          Back to top
+        </button>
       </div>
     </div>
   </footer>
