@@ -109,7 +109,7 @@
     /* ── Hero ── */
     .cs-hero {
       background: #0c0c0f;
-      min-height: 100vh;
+      min-height: 50vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding: 120px 100px 80px;
@@ -194,7 +194,7 @@
     .cs-meta-value { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 600; color: #171717; }
 
     /* ── Body sections ── */
-    .cs-section { max-width: 1280px; margin: 0 auto; padding: 100px 100px; }
+    .cs-section { max-width: 1280px; margin: 0 auto; padding: 60px 100px; }
     .cs-section + .cs-section { padding-top: 0; }
     .cs-label {
       font-size: 11px; font-weight: 700; color: #7342E2;
@@ -219,7 +219,7 @@
     /* ── Problem quote ── */
     .cs-problem-section {
       background: #171717;
-      padding: 60px 0 32px;
+      padding: 60px 0;
     }
     .cs-problem-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; }
     .cs-problem-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
@@ -669,7 +669,7 @@
     .cs-decision-outcome-icon { flex-shrink: 0; margin-top: 2px; }
 
     /* ── Reflection dark section ── */
-    .cs-reflection-section { background: #171717; padding: 100px 0; overflow: hidden; }
+    .cs-reflection-section { background: #171717; padding: 60px 0; overflow: hidden; }
     .cs-reflection-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; box-sizing: border-box; width: 100%; }
     .cs-reflection-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
     .cs-reflection-heading {
@@ -692,38 +692,125 @@
     /* ── Divider ── */
     .cs-divider { border: none; border-top: 1px solid rgba(0,0,0,0.07); margin: 0 100px; }
 
-    /* ── Footer ── */
-    .cs-footer { background: #0c0c0f; position: relative; overflow: hidden; }
-    .cs-footer-aurora {
-      position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(circle at 50% 60%, rgba(115,66,226,0.25) 0%, rgba(115,66,226,0.08) 40%, transparent 70%);
+    /* ── Cinematic footer ── */
+    .cinematic-footer-wrapper {
+      position: relative; width: 100%; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden; font-family: 'Bricolage Grotesque', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      --cf-bg: #0c0c0f; --cf-fg: #f0ede8; --cf-primary: #7342E2;
+      --cf-secondary: #ec4899; --cf-muted: rgba(240,237,232,0.5);
+      --cf-border: rgba(115,66,226,0.2); --cf-destructive: #ef4444;
+      --pill-bg-1: rgba(115,66,226,0.08); --pill-bg-2: rgba(115,66,226,0.03);
+      --pill-shadow: rgba(0,0,0,0.5); --pill-highlight: rgba(115,66,226,0.2);
+      --pill-inset-shadow: rgba(0,0,0,0.6); --pill-border: rgba(115,66,226,0.25);
+      background: var(--cf-bg); color: var(--cf-fg);
     }
-    .cs-footer-inner { max-width: 1280px; margin: 0 auto; padding: 80px 48px 40px; position: relative; z-index: 1; }
-    .cs-footer-main { text-align: center; margin-bottom: 64px; }
-    .cs-footer-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: rgba(240,237,232,0.35); margin-bottom: 20px; }
-    .cs-footer-logo span { color: #7342E2; }
-    .cs-footer-heading { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(36px,6vw,72px); font-weight: 900; line-height: 1; letter-spacing: -0.04em; color: #fff; margin-bottom: 40px; }
-    .cs-footer-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .cs-footer-pill {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(240,237,232,0.8); padding: 12px 22px; border-radius: 100px;
-      font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 500;
-      text-decoration: none; transition: all 0.25s;
+    .cf-aurora {
+      position: absolute; left: 50%; top: 50%; width: 80vw; height: 60vh;
+      transform: translate(-50%, -50%); border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(115,66,226,0.35) 0%, rgba(115,66,226,0.18) 35%, rgba(236,72,153,0.08) 60%, transparent 75%);
+      filter: blur(80px); pointer-events: none; z-index: 0;
+      animation: cf-breathe 8s ease-in-out infinite alternate;
     }
-    button.cs-footer-pill { cursor: pointer; background: rgba(255,255,255,0.06); }
-    button.cs-footer-pill:hover { background: rgba(115,66,226,0.2); border-color: rgba(115,66,226,0.4); color: #fff; }
-    .cs-footer-bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
-      flex-wrap: wrap; gap: 16px;
+    .cf-grid {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-size: 60px 60px;
+      background-image: linear-gradient(to right, rgba(240,237,232,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(240,237,232,0.04) 1px, transparent 1px);
+      mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
     }
-    .cs-footer-copyright { font-size: 13px; color: rgba(240,237,232,0.3); font-family: 'Bricolage Grotesque', sans-serif; }
-    .cs-footer-links { display: flex; gap: 28px; }
-    .cs-footer-links a { font-family: 'Bricolage Grotesque', sans-serif; font-size: 14px; font-weight: 500; color: rgba(240,237,232,0.5); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color 0.2s; }
-    .cs-footer-links a:hover { color: #f0ede8; }
-    .cs-footer-back-top { display: inline-flex; align-items: center; gap: 7px; background: none; border: none; font-family: 'Bricolage Grotesque', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(240,237,232,0.35); cursor: pointer; transition: color 0.2s; }
-    .cs-footer-back-top:hover { color: #f0ede8; }
+    .cf-giant-text {
+      position: absolute; bottom: -2vh; left: 50%; transform: translateX(-50%);
+      white-space: nowrap; font-size: 26vw; line-height: 0.75; font-weight: 900; letter-spacing: -0.05em;
+      color: transparent; -webkit-text-stroke: 1px rgba(240,237,232,0.05);
+      background: linear-gradient(180deg, rgba(240,237,232,0.1) 0%, transparent 60%);
+      -webkit-background-clip: text; background-clip: text;
+      z-index: 0; pointer-events: none; user-select: none; font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .cf-marquee-bar {
+      position: absolute; top: 0; left: 0; width: 100%; overflow: hidden;
+      border-bottom: 1px solid rgba(240,237,232,0.08); background: rgba(10,10,15,0.6);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      padding: 14px 0; z-index: 10;
+      transform: rotate(-1.5deg) scaleX(1.08); box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .cf-marquee-track {
+      display: flex; width: max-content; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--cf-muted);
+      animation: cf-marquee 40s linear infinite;
+    }
+    .cf-marquee-item { display: flex; align-items: center; gap: 48px; padding: 0 24px; }
+    .cf-marquee-item span.dot { color: rgba(115,66,226,0.6); }
+    .cf-pill {
+      background: linear-gradient(145deg, var(--pill-bg-1) 0%, var(--pill-bg-2) 100%);
+      box-shadow: 0 10px 30px -10px var(--pill-shadow), inset 0 1px 1px var(--pill-highlight), inset 0 -1px 2px var(--pill-inset-shadow);
+      border: 1px solid var(--pill-border);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1); text-decoration: none; cursor: pointer;
+    }
+    .cf-main {
+      position: relative; z-index: 10; flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 120px 24px 80px;
+    }
+    .cf-heading {
+      font-size: clamp(42px,8vw,96px); font-weight: 900; letter-spacing: -0.04em;
+      text-align: center; margin-bottom: 48px; line-height: 1;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: #ffffff; -webkit-text-fill-color: #ffffff;
+      filter: drop-shadow(0 0 20px rgba(240,237,232,0.12));
+    }
+    .cf-cta-group { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
+    .cf-primary-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .cf-cta-btn {
+      padding: 18px 40px; border-radius: 100px; color: var(--cf-fg);
+      font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; gap: 10px;
+      background: transparent !important; box-shadow: none !important;
+      border: 1px solid rgba(240,237,232,0.2) !important;
+      backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+    .cf-bottom {
+      position: relative; z-index: 20; width: 100%; padding: 0 48px 32px;
+      display: flex; align-items: center; justify-content: flex-start; gap: 16px;
+    }
+    .cf-copyright { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cf-muted); }
+    .cf-made-badge {
+      margin-left: auto; cursor: default; white-space: nowrap;
+      padding: 12px 22px; border-radius: 100px; display: flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-muted);
+    }
+    .cf-heart { font-size: 14px; color: var(--cf-destructive); animation: cf-heartbeat 2s cubic-bezier(0.25,1,0.5,1) infinite; }
+    .cf-back-top {
+      padding: 10px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 7px;
+      color: var(--cf-muted); border: none; background: none;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      white-space: nowrap; transition: color 0.25s ease; font-family: 'Bricolage Grotesque', sans-serif; cursor: pointer;
+    }
+    .cf-back-top svg { transition: transform 0.3s ease; flex-shrink: 0; }
+    .cf-back-top:hover { color: var(--cf-fg); }
+    .cf-back-top:hover svg { transform: translateY(-3px); }
+    #cfEmailBtn { position: relative; }
+    #cfEmailBtn::after {
+      content: 'Click to copy'; position: absolute; bottom: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: rgba(240,237,232,0.12); color: rgba(240,237,232,0.7);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 5px 12px; border-radius: 100px;
+      border: 1px solid rgba(240,237,232,0.15); backdrop-filter: blur(8px);
+      white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #cfEmailBtn:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @keyframes cf-breathe {
+      0%   { transform: translate(-50%,-50%) scale(1);   opacity: 0.6; }
+      100% { transform: translate(-50%,-50%) scale(1.1); opacity: 1; }
+    }
+    @keyframes cf-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes cf-heartbeat {
+      0%, 100% { transform: scale(1); }
+      15%, 45% { transform: scale(1.25); }
+      30%      { transform: scale(1); }
+    }
 
     /* ── My Role section ── */
     .cs-role-band { border-bottom: 1px solid rgba(0,0,0,0.07); background: #faf8ff; }
@@ -928,26 +1015,17 @@
   </header>
 
   <!-- ════ Hero ════ -->
-  <section class="cs-hero">
+  <section class="cs-hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 70px 48px 50px; grid-template-columns: unset;">
     <div class="cs-hero-bg"></div>
     <div class="cs-hero-grid"></div>
     <a href="index.html#works" class="cs-back">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Back to Works
     </a>
-    <div class="cs-hero-content">
-      <div class="cs-hero-tags">
-        <span class="cs-hero-tag">UX Design</span>
-        <span class="cs-hero-tag">Mobile App</span>
-        <span class="cs-hero-tag">Automotive</span>
-        <span class="cs-hero-tag">Concept</span>
-        <span class="cs-hero-tag">2025</span>
-      </div>
-      <h1 class="cs-hero-title">Škoda<br><em>Connected</em><br>App</h1>
-      <p class="cs-hero-sub">A conceptual redesign of a connected car app for Škoda vehicle owners, bringing keyless access, remote controls, and real-time vehicle insights into a seamless mobile experience.</p>
-    </div>
-    <div class="cs-hero-img-ph">
-      <img src="images/skoda/SkodaHero.png" alt="Škoda Connected App">
+    <div class="cs-hero-content" style="text-align: center; align-items: center; max-width: 800px;">
+      <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px;">Škoda · Automotive App</p>
+      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px);">A smarter way<br>to own a car</h1>
+      <p class="cs-hero-sub" style="max-width: 600px; margin-left: auto; margin-right: auto; text-wrap: balance;">A conceptual redesign of a connected car app for Škoda vehicle owners, bringing keyless access, remote controls, and real-time vehicle insights into a seamless mobile experience.</p>
     </div>
   </section>
 
@@ -1640,31 +1718,73 @@
     </div>
   </div>
 
-  <!-- ════ Footer ════ -->
-  <footer class="cs-footer">
-    <div class="cs-footer-aurora"></div>
-    <div class="cs-footer-inner">
-      <div class="cs-footer-main">
-        <div class="cs-footer-logo">SR<span>.</span></div>
-        <h2 class="cs-footer-heading">Let's Work Together</h2>
-        <div class="cs-footer-ctas">
-          <div class="cs-footer-pill">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  <!-- ════ FOOTER ════ -->
+  <footer class="cinematic-footer-wrapper">
+    <div class="cf-aurora"></div>
+    <div class="cf-grid"></div>
+    <div class="cf-giant-text">SR.</div>
+
+    <div class="cf-marquee-bar">
+      <div class="cf-marquee-track">
+        <div class="cf-marquee-item">
+          <span>Product Design</span><span class="dot">✦</span>
+          <span>12+ Years Experience</span><span class="dot">✦</span>
+          <span>Design Leadership</span><span class="dot">✦</span>
+          <span>Design Systems</span><span class="dot">✦</span>
+          <span>UX Research</span><span class="dot">✦</span>
+          <span>Strategic Vision</span><span class="dot">✦</span>
+          <span>Team Mentoring</span><span class="dot">✦</span>
+          <span>Stakeholder Alignment</span><span class="dot">✦</span>
+          <span>Design Ops</span><span class="dot">✦</span>
+          <span>OKR Planning</span><span class="dot">✦</span>
+        </div>
+        <div class="cf-marquee-item" aria-hidden="true">
+          <span>Product Design</span><span class="dot">✦</span>
+          <span>12+ Years Experience</span><span class="dot">✦</span>
+          <span>Design Leadership</span><span class="dot">✦</span>
+          <span>Design Systems</span><span class="dot">✦</span>
+          <span>UX Research</span><span class="dot">✦</span>
+          <span>Strategic Vision</span><span class="dot">✦</span>
+          <span>Team Mentoring</span><span class="dot">✦</span>
+          <span>Stakeholder Alignment</span><span class="dot">✦</span>
+          <span>Design Ops</span><span class="dot">✦</span>
+          <span>OKR Planning</span><span class="dot">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-main">
+      <h2 class="cf-heading">Let's Work Together</h2>
+      <div class="cf-cta-group">
+        <div class="cf-primary-row">
+          <div class="cf-pill cf-cta-btn" style="cursor:default">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             +91 989 424 9490
           </div>
-          <button class="cs-footer-pill" id="footerEmailBtn" onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('footerEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'18\' height=\'18\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
+            onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
             santhosh.r777@live.in
           </button>
         </div>
       </div>
-      <div class="cs-footer-bottom">
-        <div class="cs-footer-copyright">© 2026 SR. All rights reserved.</div>
-        <button class="cs-footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
-          Back to top
-        </button>
+    </div>
+
+    <div class="cf-bottom">
+      <div class="cf-copyright">© 2026 SR. All rights reserved.</div>
+      <div class="cf-pill cf-made-badge">
+        <span>Designed with</span>
+        <span class="cf-heart">❤️</span>
+        <span style="color:rgba(240,237,232,0.25);margin:0 4px;">|</span>
+        <span>Vibe coded with passion</span>
       </div>
+      <button class="cf-pill cf-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+        Back to top
+      </button>
     </div>
   </footer>
 

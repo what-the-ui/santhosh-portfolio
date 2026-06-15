@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sourcing Insights – Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e2ddd8;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      padding: 40px 0;
+    }
+
+    /* ─── iPhone outer shell ─── */
+    .iphone-shell {
+      position: relative;
+      width: 421px;
+      background: linear-gradient(160deg, #3a3a3c 0%, #1c1c1e 60%, #2c2c2e 100%);
+      border-radius: 58px;
+      padding: 14px;
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.18),
+        0 0 0 1px rgba(0,0,0,0.6),
+        0 70px 140px rgba(0,0,0,0.55),
+        0 30px 60px rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+
+    /* Hardware buttons — left side */
+    .hw-mute, .hw-vol-up, .hw-vol-dn {
+      position: absolute;
+      left: -3px;
+      width: 3px;
+      background: linear-gradient(to right, #2a2a2c, #3a3a3c);
+      border-radius: 2px 0 0 2px;
+    }
+    .hw-mute   { top: 130px; height: 32px; }
+    .hw-vol-up { top: 185px; height: 62px; }
+    .hw-vol-dn { top: 265px; height: 62px; }
+
+    /* Hardware button — right side */
+    .hw-power {
+      position: absolute;
+      right: -3px;
+      top: 220px;
+      width: 3px;
+      height: 80px;
+      background: linear-gradient(to left, #2a2a2c, #3a3a3c);
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ─── Screen ─── */
+    .phone {
+      width: 393px;
+      height: 852px;
+      background: #fff;
+      border-radius: 46px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Dynamic Island */
+    .dynamic-island {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 34px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 200;
+    }
+
+    /* Home indicator */
+    .home-bar {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 134px;
+      height: 5px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 3px;
+      z-index: 200;
+    }
+
+    /* ─── Fixed header ─── */
+    #fixed-header {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: #fff;
+    }
+
+    /* Status bar */
+    .status-bar {
+      height: 59px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 28px 10px;
+      position: relative;
+    }
+    .status-time {
+      font-size: 17px;
+      font-weight: 600;
+      color: #121212;
+      letter-spacing: -0.3px;
+      font-variant-numeric: tabular-nums;
+    }
+    .status-icons { display: flex; align-items: center; gap: 7px; }
+
+    /* App bar */
+    .app-bar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+    }
+    .btn-back {
+      width: 36px; height: 36px;
+      background: #f6f6f6;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .nav-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #121212;
+    }
+    .ghost { width: 36px; }
+
+    /* Search bar — hides / shows on scroll */
+    .search-wrap {
+      height: 60px;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      transition:
+        height 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.22s ease,
+        padding-top 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        padding-bottom 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .search-wrap.collapsed {
+      height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .search-pill {
+      flex: 1;
+      height: 42px;
+      border: 1px solid #ccc;
+      border-radius: 90px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+    }
+    .search-pill svg { width: 20px; height: 20px; flex-shrink: 0; color: #999; }
+    .search-hint { font-size: 14px; color: #999; }
+
+    /* Section title */
+    .section-hd { padding: 14px 14px 2px; }
+    .section-name { font-size: 16px; font-weight: 500; color: #121212; line-height: 20px; }
+    .section-meta { font-size: 12px; color: #717171; line-height: 18px; margin-top: 2px; }
+    .section-meta u { cursor: pointer; }
+
+    /* Filter chips */
+    .filters {
+      display: flex;
+      gap: 8px;
+      padding: 12px 14px 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filters::-webkit-scrollbar { display: none; }
+    .chip {
+      height: 36px;
+      padding: 0 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #121212;
+      white-space: nowrap;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      user-select: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .chip.on { background: rgba(0,0,0,0.03); border-color: #121212; }
+
+    .header-sep { height: 1px; background: rgba(0,0,0,0.06); }
+
+    /* ─── Scrollable list ─── */
+    #list-container {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 134px;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      transition: top 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #list-container::-webkit-scrollbar { display: none; }
+
+    .items-list { padding: 12px 14px 48px; }
+
+    .item-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .item-num { width: 26px; font-size: 14px; color: #999; flex-shrink: 0; line-height: 20px; }
+    .item-inner { flex: 1; display: flex; align-items: center; justify-content: space-between; }
+    .item-lhs { display: flex; align-items: center; gap: 14px; flex: 1; }
+
+    /* Brand avatar */
+    .avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      background: #f2f2f2;
+    }
+    .avatar img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .avatar .shade { position: absolute; inset: 0; background: rgba(0,0,0,0.28); }
+    .avatar .logo-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .avatar .logo-wrap img { width: 44px; height: auto; object-fit: contain; }
+    .avatar .logo-txt {
+      color: #fff; font-size: 9px; font-weight: 700;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      text-align: center; line-height: 1.25; padding: 0 8px;
+    }
+    .avatar .logo-txt.serif {
+      font-family: 'Playfair Display', Georgia, serif;
+      letter-spacing: 1px; font-size: 8.5px;
+    }
+
+    .item-info { flex: 1; }
+    .item-title { font-size: 16px; color: #121212; line-height: 20px; }
+    .item-dept  { font-size: 13px; color: #999; line-height: 18px; margin-top: 2px; }
+    .chevron { width: 20px; display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; }
+
+    /* ─── Bottom nav ─── */
+    .bottom-nav {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 134px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 28px;
+      background: linear-gradient(to top, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+      pointer-events: none;
+    }
+    .nav-pill {
+      width: 353px; height: 62px;
+      background: rgba(246,246,246,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 296px;
+      border: 0.7px solid rgba(255,255,255,0.9);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex; align-items: center; padding: 4px;
+      pointer-events: all;
+    }
+    .nav-tab {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px; height: 54px; border-radius: 200px; cursor: pointer;
+    }
+    .nav-tab-icon { height: 28px; display: flex; align-items: center; justify-content: center; }
+    .nav-tab-icon img { height: 18px; width: auto; }
+    .nav-tab-label { font-size: 10px; font-weight: 500; color: #121212; letter-spacing: -0.03px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ iPHONE SHELL ═══════════════════════════════════ -->
+<div class="iphone-shell">
+  <!-- Hardware buttons -->
+  <div class="hw-mute"></div>
+  <div class="hw-vol-up"></div>
+  <div class="hw-vol-dn"></div>
+  <div class="hw-power"></div>
+
+  <!-- Screen -->
+  <div class="phone">
+
+    <!-- Dynamic Island -->
+    <div class="dynamic-island"></div>
+
+    <!-- ═══ FIXED HEADER ════════════════════════════ -->
+    <div id="fixed-header">
+
+      <!-- Status bar -->
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <div class="status-icons">
+          <!-- Cellular signal -->
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="#121212" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0"   y="8"   width="3" height="4"  rx="1"/>
+            <rect x="4.5" y="5.5" width="3" height="6.5" rx="1"/>
+            <rect x="9"   y="3"   width="3" height="9"  rx="1"/>
+            <rect x="13.5" y="0"  width="3" height="12" rx="1"/>
+          </svg>
+          <!-- Wi-Fi -->
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="#121212" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8" cy="10.5" r="1.5"/>
+            <path d="M4.5 7.3C5.6 6.2 6.7 5.6 8 5.6s2.4.6 3.5 1.7L13 5.8C11.5 4.3 9.9 3.6 8 3.6S4.5 4.3 3 5.8L4.5 7.3z"/>
+            <path d="M1.2 4C3 2.2 5.4 1.1 8 1.1s5 1.1 6.8 2.9L16.3 2.5C14.1.4 11.2-.6 8-.6S1.9.4-.3 2.5L1.2 4z" opacity=".35"/>
+          </svg>
+          <!-- Battery -->
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#121212" stroke-opacity="0.35"/>
+            <rect x="2" y="2" width="17" height="8" rx="2" fill="#121212"/>
+            <path d="M23 4v4c.9-.5 1.5-1.2 1.5-2s-.6-1.5-1.5-2z" fill="#121212" fill-opacity="0.4"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- App bar -->
+      <div class="app-bar">
+        <div class="btn-back">
+          <svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 1L1 9L9 17"/>
+          </svg>
+        </div>
+        <span class="nav-title">Sourcing Insights</span>
+        <div class="ghost"></div>
+      </div>
+
+      <!-- Search bar — hides on scroll down, shows on scroll up -->
+      <div class="search-wrap" id="search-bar">
+        <div class="search-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+          </svg>
+          <span class="search-hint">See what items like yours sold for</span>
+        </div>
+      </div>
+
+      <!-- Section title — always pinned -->
+      <div class="section-hd">
+        <div class="section-name">Fast Selling Items</div>
+        <div class="section-meta">Data for Last 7 days.&nbsp;<u>Learn more</u></div>
+      </div>
+
+      <!-- Department filter — always pinned -->
+      <div class="filters">
+        <div class="chip" onclick="setChip(this)">All</div>
+        <div class="chip on" onclick="setChip(this)">Women</div>
+        <div class="chip" onclick="setChip(this)">Men</div>
+        <div class="chip" onclick="setChip(this)">Kids</div>
+        <div class="chip" onclick="setChip(this)">Home</div>
+      </div>
+
+      <div class="header-sep"></div>
+    </div>
+
+    <!-- ═══ SCROLLABLE LIST ════════════════════════════ -->
+    <div id="list-container">
+      <div class="items-list">
+
+        <!-- 01 Dior Bags -->
+        <div class="item-row">
+          <span class="item-num">01</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/e5f0c20c-0a9b-4153-adff-e801e3235da5" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt serif">DIOR</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Dior Bags</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 02 Mulberry Bags -->
+        <div class="item-row">
+          <span class="item-num">02</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/a3f97406-d798-4635-81cb-19985020465f" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt serif" style="font-size:7.5px;letter-spacing:0.5px">Mulberry</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Mulberry Bags</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 03 Lululemon Dresses -->
+        <div class="item-row">
+          <span class="item-num">03</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/54ec1b3d-ce7e-42dc-b573-5a27e0fffe5e" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><img src="https://www.figma.com/api/mcp/asset/5739bad1-d39a-44f1-8f8d-5190be518941" alt="lululemon"></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Lululemon Dresses</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 04 Nike Sneakers -->
+        <div class="item-row">
+          <span class="item-num">04</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/705312d3-80ab-43fe-8752-d2df87a5f9b0" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><img src="https://www.figma.com/api/mcp/asset/75155b6c-0512-494b-bd5b-dd5b8873abe7" alt="Nike"></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Nike Sneakers</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 05 Burberry Shirts -->
+        <div class="item-row">
+          <span class="item-num">05</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/4bb3b55c-b9d4-4c74-bce2-d4d24f65ec34" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt" style="font-size:7px;letter-spacing:2px">BURBERRY</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Burberry Shirts</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 06 Nike Bags -->
+        <div class="item-row">
+          <span class="item-num">06</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/705312d3-80ab-43fe-8752-d2df87a5f9b0" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><img src="https://www.figma.com/api/mcp/asset/75155b6c-0512-494b-bd5b-dd5b8873abe7" alt="Nike"></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Nike Bags</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 07 Coach Bags -->
+        <div class="item-row">
+          <span class="item-num">07</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/a3f97406-d798-4635-81cb-19985020465f" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt" style="font-size:8.5px;letter-spacing:2.5px">COACH</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Coach Bags</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 08 Zara Blazers -->
+        <div class="item-row">
+          <span class="item-num">08</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/e5f0c20c-0a9b-4153-adff-e801e3235da5" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt" style="font-size:9.5px;letter-spacing:3px">ZARA</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Zara Blazers</div>
+                <div class="item-dept">Men</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 09 Free People Dresses -->
+        <div class="item-row">
+          <span class="item-num">09</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/54ec1b3d-ce7e-42dc-b573-5a27e0fffe5e" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt" style="font-size:7px;letter-spacing:1px;line-height:1.3">FREE<br>PEOPLE</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Free People Dresses</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 10 Levi's Jeans -->
+        <div class="item-row">
+          <span class="item-num">10</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/4bb3b55c-b9d4-4c74-bce2-d4d24f65ec34" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt serif" style="font-size:9px;letter-spacing:1.5px">Levi's</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Levi's Jeans</div>
+                <div class="item-dept">Men</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 11 Gucci Sneakers -->
+        <div class="item-row">
+          <span class="item-num">11</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/a3f97406-d798-4635-81cb-19985020465f" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt serif" style="font-size:9px;letter-spacing:1.5px">GUCCI</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Gucci Sneakers</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 12 Ralph Lauren Polos -->
+        <div class="item-row">
+          <span class="item-num">12</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/e5f0c20c-0a9b-4153-adff-e801e3235da5" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt" style="font-size:6.5px;letter-spacing:1.2px;line-height:1.4">RALPH<br>LAUREN</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Ralph Lauren Polos</div>
+                <div class="item-dept">Men</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 13 Prada Bags -->
+        <div class="item-row">
+          <span class="item-num">13</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/9100fff8-ae36-49b7-8e99-c9ed41761c7e" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt serif" style="font-size:9px;letter-spacing:2px">PRADA</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Prada Bags</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 14 Anthropologie Tops -->
+        <div class="item-row">
+          <span class="item-num">14</span>
+          <div class="item-inner">
+            <div class="item-lhs">
+              <div class="avatar">
+                <img class="bg" src="https://www.figma.com/api/mcp/asset/54ec1b3d-ce7e-42dc-b573-5a27e0fffe5e" alt="">
+                <div class="shade"></div>
+                <div class="logo-wrap"><span class="logo-txt serif" style="font-size:7px;letter-spacing:0.5px">anthro</span></div>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Anthropologie Tops</div>
+                <div class="item-dept">Women</div>
+              </div>
+            </div>
+            <div class="chevron"><svg width="6" height="11" viewBox="0 0 6 10" fill="none"><path d="M1 1L5 5L1 9" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ BOTTOM NAV ══════════════════════════════════ -->
+    <div class="bottom-nav">
+      <div class="nav-pill">
+        <div class="nav-tab">
+          <div class="nav-tab-icon"><img src="https://www.figma.com/api/mcp/asset/5377bf92-1fb8-4df3-91ad-11f6257e11a8" alt="home"></div>
+          <span class="nav-tab-label">Home</span>
+        </div>
+        <div class="nav-tab">
+          <div class="nav-tab-icon"><img src="https://www.figma.com/api/mcp/asset/a1fa9a4f-5bc5-49be-961c-87a05320216e" alt="search"></div>
+          <span class="nav-tab-label">Search</span>
+        </div>
+        <div class="nav-tab">
+          <div class="nav-tab-icon"><img src="https://www.figma.com/api/mcp/asset/497ef0c2-6ba1-4134-8559-c9435e951201" alt="sell"></div>
+          <span class="nav-tab-label">Sell</span>
+        </div>
+        <div class="nav-tab">
+          <div class="nav-tab-icon"><img src="https://www.figma.com/api/mcp/asset/8497f02e-8dd7-4bc4-b447-1f88ec2cc2f1" alt="news"></div>
+          <span class="nav-tab-label">News</span>
+        </div>
+        <div class="nav-tab">
+          <div class="nav-tab-icon"><img src="https://www.figma.com/api/mcp/asset/332e54ba-ca26-4d01-a1f8-514d53510a33" alt="me" style="height:20px;width:20px;border-radius:50%;object-fit:cover"></div>
+          <span class="nav-tab-label">Me</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home indicator -->
+    <div class="home-bar"></div>
+
+  </div><!-- /phone -->
+</div><!-- /iphone-shell -->
+
+<script>
+  function setChip(el) {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+    el.classList.add('on');
+  }
+
+  const hdr    = document.getElementById('fixed-header');
+  const sb     = document.getElementById('search-bar');
+  const listEl = document.getElementById('list-container');
+
+  let hidden = false, lastY = 0, hFull, hShort;
+
+  function init() {
+    hFull  = hdr.offsetHeight;
+    hShort = hFull - sb.offsetHeight;
+    listEl.style.top = hFull + 'px';
+  }
+
+  listEl.addEventListener('scroll', () => {
+    const y = listEl.scrollTop;
+
+    if (y < 8 && hidden) {
+      hidden = false;
+      sb.classList.remove('collapsed');
+      listEl.style.top = hFull + 'px';
+      lastY = y; return;
+    }
+
+    const delta = y - lastY;
+
+    if (delta > 4 && y > 16 && !hidden) {
+      hidden = true;
+      sb.classList.add('collapsed');
+      listEl.style.top = hShort + 'px';
+    } else if (delta < -4 && hidden) {
+      hidden = false;
+      sb.classList.remove('collapsed');
+      listEl.style.top = hFull + 'px';
+    }
+
+    lastY = y;
+  }, { passive: true });
+
+  window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

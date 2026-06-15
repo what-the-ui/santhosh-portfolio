@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Diff — AI Screenshot Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --card: #161616;
+      --border: #222222;
+      --border-hover: #333333;
+      --accent: #7C6EFA;
+      --accent-dim: rgba(124, 110, 250, 0.12);
+      --accent-glow: rgba(124, 110, 250, 0.25);
+      --text: #F2F2F2;
+      --text-2: #888888;
+      --text-3: #444444;
+      --high: #FF4D4D;
+      --high-bg: rgba(255, 77, 77, 0.1);
+      --medium: #FF9500;
+      --medium-bg: rgba(255, 149, 0, 0.1);
+      --low: #34C759;
+      --low-bg: rgba(52, 199, 89, 0.1);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo svg { color: white; }
+
+    header h1 {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    header span {
+      font-size: 13px;
+      color: var(--text-2);
+      font-weight: 400;
+    }
+
+    .badge {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(124,110,250,0.2);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── MAIN ─── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff 30%, #888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: var(--text-2);
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    /* ─── UPLOAD SECTION ─── */
+    .upload-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .upload-zone {
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .upload-zone:hover,
+    .upload-zone.dragover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .upload-zone.has-image {
+      border-style: solid;
+      border-color: var(--border-hover);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 24px;
+      pointer-events: none;
+    }
+
+    .upload-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-2);
+    }
+
+    .upload-label-tag {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .upload-placeholder h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .upload-placeholder p {
+      font-size: 12px;
+      color: var(--text-2);
+      text-align: center;
+    }
+
+    /* Preview state */
+    .preview-container {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+
+    .upload-zone.has-image .preview-container { display: block; }
+    .upload-zone.has-image .upload-placeholder { display: none; }
+
+    .preview-container img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      gap: 8px;
+    }
+
+    .preview-filename {
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+      font-family: 'JetBrains Mono', monospace;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-remove {
+      font-size: 11px;
+      font-weight: 500;
+      color: white;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 6px;
+      padding: 4px 10px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      z-index: 10;
+      pointer-events: all;
+      transition: background 0.15s;
+    }
+
+    .preview-remove:hover { background: rgba(255,77,77,0.5); }
+
+    /* ─── ANALYZE BUTTON ─── */
+    .analyze-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .btn-analyze {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 0 0 var(--accent-glow);
+    }
+
+    .btn-analyze:hover:not(:disabled) {
+      background: #8D81FF;
+      box-shadow: 0 0 24px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-analyze:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-analyze.loading {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .btn-analyze.loading .spinner { display: block; }
+    .btn-analyze.loading .btn-icon { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── ERROR ─── */
+    .error-card {
+      display: none;
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.25);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #FF6B6B;
+      margin-bottom: 32px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .error-card.visible { display: flex; }
+
+    /* ─── RESULTS ─── */
+    #results { display: none; }
+    #results.visible { display: block; }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .results-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .results-meta {
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    /* Summary */
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .summary-card p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      text-align: center;
+    }
+
+    .stat-card .stat-num {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-2);
+    }
+
+    .stat-card.total .stat-num { color: var(--text); }
+    .stat-card.high .stat-num { color: var(--high); }
+    .stat-card.medium .stat-num { color: var(--medium); }
+    .stat-card.low .stat-num { color: var(--low); }
+
+    /* Critical changes */
+    .critical-section {
+      background: rgba(255,77,77,0.05);
+      border: 1px solid rgba(255,77,77,0.15);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .critical-section h4 {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--high);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .critical-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .critical-list li {
+      font-size: 13px;
+      color: var(--text-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .critical-list li::before {
+      content: '→';
+      color: var(--high);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Category tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+      background: var(--surface);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .tab {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-2);
+      transition: all 0.15s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab:hover { color: var(--text); }
+
+    .tab.active {
+      background: var(--card);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .tab-count {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: var(--border);
+      color: var(--text-2);
+    }
+
+    .tab.active .tab-count {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    /* Diff panels */
+    .diff-panel { display: none; }
+    .diff-panel.active { display: flex; flex-direction: column; gap: 8px; }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-3);
+      font-size: 13px;
+    }
+
+    /* Diff item */
+    .diff-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+
+    .diff-item:hover { border-color: var(--border-hover); }
+
+    .diff-item-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .diff-element {
+      font-size: 13px;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .diff-property {
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .impact-badge {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .impact-badge.high { color: var(--high); background: var(--high-bg); }
+    .impact-badge.medium { color: var(--medium); background: var(--medium-bg); }
+    .impact-badge.low { color: var(--low); background: var(--low-bg); }
+
+    .diff-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .diff-side {
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .diff-side:first-child {
+      border-right: 1px solid var(--border);
+    }
+
+    .diff-side-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+    }
+
+    .diff-side-value {
+      font-size: 13px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .diff-side:first-child .diff-side-value { color: #FF9999; }
+    .diff-side:last-child .diff-side-value { color: #99FF99; }
+
+    .color-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    .diff-note {
+      padding: 8px 16px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-2);
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      main { padding: 32px 16px 64px; }
+      .upload-grid { grid-template-columns: 1fr; }
+      .hero h2 { font-size: 26px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .diff-body { grid-template-columns: 1fr; }
+      .diff-side:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="8" height="8" rx="1"/>
+      <rect x="13" y="3" width="8" height="8" rx="1"/>
+      <path d="M3 13h8M13 13h8M3 17h8M13 17h8M3 21h8M13 21h8"/>
+    </svg>
+  </div>
+  <h1>Design Diff</h1>
+  <span>AI-powered screenshot comparison</span>
+  <span class="badge">Powered by Claude</span>
+</header>
+
+<main>
+  <div class="hero">
+    <h2>Spot every difference,<br/>instantly.</h2>
+    <p>Upload two UI screenshots and AI will detect differences in color, typography, spacing, layout, and more.</p>
+  </div>
+
+  <!-- Upload -->
+  <div class="upload-grid">
+    <div class="upload-zone" id="zone1" ondragover="handleDrag(event, this)" ondragleave="handleDragLeave(this)" ondrop="handleDrop(event, 1)">
+      <input type="file" id="file1" accept="image/*" onchange="handleFile(1, this)" />
+      <div class="upload-placeholder">
+        <div class="upload-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+        </div>
+        <span class="upload-label-tag">Before</span>
+        <h3>Screenshot 1 — Original</h3>
+        <p>Drag & drop or click to upload<br/>PNG, JPG, WebP up to 15MB</p>
+      </div>
+      <div class="preview-container" id="preview1">
+        <img id="previewImg1" src="" alt="Screenshot 1" />
+        <div class="preview-overlay">
+          <span class="preview-filename" id="filename1"></span>
+          <button class="preview-remove" onclick="removeFile(event, 1)">Change</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-zone" id="zone2" ondragover="handleDrag(event, this)" ondragleave="handleDragLeave(this)" ondrop="handleDrop(event, 2)">
+      <input type="file" id="file2" accept="image/*" onchange="handleFile(2, this)" />
+      <div class="upload-placeholder">
+        <div class="upload-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+        </div>
+        <span class="upload-label-tag" style="background:rgba(52,199,89,0.12);color:#34C759;border:none;">After</span>
+        <h3>Screenshot 2 — Updated</h3>
+        <p>Drag & drop or click to upload<br/>PNG, JPG, WebP up to 15MB</p>
+      </div>
+      <div class="preview-container" id="preview2">
+        <img id="previewImg2" src="" alt="Screenshot 2" />
+        <div class="preview-overlay">
+          <span class="preview-filename" id="filename2"></span>
+          <button class="preview-remove" onclick="removeFile(event, 2)">Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analyze -->
+  <div class="analyze-wrap">
+    <button class="btn-analyze" id="analyzeBtn" onclick="analyze()" disabled>
+      <span class="btn-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="11" y1="8" x2="11" y2="14"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+      </span>
+      <div class="spinner"></div>
+      <span id="btnText">Analyze Differences</span>
+    </button>
+  </div>
+
+  <!-- Error -->
+  <div class="error-card" id="errorCard">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span id="errorMsg"></span>
+  </div>
+
+  <!-- Results -->
+  <div id="results">
+    <div class="results-header">
+      <h3>Analysis Results</h3>
+      <span class="results-meta" id="resultsMeta"></span>
+    </div>
+
+    <div class="summary-card">
+      <p id="summaryText"></p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card total">
+        <div class="stat-num" id="statTotal">—</div>
+        <div class="stat-label">Total Differences</div>
+      </div>
+      <div class="stat-card high">
+        <div class="stat-num" id="statHigh">—</div>
+        <div class="stat-label">High Impact</div>
+      </div>
+      <div class="stat-card medium">
+        <div class="stat-num" id="statMedium">—</div>
+        <div class="stat-label">Medium Impact</div>
+      </div>
+      <div class="stat-card low">
+        <div class="stat-num" id="statLow">—</div>
+        <div class="stat-label">Low Impact</div>
+      </div>
+    </div>
+
+    <div class="critical-section" id="criticalSection">
+      <h4>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+        </svg>
+        Critical Changes
+      </h4>
+      <ul class="critical-list" id="criticalList"></ul>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" id="diffTabs">
+      <button class="tab active" data-panel="colors" onclick="switchTab(this, 'colors')">
+        Colors <span class="tab-count" id="tc-colors">0</span>
+      </button>
+      <button class="tab" data-panel="typography" onclick="switchTab(this, 'typography')">
+        Typography <span class="tab-count" id="tc-typography">0</span>
+      </button>
+      <button class="tab" data-panel="spacing" onclick="switchTab(this, 'spacing')">
+        Spacing <span class="tab-count" id="tc-spacing">0</span>
+      </button>
+      <button class="tab" data-panel="layout" onclick="switchTab(this, 'layout')">
+        Layout <span class="tab-count" id="tc-layout">0</span>
+      </button>
+      <button class="tab" data-panel="other" onclick="switchTab(this, 'other')">
+        Other <span class="tab-count" id="tc-other">0</span>
+      </button>
+    </div>
+
+    <div class="diff-panel active" id="panel-colors"></div>
+    <div class="diff-panel" id="panel-typography"></div>
+    <div class="diff-panel" id="panel-spacing"></div>
+    <div class="diff-panel" id="panel-layout"></div>
+    <div class="diff-panel" id="panel-other"></div>
+  </div>
+</main>
+
+<script>
+  const files = { 1: null, 2: null };
+
+  function handleDrag(e, zone) {
+    e.preventDefault();
+    zone.classList.add('dragover');
+  }
+
+  function handleDragLeave(zone) {
+    zone.classList.remove('dragover');
+  }
+
+  function handleDrop(e, num) {
+    e.preventDefault();
+    const zone = document.getElementById('zone' + num);
+    zone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) setFile(num, file);
+  }
+
+  function handleFile(num, input) {
+    if (input.files[0]) setFile(num, input.files[0]);
+  }
+
+  function setFile(num, file) {
+    if (!file.type.startsWith('image/')) {
+      showError('Please upload an image file (PNG, JPG, WebP).');
+      return;
+    }
+    files[num] = file;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      document.getElementById('previewImg' + num).src = e.target.result;
+      document.getElementById('filename' + num).textContent = file.name;
+      document.getElementById('zone' + num).classList.add('has-image');
+    };
+    reader.readAsDataURL(file);
+    updateBtn();
+    hideError();
+    document.getElementById('results').classList.remove('visible');
+  }
+
+  function removeFile(e, num) {
+    e.stopPropagation();
+    e.preventDefault();
+    files[num] = null;
+    document.getElementById('zone' + num).classList.remove('has-image');
+    document.getElementById('file' + num).value = '';
+    updateBtn();
+  }
+
+  function updateBtn() {
+    document.getElementById('analyzeBtn').disabled = !(files[1] && files[2]);
+  }
+
+  function showError(msg) {
+    const card = document.getElementById('errorCard');
+    document.getElementById('errorMsg').textContent = msg;
+    card.classList.add('visible');
+  }
+
+  function hideError() {
+    document.getElementById('errorCard').classList.remove('visible');
+  }
+
+  function switchTab(btn, panel) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.diff-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + panel).classList.add('active');
+  }
+
+  function isHexColor(str) {
+    return /^#([0-9A-F]{3}){1,2}$/i.test(str.trim());
+  }
+
+  function extractColor(str) {
+    const match = str.match(/#([0-9A-Fa-f]{3}){1,2}/);
+    return match ? match[0] : null;
+  }
+
+  function renderDiffItem(item, category) {
+    const impact = (item.impact || 'low').toLowerCase();
+    const property = item.property ? `<span class="diff-property">${item.property}</span>` : '';
+
+    const v1 = item.image1 || '—';
+    const v2 = item.image2 || '—';
+
+    const color1 = category === 'colors' ? extractColor(v1) : null;
+    const color2 = category === 'colors' ? extractColor(v2) : null;
+
+    const swatch1 = color1 ? `<span class="color-swatch" style="background:${color1}"></span>` : '';
+    const swatch2 = color2 ? `<span class="color-swatch" style="background:${color2}"></span>` : '';
+
+    const description = item.description ? `<span style="font-size:12px;color:var(--text-2);margin-bottom:4px;display:block;">${item.description}</span>` : '';
+    const note = item.note ? `<div class="diff-note">${item.note}</div>` : '';
+
+    return `
+      <div class="diff-item">
+        <div class="diff-item-header">
+          <span class="diff-element">${item.element || 'Unknown element'}</span>
+          ${property}
+          <span class="impact-badge ${impact}">${impact}</span>
+        </div>
+        ${description ? `<div style="padding:8px 16px 0;">${description}</div>` : ''}
+        <div class="diff-body">
+          <div class="diff-side">
+            <span class="diff-side-label">Before</span>
+            <span class="diff-side-value">${swatch1}${v1}</span>
+          </div>
+          <div class="diff-side">
+            <span class="diff-side-label">After</span>
+            <span class="diff-side-value">${swatch2}${v2}</span>
+          </div>
+        </div>
+        ${note}
+      </div>`;
+  }
+
+  function renderPanel(panelId, items, category) {
+    const panel = document.getElementById('panel-' + panelId);
+    const count = document.getElementById('tc-' + panelId);
+    const arr = items || [];
+    count.textContent = arr.length;
+    if (!arr.length) {
+      panel.innerHTML = '<div class="empty-state">No differences found in this category.</div>';
+    } else {
+      panel.innerHTML = arr.map(item => renderDiffItem(item, category)).join('');
+    }
+  }
+
+  async function analyze() {
+    if (!files[1] || !files[2]) return;
+
+    const btn = document.getElementById('analyzeBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    document.getElementById('btnText').textContent = 'Analyzing…';
+    document.getElementById('results').classList.remove('visible');
+    hideError();
+
+    const formData = new FormData();
+    formData.append('image1', files[1]);
+    formData.append('image2', files[2]);
+
+    try {
+      const res = await fetch('/analyze', { method: 'POST', body: formData });
+      const data = await res.json();
+
+      if (!data.success) throw new Error(data.error || 'Analysis failed.');
+
+      const a = data.analysis;
+
+      document.getElementById('summaryText').textContent = a.summary || '';
+      document.getElementById('statTotal').textContent = a.totalDifferences ?? '—';
+      document.getElementById('statHigh').textContent = a.impactSummary?.high ?? '—';
+      document.getElementById('statMedium').textContent = a.impactSummary?.medium ?? '—';
+      document.getElementById('statLow').textContent = a.impactSummary?.low ?? '—';
+
+      const criticalList = document.getElementById('criticalList');
+      const criticals = a.criticalChanges || [];
+      if (criticals.length) {
+        criticalList.innerHTML = criticals.map(c => `<li>${c}</li>`).join('');
+        document.getElementById('criticalSection').style.display = '';
+      } else {
+        document.getElementById('criticalSection').style.display = 'none';
+      }
+
+      const d = a.differences || {};
+      renderPanel('colors', d.colors, 'colors');
+      renderPanel('typography', d.typography, 'typography');
+      renderPanel('spacing', d.spacing, 'spacing');
+      renderPanel('layout', d.layout, 'layout');
+      renderPanel('other', d.other, 'other');
+
+      const now = new Date().toLocaleTimeString();
+      document.getElementById('resultsMeta').textContent = `Analyzed at ${now}`;
+
+      // Switch to first non-empty tab
+      const order = ['colors','typography','spacing','layout','other'];
+      const firstActive = order.find(k => (d[k] || []).length > 0) || 'colors';
+      const tab = document.querySelector(`[data-panel="${firstActive}"]`);
+      if (tab) switchTab(tab, firstActive);
+
+      document.getElementById('results').classList.add('visible');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (err) {
+      showError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      document.getElementById('btnText').textContent = 'Analyze Differences';
+    }
+  }
+</script>
+
+</body>
+</html>
