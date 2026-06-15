@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXDLQZNTFX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXDLQZNTFX');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santhosh Rajendran, Product Design Partner</title>
+  <link rel="icon" type="image/png" href="images/favicon-profile.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #fff;
+      background-image: radial-gradient(circle, rgba(255, 97, 1, 0.12) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      color: #171717;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 18px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #171717;
+    }
+    .nav-logo span { color: #FF6101; }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #171717;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FF6101;
+      transition: width 0.2s;
+    }
+    .nav-links a:hover { color: #FF6101; }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 100px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .profile-photo {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+    .profile-photo .bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .profile-photo img.face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: #171717;
+      margin-bottom: 16px;
+    }
+    .hero-tagline {
+      font-size: 20px;
+      color: #171717;
+      font-weight: 500;
+      margin-bottom: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2px;
+    }
+    .hero-tagline .accent { color: #FF6101; font-weight: 700; }
+    .hero-tagline .arrow { color: #FF6101; margin: 0 2px; }
+    .hero-bio {
+      font-size: 20px;
+      color: #171717;
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
+    .hero-bio strong { font-weight: 700; }
+    .hero-bio .ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #171717;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .hero-bio .ext-link:hover { color: #FF6101; }
+    .hero-bio .ext-link:hover svg path { stroke: #FF6101; }
+    .hero-btns {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .btn-sayhi {
+      display: none;
+    }
+    .btn-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #171717;
+      color: #fff;
+      padding: 16px 30px;
+      border-radius: 17px;
+      font-family: 'Lato', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-resume:hover { background: #333; transform: translateY(-2px); }
+
+    /* ── PingandVibe Card (Hero Right) ── */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-top: 40px;
+    }
+    .ping-card {
+      position: relative;
+      width: 246px;
+    }
+    .ping-header-bar {
+      background: #FF6101;
+      border-radius: 20px 20px 0 0;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .ping-logo { width: 28px; height: 28px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+    .ping-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .ping-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px;
+      color: #fff;
+      font-weight: 400;
+    }
+    .ping-ticket-body {
+      position: relative;
+      background: #fff5f0;
+      border-radius: 0 0 20px 20px;
+    }
+    .ping-qr-section {
+      padding: 20px 20px 20px;
+    }
+    .ping-qr-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .ping-qr-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #121212;
+      letter-spacing: 0.48px;
+    }
+    .ping-qr-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+    }
+    .ping-qr-img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      display: block;
+    }
+    .ping-qr-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+    .ping-divider-wrap {
+      padding: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin: 0 -1px;
+    }
+    .ping-divider-wrap::before,
+    .ping-divider-wrap::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .ping-divider-line {
+      flex: 1;
+      border-top: 2px dashed rgba(0,0,0,0.12);
+    }
+    .ping-spotify-section {
+      padding: 12px 16px 16px;
+    }
+    .ping-spotify-section iframe {
+      border-radius: 12px;
+      display: block;
+    }
+
+    /* ── Social Bar ── */
+    .social-bar {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 100px 72px;
+      display: flex;
+      gap: 24px;
+    }
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+      font-size: 16px;
+      color: #171717;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .social-pill:hover { color: #FF6101; }
+    .social-pill .arrow { color: #999; }
+    .social-pill svg.arrow { flex-shrink: 0; }
+
+    /* ── Section Headings ── */
+    .section-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: #171717;
+      margin-bottom: 36px;
+    }
+
+    /* ── Selected Works ── */
+    .selected-works {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 100px 80px;
+    }
+    .works-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .work-card-link {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+    .work-card-disabled { cursor: pointer; opacity: 0.5; }
+    .cs-hud {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #171717;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 100px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 9999;
+      white-space: nowrap;
+    }
+    .cs-hud.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .work-card {
+      border-radius: 20px;
+      padding: 0 20px 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: stretch;
+      min-height: 400px;
+      overflow: hidden;
+    }
+    .work-card:hover { transform: translateY(-4px) scale(1.015); }
+    .work-left { padding: 20px 0; display: flex; flex-direction: column; justify-content: center; }
+    .work-card.c-lime { background: #FFF3F1; }
+    .work-card.c-pink { background: #FFF3F1; }
+    .work-card.c-teal { background: #F9FBD1; }
+
+    .work-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .work-icon.dark { background: #1a1a1a; }
+    .work-icon.pink-bg { background: #fff; }
+    .work-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* SVG icon placeholders */
+    .icon-shadow-guardian {
+      width: 42px;
+      height: 42px;
+      background: conic-gradient(#0d9488, #115e59);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-superops {
+      font-family: 'Lato', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #e53e3e;
+      line-height: 1;
+    }
+    .icon-skoda {
+      font-family: 'Lato', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+
+    .work-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #171717;
+    }
+    .work-desc {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 320px;
+    }
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1.5px solid rgba(0, 0, 0, 0.15);
+      padding: 5px 14px;
+      border-radius: 100px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+    .work-preview {
+      background: transparent;
+      border-radius: 18px;
+      aspect-ratio: 1.45 / 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .work-preview-inner {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.5);
+      filter: blur(2px);
+    }
+    .coming-soon {
+      position: relative;
+      z-index: 2;
+      background: #fff;
+      border-radius: 100px;
+      padding: 10px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #171717;
+    }
+
+    /* ── Design Showcase ── */
+    .design-showcase {
+      padding: 0 0 80px;
+    }
+    .showcase-header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 100px;
+    }
+    .bento-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 50px;
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: auto;
+      gap: 20px;
+    }
+    .bento-item {
+      border-radius: 24px;
+      overflow: hidden;
+      background: transparent;
+    }
+    .bento-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+    }
+    /* Per-image crop positions to match Figma */
+    .b-img1 img { object-position: left top; }
+    .b-img2 img { object-position: center top; }
+    .b-img9 img { object-position: center top; }
+    .b-img10 img { object-position: center top; }
+    /* Grid placement */
+    .b-img1 { grid-column: span 7; height: 308px; border: 1px solid rgba(217, 217, 217, 0.5); }
+    .b-img2 { grid-column: span 5; grid-row: span 2; height: 601px; border: 1px solid rgba(217, 217, 217, 0.5); }
+    .b-img3 { grid-column: span 7; grid-row: span 2; height: 601px; }
+    .b-img4 { grid-column: span 5; height: 308px; }
+    .b-img5 { grid-column: span 12; height: 689px; }
+    .b-img6 { grid-column: span 3; height: 308px; }
+    .b-img7 { grid-column: span 9; height: 308px; }
+    .b-img8 { grid-column: span 6; height: 400px; }
+    .b-img9 { grid-column: span 6; grid-row: span 2; min-height: 820px; border: 1px solid rgba(217, 217, 217, 0.5); }
+    .b-img10 { grid-column: span 6; height: 400px; }
+
+
+    /* ── My Story ── */
+    .my-story { padding-bottom: 80px; }
+    .story-header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 100px;
+    }
+    .story-photo-wrap {
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+      margin: 20px 0 32px;
+    }
+    .story-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+    .story-bio {
+      font-size: 20px;
+      line-height: 1.75;
+      color: #171717;
+      margin-bottom: 60px;
+    }
+    .story-columns {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* Skills */
+    .skills-col h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px 6px 6px;
+      background: #ffffff;
+      border-radius: 100px;
+      border: 1px solid rgba(0,0,0,0.06);
+      cursor: default;
+    }
+    .skill-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+    .skill-icon img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+    .skill-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #171717;
+      white-space: nowrap;
+    }
+
+    /* Experience */
+    .exp-col {}
+    .exp-col h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .exp-item {
+      padding: 24px 0;
+    }
+    .exp-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .exp-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+    }
+    .exp-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .exp-meta {}
+    .exp-role {
+      font-size: 20px;
+      font-weight: 700;
+      color: #171717;
+    }
+    .exp-company-date {
+      font-size: 14px;
+      color: #888;
+      margin-top: 2px;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-left: 68px;
+    }
+    .exp-bullets li {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.7;
+      padding-left: 24px;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #FF6101;
+      border-radius: 50%;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #FF6101;
+      color: #fff;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+    .footer-links a {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 0.8; }
+    .footer-contact {
+      display: flex;
+      gap: 40px;
+      font-size: 16px;
+    }
+    .footer-contact a {
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .footer-contact a:hover { opacity: 0.8; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      nav, .hero, .selected-works, .social-bar,
+      .showcase-header, .story-header, .story-columns, .footer-inner {
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+      .bento-wrap { padding: 0 24px; }
+      .hero-name { font-size: 44px; }
+      .work-card { padding: 32px 36px; min-height: 340px; }
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 48px; }
+      .hero-right { align-items: flex-start; }
+      .hero-name { font-size: 40px; }
+      .work-card { grid-template-columns: 1fr; min-height: auto; gap: 20px; padding: 24px 0 0 24px; }
+      .work-preview { aspect-ratio: 2/1; margin-right: 0; }
+      .story-columns { grid-template-columns: 1fr; gap: 48px; }
+      /* Flatten bento on tablet */
+      .b-img1, .b-img3 { grid-column: span 6; }
+      .b-img2, .b-img4 { grid-column: span 6; }
+      .b-img2, .b-img3 { grid-row: span 1; min-height: 280px; }
+      .b-img6 { grid-column: span 4; }
+      .b-img7 { grid-column: span 8; }
+      .b-img8, .b-img10 { grid-column: span 12; height: 280px; }
+      .b-img9 { grid-column: span 12; min-height: 400px; grid-row: span 1; }
+    }
+
+    @media (max-width: 640px) {
+      nav, .hero, .selected-works, .social-bar,
+      .showcase-header, .story-header, .story-columns, .footer-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .bento-wrap { padding: 0 16px; }
+      .hero { padding-top: 48px; padding-left: 20px; padding-right: 20px; }
+      .hero-name { font-size: 32px; }
+      .section-heading { font-size: 36px; }
+      .work-card { padding: 24px 20px; }
+      .bento-grid { gap: 12px; }
+      .b-img1, .b-img2, .b-img3, .b-img4,
+      .b-img5, .b-img6, .b-img7, .b-img8, .b-img9, .b-img10 {
+        grid-column: span 12;
+        grid-row: span 1;
+        min-height: unset;
+        height: 240px;
+      }
+      .b-img5 { height: 220px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-contact { flex-direction: column; gap: 10px; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+
+      /* ── Mobile hero content ── */
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-bio { text-align: center; }
+      .hero-tagline { justify-content: center; }
+      .hero-btns {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      .btn-sayhi {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: #171717;
+        color: #fff;
+        padding: 16px 30px;
+        border-radius: 17px;
+        font-family: 'Lato', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        transition: background 0.2s, transform 0.15s;
+      }
+      .btn-resume {
+        width: 100%;
+        justify-content: center;
+        background: transparent;
+        color: #171717;
+        box-shadow: inset 0 0 0 2px #171717;
+        font-size: 18px;
+        padding: 16px 30px;
+      }
+      .btn-resume:hover { background: #f5f5f5; transform: translateY(-2px); }
+
+      /* ── Hide Ping & Vibe + QR on mobile ── */
+      .hero-right { display: none; }
+      .ping-qr-section { display: none; }
+
+      /* ── Nav spacing ── */
+      .nav-links { gap: 16px; }
+
+      /* ── Hide social bar (LinkedIn/Dribbble) ── */
+      .social-bar { display: none; }
+
+      /* ── Center section titles ── */
+      .section-heading { text-align: center; }
+    }
+
+    /* ── Keyframes ── */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes subtlePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 97, 1, 0); }
+      50%       { box-shadow: 0 0 0 8px rgba(255, 97, 1, 0.08); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+
+    /* ── Hero entrance ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-left > * {
+        opacity: 0;
+        animation: heroFadeUp 0.7s ease forwards;
+      }
+      .profile-photo      { animation-delay: 0.05s; }
+      .hero-name          { animation-delay: 0.15s; }
+      .hero-tagline       { animation-delay: 0.25s; }
+      .hero-bio           { animation-delay: 0.35s; }
+      .hero-btns          { animation-delay: 0.45s; }
+
+      /* Ping card floats gently */
+      .ping-card { animation: float 5s ease-in-out infinite; }
+
+      /* Nav logo subtle pulse on load */
+      .nav-logo { animation: heroFadeUp 0.5s ease forwards; }
+
+
+
+      /* Social pills slide on hover */
+      .social-pill {
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+      .social-pill:hover { transform: translateX(4px); }
+
+
+      /* Exp-logo pulse on hover */
+      .exp-logo {
+        transition: transform 0.2s ease;
+      }
+      .exp-logo:hover { transform: scale(1.08); }
+
+      /* Orange accent btn pulse */
+      .btn-sayhi {
+        transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      }
+      .btn-sayhi:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(23, 23, 23, 0.25);
+      }
+
+      /* Section headings shimmer on scroll-in */
+      .section-heading.visible {
+        background: linear-gradient(90deg, #171717 40%, #FF6101 50%, #171717 60%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 1.8s ease forwards;
+      }
+    }
+
+    /* ── Scroll animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .work-card.fade-up.visible {
+        transition: opacity 0.6s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    }
+
+    .work-card {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ NAV ════ -->
+  <header>
+    <nav>
+      <div class="nav-logo">SR<span>.</span></div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#works">Works</a>
+        <a href="#my-story">My Story</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ════ HERO ════ -->
+  <section id="home" class="hero">
+    <!-- Left -->
+    <div class="hero-left">
+      <div class="profile-photo">
+        <div class="bg" style="background:#FF6101;"></div>
+        <img class="face" src="images/profile-photo.png" alt="Santhosh Rajendran">
+      </div>
+
+      <h1 class="hero-name">Santhosh Rajendran</h1>
+
+      <p class="hero-tagline">
+        Your &nbsp;
+        <span class="accent">ZERO</span>
+        <span class="arrow">→</span>
+        <span class="accent">ONE</span>
+        <span class="arrow">→</span>
+        <span class="accent">TEN</span>
+        &nbsp; Product Design Partner
+      </p>
+
+      <p class="hero-bio">
+        AI-first designer with a decade of experience crafting seamless,
+        user-friendly products through thoughtful design thinking.
+        Currently spearheading design at
+        <a href="https://poshmark.com" target="_blank" rel="noopener" class="ext-link">
+          <strong>Poshmark</strong>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </p>
+
+      <div class="hero-btns">
+        <a href="http://wa.me/919894249490" target="_blank" rel="noopener" class="btn-sayhi">Say Hi</a>
+        <a href="Santhosh-Resume.pdf" download="Santhosh-Resume.pdf" class="btn-resume" onclick="gtag('event','resume_download',{event_category:'engagement',event_label:'Download Resume'})">Download Resume</a>
+      </div>
+    </div>
+
+    <!-- Right: Ping & Vibe Card -->
+    <div class="hero-right">
+      <div class="ping-card">
+        <!-- Orange header bar -->
+        <div class="ping-header-bar">
+          <div class="ping-logo">
+            <img src="images/whatsapp.png" alt="WhatsApp">
+          </div>
+          <span class="ping-title">Ping &amp; Vibe</span>
+        </div>
+        <!-- Ticket body -->
+        <div class="ping-ticket-body">
+          <!-- QR section -->
+          <div class="ping-qr-section">
+            <div class="ping-qr-box">
+              <span class="ping-qr-label">Scan to Say Hi!</span>
+              <div class="ping-qr-wrap">
+                <img class="ping-qr-img" src="images/qr.png" alt="QR code">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SOCIAL BAR ════ -->
+  <div class="social-bar">
+    <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener" class="social-pill">
+      LinkedIn <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="arrow"><path d="M6.99997 7H17V17" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener" class="social-pill">
+      Dribbble <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="arrow"><path d="M6.99997 7H17V17" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <!-- ════ SELECTED WORKS ════ -->
+  <section id="works" class="selected-works">
+    <h2 class="section-heading fade-up">Selected Works</h2>
+    <div class="works-list">
+
+      <!-- Card 1: Poshmark App Redesign -->
+      <a href="poshmark.html" class="work-card-link" onclick="gtag('event','work_card_click',{event_category:'engagement',event_label:'Poshmark App Redesign'})"><div class="work-card c-lime fade-up">
+        <div class="work-left">
+          <div class="work-icon" style="overflow:hidden; padding:0;">
+            <img src="icons/poshmark.png" alt="Poshmark" style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <h3 class="work-title">Poshmark App Redesign</h3>
+          <p class="work-desc">The new look encompasses a redesigned navigational tools, and a new, streamlined aesthetic.</p>
+          <div class="work-tags">
+            <span class="tag">iOS design</span>
+            <span class="tag">Android design</span>
+          </div>
+        </div>
+        <div class="work-preview" style="align-self: stretch; border-radius: 0; aspect-ratio: unset;">
+          <div class="work-preview-inner" style="position:absolute; inset:12px 0 12px 12px; overflow:hidden; border-radius:18px; background:#FFF3F1; filter:none;">
+            <img src="images/pm-card.webp" alt="Poshmark App" style="width:100%; height:100%; object-fit:cover; object-position:center center; display:block; border-radius:18px;">
+          </div>
+        </div>
+      </div></a>
+
+      <!-- Card 2: Škoda Connected App -->
+      <a href="skoda.html" class="work-card-link"><div class="work-card c-teal fade-up">
+        <div class="work-left">
+          <div class="work-icon dark">
+            <img src="images/skoda/skoda-logo.svg" alt="Škoda" style="width:36px; height:36px; display:block;">
+          </div>
+          <h3 class="work-title">Škoda Connected App Concept</h3>
+          <p class="work-desc">In-car connectivity app redesigned for seamless interaction between driver and vehicle experience.</p>
+          <div class="work-tags">
+            <span class="tag">iOS design</span>
+            <span class="tag">Android design</span>
+          </div>
+        </div>
+        <div class="work-preview" style="align-self: stretch; border-radius: 0; aspect-ratio: unset;">
+          <div class="work-preview-inner" style="position:absolute; inset:12px 0 12px 12px; overflow:hidden; border-radius:18px; background:#F9FBD1; filter:none;">
+            <img src="images/skoda/SkodaHero.png" alt="Škoda App" style="width:100%; height:100%; object-fit:cover; object-position:center center; display:block; border-radius:18px;">
+          </div>
+        </div>
+      </div></a>
+
+    </div>
+  </section>
+
+  <!-- ════ DESIGN SHOWCASE ════ -->
+  <section class="design-showcase">
+    <div class="showcase-header">
+      <h2 class="section-heading fade-up">Design Showcase</h2>
+    </div>
+    <div class="bento-wrap">
+      <div class="bento-grid">
+        <!-- Img1 -->
+        <div class="bento-item b-img1 fade-up">
+          <img src="images/Img1.png?v=2" alt="Design showcase">
+        </div>
+
+        <!-- Img2 -->
+        <div class="bento-item b-img2 fade-up">
+          <img src="images/Img2.png?v=2" alt="Design showcase">
+        </div>
+
+        <!-- Img3 -->
+        <div class="bento-item b-img3 fade-up">
+          <img src="images/Img3.png" alt="Design showcase">
+        </div>
+
+        <!-- Img4 -->
+        <div class="bento-item b-img4 fade-up">
+          <img src="images/Img4.png" alt="Design showcase">
+        </div>
+
+        <!-- Img5 -->
+        <div class="bento-item b-img5 fade-up">
+          <img src="images/Img5.png" alt="Design showcase">
+        </div>
+
+        <!-- Img6 -->
+        <div class="bento-item b-img6 fade-up">
+          <img src="images/Img6.png" alt="Design showcase">
+        </div>
+
+        <!-- Img7 -->
+        <div class="bento-item b-img7 fade-up">
+          <img src="images/Img7.png" alt="Design showcase">
+        </div>
+
+        <!-- Img8 -->
+        <div class="bento-item b-img8 fade-up">
+          <img src="images/Img8.png" alt="Design showcase">
+        </div>
+
+        <!-- Img9 -->
+        <div class="bento-item b-img9 fade-up">
+          <img src="images/Img9.png?v=2" alt="Design showcase">
+        </div>
+
+        <!-- Img10 -->
+        <div class="bento-item b-img10 fade-up">
+          <img src="images/Img10.png" alt="Design showcase">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ MY STORY ════ -->
+  <section id="my-story" class="my-story">
+    <div class="story-header">
+      <h2 class="section-heading fade-up">My Story</h2>
+    </div>
+
+    <div class="story-photo-wrap">
+      <img src="images/story-photo.jpg" alt="Santhosh Rajendran in Singapore">
+    </div>
+
+    <div class="story-header">
+      <p class="story-bio fade-up">
+        With over ten years of experience in web and product design, I bring a genuine curiosity,
+        a passion for my craft, and an eagerness to keep growing. I love tackling complex challenges,
+        using a thoughtful and strategic approach that strikes a balance between creativity and data.
+        My goal is to turn intricate problems into straightforward, actionable solutions that truly make a difference.
+      </p>
+    </div>
+
+    <div class="story-columns">
+      <!-- Experience (now first) -->
+      <div class="exp-col fade-up">
+        <h3>Experience</h3>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Manager, Product Design</div>
+              <div class="exp-company-date">2024 - Present · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Led and scaled a team of 4 designers across multiple product areas, driving design quality and delivery efficiency and contributing to 18% YoY DAU growth.</li>
+            <li>Defined marketplace design strategy, improving listing completion by 31%.</li>
+            <li>Partnered with product and engineering to deliver high-impact initiatives and scale a design system, reducing inconsistencies by 35%.</li>
+            <li>Established team processes including design critiques, planning, and reviews to improve execution.</li>
+            <li>Mentored designers and supported career growth, improving team capability and output.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Lead Product Designer</div>
+              <div class="exp-company-date">2022 - 2024 · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Owned end-to-end design for core marketplace journeys including listing, discovery, and onboarding.</li>
+            <li>Led cross-functional collaboration to define product direction and improve user experience.</li>
+            <li>Identified key friction points through research and translated insights into product improvements.</li>
+            <li>Delivered UX improvements that increased seller activation and improved conversion flows.</li>
+            <li>Mentored junior designers and elevated overall design quality within the team.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Senior Product Designer</div>
+              <div class="exp-company-date">2020 - 2022 · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Designed scalable web and mobile experiences across key product flows.</li>
+            <li>Improved usability of complex workflows, reducing friction in core user actions.</li>
+            <li>Conducted competitive analysis to identify opportunities for product enhancements.</li>
+            <li>Presented design solutions to stakeholders and drove alignment across teams.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Product Designer</div>
+              <div class="exp-company-date">2017 - 2020 · Poshmark India Private Limited</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Executed design solutions for new features across core product areas.</li>
+            <li>Collaborated closely with engineering to ensure high-quality implementation.</li>
+            <li>Contributed to improving usability and consistency across the product.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Product Designer</div>
+              <div class="exp-company-date">2014 - 2017 · AnywhereWorks</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Created wireframes, visual designs, and interaction flows for digital products.</li>
+            <li>Iterated on designs based on user feedback and usability insights.</li>
+            <li>Built strong foundations in user-centered design and interface design.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
+            <div class="exp-meta">
+              <div class="exp-role">Product Designer Intern</div>
+              <div class="exp-company-date">2014 (3 months) · AnywhereWorks</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Supported senior designers in creating wireframes and visual designs.</li>
+            <li>Assisted in user research and usability testing activities.</li>
+            <li>Gained foundational experience in UX and product design workflows.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Tools & Skills (now below) -->
+      <div class="skills-col fade-up">
+        <h3>Tools &amp; Skills</h3>
+
+        <div class="skills-grid">
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/figma.png" alt="Figma">
+            </div>
+            <div class="skill-name">Figma</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/sketch.png" alt="Sketch">
+            </div>
+            <div class="skill-name">Sketch</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/principle.png" alt="Principle For Mac">
+            </div>
+            <div class="skill-name">Principle For Mac</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/framer.png" alt="Framer">
+            </div>
+            <div class="skill-name">Framer</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/protopie.png" alt="Protopie">
+            </div>
+            <div class="skill-name">Protopie</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/aftereffects.svg" alt="After Effects">
+            </div>
+            <div class="skill-name">After Effects</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/illustrator.svg" alt="Illustrator">
+            </div>
+            <div class="skill-name">Illustrator</div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-icon">
+              <img src="icons/photoshop.svg" alt="Photoshop">
+            </div>
+            <div class="skill-name">Photoshop</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener">LinkedIn <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener">Dribbble <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://instagram.com/santhosh.r777" target="_blank" rel="noopener">Instagram <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="footer-contact">
+        <a href="tel:+919894249490">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          +91 989 424 9490
+        </a>
+        <a href="mailto:santhosh.r777@live.in">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          santhosh.r777@live.in
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    let hudTimer;
+    function showComingSoon() {
+      const hud = document.getElementById('cs-hud');
+      hud.classList.add('show');
+      clearTimeout(hudTimer);
+      hudTimer = setTimeout(() => hud.classList.remove('show'), 2000);
+    }
+
+    // ── Parallax ──
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      const profilePhoto = document.querySelector('.profile-photo');
+      const heroName     = document.querySelector('.hero-name');
+      const heroTagline  = document.querySelector('.hero-tagline');
+      const heroBio      = document.querySelector('.hero-bio');
+      const heroBtns     = document.querySelector('.hero-btns');
+      const pingCard     = document.querySelector('.ping-card');
+
+      let ticking = false;
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+
+            // Hero left — each layer moves at a slightly different rate
+            if (profilePhoto) profilePhoto.style.transform = `translateY(${y * 0.12}px)`;
+            if (heroName)     heroName.style.transform     = `translateY(${y * 0.08}px)`;
+            if (heroTagline)  heroTagline.style.transform  = `translateY(${y * 0.06}px)`;
+            if (heroBio)      heroBio.style.transform      = `translateY(${y * 0.04}px)`;
+            if (heroBtns)     heroBtns.style.transform     = `translateY(${y * 0.02}px)`;
+
+            // Ping card drifts upward slightly faster for depth
+            if (pingCard) pingCard.style.transform = `translateY(${y * -0.06}px)`;
+
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+  </script>
+
+  <div class="cs-hud" id="cs-hud">Coming Soon</div>
+
+  <!-- Vibe Coding badge -->
+  <style>
+    @keyframes vibe-shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      14%  { transform: scale(1.3); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.2); }
+      56%  { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
+    .vibe-heart {
+      display: inline-block;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      transform-origin: center;
+      line-height: 0;
+    }
+    .vibe-badge {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      pointer-events: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 18px;
+      border-radius: 100px;
+      background: linear-gradient(120deg, #111 35%, #3a3a3a 50%, #111 65%);
+      background-size: 200% auto;
+      animation: vibe-shimmer 2.5s linear infinite;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-family: inherit;
+    }
+    .vibe-badge-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+  </style>
+  <div class="vibe-badge">
+    <span class="vibe-badge-icon">✦</span>
+    <span style="display:inline-flex;align-items:center;gap:3px;">Designed with<span class="vibe-heart"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#ff3b3b" stroke="#ff3b3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>and Built with AI.</span>
+  </div>
+
+</body>
+</html>
