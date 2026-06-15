@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="images/favicon-profile.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
@@ -373,14 +373,14 @@
     .hero-inline-link:hover { opacity: 0.7; }
     .hero-location-city {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 500;
+      line-height: 1.5;
       color: #f0ede8;
-      letter-spacing: -0.5px;
       text-decoration: underline;
       text-decoration-thickness: 1px;
       text-decoration-color: rgba(240, 237, 232, 0.3);
-      text-underline-offset: 4px;
+      text-underline-offset: 3px;
       cursor: pointer;
       transition: opacity 0.2s ease;
     }
@@ -470,7 +470,7 @@
     .stat-label {
       display: block;
       font-size: 13px;
-      color: #777;
+      color: #888;
       font-weight: 500;
       line-height: 1.35;
     }
@@ -577,7 +577,7 @@
     }
     .wid-desc {
       font-size: 15px;
-      color: #888;
+      color: #0c0c0f;
       line-height: 1.4;
       font-weight: 400;
     }
@@ -593,9 +593,9 @@
     }
     .my-story .section-heading,
     .my-story .section-heading.visible {
-      color: #171717 !important;
+      color: #0c0c0f !important;
       background: none !important;
-      -webkit-text-fill-color: #171717 !important;
+      -webkit-text-fill-color: #0c0c0f !important;
       margin-bottom: 0;
       animation: none !important;
     }
@@ -621,7 +621,7 @@
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #b0b0b0;
+      color: #aaa;
     }
     .tools-row {
       display: flex;
@@ -1079,7 +1079,7 @@
       border: 1px solid rgba(255,255,255,0.1) !important;
       padding: 5px 14px;
       border-radius: 100px;
-      color: #a0a0a0 !important;
+      color: #aaa !important;
     }
     .coming-soon {
       position: relative;
@@ -1089,7 +1089,7 @@
       padding: 10px 22px;
       font-size: 16px;
       font-weight: 700;
-      color: #171717;
+      color: #0c0c0f;
     }
 
     /* ── Design Showcase ── */
@@ -1167,13 +1167,11 @@
       font-weight: 400;
       letter-spacing: -1px;
       line-height: 1.3;
-      color: #171717;
+      color: #0c0c0f;
       margin-bottom: 60px;
     }
     .story-columns {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 100px;
+      padding: 0 48px 0 var(--bio-indent, 100px);
       display: flex;
       flex-direction: column;
       gap: 40px;
@@ -1185,7 +1183,7 @@
       font-size: 22px;
       font-weight: 700;
       margin-bottom: 8px;
-      color: #999;
+      color: #aaa;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 13px;
@@ -1221,122 +1219,483 @@
     .skill-name {
       font-size: 15px;
       font-weight: 600;
-      color: #c0bdb8;
+      color: #aaa;
       white-space: nowrap;
     }
 
-    /* Experience */
-    .exp-col {}
+    /* Experience Timeline */
     .exp-col h3 {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      color: #999;
+      color: #aaa;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      letter-spacing: 1.5px;
+      margin-bottom: 36px;
     }
-    .exp-item {
-      padding: 24px 0;
+    .exp-timeline {
+      position: relative;
+      max-width: 640px;
     }
-    .exp-header {
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 25px;
+      top: 52px;
+      bottom: 52px;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        #f59e0b 0%,
+        #ec4899 25%,
+        #3b82f6 50%,
+        #10b981 75%,
+        #7342E2 100%
+      );
+      opacity: 0.35;
+    }
+    .tl-item {
+      display: block;
+      padding-bottom: 36px;
+      position: relative;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item:last-child::after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 52px;
+      bottom: 0;
+      width: 4px;
+      background: #fff;
+      z-index: 2;
+    }
+    .tl-header {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
+      gap: 20px;
+      margin-bottom: 14px;
     }
-    .exp-logo {
+    .tl-title { flex: 1; }
+    .tl-node {
+      flex-shrink: 0;
       width: 52px;
       height: 52px;
-      border-radius: 14px;
-      flex-shrink: 0;
-      overflow: hidden;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 1;
     }
-    .exp-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .exp-meta {}
-    .exp-role {
-      font-size: 20px;
-      font-weight: 700;
-      color: #f0ede8 !important;
-    }
-    .exp-company-date {
+    .tl-item:nth-child(1) .tl-node { background: linear-gradient(135deg, #7342E2, #ec4899); }
+    .tl-item:nth-child(2) .tl-node { background: linear-gradient(135deg, #34d399, #3b82f6); }
+    .tl-item:nth-child(3) .tl-node { background: linear-gradient(135deg, #60a5fa, #7342E2); }
+    .tl-item:nth-child(4) .tl-node { background: linear-gradient(135deg, #f472b6, #f97316); }
+    .tl-item:nth-child(5) .tl-node { background: linear-gradient(135deg, #fbbf24, #ef4444); }
+    .tl-content { flex: 1; }
+    .tl-period {
       font-size: 14px;
-      color: #888 !important;
-      margin-top: 2px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 4px;
     }
-    .exp-bullets {
+    .tl-role {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0c0c0f;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .tl-desc {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.65;
+    }
+    .tl-bullets {
       list-style: none;
+      padding: 0 0 0 72px;
+      margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      padding-left: 68px;
+      gap: 8px;
     }
-    .exp-bullets li {
-      font-size: 16px;
-      color: #a0a0a0 !important;
-      line-height: 1.7;
-      padding-left: 24px;
+    .tl-bullets li {
+      font-size: 15px;
+      color: #0c0c0f;
+      line-height: 1.65;
+      padding-left: 16px;
       position: relative;
     }
-    .exp-bullets li::before {
+    .tl-bullets li::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 10px;
-      width: 12px;
-      height: 12px;
-      border: 2px solid #7342E2;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      background: rgba(115,66,226,0.3);
       border-radius: 50%;
     }
 
     /* ── Footer ── */
-    footer {
-      background: #7342E2;
-      color: #fff;
+    /* ── Cinematic Footer ── */
+    .cf-reveal-wrapper {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
     }
-    .footer-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 28px 100px;
+
+    .cinematic-footer-wrapper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
+      overflow: hidden;
+      font-family: 'Lato', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      opacity: 0;
+      pointer-events: none;
+
+      /* Theme tokens */
+      --cf-bg: #0c0c0f;
+      --cf-fg: #f0ede8;
+      --cf-primary: #7342E2;
+      --cf-secondary: #ec4899;
+      --cf-muted: rgba(240, 237, 232, 0.5);
+      --cf-border: rgba(115, 66, 226, 0.2);
+      --cf-destructive: #ef4444;
+
+      /* Pill tokens (pre-computed since no color-mix needed) */
+      --pill-bg-1: rgba(115, 66, 226, 0.08);
+      --pill-bg-2: rgba(115, 66, 226, 0.03);
+      --pill-shadow: rgba(0, 0, 0, 0.5);
+      --pill-highlight: rgba(115, 66, 226, 0.2);
+      --pill-inset-shadow: rgba(0, 0, 0, 0.6);
+      --pill-border: rgba(115, 66, 226, 0.25);
+      --pill-bg-1-hover: rgba(115, 66, 226, 0.15);
+      --pill-bg-2-hover: rgba(115, 66, 226, 0.06);
+      --pill-border-hover: rgba(115, 66, 226, 0.45);
+      --pill-shadow-hover: rgba(0, 0, 0, 0.65);
+      --pill-highlight-hover: rgba(115, 66, 226, 0.35);
+
+      background: var(--cf-bg);
+      color: var(--cf-fg);
+    }
+
+    /* Aurora glow */
+    .cf-aurora {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 80vw; height: 60vh;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgba(115, 66, 226, 0.35) 0%,
+        rgba(115, 66, 226, 0.18) 35%,
+        rgba(236, 72, 153, 0.08) 60%,
+        transparent 75%
+      );
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: cf-breathe 8s ease-in-out infinite alternate;
+    }
+
+    /* Grid bg */
+    .cf-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-size: 60px 60px;
+      background-image:
+        linear-gradient(to right, rgba(240,237,232,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(240,237,232,0.04) 1px, transparent 1px);
+      mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+    }
+
+    /* Giant bg text */
+    .cf-giant-text {
+      position: absolute;
+      bottom: -2vh;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 26vw;
+      line-height: 0.75;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(240,237,232,0.05);
+      background: linear-gradient(180deg, rgba(240,237,232,0.1) 0%, transparent 60%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Marquee bar */
+    .cf-marquee-bar {
+      position: absolute;
+      top: 78px;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid rgba(240,237,232,0.08);
+      border-bottom: 1px solid rgba(240,237,232,0.08);
+      background: rgba(10,10,15,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 14px 0;
+      z-index: 10;
+      transform: rotate(-1.5deg) scaleX(1.08);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .cf-marquee-track {
+      display: flex;
+      width: max-content;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cf-muted);
+      animation: cf-marquee 40s linear infinite;
+    }
+    .cf-marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      padding: 0 24px;
+    }
+    .cf-marquee-item span.dot {
+      color: rgba(115,66,226,0.6);
+    }
+
+    /* Glass pill */
+    .cf-pill {
+      background: linear-gradient(145deg, var(--pill-bg-1) 0%, var(--pill-bg-2) 100%);
+      box-shadow:
+        0 10px 30px -10px var(--pill-shadow),
+        inset 0 1px 1px var(--pill-highlight),
+        inset 0 -1px 2px var(--pill-inset-shadow);
+      border: 1px solid var(--pill-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Main content */
+    .cf-main {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 24px 80px;
+    }
+
+    .cf-heading {
+      font-size: clamp(42px, 8vw, 96px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-align: center;
+      margin-bottom: 48px;
+      line-height: 1;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: #ffffff;
+      -webkit-text-fill-color: #ffffff;
+      filter: drop-shadow(0 0 20px rgba(240,237,232,0.12));
+    }
+
+    .cf-cta-group {
+      display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 20px;
+      width: 100%;
     }
-    .footer-links {
+    .cf-primary-row {
       display: flex;
-      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
     }
-    .footer-links a {
-      color: #fff;
-      font-size: 16px;
-      font-weight: 500;
+    .cf-cta-btn {
+      padding: 18px 40px;
+      border-radius: 100px;
+      color: var(--cf-fg);
+      font-weight: 700;
+      font-size: 15px;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      transition: opacity 0.2s;
+      gap: 10px;
+      background: transparent !important;
+      box-shadow: none !important;
+      border: 1px solid rgba(240, 237, 232, 0.2) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
     }
-    .footer-links a:hover { opacity: 0.8; }
-    .footer-contact {
+    .cf-secondary-row {
       display: flex;
-      gap: 40px;
-      font-size: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 4px;
     }
-    .footer-contact a {
-      color: #fff;
+    .cf-link-btn {
+      padding: 11px 22px;
+      border-radius: 100px;
+      color: var(--cf-muted);
+      font-weight: 500;
+      font-size: 13px;
       display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Bottom bar */
+    .cf-bottom {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      padding: 0 48px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+    }
+    .cf-made-badge {
+      margin-left: auto;
+      cursor: default;
+      white-space: nowrap;
+    }
+    .cf-copyright {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cf-muted);
+    }
+    .cf-made-badge {
+      padding: 12px 22px;
+      border-radius: 100px;
+      display: flex;
       align-items: center;
       gap: 6px;
-      transition: opacity 0.2s;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cf-muted);
     }
-    .footer-contact a:hover { opacity: 0.8; }
+    .cf-made-badge .cf-brand {
+      color: var(--cf-fg);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .cf-heart {
+      font-size: 14px;
+      color: var(--cf-destructive);
+      animation: cf-heartbeat 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    }
+    .cf-back-top {
+      padding: 10px 18px;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--cf-muted);
+      border: none;
+      background: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 0.25s ease;
+    }
+    .cf-back-top svg {
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .cf-back-top:hover {
+      color: var(--cf-fg);
+    }
+    .cf-back-top:hover svg {
+      transform: translateY(-3px);
+    }
+
+    /* Email copy tooltip */
+    #cfEmailBtn {
+      position: relative;
+    }
+    #cfEmailBtn::after {
+      content: 'Click to copy';
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: rgba(240,237,232,0.12);
+      color: rgba(240,237,232,0.7);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 1px solid rgba(240,237,232,0.15);
+      backdrop-filter: blur(8px);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #cfEmailBtn:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Keyframes */
+    @keyframes cf-breathe {
+      0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    }
+    @keyframes cf-marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes cf-heartbeat {
+      0%, 100% { transform: scale(1); }
+      15%, 45% { transform: scale(1.25); }
+      30%      { transform: scale(1); }
+    }
+
+    @media (max-width: 640px) {
+      .cf-bottom { padding: 0 20px 24px; flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .cf-copyright { order: 3; }
+      .cf-made-badge { order: 1; }
+      .cf-back-top { order: 2; }
+    }
 
     /* ── Responsive ── */
     @media (max-width: 1100px) {
-      .works-cards-wrap, .showcase-header, .story-header, .story-columns, .footer-inner {
+      .works-cards-wrap, .showcase-header, .story-header {
         padding-left: 48px;
         padding-right: 48px;
       }
@@ -1369,7 +1728,7 @@
       .hero-stats { width: 100%; }
       .stat-card { flex: 1; min-width: 0; }
       .nav-pills-wrap a { padding: 7px 14px; font-size: 13px; }
-      .works-cards-wrap, .showcase-header, .story-header, .story-columns, .footer-inner {
+      .works-cards-wrap, .showcase-header, .story-header, .story-columns {
         padding-left: 20px;
         padding-right: 20px;
       }
@@ -1385,9 +1744,6 @@
         height: 240px;
       }
       .b-img5 { height: 220px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .footer-contact { flex-direction: column; gap: 10px; }
-      .footer-links { flex-wrap: wrap; gap: 16px; }
     }
 
     /* ── Keyframes ── */
@@ -1763,7 +2119,7 @@
     <div class="hero-top">
       <div class="hero-label">
         <span class="hero-label-tag">Your 0 → 1 | 1 → N Product Design Partner</span>
-        <p class="hero-label-sub">AI-first designer with more than a decade of experience crafting seamless, user-friendly products through thoughtful design thinking. Currently spearheading design at <a href="https://www.poshmark.com" target="_blank" rel="noopener noreferrer" class="hero-inline-link">Poshmark</a></p>
+        <p class="hero-label-sub">AI-first designer with more than a decade of experience crafting seamless, user-friendly products through thoughtful design thinking. Currently spearheading design at <a href="https://www.poshmark.com" target="_blank" rel="noopener noreferrer" class="hero-inline-link">Poshmark</a>.</p>
       </div>
       <div class="hero-desc">
         <div class="hero-location">
@@ -1978,8 +2334,8 @@
         </div>
       </a>
 
-      <!-- Card 4: Placeholder -->
-      <a href="#" class="wc2">
+      <!-- Card 4: Placeholder (hidden) -->
+      <a href="#" class="wc2" style="display:none">
         <div class="wc2-img-wrap wc2-ph-2">
           <span class="wc2-hover-btn">View Case Study</span>
         </div>
@@ -1989,8 +2345,8 @@
         </div>
       </a>
 
-      <!-- Card 4: Placeholder -->
-      <a href="#" class="wc2">
+      <!-- Card 5: Placeholder (hidden) -->
+      <a href="#" class="wc2" style="display:none">
         <div class="wc2-img-wrap wc2-ph-3">
           <span class="wc2-hover-btn">View Case Study</span>
         </div>
@@ -2067,46 +2423,46 @@
           <div class="testimonials-track">
             <!-- Set 1 -->
             <div class="testi-card">
-              <p class="testi-text">"Santhosh has an incredible ability to translate complex product requirements into clean, intuitive interfaces. Working with him was a masterclass in collaborative design."</p>
+              <p class="testi-text">"Santhosh is an amazing designer with business and product sense. He aims at solving the real problems while ensuring highest levels of User Experience design. He holds a high level of professional conduct — always delivering on time and keeping everyone informed on projects very transparently."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arjun Nair">
-                <div><div class="testi-name">Arjun Nair</div><div class="testi-role">Senior Product Manager</div></div>
+                <img class="testi-avatar" src="images/Hemanth.jpeg" alt="Hemanth Bhatia">
+                <div><div class="testi-name">Hemanth Bhatia</div><div class="testi-role">Sr Product Manager, PayPal</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <p class="testi-text">"The design system Santhosh built for us saved our engineering team hundreds of hours. Every component was thoughtfully documented and pixel-perfect."</p>
+              <p class="testi-text">"Santhosh has a rare ability to bridge product vision, engineering realities, and user needs. He consistently turns ambiguous problems into clear, actionable solutions, while keeping the team aligned and moving fast. His product thinking goes far beyond requirements — he anticipates edge cases, understands technical trade-offs, and always focuses on delivering real customer value. He makes complex initiatives feel manageable."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma">
-                <div><div class="testi-name">Priya Sharma</div><div class="testi-role">Engineering Lead</div></div>
+                <img class="testi-avatar" src="images/Ketan.jpeg" alt="Ketan Jain">
+                <div><div class="testi-name">Ketan Jain</div><div class="testi-role">VP of Engineering, Poshmark</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <p class="testi-text">"Santhosh brings an rare mix of design craft and product thinking. He doesn't just make things look good — he makes them work better for users."</p>
+              <p class="testi-text">"Santhosh treats design with rare discipline — nothing he ships is arbitrary, and the polish shows in every detail. He has a sharp instinct for what users actually need versus what they ask for, and he moves fast without ever cutting corners on quality. Best of all, his work shows up where it counts: cleaner flows, better activation, fewer support tickets. Design that pays for itself."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/58.jpg" alt="David Kim">
-                <div><div class="testi-name">David Kim</div><div class="testi-role">VP of Product, Poshmark</div></div>
+                <img class="testi-avatar" src="images/Abhay.png" alt="Abhay Kumar">
+                <div><div class="testi-name">Abhay Kumar</div><div class="testi-role">Director of Engineering, Poshmark</div></div>
               </div>
             </div>
             <!-- Set 2 (duplicate for seamless loop) -->
             <div class="testi-card">
-              <p class="testi-text">"Santhosh has an incredible ability to translate complex product requirements into clean, intuitive interfaces. Working with him was a masterclass in collaborative design."</p>
+              <p class="testi-text">"Santhosh is an amazing designer with business and product sense. He aims at solving the real problems while ensuring highest levels of User Experience design. He holds a high level of professional conduct — always delivering on time and keeping everyone informed on projects very transparently."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arjun Nair">
-                <div><div class="testi-name">Arjun Nair</div><div class="testi-role">Senior Product Manager</div></div>
+                <img class="testi-avatar" src="images/Hemanth.jpeg" alt="Hemanth Bhatia">
+                <div><div class="testi-name">Hemanth Bhatia</div><div class="testi-role">Sr Product Manager, PayPal</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <p class="testi-text">"The design system Santhosh built for us saved our engineering team hundreds of hours. Every component was thoughtfully documented and pixel-perfect."</p>
+              <p class="testi-text">"Santhosh has a rare ability to bridge product vision, engineering realities, and user needs. He consistently turns ambiguous problems into clear, actionable solutions, while keeping the team aligned and moving fast. His product thinking goes far beyond requirements — he anticipates edge cases, understands technical trade-offs, and always focuses on delivering real customer value. He makes complex initiatives feel manageable."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma">
-                <div><div class="testi-name">Priya Sharma</div><div class="testi-role">Engineering Lead</div></div>
+                <img class="testi-avatar" src="images/Ketan.jpeg" alt="Ketan Jain">
+                <div><div class="testi-name">Ketan Jain</div><div class="testi-role">VP of Engineering, Poshmark</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <p class="testi-text">"Santhosh brings an rare mix of design craft and product thinking. He doesn't just make things look good — he makes them work better for users."</p>
+              <p class="testi-text">"Santhosh treats design with rare discipline — nothing he ships is arbitrary, and the polish shows in every detail. He has a sharp instinct for what users actually need versus what they ask for, and he moves fast without ever cutting corners on quality. Best of all, his work shows up where it counts: cleaner flows, better activation, fewer support tickets. Design that pays for itself."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/58.jpg" alt="David Kim">
-                <div><div class="testi-name">David Kim</div><div class="testi-role">VP of Product, Poshmark</div></div>
+                <img class="testi-avatar" src="images/Abhay.png" alt="Abhay Kumar">
+                <div><div class="testi-name">Abhay Kumar</div><div class="testi-role">Director of Engineering, Poshmark</div></div>
               </div>
             </div>
           </div>
@@ -2119,21 +2475,21 @@
             <div class="testi-card">
               <p class="testi-text">"I've worked with a lot of designers, but Santhosh stands out for his speed and precision. He shipped production-ready designs faster than most engineers ship code."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sarah Chen">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3ESC%3C/text%3E%3C/svg%3E" alt="Sarah Chen">
                 <div><div class="testi-name">Sarah Chen</div><div class="testi-role">Founder & CEO</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <p class="testi-text">"His prototypes were so high-fidelity that our investors thought they were the actual product. Santhosh's work directly contributed to closing our Series A."</p>
+              <p class="testi-text">"I've always appreciated Santhosh's thoughtful approach to design. He doesn't just create solutions — he carefully thinks through user behavior, trade-offs, and the overall experience, with a strong rationale behind every design decision. His ability to clearly articulate the reasoning behind his work makes him an exceptional collaborator and designer."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/77.jpg" alt="Rohan Mehta">
-                <div><div class="testi-name">Rohan Mehta</div><div class="testi-role">Co-founder, FinFlow</div></div>
+                <img class="testi-avatar" src="images/Sriram.jpeg" alt="Sriram Subramanian">
+                <div><div class="testi-name">Sriram Subramanian</div><div class="testi-role">Sr Product Manager, Poshmark</div></div>
               </div>
             </div>
             <div class="testi-card">
               <p class="testi-text">"Santhosh redesigned our seller dashboard and immediately reduced support tickets by 40%. He understood our users better than we did going in."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Meera Iyer">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EMI%3C/text%3E%3C/svg%3E" alt="Meera Iyer">
                 <div><div class="testi-name">Meera Iyer</div><div class="testi-role">Head of Growth</div></div>
               </div>
             </div>
@@ -2141,21 +2497,21 @@
             <div class="testi-card">
               <p class="testi-text">"I've worked with a lot of designers, but Santhosh stands out for his speed and precision. He shipped production-ready designs faster than most engineers ship code."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sarah Chen">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3ESC%3C/text%3E%3C/svg%3E" alt="Sarah Chen">
                 <div><div class="testi-name">Sarah Chen</div><div class="testi-role">Founder & CEO</div></div>
               </div>
             </div>
             <div class="testi-card">
-              <p class="testi-text">"His prototypes were so high-fidelity that our investors thought they were the actual product. Santhosh's work directly contributed to closing our Series A."</p>
+              <p class="testi-text">"I've always appreciated Santhosh's thoughtful approach to design. He doesn't just create solutions — he carefully thinks through user behavior, trade-offs, and the overall experience, with a strong rationale behind every design decision. His ability to clearly articulate the reasoning behind his work makes him an exceptional collaborator and designer."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/77.jpg" alt="Rohan Mehta">
-                <div><div class="testi-name">Rohan Mehta</div><div class="testi-role">Co-founder, FinFlow</div></div>
+                <img class="testi-avatar" src="images/Sriram.jpeg" alt="Sriram Subramanian">
+                <div><div class="testi-name">Sriram Subramanian</div><div class="testi-role">Sr Product Manager, Poshmark</div></div>
               </div>
             </div>
             <div class="testi-card">
               <p class="testi-text">"Santhosh redesigned our seller dashboard and immediately reduced support tickets by 40%. He understood our users better than we did going in."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Meera Iyer">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EMI%3C/text%3E%3C/svg%3E" alt="Meera Iyer">
                 <div><div class="testi-name">Meera Iyer</div><div class="testi-role">Head of Growth</div></div>
               </div>
             </div>
@@ -2169,21 +2525,21 @@
             <div class="testi-card">
               <p class="testi-text">"Every handoff from Santhosh came with detailed specs, edge cases considered, and a thorough walkthrough. It made implementation a pleasure, not a guessing game."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/11.jpg" alt="Karan Verma">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EKV%3C/text%3E%3C/svg%3E" alt="Karan Verma">
                 <div><div class="testi-name">Karan Verma</div><div class="testi-role">Frontend Engineer</div></div>
               </div>
             </div>
             <div class="testi-card">
               <p class="testi-text">"Santhosh led our design org through a complete rebrand in 6 weeks. His process, composure under pressure, and final output were all exceptional."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/55.jpg" alt="Ananya Bose">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EAB%3C/text%3E%3C/svg%3E" alt="Ananya Bose">
                 <div><div class="testi-name">Ananya Bose</div><div class="testi-role">Chief Product Officer</div></div>
               </div>
             </div>
             <div class="testi-card">
               <p class="testi-text">"What sets Santhosh apart is how he balances aesthetics with function. Every pixel has a purpose, and that discipline shows in the product's retention numbers."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/42.jpg" alt="James Wu">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EJW%3C/text%3E%3C/svg%3E" alt="James Wu">
                 <div><div class="testi-name">James Wu</div><div class="testi-role">Product Director</div></div>
               </div>
             </div>
@@ -2191,21 +2547,21 @@
             <div class="testi-card">
               <p class="testi-text">"Every handoff from Santhosh came with detailed specs, edge cases considered, and a thorough walkthrough. It made implementation a pleasure, not a guessing game."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/11.jpg" alt="Karan Verma">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EKV%3C/text%3E%3C/svg%3E" alt="Karan Verma">
                 <div><div class="testi-name">Karan Verma</div><div class="testi-role">Frontend Engineer</div></div>
               </div>
             </div>
             <div class="testi-card">
               <p class="testi-text">"Santhosh led our design org through a complete rebrand in 6 weeks. His process, composure under pressure, and final output were all exceptional."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/55.jpg" alt="Ananya Bose">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EAB%3C/text%3E%3C/svg%3E" alt="Ananya Bose">
                 <div><div class="testi-name">Ananya Bose</div><div class="testi-role">Chief Product Officer</div></div>
               </div>
             </div>
             <div class="testi-card">
               <p class="testi-text">"What sets Santhosh apart is how he balances aesthetics with function. Every pixel has a purpose, and that discipline shows in the product's retention numbers."</p>
               <div class="testi-person">
-                <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/42.jpg" alt="James Wu">
+                <img class="testi-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%23e8e8e8'/%3E%3Ctext x='22' y='27' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='600' fill='%23999'%3EJW%3C/text%3E%3C/svg%3E" alt="James Wu">
                 <div><div class="testi-name">James Wu</div><div class="testi-role">Product Director</div></div>
               </div>
             </div>
@@ -2259,127 +2615,208 @@
     <div class="story-columns">
       <div class="exp-col fade-up">
         <h3>Experience</h3>
+        <div class="exp-timeline">
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Manager, Product Design</div>
-              <div class="exp-company-date">2024 - Present · Poshmark India Private Limited</div>
+          <!-- 1: Manager (current) -->
+          <div class="tl-item">
+            <div class="tl-header">
+              <div class="tl-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+              </div>
+              <div class="tl-title">
+                <div class="tl-period">2024 · Present · Poshmark India Private Limited</div>
+                <div class="tl-role">Manager, Product Design</div>
+              </div>
             </div>
+            <ul class="tl-bullets">
+              <li>Led and scaled a team of 4 designers across multiple product areas, driving design quality and delivery efficiency and contributing to 18% YoY DAU growth.</li>
+              <li>Defined marketplace design strategy, improving listing completion by 31%.</li>
+              <li>Partnered with product and engineering to deliver high-impact initiatives and scale a design system, reducing inconsistencies by 35%.</li>
+              <li>Established team processes including design critiques, planning, and reviews to improve execution.</li>
+              <li>Mentored designers and supported career growth, improving team capability and output.</li>
+            </ul>
           </div>
-          <ul class="exp-bullets">
-            <li>Led and scaled a team of 4 designers across multiple product areas, driving design quality and delivery efficiency and contributing to 18% YoY DAU growth.</li>
-            <li>Defined marketplace design strategy, improving listing completion by 31%.</li>
-            <li>Partnered with product and engineering to deliver high-impact initiatives and scale a design system, reducing inconsistencies by 35%.</li>
-            <li>Established team processes including design critiques, planning, and reviews to improve execution.</li>
-            <li>Mentored designers and supported career growth, improving team capability and output.</li>
-          </ul>
-        </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Lead Product Designer</div>
-              <div class="exp-company-date">2022 - 2024 · Poshmark India Private Limited</div>
+          <!-- 2: Lead -->
+          <div class="tl-item">
+            <div class="tl-header">
+              <div class="tl-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+              </div>
+              <div class="tl-title">
+                <div class="tl-period">2022 – 2024 · Poshmark India Private Limited</div>
+                <div class="tl-role">Lead Product Designer</div>
+              </div>
             </div>
+            <ul class="tl-bullets">
+              <li>Owned end-to-end design for core marketplace journeys including listing, discovery, and onboarding.</li>
+              <li>Led cross-functional collaboration to define product direction and improve user experience.</li>
+              <li>Identified key friction points through research and translated insights into product improvements.</li>
+              <li>Delivered UX improvements that increased seller activation and improved conversion flows.</li>
+              <li>Mentored junior designers and elevated overall design quality within the team.</li>
+            </ul>
           </div>
-          <ul class="exp-bullets">
-            <li>Owned end-to-end design for core marketplace journeys including listing, discovery, and onboarding.</li>
-            <li>Led cross-functional collaboration to define product direction and improve user experience.</li>
-            <li>Identified key friction points through research and translated insights into product improvements.</li>
-            <li>Delivered UX improvements that increased seller activation and improved conversion flows.</li>
-            <li>Mentored junior designers and elevated overall design quality within the team.</li>
-          </ul>
-        </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Senior Product Designer</div>
-              <div class="exp-company-date">2020 - 2022 · Poshmark India Private Limited</div>
+          <!-- 3: Senior -->
+          <div class="tl-item">
+            <div class="tl-header">
+              <div class="tl-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+              </div>
+              <div class="tl-title">
+                <div class="tl-period">2020 – 2022 · Poshmark India Private Limited</div>
+                <div class="tl-role">Senior Product Designer</div>
+              </div>
             </div>
+            <ul class="tl-bullets">
+              <li>Designed scalable web and mobile experiences across key product flows.</li>
+              <li>Improved usability of complex workflows, reducing friction in core user actions.</li>
+              <li>Conducted competitive analysis to identify opportunities for product enhancements.</li>
+              <li>Presented design solutions to stakeholders and drove alignment across teams.</li>
+            </ul>
           </div>
-          <ul class="exp-bullets">
-            <li>Designed scalable web and mobile experiences across key product flows.</li>
-            <li>Improved usability of complex workflows, reducing friction in core user actions.</li>
-            <li>Conducted competitive analysis to identify opportunities for product enhancements.</li>
-            <li>Presented design solutions to stakeholders and drove alignment across teams.</li>
-          </ul>
-        </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/poshmark.png" alt="Poshmark"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Product Designer</div>
-              <div class="exp-company-date">2017 - 2020 · Poshmark India Private Limited</div>
+          <!-- 4: Product Designer Poshmark -->
+          <div class="tl-item">
+            <div class="tl-header">
+              <div class="tl-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+              </div>
+              <div class="tl-title">
+                <div class="tl-period">2017 – 2020 · Poshmark India Private Limited</div>
+                <div class="tl-role">Product Designer</div>
+              </div>
             </div>
+            <ul class="tl-bullets">
+              <li>Executed design solutions for new features across core product areas.</li>
+              <li>Collaborated closely with engineering to ensure high-quality implementation.</li>
+              <li>Contributed to improving usability and consistency across the product.</li>
+            </ul>
           </div>
-          <ul class="exp-bullets">
-            <li>Executed design solutions for new features across core product areas.</li>
-            <li>Collaborated closely with engineering to ensure high-quality implementation.</li>
-            <li>Contributed to improving usability and consistency across the product.</li>
-          </ul>
-        </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Product Designer</div>
-              <div class="exp-company-date">2014 - 2017 · AnywhereWorks</div>
+          <!-- 5: AnywhereWorks -->
+          <div class="tl-item">
+            <div class="tl-header">
+              <div class="tl-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+              </div>
+              <div class="tl-title">
+                <div class="tl-period">2014 – 2017 · AnywhereWorks</div>
+                <div class="tl-role">Product Designer</div>
+              </div>
             </div>
+            <ul class="tl-bullets">
+              <li>Created wireframes, visual designs, and interaction flows for digital products.</li>
+              <li>Iterated on designs based on user feedback and usability insights.</li>
+              <li>Built strong foundations in user-centered design and interface design.</li>
+            </ul>
           </div>
-          <ul class="exp-bullets">
-            <li>Created wireframes, visual designs, and interaction flows for digital products.</li>
-            <li>Iterated on designs based on user feedback and usability insights.</li>
-            <li>Built strong foundations in user-centered design and interface design.</li>
-          </ul>
-        </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-logo"><img src="icons/anywhereworks.png" alt="AnywhereWorks"></div>
-            <div class="exp-meta">
-              <div class="exp-role">Product Designer Intern</div>
-              <div class="exp-company-date">2014 (3 months) · AnywhereWorks</div>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Supported senior designers in creating wireframes and visual designs.</li>
-            <li>Assisted in user research and usability testing activities.</li>
-            <li>Gained foundational experience in UX and product design workflows.</li>
-          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ════ FOOTER ════ -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/santhoshrajendran/" target="_blank" rel="noopener">LinkedIn <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="https://dribbble.com/santhoshrajendran" target="_blank" rel="noopener">Dribbble <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="https://instagram.com/santhosh.r777" target="_blank" rel="noopener">Instagram <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;"><path d="M6.99997 7H17V17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.99997 17L17 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="cf-reveal-wrapper">
+    <footer class="cinematic-footer-wrapper" id="cinematicFooter">
+
+      <!-- Ambient glow -->
+      <div class="cf-aurora"></div>
+      <!-- Grid bg -->
+      <div class="cf-grid"></div>
+      <!-- Giant background text -->
+      <div class="cf-giant-text" id="cfGiantText">SR.</div>
+
+      <!-- Marquee bar -->
+      <div class="cf-marquee-bar">
+        <div class="cf-marquee-track">
+          <div class="cf-marquee-item">
+            <span>Product Design</span><span class="dot">✦</span>
+            <span>12+ Years Experience</span><span class="dot">✦</span>
+            <span>Design Leadership</span><span class="dot">✦</span>
+            <span>Design Systems</span><span class="dot">✦</span>
+            <span>UX Research</span><span class="dot">✦</span>
+            <span>Strategic Vision</span><span class="dot">✦</span>
+            <span>Team Mentoring</span><span class="dot">✦</span>
+            <span>Stakeholder Alignment</span><span class="dot">✦</span>
+            <span>Design Ops</span><span class="dot">✦</span>
+            <span>OKR Planning</span><span class="dot">✦</span>
+          </div>
+          <div class="cf-marquee-item" aria-hidden="true">
+            <span>Product Design</span><span class="dot">✦</span>
+            <span>12+ Years Experience</span><span class="dot">✦</span>
+            <span>Design Leadership</span><span class="dot">✦</span>
+            <span>Design Systems</span><span class="dot">✦</span>
+            <span>UX Research</span><span class="dot">✦</span>
+            <span>Strategic Vision</span><span class="dot">✦</span>
+            <span>Team Mentoring</span><span class="dot">✦</span>
+            <span>Stakeholder Alignment</span><span class="dot">✦</span>
+            <span>Design Ops</span><span class="dot">✦</span>
+            <span>OKR Planning</span><span class="dot">✦</span>
+          </div>
+        </div>
       </div>
-      <div class="footer-contact">
-        <a href="tel:+919894249490">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          +91 989 424 9490
-        </a>
-        <a href="mailto:santhosh.r777@live.in">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          santhosh.r777@live.in
-        </a>
+
+      <!-- Main content -->
+      <div class="cf-main">
+        <h2 class="cf-heading" id="cfHeading">Let's Work Together</h2>
+
+        <div class="cf-cta-group" id="cfLinks">
+          <!-- Primary CTAs -->
+          <div class="cf-primary-row">
+            <div class="cf-pill cf-cta-btn" style="cursor:default">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              +91 989 424 9490
+            </div>
+            <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
+              onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              santhosh.r777@live.in
+            </button>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </footer>
+
+      <!-- Bottom bar -->
+      <div class="cf-bottom">
+        <div class="cf-copyright">© 2026 SR. All rights reserved.</div>
+        <div class="cf-pill cf-made-badge">
+          <span>Designed with</span>
+          <span class="cf-heart">❤️</span>
+          <span style="color:rgba(240,237,232,0.25);margin:0 4px;">|</span>
+          <span>Vibe coded with passion</span>
+        </div>
+        <button class="cf-pill cf-back-top" id="cfBackTop" data-magnetic aria-label="Back to top">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M5 15l7-7 7 7"/>
+          </svg>
+          Back to top
+        </button>
+      </div>
+
+    </footer>
+  </div>
 
   <script>
+    (function syncExpIndent() {
+      function update() {
+        const bioCol = document.querySelector('.story-bio-col');
+        const myStory = document.querySelector('.my-story');
+        if (!bioCol || !myStory) return;
+        const offset = bioCol.getBoundingClientRect().left - myStory.getBoundingClientRect().left;
+        myStory.style.setProperty('--bio-indent', Math.max(48, offset) + 'px');
+      }
+      update();
+      window.addEventListener('resize', update);
+    })();
+
     // Intersection Observer for fade-up animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2601,7 +3038,7 @@
       z-index: 9999;
       pointer-events: none;
       white-space: nowrap;
-      display: flex;
+      display: none;
       align-items: center;
       gap: 7px;
       padding: 10px 18px;
@@ -2626,19 +3063,108 @@
       pointer-events: none;
     }
   </style>
-  <div class="vibe-badge" id="vibeBadge">
+  <div class="vibe-badge hidden" id="vibeBadge">
     <span class="vibe-badge-icon">✦</span>
     <span style="display:inline-flex;align-items:center;gap:3px;">Designed with <span class="vibe-heart"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#ff3b3b" stroke="#ff3b3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span> &nbsp;|&nbsp; Vibe coded with passion</span>
   </div>
   <script>
     (function() {
       const badge = document.getElementById('vibeBadge');
-      const hero = document.getElementById('home');
-      if (!badge || !hero) return;
+      const footerWrapper = document.querySelector('.cf-reveal-wrapper');
+      if (!badge || !footerWrapper) return;
       const obs = new IntersectionObserver(([entry]) => {
         badge.classList.toggle('hidden', !entry.isIntersecting);
       }, { threshold: 0.1 });
-      obs.observe(hero);
+      obs.observe(footerWrapper);
+    })();
+  </script>
+
+  <!-- ════ CINEMATIC FOOTER ANIMATIONS ════ -->
+  <script>
+    (function initCinematicFooter() {
+      if (typeof gsap === 'undefined') return;
+
+      const footer   = document.getElementById('cinematicFooter');
+      const giant    = document.getElementById('cfGiantText');
+      const heading  = document.getElementById('cfHeading');
+      const links    = document.getElementById('cfLinks');
+      const wrapper  = footer && footer.closest('.cf-reveal-wrapper');
+      if (!footer || !wrapper) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Show/hide entire footer based on wrapper visibility
+      ScrollTrigger.create({
+        trigger: wrapper,
+        start: 'top 90%',
+        end: 'top top',
+        onEnter: function() {
+          gsap.to(footer, { opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' });
+        },
+        onLeaveBack: function() {
+          gsap.to(footer, { opacity: 0, pointerEvents: 'none', duration: 0.3, ease: 'power2.in' });
+        },
+      });
+
+      // Parallax: giant text rises in as the footer is revealed
+      gsap.fromTo(giant,
+        { y: '8vh', opacity: 0 },
+        {
+          y: '0vh', opacity: 1,
+          ease: 'power1.out',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top 85%',
+            end: 'bottom bottom',
+            scrub: 1.2,
+          }
+        }
+      );
+
+      // Staggered reveal for heading + links
+      gsap.fromTo([heading, links],
+        { y: 60, opacity: 0 },
+        {
+          y: 0, opacity: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top 45%',
+            end: 'bottom bottom',
+            scrub: 1,
+          }
+        }
+      );
+
+      // Magnetic button effect
+      document.querySelectorAll('[data-magnetic]').forEach(function(el) {
+        el.addEventListener('mousemove', function(e) {
+          var r = el.getBoundingClientRect();
+          var x = e.clientX - r.left - r.width  / 2;
+          var y = e.clientY - r.top  - r.height / 2;
+          gsap.to(el, {
+            x: x * 0.35, y: y * 0.35,
+            rotationX: -y * 0.12, rotationY: x * 0.12,
+            scale: 1.05,
+            ease: 'power2.out', duration: 0.4,
+          });
+        });
+        el.addEventListener('mouseleave', function() {
+          gsap.to(el, {
+            x: 0, y: 0, rotationX: 0, rotationY: 0, scale: 1,
+            ease: 'elastic.out(1, 0.3)', duration: 1.2,
+          });
+        });
+      });
+
+      // Back to top
+      var backBtn = document.getElementById('cfBackTop');
+      if (backBtn) {
+        backBtn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
     })();
   </script>
 
