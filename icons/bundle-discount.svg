@@ -1,0 +1,14 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Back shopping bag -->
+  <path d="M9 4.5Q9 2 12 2Q15 2 15 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="7" y="4.5" width="10" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Front shopping bag (offset left-down) -->
+  <path d="M3.5 8.5Q3.5 6 6.5 6Q9.5 6 9.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="1.5" y="8.5" width="10" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Price tag (pointed left, rounded right) -->
+  <path d="M14 14L12.5 17L14 20L22 20Q23 20 23 19L23 15Q23 14 22 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- % symbol inside tag -->
+  <path d="M16 19L21 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="16.5" cy="15" r="0.75" fill="currentColor"/>
+  <circle cx="20.5" cy="18.5" r="0.75" fill="currentColor"/>
+</svg>

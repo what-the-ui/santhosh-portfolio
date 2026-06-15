@@ -109,7 +109,7 @@
     /* ── Hero ── */
     .cs-hero {
       background: #0c0c0f;
-      min-height: 100vh;
+      min-height: 50vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding: 100px 100px 80px;
@@ -191,7 +191,7 @@
     .cs-meta-value { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 600; color: #171717; }
 
     /* ── Body sections ── */
-    .cs-section { max-width: 1280px; margin: 0 auto; padding: 100px 100px; }
+    .cs-section { max-width: 1280px; margin: 0 auto; padding: 60px 100px; }
     .cs-section + .cs-section { padding-top: 0; }
     .cs-label {
       font-size: 11px; font-weight: 700; color: #7342E2;
@@ -215,14 +215,14 @@
     /* ── Problem quote ── */
     .cs-problem-section {
       background: #171717;
-      padding: 100px 0;
+      padding: 60px 0;
     }
     .cs-problem-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; }
     .cs-problem-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
     .cs-problem-quote {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 36px; font-weight: 500; line-height: 1.5;
-      color: #fff; max-width: 900px;
+      color: #fff;
     }
     .cs-problem-quote em { color: #7342E2; font-style: normal; }
 
@@ -327,16 +327,19 @@
     .ba-label-new { right: 20px; }
     .ba-label-old { left: 20px; }
     .ba-caption {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #999;
-      letter-spacing: 0.3px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 16px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #7342E2;
+      background: rgba(115,66,226,0.07);
+      border: 1px solid rgba(115,66,226,0.18);
+      border-radius: 100px;
+      padding: 8px 20px;
+      width: fit-content; margin-left: auto; margin-right: auto;
     }
 
     /* ── Final showcase ── */
-    .cs-final-wrap { padding: 0 100px 120px; }
+    .cs-final-wrap { padding: 0 100px 80px; }
     .cs-final-hero { background: #f5f5f5; border-radius: 24px; height: 760px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; color: #ccc; margin-bottom: 24px; }
     .cs-final-hero-icon { width: 72px; height: 72px; border: 2px dashed #ddd; border-radius: 18px; display: flex; align-items: center; justify-content: center; }
     .cs-final-hero-title { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ccc; }
@@ -350,7 +353,7 @@
     .cs-stats-row {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 2px; background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden;
-      margin: 48px 0 40px;
+      margin: 48px 0 0;
     }
     .cs-stat {
       background: #fff; padding: 48px 40px;
@@ -550,9 +553,6 @@
       .cs-heading { font-size: 36px; }
       .cs-two-col, .cs-two-col-narrow { grid-template-columns: 1fr; gap: 40px; }
       .cs-process-grid { grid-template-columns: 1fr 1fr; }
-      .cs-meta-bar-inner { grid-template-columns: 1fr 1fr; }
-      .cs-meta-cell:nth-child(2) { border-right: none; }
-      .cs-meta-cell:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.08); padding-left: 0; }
       .cs-meta-cell { padding-left: 0 !important; }
       .cs-stats-row { grid-template-columns: 1fr; }
       .cs-challenge-grid { grid-template-columns: 1fr; }
@@ -574,9 +574,10 @@
       .cs-heading { font-size: 28px; }
       .cs-problem-quote { font-size: 24px; }
       .cs-process-grid { grid-template-columns: 1fr; }
-      .cs-meta-bar-inner { grid-template-columns: 1fr; padding-left: 24px; padding-right: 24px; gap: 0; }
-      .cs-meta-cell { padding: 16px 0; border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); padding-left: 0 !important; }
-      .cs-meta-cell:last-child { border-bottom: none; }
+      .cs-meta-bar-inner { grid-template-columns: 1fr 1fr; padding-left: 24px; padding-right: 24px; }
+      .cs-meta-cell:nth-child(2) { border-right: none; }
+      .cs-meta-cell:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.08); }
+      .cs-meta-cell { padding-left: 0 !important; }
       .cs-footer-inner { padding: 60px 24px 32px; }
       .cs-footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
       .cs-divider { margin: 0 24px; }
@@ -703,7 +704,7 @@
     .cs-exec-body { font-size: 15px; color: #666; line-height: 1.65; }
 
     /* Reflection dark section */
-    .cs-reflection-section { background: #171717; padding: 100px 0; overflow: hidden; }
+    .cs-reflection-section { background: #171717; padding: 60px 0; overflow: hidden; }
     .cs-reflection-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; box-sizing: border-box; width: 100%; }
     .cs-reflection-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
     .cs-reflection-heading {
@@ -1034,7 +1035,7 @@
   </header>
 
   <!-- ════ HERO ════ -->
-  <div class="cs-hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 140px 48px 100px;">
+  <div class="cs-hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 70px 48px 50px;">
     <div class="cs-hero-bg"></div>
     <div class="cs-hero-grid"></div>
     <a href="index.html#works" class="cs-back">
@@ -1043,16 +1044,33 @@
     </a>
 
     <div class="cs-hero-content" style="text-align: center; align-items: center; max-width: 800px;">
-      <div class="cs-hero-tags" style="justify-content: center;">
-        <span class="cs-hero-tag">Product Design Manager</span>
-        <span class="cs-hero-tag">iOS Design</span>
-        <span class="cs-hero-tag">Android Design</span>
-        <span class="cs-hero-tag">2026</span>
-      </div>
-      <h1 class="cs-hero-title" style="white-space: nowrap;">Poshmark App Redesign</h1>
+      <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px;">Poshmark · App Redesign</p>
+      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px);">Redesigning for<br>retention, not recognition</h1>
       <p class="cs-hero-sub" style="max-width: 900px; margin-left: auto; margin-right: auto; text-wrap: balance;">Fifteen years of product debt, a shrinking seller base, and a rare engineering window. The design strategy, trade-offs, and outcomes behind Poshmark's most significant platform investment in a decade.</p>
     </div>
 
+  </div>
+
+  <!-- ════ META BAR ════ -->
+  <div class="cs-meta-bar">
+    <div class="cs-meta-bar-inner">
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-value">Product Design Manager</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Platform</div>
+        <div class="cs-meta-value">iOS & Android</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Type</div>
+        <div class="cs-meta-value">App Redesign</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Year</div>
+        <div class="cs-meta-value">2026</div>
+      </div>
+    </div>
   </div>
 
   <!-- ════ 1. CONTEXT ════ -->
@@ -1077,8 +1095,6 @@
       </div>
     </div>
   </div>
-
-  <hr class="cs-divider">
 
   <!-- ════ 2. THE PROBLEM ════ -->
   <div class="cs-problem-section fade-up">
@@ -1109,7 +1125,21 @@
     </div>
   </div>
 
-  <hr class="cs-divider">
+  <!-- ── Before / After Slider ── -->
+  <div style="max-width: 1280px; margin: 0 auto; padding: 60px 100px 40px;">
+    <div class="ba-wrap"><div class="ba-slider">
+      <img class="ba-img ba-after" src="images/NewAfter.png" alt="New UI">
+      <div class="ba-before-clip">
+        <img class="ba-img ba-before" src="images/before.png" alt="Old UI">
+      </div>
+      <div class="ba-divider">
+        <div class="ba-handle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div></div>
+    <p class="ba-caption"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/></svg> Slide to compare</p>
+  </div>
 
   <!-- ════ 3. ROLE & TEAM ════ -->
   <div class="cs-section fade-up">
@@ -1288,7 +1318,7 @@
       </div>
     </div>
 
-    <img src="images/posh6.png" alt="Exploration sketches and wireframes" style="width:100%; border-radius:20px; display:block; margin-top:16px;">
+    <img src="images/Posh6-Black.png" alt="Exploration sketches and wireframes" style="width:100%; border-radius:20px; display:block; margin-top:16px;">
   </div>
 
   <hr class="cs-divider">
@@ -1370,21 +1400,7 @@
     </div>
     <!-- ── Before / After Slider ── -->
     <div style="margin-top: 32px;">
-      <div class="ba-wrap"><div class="ba-slider" id="baSlider">
-        <!-- New UI (after), full width base -->
-        <img class="ba-img ba-after" src="images/NewAfter.png" alt="New UI">
-        <!-- Old UI (before), clipped by slider position -->
-        <div class="ba-before-clip" id="baClip">
-          <img class="ba-img ba-before" src="images/before.png" alt="Old UI">
-        </div>
-        <!-- Divider -->
-        <div class="ba-divider" id="baDivider">
-          <div class="ba-handle">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-      </div></div>
-      <p class="ba-caption">Slide to compare</p>
+      <img src="images/After-black-new.png" alt="New UI" style="width: 100%; border-radius: 20px; display: block;">
     </div>
   </div>
 
@@ -1425,7 +1441,7 @@
 
   <!-- ════ FINAL DESIGN SHOWCASE ════ -->
   <div class="cs-final-wrap fade-up">
-    <div style="max-width:1280px; margin:0 auto 40px; padding:100px 0 0;">
+    <div style="max-width:1280px; margin:0 auto 40px; padding:80px 0 0;">
       <div style="font-size:11px;font-weight:700;color:#7342E2;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;">Final Design</div>
       <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:700;letter-spacing:-1px;color:#171717;margin-bottom:8px;">See it all together</h2>
       <p style="font-size:18px;color:#888;max-width:560px;line-height:1.6;">The complete Poshmark 2.0, every flow, every screen, shipped.</p>
@@ -1433,11 +1449,11 @@
     <div style="max-width:1280px; margin:0 auto;">
       <img src="images/posh1.png" alt="Poshmark full design overview" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
       <img src="images/posh2.png" alt="Poshmark design screens" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
-      <img src="images/listing.png" alt="Poshmark listing screens" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
+      <img src="images/Sell.png" alt="Poshmark listing screens" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
       <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
-        <img src="images/posh3.png" alt="Poshmark home feed" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
-        <img src="images/posh4.png" alt="Poshmark new listing flow" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
-        <img src="images/posh5.png" alt="Poshmark product detail" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
+        <img src="images/posh3.png?v=2" alt="Poshmark home feed" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
+        <img src="images/posh4.png?v=2" alt="Poshmark new listing flow" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
+        <img src="images/posh5.png?v=2" alt="Poshmark product detail" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
       </div>
     </div>
   </div>
@@ -1581,78 +1597,72 @@
 
     // ── Before / After Slider ──
     (function() {
-      const slider = document.getElementById('baSlider');
-      if (!slider) return;
-      const clip = document.getElementById('baClip');
-      const divider = document.getElementById('baDivider');
-      let dragging = false;
+      function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
-      function setPos(pct) {
-        pct = Math.max(0, Math.min(100, pct));
-        clip.style.width = pct + '%';
-        divider.style.left = pct + '%';
-      }
+      document.querySelectorAll('.ba-slider').forEach(function(slider) {
+        const clip = slider.querySelector('.ba-before-clip');
+        const divider = slider.querySelector('.ba-divider');
+        let dragging = false;
+        let hintPlayed = false;
 
-      // Set initial position to 20px from left
-      let hintPlayed = false;
-
-      function playHint(startPct) {
-        if (hintPlayed) return;
-        hintPlayed = true;
-        const rect = slider.getBoundingClientRect();
-        const deltaPct = (40 / rect.width) * 100;
-        const targetPct = startPct + deltaPct;
-        const duration = 1400;
-        let start = null;
-
-        function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
-
-        function animate(ts) {
-          if (dragging) return; // stop if user grabbed it
-          if (!start) start = ts;
-          const elapsed = ts - start;
-          const t = Math.min(elapsed / duration, 1);
-          const ease = easeInOut(t);
-          // Go right then come back
-          const pos = t <= 0.5
-            ? startPct + ease * deltaPct * 2
-            : targetPct - (ease - 0.5) * deltaPct * 2;
-          setPos(t < 1 ? pos : startPct);
-          if (t < 1) requestAnimationFrame(animate);
+        function setPos(pct) {
+          pct = Math.max(0, Math.min(100, pct));
+          clip.style.width = pct + '%';
+          divider.style.left = pct + '%';
         }
-        requestAnimationFrame(animate);
-      }
 
-      function initPos() {
-        setPos(0);
-        // Trigger hint when slider scrolls into view
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              setTimeout(() => playHint(0), 400);
-              observer.disconnect();
-            }
-          });
-        }, { threshold: 0.5 });
-        observer.observe(slider);
-      }
-      // Wait for image to load to get correct dimensions
-      const afterImg = slider.querySelector('.ba-after');
-      if (afterImg.complete) initPos();
-      else afterImg.addEventListener('load', initPos);
+        function playHint(startPct) {
+          if (hintPlayed) return;
+          hintPlayed = true;
+          const rect = slider.getBoundingClientRect();
+          const deltaPct = (40 / rect.width) * 100;
+          const targetPct = startPct + deltaPct;
+          const duration = 1400;
+          let start = null;
+          function animate(ts) {
+            if (dragging) return;
+            if (!start) start = ts;
+            const elapsed = ts - start;
+            const t = Math.min(elapsed / duration, 1);
+            const ease = easeInOut(t);
+            const pos = t <= 0.5
+              ? startPct + ease * deltaPct * 2
+              : targetPct - (ease - 0.5) * deltaPct * 2;
+            setPos(t < 1 ? pos : startPct);
+            if (t < 1) requestAnimationFrame(animate);
+          }
+          requestAnimationFrame(animate);
+        }
 
-      function getPercent(clientX) {
-        const rect = slider.getBoundingClientRect();
-        return ((clientX - rect.left) / rect.width) * 100;
-      }
+        function initPos() {
+          setPos(50);
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                setTimeout(() => playHint(50), 400);
+                observer.disconnect();
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(slider);
+        }
 
-      slider.addEventListener('mousedown', e => { dragging = true; setPos(getPercent(e.clientX)); });
-      window.addEventListener('mousemove', e => { if (dragging) setPos(getPercent(e.clientX)); });
-      window.addEventListener('mouseup', () => { dragging = false; });
+        const afterImg = slider.querySelector('.ba-after');
+        if (afterImg.complete) initPos();
+        else afterImg.addEventListener('load', initPos);
 
-      slider.addEventListener('touchstart', e => { dragging = true; setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
-      window.addEventListener('touchmove', e => { if (dragging) setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
-      window.addEventListener('touchend', () => { dragging = false; });
+        function getPercent(clientX) {
+          const rect = slider.getBoundingClientRect();
+          return ((clientX - rect.left) / rect.width) * 100;
+        }
+
+        slider.addEventListener('mousedown', e => { dragging = true; setPos(getPercent(e.clientX)); });
+        window.addEventListener('mousemove', e => { if (dragging) setPos(getPercent(e.clientX)); });
+        window.addEventListener('mouseup', () => { dragging = false; });
+        slider.addEventListener('touchstart', e => { dragging = true; setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
+        window.addEventListener('touchmove', e => { if (dragging) setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
+        window.addEventListener('touchend', () => { dragging = false; });
+      });
     })();
   </script>
   <script>
