@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXDLQZNTFX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXDLQZNTFX');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poshmark Typography Guidelines · Santhosh Rajendran</title>
+  <link rel="icon" type="image/png" href="images/favicon-profile.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: #0c0c0f; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #fff;
+      color: #171717;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 0;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    header.scrolled .nav-logo { color: #0c0c0f; }
+    header.scrolled .nav-logo span { color: #7342E2; }
+    header.scrolled .nav-text-link { color: #0c0c0f; -webkit-text-fill-color: #0c0c0f; }
+    header.scrolled .nav-cta {
+      background: #7342E2;
+      border-color: #7342E2;
+      color: #fff;
+    }
+    nav {
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    .nav-logo {
+      font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px;
+      color: #f0ede8; text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .nav-logo span { color: #7342E2; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-text-link {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 400; color: #f0ede8;
+      text-decoration: underline; text-decoration-thickness: 1px;
+      text-underline-offset: 3px; transition: opacity 0.2s, color 0.3s; white-space: nowrap;
+    }
+    .nav-text-link:hover { opacity: 0.75; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #f0ede8;
+      padding: 10px 24px; border-radius: 100px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 600;
+      transition: all 0.25s; text-decoration: none; white-space: nowrap;
+    }
+    .nav-cta:hover { background: #7342E2; border-color: #7342E2; color: #fff; box-shadow: 0 8px 30px rgba(115,66,226,0.35); }
+
+    /* ── Hero ── */
+    .cs-hero {
+      background: #0c0c0f;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cs-hero-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(115,66,226,0.18) 0%, transparent 70%);
+    }
+    .cs-hero-grid {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-size: 60px 60px;
+      background-image: linear-gradient(to right, rgba(240,237,232,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(240,237,232,0.04) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+    }
+    .cs-back {
+      position: absolute; top: 96px; left: 48px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 13px; font-weight: 600; color: rgba(240,237,232,0.5);
+      text-decoration: none; z-index: 10;
+      transition: color 0.2s;
+    }
+    .cs-back:hover { color: rgba(240,237,232,0.9); }
+    .cs-hero-content {
+      position: relative; z-index: 10;
+      text-align: center; align-items: center; max-width: 860px;
+    }
+    .cs-hero-tag-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .cs-hero-tag {
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      padding: 4px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(240,237,232,0.5); background: rgba(255,255,255,0.04);
+    }
+    .cs-hero-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(40px, 5vw, 72px); font-weight: 700; line-height: 1.05;
+      letter-spacing: -2px; color: #fff; margin-bottom: 24px;
+    }
+    .cs-hero-sub {
+      font-size: 18px; line-height: 1.7; color: rgba(240,237,232,0.65);
+      max-width: 660px; margin: 0 auto;
+    }
+
+    /* ── Meta Bar ── */
+    .cs-meta-bar { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .cs-meta-bar-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 100px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .cs-meta-cell {
+      padding: 32px 0; border-right: 1px solid rgba(0,0,0,0.08);
+    }
+    .cs-meta-cell:first-child { padding-left: 0; }
+    .cs-meta-cell:last-child { border-right: none; padding-left: 40px; }
+    .cs-meta-cell:not(:first-child):not(:last-child) { padding-left: 40px; }
+    .cs-meta-label { font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .cs-meta-value { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 600; color: #171717; }
+
+    /* ── Section base ── */
+    .cs-section { max-width: 1280px; margin: 0 auto; padding: 60px 100px; }
+    .cs-section + .cs-section { padding-top: 0; }
+    .cs-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+    .cs-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 44px; font-weight: 700; letter-spacing: -1px;
+      color: #171717; line-height: 1.1; margin-bottom: 8px;
+    }
+    .cs-body { font-size: 16px; color: #555; line-height: 1.75; }
+    .cs-divider { border: none; border-top: 1px solid rgba(0,0,0,0.08); margin: 0; }
+
+    /* ── Stats row ── */
+    .cs-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden; }
+    .cs-stat { background: #faf8ff; padding: 40px 36px; }
+    .cs-stat-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 56px; font-weight: 700; color: #171717; line-height: 1; letter-spacing: -2px; margin-bottom: 12px;
+    }
+    .cs-stat-unit { font-size: 32px; }
+    .cs-stat-label { font-size: 14px; color: #777; line-height: 1.6; }
+
+    /* ── Problem (dark) ── */
+    .cs-problem-section { background: #171717; padding: 80px 0; }
+    .cs-problem-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; }
+    .cs-problem-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+    .cs-problem-quote {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px; font-weight: 500; line-height: 1.5;
+      color: #fff;
+    }
+    .cs-problem-quote em { color: #7342E2; font-style: normal; }
+    .cs-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 56px; }
+    .cs-problem-col-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 16px; }
+    .cs-problem-col-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cs-problem-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .cs-problem-list li { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.65; padding-left: 20px; position: relative; }
+    .cs-problem-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; background: #7342E2; border-radius: 50%; }
+    .cs-problem-why { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .cs-problem-why-body { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-top: 12px; }
+
+    /* ── Pillars ── */
+    .cs-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+    .cs-pillar { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 36px 32px; }
+    .cs-pillar-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 48px; font-weight: 700; color: #ede9fe; line-height: 1; margin-bottom: 16px; }
+    .cs-pillar-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px; }
+    .cs-pillar-body { font-size: 15px; color: #666; line-height: 1.7; }
+
+    /* ── Exec phases ── */
+    .cs-exec-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden; margin-top: 48px; }
+    .cs-exec-phase { background: #faf8ff; padding: 40px 32px; }
+    .cs-exec-badge {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+      background: #ede9fe; color: #5b21b6; margin-bottom: 20px;
+    }
+    .cs-exec-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; color: #171717; margin-bottom: 12px; }
+    .cs-exec-body { font-size: 15px; color: #666; line-height: 1.65; }
+
+    /* ── Decisions ── */
+    .cs-decision { border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 40px; margin-bottom: 24px; background: #fff; }
+    .cs-decision-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .cs-decision-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; color: #ede9fe; line-height: 1; flex-shrink: 0; }
+    .cs-decision-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #171717; }
+    .cs-decision-body { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 20px; }
+    .cs-decision-outcome {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #f0fdf4; border-radius: 12px; padding: 16px 20px;
+      font-size: 15px; color: #166534; line-height: 1.6;
+    }
+
+    /* ── Warm section ── */
+    .cs-warm-section { background: #faf8ff; }
+
+    /* ── Timeline ── */
+    .cs-timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+    .cs-timeline-card { border-radius: 16px; padding: 32px; border: 1px solid rgba(0,0,0,0.07); }
+    .cs-timeline-card.near { background: #fff; }
+    .cs-timeline-card.far { background: #f8f5ff; border-color: rgba(115,66,226,0.12); }
+    .cs-timeline-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; margin-bottom: 16px; }
+    .cs-timeline-badge.near { background: #f0f0f0; color: #555; }
+    .cs-timeline-badge.far { background: #ede9fe; color: #5b21b6; }
+    .cs-timeline-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px; }
+    .cs-timeline-body { font-size: 15px; color: #666; line-height: 1.65; }
+
+    /* ── Insight cards ── */
+    .cs-insight-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .cs-insight-card { border-radius: 20px; padding: 36px; background: #f5f4f2; border: 1px solid rgba(0,0,0,0.06); }
+    .cs-insight-card.highlight { background: #f8f5ff; border-color: rgba(115,66,226,0.15); }
+    .cs-insight-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #aaa; margin-bottom: 12px; }
+    .cs-insight-card.highlight .cs-insight-eyebrow { color: #7342E2; }
+    .cs-insight-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700; color: #171717; margin-bottom: 10px; }
+    .cs-insight-body { font-size: 15px; color: #555; line-height: 1.7; }
+
+    /* ── Reflection (dark) ── */
+    .cs-reflection-section { background: #171717; padding: 80px 0; overflow: hidden; }
+    .cs-reflection-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; box-sizing: border-box; width: 100%; }
+    .cs-reflection-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+    .cs-reflection-heading { font-family: 'Bricolage Grotesque', sans-serif; font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -1px; color: #fff; margin-bottom: 40px; }
+    .cs-reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .cs-reflection-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); border-radius: 20px; padding: 36px; }
+    .cs-reflection-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #7342E2; margin-bottom: 14px; }
+    .cs-reflection-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cs-reflection-card-body { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; }
+    .cs-reflection-quote { font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 500; line-height: 1.55; color: rgba(255,255,255,0.65); margin-top: 48px; }
+    .cs-reflection-quote em { color: #7342E2; font-style: normal; }
+
+    /* ── Case Study Nav ── */
+    .cs-case-nav { border-top: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; display: flex; }
+    .cs-case-nav-card { flex: 1; padding: 48px 0; display: flex; flex-direction: column; gap: 10px; text-decoration: none; transition: background 0.2s; }
+    .cs-case-nav-card:hover { background: #fafafa; }
+    .cs-case-nav-prev { padding-right: 60px; border-right: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-next { padding-left: 60px; text-align: right; margin-left: auto; }
+    .cs-case-nav-card.solo-next { margin-left: auto; }
+    .cs-case-nav-label { font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 6px; }
+    .cs-case-nav-next .cs-case-nav-label { justify-content: flex-end; }
+    .cs-case-nav-project { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 1.5px; }
+    .cs-case-nav-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; color: #171717; line-height: 1.2; letter-spacing: -0.5px; transition: color 0.2s; }
+    .cs-case-nav-card:hover .cs-case-nav-title { color: #7342E2; }
+
+    /* ── Fade up ── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Image frame ── */
+    .cs-img-frame { border-radius: 20px; overflow: hidden; background: #f5f4f2; border: 1px solid rgba(0,0,0,0.06); }
+    .cs-img-caption { font-size: 12px; color: #aaa; margin-top: 12px; text-align: center; letter-spacing: 0.3px; }
+
+    /* ── Cinematic footer ── */
+    .cinematic-footer-wrapper {
+      position: relative; width: 100%; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden; font-family: 'Bricolage Grotesque', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      --cf-bg: #0c0c0f; --cf-fg: #f0ede8; --cf-primary: #7342E2;
+      --cf-secondary: #ec4899; --cf-muted: rgba(240,237,232,0.5);
+      --cf-border: rgba(115,66,226,0.2); --cf-destructive: #ef4444;
+      --pill-bg-1: rgba(115,66,226,0.08); --pill-bg-2: rgba(115,66,226,0.03);
+      --pill-shadow: rgba(0,0,0,0.5); --pill-highlight: rgba(115,66,226,0.2);
+      --pill-inset-shadow: rgba(0,0,0,0.6); --pill-border: rgba(115,66,226,0.25);
+      background: var(--cf-bg); color: var(--cf-fg);
+    }
+    .cf-aurora { position: absolute; left: 50%; top: 50%; width: 80vw; height: 60vh; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(115,66,226,0.35) 0%, rgba(115,66,226,0.18) 35%, rgba(236,72,153,0.08) 60%, transparent 75%); filter: blur(80px); pointer-events: none; z-index: 0; animation: cf-breathe 8s ease-in-out infinite alternate; }
+    .cf-grid { position: absolute; inset: 0; z-index: 0; pointer-events: none; background-size: 60px 60px; background-image: linear-gradient(to right, rgba(240,237,232,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(240,237,232,0.04) 1px, transparent 1px); mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent); }
+    .cf-giant-text { position: absolute; bottom: -2vh; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 26vw; line-height: 0.75; font-weight: 900; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1px rgba(240,237,232,0.05); background: linear-gradient(180deg, rgba(240,237,232,0.1) 0%, transparent 60%); -webkit-background-clip: text; background-clip: text; z-index: 0; pointer-events: none; user-select: none; }
+    .cf-marquee-bar { position: sticky; top: 64px; width: 100%; overflow: hidden; border-bottom: 1px solid rgba(240,237,232,0.08); background: rgba(10,10,15,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 14px 0; z-index: 20; transform: rotate(-1.5deg) scaleX(1.08); box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+    .cf-marquee-track { display: flex; width: max-content; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cf-muted); animation: cf-marquee 40s linear infinite; }
+    .cf-marquee-item { display: flex; align-items: center; gap: 48px; padding: 0 24px; }
+    .cf-marquee-item span.dot { color: rgba(115,66,226,0.6); }
+    .cf-pill { background: linear-gradient(145deg, var(--pill-bg-1) 0%, var(--pill-bg-2) 100%); box-shadow: 0 10px 30px -10px var(--pill-shadow), inset 0 1px 1px var(--pill-highlight), inset 0 -1px 2px var(--pill-inset-shadow); border: 1px solid var(--pill-border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: all 0.4s cubic-bezier(0.16,1,0.3,1); text-decoration: none; cursor: pointer; }
+    .cf-main { position: relative; z-index: 10; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px 80px; }
+    .cf-heading { font-size: clamp(42px,8vw,96px); font-weight: 900; letter-spacing: -0.04em; text-align: center; margin-bottom: 48px; line-height: 1; color: #ffffff; -webkit-text-fill-color: #ffffff; filter: drop-shadow(0 0 20px rgba(240,237,232,0.12)); }
+    .cf-cta-group { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
+    .cf-primary-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .cf-cta-btn { padding: 18px 40px; border-radius: 100px; color: var(--cf-fg); font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; gap: 10px; background: transparent !important; box-shadow: none !important; border: 1px solid rgba(240,237,232,0.2) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; font-family: 'Bricolage Grotesque', sans-serif; }
+    .cf-bottom { position: relative; z-index: 20; width: 100%; padding: 0 48px 32px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; }
+    .cf-copyright { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cf-muted); }
+    .cf-made-badge { margin-left: auto; cursor: default; white-space: nowrap; padding: 12px 22px; border-radius: 100px; display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-muted); }
+    .cf-heart { font-size: 14px; color: var(--cf-destructive); animation: cf-heartbeat 2s cubic-bezier(0.25,1,0.5,1) infinite; }
+    .cf-back-top { padding: 10px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 7px; color: var(--cf-muted); border: none; background: none; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; transition: color 0.25s ease; font-family: 'Bricolage Grotesque', sans-serif; cursor: pointer; }
+    .cf-back-top svg { transition: transform 0.3s ease; flex-shrink: 0; }
+    .cf-back-top:hover { color: var(--cf-fg); }
+    .cf-back-top:hover svg { transform: translateY(-3px); }
+    #cfEmailBtn { position: relative; }
+    #cfEmailBtn::after { content: 'Click to copy'; position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(4px); background: rgba(240,237,232,0.12); color: rgba(240,237,232,0.7); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(240,237,232,0.15); backdrop-filter: blur(8px); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
+    #cfEmailBtn:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @keyframes cf-breathe { 0% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; } 100% { transform: translate(-50%,-50%) scale(1.1); opacity: 1; } }
+    @keyframes cf-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes cf-heartbeat { 0%, 100% { transform: scale(1); } 15%, 45% { transform: scale(1.25); } 30% { transform: scale(1); } }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .cs-section { padding: 60px 48px; }
+      .cs-problem-inner { padding: 0 48px; }
+      .cs-meta-bar-inner { padding: 0 48px; }
+      .cs-reflection-inner { padding: 0 48px; }
+      .cs-case-nav-inner { padding: 0 48px; }
+      .cs-pillars { grid-template-columns: 1fr 1fr; }
+      .cs-exec-phases { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .cs-problem-grid { grid-template-columns: 1fr; gap: 40px; }
+      .cs-pillars { grid-template-columns: 1fr; }
+      .cs-exec-phases { grid-template-columns: 1fr; }
+      .cs-insight-cards { grid-template-columns: 1fr; }
+      .cs-timeline { grid-template-columns: 1fr; }
+      .cs-reflection-grid { grid-template-columns: 1fr; }
+      .cs-stats-row { grid-template-columns: 1fr; }
+      .cs-meta-bar-inner { grid-template-columns: 1fr 1fr; }
+      .cs-meta-cell:nth-child(2) { border-right: none; }
+      .cs-meta-cell:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.08); }
+      .cs-meta-cell { padding-left: 0 !important; }
+    }
+    @media (max-width: 640px) {
+      .cs-section { padding: 48px 24px; }
+      .cs-problem-inner { padding: 0 24px; }
+      .cs-reflection-inner { padding: 0 24px; }
+      .cs-case-nav-inner { padding: 0 24px; flex-direction: column; }
+      .cs-meta-bar-inner { padding: 0 24px; grid-template-columns: 1fr 1fr; }
+      .cs-hero { padding: 120px 24px 64px; }
+      .cs-hero-title { font-size: 36px; letter-spacing: -1px; }
+      .cs-back { left: 24px; }
+      .cs-heading { font-size: 32px; }
+      .cs-reflection-heading { font-size: 32px; }
+      .cs-reflection-quote { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ NAV ════ -->
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo">SR<span>.</span></a>
+      <div class="nav-right">
+        <a href="index.html" class="nav-text-link">LinkedIn</a>
+        <a href="https://dribbble.com" class="nav-text-link">Dribbble</a>
+        <a href="images/Santhosh-Resume.pdf" target="_blank" class="nav-cta">Download Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ════ HERO ════ -->
+  <div class="cs-hero">
+    <div class="cs-hero-bg"></div>
+    <div class="cs-hero-grid"></div>
+    <a href="index.html#works" class="cs-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Works
+    </a>
+    <div class="cs-hero-content">
+      <div class="cs-hero-tag-row">
+        <span class="cs-hero-tag">Poshmark</span>
+        <span class="cs-hero-tag">Design Systems</span>
+        <span class="cs-hero-tag">Typography</span>
+      </div>
+      <h1 class="cs-hero-title" style="white-space: nowrap;">One type system, every surface</h1>
+      <p class="cs-hero-sub" style="max-width: 780px; margin-left: auto; margin-right: auto; text-wrap: balance;">Poshmark's typography was a patchwork of local decisions accumulated over years. This is how we turned inconsistency into a unified design standard — spanning iOS and Android — in six weeks.</p>
+    </div>
+  </div>
+
+  <!-- ════ META BAR ════ -->
+  <div class="cs-meta-bar">
+    <div class="cs-meta-bar-inner">
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-value">Lead Product Designer</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Timeline</div>
+        <div class="cs-meta-value">Typography System · 6 weeks</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Tools</div>
+        <div class="cs-meta-value">Figma</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Scope</div>
+        <div class="cs-meta-value">iOS · Android</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ 1. CONTEXT ════ -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Background</div>
+    <h2 class="cs-heading">What the absence of a system costs</h2>
+    <p class="cs-body" style="margin-top: 24px;">At Poshmark's scale, with the app spanning iOS and Android, small typographic inconsistencies don't stay small. Every time a designer made a local size or weight decision, that decision compounded across hundreds of components, screens, and teams — creating a product that felt subtly misaligned at every seam.</p>
+    <p class="cs-body" style="margin-top: 16px;">There was no shared typographic language. Font sizes, weights, and styles were chosen by convention and instinct, not by system. The same component type — a section label, a card title, a filter chip — could render at three different sizes depending on which designer or which quarter it shipped. Developers couldn't trust which spec was authoritative. Design reviews burned time on typographic debates that should have been settled by a reference.</p>
+    <p class="cs-body" style="margin-top: 16px;">This wasn't a style problem. It was a product velocity problem. And the cost was invisible until you looked at the whole surface area at once.</p>
+
+    <div class="cs-stats-row" style="margin-top: 56px;">
+      <div class="cs-stat">
+        <div class="cs-stat-num">2<span class="cs-stat-unit">×</span></div>
+        <div class="cs-stat-label">Platforms in scope — iOS and Android, each with evolved typographic conventions and no shared logic</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">3<span class="cs-stat-unit">+</span></div>
+        <div class="cs-stat-label">Independent type scales operating across the product with no shared logic or naming convention</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">3<span class="cs-stat-unit"> </span></div>
+        <div class="cs-stat-label">Designers led through structured parallel exploration — research, interaction, and visual — before converging</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image: Ty1 -->
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 100px 60px;">
+    <img src="images/Ty1.png" alt="Typography system overview" style="width: 100%; border-radius: 24px; display: block;">
+  </div>
+
+  <!-- ════ 2. THE PROBLEM ════ -->
+  <div class="cs-problem-section fade-up">
+    <div class="cs-problem-inner">
+      <div class="cs-problem-label">The Problem</div>
+      <div class="cs-problem-quote">iOS and Android had each evolved independently. There was no <em>shared logic</em>, no shared language — just years of local decisions with no referee.</div>
+
+      <div class="cs-problem-why" style="margin-top: 48px;">
+        <div class="cs-problem-col-label">Why a system, not a style guide</div>
+        <p class="cs-problem-why-body">A static style guide would document what exists. A system defines what should be and why — with semantic roles, platform-specific implementation notes, and usage examples that make the right choice easier than the wrong one. We needed something designers would actually use, not just reference. That meant the output had to be opinionated, contextual, and embedded directly in Figma where the work happens.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ 3. PROCESS ════ -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Process</div>
+    <h2 class="cs-heading">Four phases, one system</h2>
+    <p class="cs-body" style="margin-top: 20px;">The work ran from December 2024 through January 2025. Rather than designing in isolation and presenting a finished system, we structured the process to build shared ownership — which mattered as much as the output.</p>
+
+    <div class="cs-exec-phases">
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 01</span>
+        <div class="cs-exec-title">Production Audit</div>
+        <p class="cs-exec-body">I pulled live screens across iOS and Android and documented the existing typographic state. The audit surfaced multiple operating scales with no shared semantic logic — filter labels alone ranged from 11px to 14px across surfaces. The audit created a shared factual baseline: before we could agree on what should be, we needed to agree on what was.</p>
+      </div>
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 02</span>
+        <div class="cs-exec-title">Parallel Exploration</div>
+        <p class="cs-exec-body">Rather than designing the system myself and asking for feedback, I brought three designers in and gave each a structured prompt to interpret a shared scale in their own product context. The Playground sessions ran independently, then converged. This surfaced the real constraints: what felt right in the feed didn't work in account settings; the right body size for listing cards differed from notification text.</p>
+      </div>
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 03</span>
+        <div class="cs-exec-title">Comparative Testing</div>
+        <p class="cs-exec-body">We applied candidate systems to actual production screens — search results, product detail pages, account settings, and social feeds. Testing against real content (not lorem ipsum) exposed issues that spec sheets couldn't: sizes that felt comfortable in one context created visual noise in another. The comparative screens became the evidence base for every key decision we made.</p>
+      </div>
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 04</span>
+        <div class="cs-exec-title">Documentation</div>
+        <p class="cs-exec-body">The final system was documented as a structured Figma file — not a flat table of specs, but an annotated, navigable reference covering usage examples, platform-specific notes, do/don't guidance, and the rationale behind key decisions. The goal was a document that any designer could open and apply without needing context from me. It shipped in January 2025 as the single source of truth for iOS and Android.</p>
+      </div>
+    </div>
+
+    <!-- Stakeholder alignment -->
+    <div style="margin-top: 40px; background: #171717; border-radius: 20px; padding: 40px 48px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start;">
+      <div style="width: 48px; height: 48px; background: rgba(115,66,226,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7342E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: #7342E2; margin-bottom: 10px;">Stakeholder Alignment</div>
+        <p style="font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; margin: 0;">Before the audit began, I aligned with the Head of Design and the iOS and Android engineering leads on scope, timeline, and what adoption would require from each team. Rather than presenting a finished system for sign-off, I ran two lightweight check-ins mid-process — one after the audit to share the baseline findings, one before documentation to confirm the key decisions before they were codified. By the time the system shipped, every stakeholder had seen the evidence, understood the rationale, and had a voice in the output. Adoption wasn't a change management challenge — it was already solved before launch.</p>
+      </div>
+    </div>
+
+    <!-- Placeholder: Process evidence -->
+    <div style="margin-top: 48px; background: #f5f4f2; border: 2px dashed rgba(0,0,0,0.12); border-radius: 20px; padding: 60px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div style="font-size: 13px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px;">Image needed</div>
+      <div style="font-size: 14px; color: rgba(0,0,0,0.4); max-width: 480px; line-height: 1.6;">Comparative testing screens — same UI component rendered at candidate type scales side by side. This is the evidence that made the body size and label decisions defensible.</div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 4. KEY DECISIONS ════ -->
+  <div class="cs-warm-section fade-up">
+    <div class="cs-section">
+      <div class="cs-label">Key Decisions</div>
+      <h2 class="cs-heading">Where the system earned its constraints</h2>
+      <p class="cs-body" style="margin-top: 20px;">Four choices defined the system. Each had genuine disagreement, real tradeoffs, and evidence behind it — not just aesthetic preference. These are the moments where a design system either earns its authority or becomes a document people route around.</p>
+
+      <div style="margin-top: 48px;">
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">01</div>
+            <div class="cs-decision-title">Unified semantic scale vs. platform-native specs</div>
+          </div>
+          <p class="cs-decision-body">The first question was structural: should iOS and Android get separate type scales to honour native conventions, or should we define one semantic scale with platform-specific rendering notes? Separate scales would be more platform-idiomatic but would double the maintenance burden and create the exact cross-platform drift we were trying to eliminate. We chose a shared semantic scale — naming roles rather than sizes (Body, Label, Caption, Title) — with platform-specific implementation notes embedded in each token. One source of truth; two rendering contexts.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            Semantic naming across iOS and Android. Platform rendering notes live beside each style definition — not as a separate file.
+          </div>
+        </div>
+
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">02</div>
+            <div class="cs-decision-title">Codifying 13px all-caps as the utility label standard</div>
+          </div>
+          <p class="cs-decision-body">Small-cap labels — filter names, section dividers, metadata chips, form field labels — appeared throughout the product with inconsistent treatment. Some were 11px, some 13px; some all-caps, some title case; letter-spacing ranged from none to 2px. The comparative testing phase made the answer clear: 13px / 700 weight / 1.5px letter-spacing / all-caps rendered legibly at small sizes, passed accessibility contrast in both light and dark contexts, and felt consistent with Poshmark's brand register. We codified it as the utility label standard across all surfaces.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            13px / Bold / All-caps / 1.5px letter-spacing defined as the canonical utility label. Applied to filters, metadata, section headers, and form labels across all surfaces.
+          </div>
+          <!-- Placeholder: 13px all-caps before/after -->
+          <div style="margin-top: 24px; background: #f5f4f2; border: 2px dashed rgba(0,0,0,0.12); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div style="font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px;">Image needed</div>
+            <div style="font-size: 13px; color: rgba(0,0,0,0.4); max-width: 440px; line-height: 1.6;">Before/after showing the same filter labels and section dividers at inconsistent sizes vs. the standardised 13px all-caps treatment.</div>
+          </div>
+        </div>
+
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">03</div>
+            <div class="cs-decision-title">Body size: 14px vs 16px on mobile</div>
+          </div>
+          <p class="cs-decision-body">The body size debate was the most contentious. The Playground phase surfaced strong preferences: some designers felt 16px was too large for content-dense mobile lists; others felt 14px was too small for comfortable reading on smaller devices. The comparative testing resolved it — applied to real product screens including feed cards, search results, and account settings, 14px held up for compact data-heavy contexts, while 16px was clearly better for paragraph-style body copy like descriptions and listing details. We landed on 14px as the default app body with 16px reserved for reading-intensive surfaces.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            14px default app body / 16px for reading-heavy surfaces. Context-driven, not arbitrary.
+          </div>
+        </div>
+
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">04</div>
+            <div class="cs-decision-title">Naming roles, not sizes</div>
+          </div>
+          <p class="cs-decision-body">Early drafts of the system named styles by their pixel value: "12px Medium", "16px Regular", "20px Bold". This was intuitive for the first design, but broke down the moment a size needed to change for platform, context, or accessibility. A designer using "16px Regular" was making a size decision. A designer using "Body / Regular" was making a role decision — and the system could handle the size. We refactored every style name to reflect semantic role: Display, Title, Heading, Body, Label, Caption, Micro. Sizes became implementation details, not identifiers.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            Semantic style naming throughout: Display · Title · Heading · Body · Label · Caption · Micro. Sizes are attributes of roles, not identifiers for designers to hunt.
+          </div>
+          <!-- Placeholder: naming structure before/after -->
+          <div style="margin-top: 24px; background: #f5f4f2; border: 2px dashed rgba(0,0,0,0.12); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div style="font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px;">Image needed</div>
+            <div style="font-size: 13px; color: rgba(0,0,0,0.4); max-width: 440px; line-height: 1.6;">Figma panel view showing the old pixel-based style names vs. the new semantic role names — Display, Title, Heading, Body, Label, Caption, Micro.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 5. THE OUTPUT ════ -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">The Output</div>
+    <h2 class="cs-heading">A Figma file that does the thinking</h2>
+    <p class="cs-body" style="margin-top: 20px;">The final deliverable was a structured Figma document serving as the single typographic authority for the entire product team. It wasn't built to be read once and archived — it was built to be the reference that ends typographic debates in real time. Every style includes the size, weight, line-height, letter-spacing, platform note, usage context, and an annotated example from a live product screen.</p>
+
+    <!-- Placeholder: Final system / Figma file -->
+    <div style="margin-top: 48px; background: #f5f4f2; border: 2px dashed rgba(0,0,0,0.12); border-radius: 20px; padding: 80px 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div style="font-size: 13px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px;">Image needed</div>
+      <div style="font-size: 14px; color: rgba(0,0,0,0.4); max-width: 520px; line-height: 1.6;">Full-width screenshot of the final Figma typography system — showing the complete role hierarchy (Display → Micro), platform notes, and an annotated usage example from a real product screen. This is the proof that the system exists.</div>
+    </div>
+
+    <div class="cs-timeline" style="margin-top: 32px;">
+      <div class="cs-timeline-card far">
+        <span class="cs-timeline-badge far">iOS</span>
+        <div class="cs-timeline-title">iOS App Typography</div>
+        <p class="cs-timeline-body">Full role hierarchy — Display through Micro — with Dynamic Type support notes and UIFont usage guidance. Applied and tested against real screens including feed, PDP, listing flow, and account surfaces.</p>
+      </div>
+      <div class="cs-timeline-card far">
+        <span class="cs-timeline-badge far">Android</span>
+        <div class="cs-timeline-title">Android App Typography</div>
+        <p class="cs-timeline-body">The same semantic scale translated into sp-unit guidance for Material Design compliance. Covers TextAppearance mappings, density considerations, and screen-size adaptations — with annotated examples from real Android screens.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- ════ 6. IMPACT ════ -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Impact</div>
+    <h2 class="cs-heading">What a single source of truth changes</h2>
+    <p class="cs-body" style="margin-top: 20px;">The system shipped in January 2025. The immediate impact wasn't dramatic — good design systems rarely announce themselves. The value showed up in the absence of decisions: fewer typographic debates in design review, fewer QA flags for spec inconsistencies, fewer back-and-forth Slack threads about "what size is a filter label again."</p>
+
+    <div class="cs-timeline" style="margin-top: 40px;">
+      <div class="cs-timeline-card near">
+        <span class="cs-timeline-badge near">For Designers</span>
+        <div class="cs-timeline-title">Fewer decisions, faster work</div>
+        <p class="cs-timeline-body">Every new feature started with a resolved typographic foundation. Designers applied semantic roles rather than making size decisions from scratch. The system absorbed the low-level work, freeing design attention for higher-order problems — layout, hierarchy, user flow — rather than "is this 14px or 15px?"</p>
+      </div>
+      <div class="cs-timeline-card far">
+        <span class="cs-timeline-badge far">For Engineering</span>
+        <div class="cs-timeline-title">One authoritative spec per surface</div>
+        <p class="cs-timeline-body">Before the system, engineers making implementation decisions had to interpret ambiguous specs or pull from multiple sources across different Figma files. The typography system gave them a single, platform-specific reference — reducing interpretation overhead and the type of specification drift that compounds into product debt over time.</p>
+      </div>
+    </div>
+    <!-- Placeholder: Before/after screens showing system applied -->
+    <div style="margin-top: 24px; background: #f5f4f2; border: 2px dashed rgba(0,0,0,0.12); border-radius: 20px; padding: 64px 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div style="font-size: 13px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px;">Image needed</div>
+      <div style="font-size: 14px; color: rgba(0,0,0,0.4); max-width: 500px; line-height: 1.6;">Side-by-side of the same screen before and after the system shipped — ideally the feed or PDP, showing how typographic consistency changed the visual cohesion without a redesign.</div>
+    </div>
+
+    <div class="cs-timeline" style="margin-top: 24px;">
+      <div class="cs-timeline-card near">
+        <span class="cs-timeline-badge near">For the Product</span>
+        <div class="cs-timeline-title">A more cohesive visual identity</div>
+        <p class="cs-timeline-body">Typography is the most repeated element in any digital product. Consistency at that layer compounds across every screen, every feature, every surface. The visual identity became more coherent not through a rebrand, but through the elimination of hundreds of micro-inconsistencies that had accumulated over years.</p>
+      </div>
+      <div class="cs-timeline-card far">
+        <span class="cs-timeline-badge far">For the Team</span>
+        <div class="cs-timeline-title">Shared language, shared ownership</div>
+        <p class="cs-timeline-body">Because the system was built through collaborative exploration rather than handed down from a single designer, the team had genuine ownership of the output. The Playground sessions created buy-in before the final decisions were made — which is why the system was adopted without resistance and evolved iteratively as edge cases surfaced.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ 7. REFLECTION ════ -->
+  <div class="cs-reflection-section">
+    <div class="cs-reflection-inner fade-up">
+      <div class="cs-reflection-label">Reflection</div>
+      <h2 class="cs-reflection-heading">What this taught me about systems thinking</h2>
+      <div class="cs-reflection-grid">
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On process</div>
+          <div class="cs-reflection-card-title">The Playground was the most valuable phase</div>
+          <p class="cs-reflection-card-body">Letting three designers interpret the problem independently before converging on a solution meant the final system had buy-in, not just sign-off. People don't resist systems they helped build. If I had designed the system myself and presented it for feedback, I'd have gotten polite alignment on something people didn't feel ownership over. The parallel exploration made the difference.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On constraint</div>
+          <div class="cs-reflection-card-title">The hardest part was agreeing on what to constrain</div>
+          <p class="cs-reflection-card-body">A typography system is, by definition, an exercise in agreed-upon constraint. The technical decisions — sizes, weights, scales — were straightforward once we had the data. The human decisions — getting three designers to agree that a shared constraint was worth more than individual flexibility — took longer and required more facilitation than the design work itself. That's the part design school doesn't teach.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On naming</div>
+          <div class="cs-reflection-card-title">Semantic names are a design decision, not a label</div>
+          <p class="cs-reflection-card-body">Moving from pixel-based names to role-based names changed how designers thought about typography in a feature. "Body" signals intent; "16px" signals measurement. A system that names roles teaches designers to think in roles — which means the system shapes behaviour, not just output. That's the kind of leverage that makes design systems worth building.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On scope</div>
+          <div class="cs-reflection-card-title">Start with the surface that has the most entropy</div>
+          <p class="cs-reflection-card-body">We started the audit with the screen type that had the widest variance — feed and search, where component density meant typographic decisions compounded fastest. That was the right call. Fixing the highest-entropy surface first created the clearest contrast between before and after, which generated team momentum for the rest of the system work. On the next initiative, I'd start the same way.</p>
+        </div>
+      </div>
+      <div class="cs-reflection-quote">
+        "A typography system isn't the sum of its sizes. It's the decisions that make those sizes <em>defensible</em> — and the process that makes the team trust them."
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ Case Study Nav ════ -->
+  <div class="cs-case-nav">
+    <div class="cs-case-nav-inner">
+      <a href="poshmark.html" class="cs-case-nav-card cs-case-nav-prev">
+        <div class="cs-case-nav-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Previous Case Study</div>
+        <div class="cs-case-nav-project">Poshmark · App Redesign</div>
+        <div class="cs-case-nav-title">Redesigning for retention, not recognition</div>
+      </a>
+      <a href="skoda.html" class="cs-case-nav-card cs-case-nav-next">
+        <div class="cs-case-nav-label">Next Case Study <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="cs-case-nav-project">Connected Car · Mobile App</div>
+        <div class="cs-case-nav-title">Škoda Connected App</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ════ FOOTER ════ -->
+  <footer class="cinematic-footer-wrapper">
+    <div class="cf-aurora"></div>
+    <div class="cf-grid"></div>
+    <div class="cf-giant-text">SR.</div>
+
+    <div class="cf-marquee-bar">
+      <div class="cf-marquee-track">
+        <div class="cf-marquee-item">
+          <span>Product Design</span><span class="dot">✦</span>
+          <span>12+ Years Experience</span><span class="dot">✦</span>
+          <span>Design Leadership</span><span class="dot">✦</span>
+          <span>Design Systems</span><span class="dot">✦</span>
+          <span>UX Research</span><span class="dot">✦</span>
+          <span>Strategic Vision</span><span class="dot">✦</span>
+          <span>Team Mentoring</span><span class="dot">✦</span>
+          <span>Stakeholder Alignment</span><span class="dot">✦</span>
+          <span>Design Ops</span><span class="dot">✦</span>
+          <span>OKR Planning</span><span class="dot">✦</span>
+        </div>
+        <div class="cf-marquee-item" aria-hidden="true">
+          <span>Product Design</span><span class="dot">✦</span>
+          <span>12+ Years Experience</span><span class="dot">✦</span>
+          <span>Design Leadership</span><span class="dot">✦</span>
+          <span>Design Systems</span><span class="dot">✦</span>
+          <span>UX Research</span><span class="dot">✦</span>
+          <span>Strategic Vision</span><span class="dot">✦</span>
+          <span>Team Mentoring</span><span class="dot">✦</span>
+          <span>Stakeholder Alignment</span><span class="dot">✦</span>
+          <span>Design Ops</span><span class="dot">✦</span>
+          <span>OKR Planning</span><span class="dot">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-main">
+      <h2 class="cf-heading">Let's Work Together</h2>
+      <div class="cf-cta-group">
+        <div class="cf-primary-row">
+          <div class="cf-pill cf-cta-btn" style="cursor:default">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 989 424 9490
+          </div>
+          <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
+            onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            santhosh.r777@live.in
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-bottom">
+      <div class="cf-copyright">© 2026 SR. All rights reserved.</div>
+      <div class="cf-pill cf-made-badge">
+        <span>Designed with</span>
+        <span class="cf-heart">❤️</span>
+        <span style="color:rgba(240,237,232,0.25);margin:0 4px;">|</span>
+        <span>Vibe coded with passion</span>
+      </div>
+      <button class="cf-pill cf-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+        Back to top
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
