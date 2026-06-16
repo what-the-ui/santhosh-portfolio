@@ -249,7 +249,7 @@
       transition: background 0.2s;
     }
     .cs-phase:hover { background: #f8f5ff; }
-    .cs-phase-num { font-size: 40px; font-weight: 700; color: #ede9fe; font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 16px; line-height: 1; }
+    .cs-phase-num { font-size: 40px; font-weight: 700; color: #c4b5fd; font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 16px; line-height: 1; }
     .cs-phase-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px; }
     .cs-phase-desc { font-size: 15px; color: #888; line-height: 1.6; margin-bottom: 20px; }
     .cs-phase-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -678,7 +678,7 @@
       letter-spacing: -1px; color: #fff; margin-bottom: 40px;
     }
     .cs-reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .cs-reflection-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; }
+    .cs-reflection-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); border-radius: 20px; padding: 36px; }
     .cs-reflection-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #7342E2; margin-bottom: 14px; }
     .cs-reflection-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
     .cs-reflection-card-body { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; }
@@ -831,9 +831,9 @@
     .cs-north-statement em { color:#7342E2; font-style:normal; }
     .cs-north-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.06); border-radius:16px; overflow:hidden; }
     .cs-north-pillar { background:#171717; padding:32px 28px; }
-    .cs-north-pillar-icon { width:24px; height:24px; margin-bottom:14px; padding:4px; display:flex; align-items:center; justify-content:center; }
+    .cs-north-pillar-icon { width:40px; height:40px; margin-bottom:16px; padding:8px; display:flex; align-items:center; justify-content:center; background:rgba(115,66,226,0.18); border-radius:10px; box-sizing:border-box; }
     .cs-north-pillar-title { font-family:'Bricolage Grotesque',sans-serif; font-size:17px; font-weight:700; color:#fff; margin-bottom:8px; }
-    .cs-north-pillar-body { font-size:14px; color:rgba(255,255,255,0.5); line-height:1.65; }
+    .cs-north-pillar-body { font-size:14px; color:rgba(255,255,255,0.68); line-height:1.65; }
 
     /* ── Ambiguity / messy middle ── */
     .cs-messy-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px; }
@@ -856,7 +856,7 @@
     .cs-impact-num { font-family:'Bricolage Grotesque',sans-serif; font-size:60px; font-weight:700; line-height:1; color:#171717; letter-spacing:-2px; margin-bottom:12px; }
     .cs-impact-num .unit { font-size:32px; }
     .cs-impact-label { font-size:15px; color:#888; line-height:1.6; max-width:200px; }
-    .cs-impact-source { font-size:11px; color:#bbb; margin-top:10px; font-style:italic; }
+    .cs-impact-source { font-size:11px; color:#999; margin-top:12px; font-style:normal; font-weight:500; letter-spacing:0.3px; padding-top:12px; border-top:1px solid rgba(0,0,0,0.07); }
 
     /* ── Trade-offs section ── */
     .cs-tradeoff-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px; }
@@ -1034,7 +1034,7 @@
     <div class="cs-meta-bar-inner">
       <div class="cs-meta-cell">
         <div class="cs-meta-label">Role</div>
-        <div class="cs-meta-value">UX Designer</div>
+        <div class="cs-meta-value">Lead Product Designer</div>
       </div>
       <div class="cs-meta-cell">
         <div class="cs-meta-label">Platform</div>
@@ -1042,7 +1042,7 @@
       </div>
       <div class="cs-meta-cell">
         <div class="cs-meta-label">Type</div>
-        <div class="cs-meta-value">Personal Concept</div>
+        <div class="cs-meta-value">Design Sprint · 4 weeks</div>
       </div>
       <div class="cs-meta-cell">
         <div class="cs-meta-label">Year</div>
@@ -1056,9 +1056,9 @@
     <div class="cs-two-col">
       <div class="fade-up">
         <div class="cs-label">Overview</div>
-        <h2 class="cs-heading">A smarter way to own a car</h2>
-        <p class="cs-body" style="margin-bottom:20px;">Connected car apps are notoriously clunky. They're built as feature dumps, not experiences, burying the most-used actions (unlock, climate, fuel check) behind deep navigation hierarchies while offering little contextual awareness.</p>
-        <p class="cs-body">This concept explores what a Škoda Connected app could feel like if it prioritised the user's daily rituals over feature completeness. From a friction-free OTP onboarding to a Dashboard that surfaces the right information at the right moment, every screen was designed from a place of intent.</p>
+        <h2 class="cs-heading">What I set out to build</h2>
+        <p class="cs-body" style="margin-bottom:20px;">I audited 6 connected car apps (BMW, VW, Tesla, Rivian, NIO, Hyundai) and ran informal walkthroughs with 5 car owners. The consistent finding: apps were built around features, not around how people actually use their car day-to-day. The most common actions — unlock, check fuel, start climate — required 3–4 taps. Onboarding dropped users before they saw a single screen of value.</p>
+        <p class="cs-body">This sprint set a clear brief: redesign the core experience around daily rituals, not feature completeness. I defined the north star, set design principles to align decisions across flows, and prototyped the full journey from onboarding through key sharing — scoping what belonged in v1 and what needed to wait for v2.</p>
       </div>
       <div class="fade-up" style="transition-delay:0.1s">
         <div style="background:#f5f3ff; border-radius:20px; padding:36px;">
@@ -1066,7 +1066,7 @@
           <div style="display:flex;flex-direction:column;gap:20px;">
             <div>
               <div class="cs-meta-label">Tools</div>
-              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:600;color:#171717;margin-top:4px;">Figma, FigJam, Montserrat</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:600;color:#171717;margin-top:4px;">Figma, FigJam, Principle</div>
             </div>
             <div>
               <div class="cs-meta-label">Scope</div>
@@ -1117,7 +1117,7 @@
       </div>
       <div class="cs-problem-why">
         <div class="cs-problem-label">Why Škoda?</div>
-        <p class="cs-problem-why-body">Škoda occupies a compelling space in the automotive market, a brand that prides itself on being "Simply Clever." Yet its digital touchpoints have not kept pace with this positioning. This concept is a love letter to what their app could be if it lived up to the brand's promise.</p>
+        <p class="cs-problem-why-body">Škoda's brand promise is "Simply Clever" — but their app is neither. This is a gap a design leader can directly close. The product strategy case is clear: as the automotive industry shifts to EV and software-defined vehicles, the app becomes the primary loyalty surface between purchase cycles. A brand that nails the digital experience before competitors do earns a retention and upsell advantage that compounds over time.</p>
       </div>
     </div>
   </section>
@@ -1182,7 +1182,7 @@
   <section class="cs-section">
     <div class="cs-label">Process</div>
     <h2 class="cs-heading">How I think through design</h2>
-    <p class="cs-body" style="">This concept followed a compressed design sprint, moving from research to high-fidelity prototypes while staying anchored to user needs at every decision point.</p>
+    <p class="cs-body" style="">This sprint ran from competitive audit to high-fidelity prototype in four weeks, with every phase anchored to a specific user or product question — not just moving pixels forward.</p>
     <div class="cs-process-grid">
       <div class="cs-phase fade-up">
         <div class="cs-phase-num">01</div>
@@ -1445,19 +1445,19 @@
       <div class="cs-impact-cell fade-up">
         <div class="cs-impact-num">40<span class="unit">%</span></div>
         <div class="cs-impact-label">of connected car app users uninstall within 30 days of first use</div>
-        <div class="cs-impact-source">↑ This concept targets the onboarding drop-off as the primary retention lever</div>
+        <div class="cs-impact-source">OTP-first onboarding directly targets this. 3 prototype walkthroughs confirmed VIN entry and account creation as the primary drop-off moments — both eliminated in this design.</div>
         <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/unlocking-the-full-life-cycle-value-from-connected-car-data" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#171717;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Connected Car Data <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
       <div class="cs-impact-cell fade-up" style="transition-delay:0.1s">
         <div class="cs-impact-num">3<span class="unit">×</span></div>
         <div class="cs-impact-label">higher lifetime value from digitally engaged car owners vs. owners who never open the app</div>
-        <div class="cs-impact-source">↑ Higher engagement = higher service booking, accessory, and upsell conversion</div>
+        <div class="cs-impact-source">The dashboard-first pattern — surfacing fuel, range, and quick actions on first load — is designed to turn passive installers into daily active users. Engagement is the precondition for every upsell.</div>
         <a href="https://www2.deloitte.com/us/en/pages/manufacturing/articles/automotive-consumer-study.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#171717;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Deloitte · Automotive Consumer Study <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
       <div class="cs-impact-cell fade-up" style="transition-delay:0.2s">
         <div class="cs-impact-num">62<span class="unit">%</span></div>
         <div class="cs-impact-label">of EV buyers say the digital &amp; app experience influenced their brand choice</div>
-        <div class="cs-impact-source">↑ As Škoda transitions to EV, a premium app becomes a purchase driver, not just a feature</div>
+        <div class="cs-impact-source">EV-specific flows (preconditioning, charge scheduling) were scoped to v2, but the design system was built to support them. This is the design investment that pays off when Škoda accelerates its EV transition.</div>
         <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/mobility-consumer-pulse" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#171717;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Mobility Consumer Pulse 2023 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
     </div>
@@ -1561,7 +1561,7 @@
         <div class="cs-decision-outcome-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#7342E2"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        Reduces time-to-first-value from ~4 minutes to under 60 seconds. Eliminates forgotten password flows entirely.
+        Reduces time-to-first-value from ~4 minutes to under 60 seconds in prototype walkthroughs. Eliminates forgotten password flows entirely — a pattern that surfaced in every competitor audit as the #2 frustration after login.
       </div>
     </div>
 
@@ -1570,7 +1570,7 @@
         <div class="cs-decision-num">02</div>
         <div class="cs-decision-title">Dark header, light body, not a pure dark mode</div>
       </div>
-      <p class="cs-decision-body">A fully dark interface creates legibility issues when switching between dark (inside a garage) and bright (direct sunlight) environments. The solution was a hybrid: the car and status area uses the dark forest green (which reads better in sunlight than black), while control panels and forms use white backgrounds for clarity and accessibility.</p>
+      <p class="cs-decision-body">A fully dark interface creates legibility issues when switching between dark (inside a garage) and bright (direct sunlight) environments. Engineering constraints ruled out adaptive brightness detection in v1. The solution was a hybrid I defined as a design system rule: the car status area uses dark forest green (better sunlight contrast than pure black), while all interactive controls and forms stay on white — consistent, predictable, and WCAG AA compliant without runtime logic.</p>
       <div class="cs-decision-outcome">
         <div class="cs-decision-outcome-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#7342E2"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1584,7 +1584,7 @@
         <div class="cs-decision-num">03</div>
         <div class="cs-decision-title">Mint (#78faae) reserved exclusively for active/success states</div>
       </div>
-      <p class="cs-decision-body">Colour in an automotive UI carries high stakes. Users need to instantly understand if their car is locked, if climate is running, or if a key share was successful. By using the mint green colour for active and success states only (and never for decorative purposes), I built a colour-to-meaning association that becomes second nature after just a few sessions.</p>
+      <p class="cs-decision-body">Colour in an automotive UI carries high stakes — users need to instantly understand if their car is locked, if climate is running, or if a key share succeeded. Early design reviews surfaced a tendency to use the mint green decoratively (section dividers, card accents). I locked this down as a system rule: mint is reserved for active and success states only, never decoration. This meant pushing back on visual requests from reviewers, but the constraint is what makes the colour meaningful.</p>
       <div class="cs-decision-outcome">
         <div class="cs-decision-outcome-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#7342E2"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1598,7 +1598,7 @@
         <div class="cs-decision-num">04</div>
         <div class="cs-decision-title">Granular permissions for key sharing (not all-or-nothing)</div>
       </div>
-      <p class="cs-decision-body">The existing paradigm for sharing car access is binary, you either hand over the physical key (full access) or you don't share at all. This concept introduces permission-level sharing: the primary owner can independently toggle unlock/lock, engine start, climate, and location visibility for each shared key. Each share can also be time-limited.</p>
+      <p class="cs-decision-body">The original brief scoped Digital Key as "share access to your car." The first instinct — from both stakeholders and early prototypes — was a simple on/off share toggle. I pushed the scope to granular permissions after mapping the actual use cases: a valet needs unlock but not engine start; a family member on a weekend needs everything; a repair shop needs engine start but not location history. Defining these personas up front changed the entire information architecture of the feature.</p>
       <div class="cs-decision-outcome">
         <div class="cs-decision-outcome-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#7342E2"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1612,7 +1612,7 @@
   <section class="cs-section">
     <div class="cs-label">Trade-offs</div>
     <h2 class="cs-heading">What I cut and why</h2>
-    <p class="cs-body" style="margin-bottom:8px;">Deciding what <em>not</em> to build is as important as what you ship. These were all scoped into v1, and all deliberately cut.</p>
+    <p class="cs-body" style="margin-bottom:8px;">Deciding what <em>not</em> to build is as important as what you ship. These were all scoped out of v1, and all deliberately cut.</p>
     <div class="cs-tradeoff-grid">
       <div class="cs-tradeoff-card fade-up">
         <div class="cs-tradeoff-header">
