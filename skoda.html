@@ -226,7 +226,7 @@
     .cs-problem-quote {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 36px; font-weight: 500; line-height: 1.5;
-      color: #fff; max-width: 900px;
+      color: #fff; max-width: 720px;
     }
     .cs-problem-quote em { color: #7342E2; font-style: normal; }
     .cs-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 52px; }
@@ -729,7 +729,7 @@
       z-index: 0; pointer-events: none; user-select: none; font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .cf-marquee-bar {
-      position: absolute; top: 0; left: 0; width: 100%; overflow: hidden;
+      position: sticky; top: 64px; width: 100%; overflow: hidden;
       border-bottom: 1px solid rgba(240,237,232,0.08); background: rgba(10,10,15,0.6);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       padding: 14px 0; z-index: 10;
@@ -752,7 +752,7 @@
     .cf-main {
       position: relative; z-index: 10; flex: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 120px 24px 80px;
+      padding: 60px 24px 80px;
     }
     .cf-heading {
       font-size: clamp(42px,8vw,96px); font-weight: 900; letter-spacing: -0.04em;
@@ -827,7 +827,7 @@
     .cs-north-section { background:#171717; padding:32px 0 60px; }
     .cs-north-inner { max-width:1280px; margin:0 auto; padding:0 100px; }
     .cs-north-label { font-size:11px; font-weight:700; color:#7342E2; text-transform:uppercase; letter-spacing:2px; margin-bottom:24px; }
-    .cs-north-statement { font-family:'Bricolage Grotesque',sans-serif; font-size:32px; font-weight:700; color:#fff; line-height:1.3; max-width:880px; margin-bottom:52px; letter-spacing:-0.5px; }
+    .cs-north-statement { font-family:'Bricolage Grotesque',sans-serif; font-size:32px; font-weight:700; color:#fff; line-height:1.3; max-width:720px; margin-bottom:52px; letter-spacing:-0.5px; }
     .cs-north-statement em { color:#7342E2; font-style:normal; }
     .cs-north-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.06); border-radius:16px; overflow:hidden; }
     .cs-north-pillar { background:#171717; padding:32px 28px; }
@@ -838,10 +838,10 @@
     /* ── Ambiguity / messy middle ── */
     .cs-messy-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px; }
     .cs-messy-card { border-radius:20px; padding:36px; }
-    .cs-messy-card.wrong { background:#fef2f2; border:1px solid rgba(239,68,68,0.15); }
-    .cs-messy-card.pivot { background:#fff7ed; border:1px solid rgba(245,158,11,0.15); }
-    .cs-messy-card.learned { background:#f0fdf4; border:1px solid rgba(34,197,94,0.15); }
-    .cs-messy-card.tension { background:#f0f9ff; border:1px solid rgba(14,165,233,0.15); }
+    .cs-messy-card.wrong,
+    .cs-messy-card.pivot,
+    .cs-messy-card.learned,
+    .cs-messy-card.tension { background:#fff; border:1px solid rgba(0,0,0,0.07); }
     .cs-messy-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px; }
     .cs-messy-card.wrong .cs-messy-eyebrow { color:#dc2626; }
     .cs-messy-card.pivot .cs-messy-eyebrow { color:#b45309; }
@@ -863,9 +863,9 @@
     .cs-tradeoff-card { border:1px solid rgba(0,0,0,0.07); border-radius:20px; padding:36px; }
     .cs-tradeoff-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
     .cs-tradeoff-title { font-family:'Bricolage Grotesque',sans-serif; font-size:18px; font-weight:700; color:#171717; }
-    .cs-tradeoff-badge { font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; padding:4px 12px; border-radius:100px; }
-    .cs-tradeoff-badge.cut { background:#fde8e8; color:#b91c1c; }
-    .cs-tradeoff-badge.deferred { background:#fff3e0; color:#b45309; }
+    .cs-tradeoff-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 14px; border-radius:100px; }
+    .cs-tradeoff-badge.cut { background:#f0f0f0; color:#555; }
+    .cs-tradeoff-badge.deferred { background:#ede9fe; color:#5b21b6; }
     .cs-tradeoff-body { font-size:14px; color:#555; line-height:1.7; margin-bottom:16px; }
     .cs-tradeoff-reason { display:flex; align-items:flex-start; gap:10px; background:#f8f8f8; border-radius:10px; padding:12px 16px; font-size:13px; color:#444; line-height:1.6; }
 
@@ -1024,8 +1024,8 @@
     </a>
     <div class="cs-hero-content" style="text-align: center; align-items: center; max-width: 800px;">
       <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px;">Škoda · Automotive App</p>
-      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px);">A smarter way<br>to own a car</h1>
-      <p class="cs-hero-sub" style="max-width: 600px; margin-left: auto; margin-right: auto; text-wrap: balance;">A conceptual redesign of a connected car app for Škoda vehicle owners, bringing keyless access, remote controls, and real-time vehicle insights into a seamless mobile experience.</p>
+      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px); white-space: nowrap;">A smarter way to own a car</h1>
+      <p class="cs-hero-sub" style="max-width: 860px; margin-left: auto; margin-right: auto; text-wrap: balance;">A conceptual redesign of a connected car app for Škoda vehicle owners, bringing keyless access, remote controls, and real-time vehicle insights into a seamless mobile experience.</p>
     </div>
   </section>
 
@@ -1161,7 +1161,7 @@
         <p class="cs-messy-body">My first iteration had 8 action tiles on the home dashboard, every feature a Škoda owner could need. It looked impressive in Figma. In walkthrough, every reviewer immediately asked "but what do I tap first?" I'd optimised for completeness, not clarity. I cut it to 4 primary actions.</p>
       </div>
       <div class="cs-messy-card pivot fade-up" style="transition-delay:0.1s">
-        <div class="cs-messy-eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.54"/></svg> Risky pivot</div>
+        <div class="cs-messy-eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px;"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg> Risky pivot</div>
         <div class="cs-messy-title">Dropped the map view entirely</div>
         <p class="cs-messy-body">The original scope included a live vehicle location map as a top-level tab. Engineering flagged that GPS polling in background would drain battery by ~18% per hour, a dealbreaker for trust. Instead of fighting the constraint, I reframed: location becomes a contextual detail (parking floor, last seen) rather than a live feed. Smaller scope, but more honest.</p>
       </div>
@@ -1239,7 +1239,7 @@
     <h2 class="cs-heading">Your phone number is all you need</h2>
     <p class="cs-body" style="margin-bottom:60px;">The onboarding flow is designed to feel effortless. No VIN numbers, no dealer codes. Just your phone number, a 6-digit OTP, and you're in, pairing your vehicle is the first thing you do inside the app, not a prerequisite to enter.</p>
     <div class="fade-up">
-      <img src="images/skoda/Skoda1.png" alt="Škoda Onboarding Screens" style="width:100%; border-radius:20px; display:block;">
+      <img src="images/skoda/Skoda%201.png" alt="Škoda Onboarding Screens" style="width:100%; border-radius:20px; display:block;">
     </div>
   </section>
 
@@ -1272,7 +1272,7 @@
         </ul>
       </div>
       <div class="fade-up" style="transition-delay:0.15s;">
-        <img src="images/skoda/Skoda2.png" alt="Škoda Home Dashboard" style="width:100%; border-radius:20px; display:block;">
+        <img src="images/skoda/Skoda%202.png" alt="Škoda Home Dashboard" style="width:100%; border-radius:20px; display:block;">
       </div>
     </div>
   </section>
@@ -1285,7 +1285,7 @@
     <h2 class="cs-heading">Share your car like you share a file</h2>
     <p class="cs-body" style="margin-bottom:60px;">The digital key feature reimagines car sharing. Instead of handing over a physical key (or a clunky token), you share access directly from your phone with granular permission controls, time-limited, revocable, and no sign-up required for the recipient.</p>
     <div class="fade-up">
-      <img src="images/skoda/Skoda7.png" alt="Škoda Digital Key" style="width:100%; border-radius:20px; display:block;">
+      <img src="images/skoda/Skoda%207.png" alt="Škoda Digital Key" style="width:100%; border-radius:20px; display:block;">
     </div>
   </section>
 
@@ -1296,7 +1296,7 @@
       <h2 class="cs-heading">A dashboard that reads the moment</h2>
       <p class="cs-body" style="margin-bottom:60px;">From pre-conditioning the cabin to checking tyre pressure before a long drive, each control screen is built for speed. Big tap targets, clear states (on/off/active), and haptic confirmation on every critical action.</p>
       <div class="fade-up">
-        <img src="images/skoda/Skoda4.png" alt="Škoda Vehicle Controls" style="width:100%; border-radius:20px; display:block;">
+        <img src="images/skoda/Skoda%204.png" alt="Škoda Vehicle Controls" style="width:100%; border-radius:20px; display:block;">
       </div>
       <div class="phone-grid phone-grid-4" style="display:none;">
         <!-- Climate -->
@@ -1446,19 +1446,19 @@
         <div class="cs-impact-num">40<span class="unit">%</span></div>
         <div class="cs-impact-label">of connected car app users uninstall within 30 days of first use</div>
         <div class="cs-impact-source">↑ This concept targets the onboarding drop-off as the primary retention lever</div>
-        <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/unlocking-the-full-life-cycle-value-from-connected-car-data" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#7342E2;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Connected Car Data <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/unlocking-the-full-life-cycle-value-from-connected-car-data" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#171717;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Connected Car Data <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
       <div class="cs-impact-cell fade-up" style="transition-delay:0.1s">
         <div class="cs-impact-num">3<span class="unit">×</span></div>
         <div class="cs-impact-label">higher lifetime value from digitally engaged car owners vs. owners who never open the app</div>
         <div class="cs-impact-source">↑ Higher engagement = higher service booking, accessory, and upsell conversion</div>
-        <a href="https://www2.deloitte.com/us/en/pages/manufacturing/articles/automotive-consumer-study.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#7342E2;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Deloitte · Automotive Consumer Study <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <a href="https://www2.deloitte.com/us/en/pages/manufacturing/articles/automotive-consumer-study.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#171717;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Deloitte · Automotive Consumer Study <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
       <div class="cs-impact-cell fade-up" style="transition-delay:0.2s">
         <div class="cs-impact-num">62<span class="unit">%</span></div>
         <div class="cs-impact-label">of EV buyers say the digital &amp; app experience influenced their brand choice</div>
         <div class="cs-impact-source">↑ As Škoda transitions to EV, a premium app becomes a purchase driver, not just a feature</div>
-        <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/mobility-consumer-pulse" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#7342E2;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Mobility Consumer Pulse 2023 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/mobility-consumer-pulse" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:11px;font-weight:700;color:#171717;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">McKinsey · Mobility Consumer Pulse 2023 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
     </div>
 
@@ -1701,8 +1701,8 @@
         <p style="font-size:18px;color:#888;max-width:560px;line-height:1.6;">The complete Škoda Connected App — every flow, every screen, shipped.</p>
       </div>
       <div class="fade-up">
-        <img src="images/skoda/Skoda5.png" alt="Škoda final design overview" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
-        <img src="images/skoda/Skoda6.png" alt="Škoda final design screens" style="width:100%; border-radius:24px; display:block;">
+        <img src="images/skoda/Skoda%205.png" alt="Škoda final design overview" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
+        <img src="images/skoda/Skoda%206.png" alt="Škoda final design screens" style="width:100%; border-radius:24px; display:block;">
       </div>
     </div>
   </section>

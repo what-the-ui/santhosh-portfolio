@@ -896,12 +896,12 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .cf-marquee-bar {
-      position: absolute; top: 0; left: 0; width: 100%;
+      position: sticky; top: 64px; width: 100%;
       overflow: hidden;
       border-bottom: 1px solid rgba(240,237,232,0.08);
-      background: rgba(10,10,15,0.6);
+      background: rgba(10,10,15,0.8);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      padding: 14px 0; z-index: 10;
+      padding: 14px 0; z-index: 20;
       transform: rotate(-1.5deg) scaleX(1.08);
       box-shadow: 0 8px 40px rgba(0,0,0,0.3);
     }
@@ -924,7 +924,7 @@
     .cf-main {
       position: relative; z-index: 10; flex: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 120px 24px 80px;
+      padding: 60px 24px 80px;
     }
     .cf-heading {
       font-size: clamp(42px,8vw,96px); font-weight: 900; letter-spacing: -0.04em;
@@ -1447,8 +1447,8 @@
       <p style="font-size:18px;color:#888;max-width:560px;line-height:1.6;">The complete Poshmark 2.0, every flow, every screen, shipped.</p>
     </div>
     <div style="max-width:1280px; margin:0 auto;">
-      <img src="images/posh1.png" alt="Poshmark full design overview" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
-      <img src="images/posh2.png" alt="Poshmark design screens" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
+      <img src="images/Posh1-black.png" alt="Poshmark full design overview" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
+      <img src="images/posh2-black.png" alt="Poshmark design screens" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
       <img src="images/Sell.png" alt="Poshmark listing screens" style="width:100%; border-radius:24px; display:block; margin-bottom:24px;">
       <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
         <img src="images/posh3.png?v=2" alt="Poshmark home feed" style="width:100%; border-radius:20px; display:block; object-fit:cover;">
