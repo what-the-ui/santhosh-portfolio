@@ -2972,12 +2972,21 @@ function renderConnections() {
   const grid = document.getElementById('connections-grid');
 
   if (state.connections.length === 0) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon">📡</div>
-        <h3>No Sources Connected</h3>
-        <p>Add company career pages or job platforms.<br>The AI agent will scan them automatically.</p>
-      </div>`;
+    if (serverInitialLoad && serverUrl) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon" style="animation:pulse 1.2s ease-in-out infinite;">📡</div>
+          <h3 style="color:var(--text-dim);">Connecting to server…</h3>
+          <p style="color:var(--text-dim);">Loading your sources, hang tight.</p>
+        </div>`;
+    } else {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">📡</div>
+          <h3>No Sources Connected</h3>
+          <p>Add company career pages or job platforms.<br>The AI agent will scan them automatically.</p>
+        </div>`;
+    }
     return;
   }
 
@@ -3754,6 +3763,7 @@ document.addEventListener('keydown', e => {
 let serverUrl = localStorage.getItem('nexus_server_url') || '';
 let serverConnected = false;
 let serverPollInterval = null;
+let serverInitialLoad = true; // true until first syncFromServer completes
 
 function saveServerUrl() {
   const el = document.getElementById('cfg-server-url');
@@ -3911,12 +3921,14 @@ async function syncFromServer() {
     }
     state.settings.totalScans = health.totalScans || 0;
     serverConnected = true;
+    serverInitialLoad = false;
     updateServerStatusChip(true, health);
     renderConnections();
     renderFeed();
     updateStats();
   } catch(e) {
     serverConnected = false;
+    serverInitialLoad = false;
     updateServerStatusChip(false);
   }
 }
