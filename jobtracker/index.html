@@ -2156,7 +2156,10 @@ footer span {
         <div class="section-label">Full Archive</div>
         <h2 class="section-title">All Jobs Found</h2>
       </div>
-      <span id="all-jobs-count" style="font-family:monospace;font-size:0.75rem;color:var(--cyan);opacity:0.7;"></span>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span id="all-jobs-count" style="font-family:monospace;font-size:0.75rem;color:var(--cyan);opacity:0.7;"></span>
+        <button id="clear-old-btn" onclick="clearOldJobs()" style="display:none;font-size:0.62rem;font-family:monospace;letter-spacing:0.08em;padding:4px 10px;background:rgba(255,80,80,0.06);border:1px solid rgba(255,80,80,0.2);color:rgba(255,100,100,0.7);border-radius:5px;cursor:pointer;transition:all 0.15s;text-transform:uppercase;" onmouseover="this.style.background='rgba(255,80,80,0.14)';this.style.color='#ff6464'" onmouseout="this.style.background='rgba(255,80,80,0.06)';this.style.color='rgba(255,100,100,0.7)'">Clear &gt;2 weeks</button>
+      </div>
     </div>
     <div style="background:rgba(0,15,35,0.7);border:1px solid rgba(0,170,255,0.1);border-radius:16px;overflow:hidden;">
       <table style="width:100%;border-collapse:collapse;" id="all-jobs-table">
@@ -3434,6 +3437,11 @@ function renderAllJobs() {
   const tbody = document.getElementById('all-jobs-body');
   const countEl = document.getElementById('all-jobs-count');
   if (!tbody) return;
+  const TWO_WEEKS = 14 * 24 * 60 * 60 * 1000;
+  const hasOld = state.jobs.some(j => j.foundAt && (Date.now() - new Date(j.foundAt).getTime()) >= TWO_WEEKS);
+  const clearBtn = document.getElementById('clear-old-btn');
+  if (clearBtn) clearBtn.style.display = hasOld ? '' : 'none';
+
   if (state.jobs.length === 0) {
     tbody.innerHTML = '<tr><td colspan="4" style="padding:2rem;text-align:center;color:var(--text-muted);font-size:0.8rem;">No jobs found yet. Run a scan to populate.</td></tr>';
     if (countEl) countEl.textContent = '';
@@ -3490,6 +3498,22 @@ function formatTime(iso) {
   if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
   if (diff < 86400000) return Math.floor(diff/3600000) + 'h ago';
   return d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+}
+
+function clearOldJobs() {
+  const TWO_WEEKS = 14 * 24 * 60 * 60 * 1000;
+  const before = state.jobs.length;
+  state.jobs = state.jobs.filter(j => j.foundAt && (Date.now() - new Date(j.foundAt).getTime()) < TWO_WEEKS);
+  const removed = before - state.jobs.length;
+  if (removed === 0) { showToast('No jobs older than 2 weeks', 'info'); return; }
+  saveState();
+  renderFeed();
+  updateStats();
+  if (serverConnected) {
+    // Sync cleared list to server by deleting all and re-uploading
+    fetch(`${serverUrl}/api/jobs`, { method: 'DELETE' }).catch(() => {});
+  }
+  showToast(`Cleared ${removed} job${removed !== 1 ? 's' : ''} older than 2 weeks`, 'success');
 }
 
 function clearFeed() {
