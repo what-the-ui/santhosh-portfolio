@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXDLQZNTFX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXDLQZNTFX');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listing Details Redesign · Santhosh Rajendran</title>
+  <link rel="icon" type="image/png" href="images/favicon-profile.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: #0c0c0f; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #fff;
+      color: #171717;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Nav */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 0;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    header.scrolled .nav-logo { color: #0c0c0f; }
+    header.scrolled .nav-logo span { color: #7342E2; }
+    header.scrolled .nav-text-link { color: #0c0c0f; -webkit-text-fill-color: #0c0c0f; }
+    header.scrolled .nav-cta { background: #7342E2; border-color: #7342E2; color: #fff; }
+    nav {
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    .nav-logo {
+      font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px;
+      color: #f0ede8; text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .nav-logo span { color: #7342E2; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-text-link {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 400; color: #f0ede8;
+      text-decoration: underline; text-decoration-thickness: 1px;
+      text-underline-offset: 3px; transition: opacity 0.2s, color 0.3s; white-space: nowrap;
+    }
+    .nav-text-link:hover { opacity: 0.75; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(15,15,18,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #f0ede8;
+      padding: 10px 24px; border-radius: 100px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px; font-weight: 600;
+      transition: all 0.25s; text-decoration: none; white-space: nowrap;
+    }
+    .nav-cta:hover { background: #7342E2; border-color: #7342E2; color: #fff; box-shadow: 0 8px 30px rgba(115,66,226,0.35); }
+
+    /* Hero */
+    .cs-hero {
+      background: #0c0c0f;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cs-hero-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(115,66,226,0.18) 0%, transparent 70%);
+    }
+    .cs-hero-grid {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-size: 60px 60px;
+      background-image: linear-gradient(to right, rgba(240,237,232,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(240,237,232,0.04) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+    }
+    .cs-back {
+      position: absolute; top: 96px; left: 48px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 13px; font-weight: 600; color: rgba(240,237,232,0.5);
+      text-decoration: none; z-index: 10;
+      transition: color 0.2s;
+    }
+    .cs-back:hover { color: rgba(240,237,232,0.9); }
+    .cs-hero-content {
+      position: relative; z-index: 10;
+      text-align: center; align-items: center; max-width: 860px;
+    }
+    .cs-hero-tag-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .cs-hero-tag {
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      padding: 4px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(240,237,232,0.5); background: rgba(255,255,255,0.04);
+    }
+    .cs-hero-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(40px, 5vw, 72px); font-weight: 700; line-height: 1.05;
+      letter-spacing: -2px; color: #fff; margin-bottom: 24px;
+    }
+    .cs-hero-sub {
+      font-size: 18px; line-height: 1.7; color: rgba(240,237,232,0.65);
+      max-width: 660px; margin: 0 auto;
+    }
+
+    /* Meta Bar */
+    .cs-meta-bar { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .cs-meta-bar-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 100px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .cs-meta-cell { padding: 32px 0; border-right: 1px solid rgba(0,0,0,0.08); }
+    .cs-meta-cell:first-child { padding-left: 0; }
+    .cs-meta-cell:last-child { border-right: none; padding-left: 40px; }
+    .cs-meta-cell:not(:first-child):not(:last-child) { padding-left: 40px; }
+    .cs-meta-label { font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .cs-meta-value { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 600; color: #171717; }
+
+    /* Section base */
+    .cs-section { max-width: 1280px; margin: 0 auto; padding: 60px 100px; }
+    .cs-section + .cs-section { padding-top: 0; }
+    .cs-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+    .cs-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 44px; font-weight: 700; letter-spacing: -1px;
+      color: #171717; line-height: 1.1; margin-bottom: 8px;
+    }
+    .cs-body { font-size: 16px; color: #555; line-height: 1.75; }
+    .cs-divider { border: none; border-top: 1px solid rgba(0,0,0,0.08); margin: 0; }
+
+    /* Stats row */
+    .cs-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden; }
+    .cs-stat { background: #faf8ff; padding: 40px 36px; }
+    .cs-stat-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 56px; font-weight: 700; color: #171717; line-height: 1; letter-spacing: -2px; margin-bottom: 12px;
+    }
+    .cs-stat-unit { font-size: 32px; }
+    .cs-stat-label { font-size: 14px; color: #777; line-height: 1.6; }
+
+    /* Problem (dark) */
+    .cs-problem-section { background: #171717; padding: 80px 0; }
+    .cs-problem-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; }
+    .cs-problem-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+    .cs-problem-quote {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px; font-weight: 500; line-height: 1.5;
+      color: #fff;
+    }
+    .cs-problem-quote em { color: #7342E2; font-style: normal; }
+    .cs-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 56px; }
+    .cs-problem-col-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 16px; }
+    .cs-problem-col-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cs-problem-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .cs-problem-list li { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.65; padding-left: 20px; position: relative; }
+    .cs-problem-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; background: #7342E2; border-radius: 50%; }
+    .cs-problem-why { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .cs-problem-why-body { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-top: 12px; }
+
+    /* Exec phases */
+    .cs-exec-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: rgba(0,0,0,0.06); border-radius: 20px; overflow: hidden; margin-top: 48px; }
+    .cs-exec-phase { background: #faf8ff; padding: 40px 32px; }
+    .cs-exec-badge {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+      background: #ede9fe; color: #5b21b6; margin-bottom: 20px;
+    }
+    .cs-exec-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; color: #171717; margin-bottom: 12px; }
+    .cs-exec-body { font-size: 15px; color: #666; line-height: 1.65; }
+
+    /* Decisions */
+    .cs-decision { border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 40px; margin-bottom: 24px; background: #fff; }
+    .cs-decision-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .cs-decision-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; color: #ede9fe; line-height: 1; flex-shrink: 0; }
+    .cs-decision-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #171717; }
+    .cs-decision-body { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 20px; }
+    .cs-decision-outcome {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #f0fdf4; border-radius: 12px; padding: 16px 20px;
+      font-size: 15px; color: #166534; line-height: 1.6;
+    }
+
+    /* Warm section */
+    .cs-warm-section { background: #faf8ff; }
+
+    /* Metrics table */
+    .cs-metrics-table { width: 100%; border-collapse: collapse; margin-top: 32px; border-radius: 16px; overflow: hidden; }
+    .cs-metrics-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #aaa; padding: 14px 20px; background: #f5f4f2; text-align: left; }
+    .cs-metrics-table td { font-size: 15px; color: #444; padding: 14px 20px; border-top: 1px solid rgba(0,0,0,0.06); line-height: 1.5; }
+    .cs-metrics-table tr:hover td { background: #faf9f8; }
+    .cs-metric-lift { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; }
+    .cs-metric-lift.up { color: #166534; }
+    .cs-metric-lift.neutral { color: #555; }
+    .cs-metric-lift.down { color: #991b1b; }
+
+    /* Timeline */
+    .cs-timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+    .cs-timeline-card { border-radius: 16px; padding: 32px; border: 1px solid rgba(0,0,0,0.07); }
+    .cs-timeline-card.near { background: #fff; }
+    .cs-timeline-card.far { background: #f8f5ff; border-color: rgba(115,66,226,0.12); }
+    .cs-timeline-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; margin-bottom: 16px; }
+    .cs-timeline-badge.near { background: #f0f0f0; color: #555; }
+    .cs-timeline-badge.far { background: #ede9fe; color: #5b21b6; }
+    .cs-timeline-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #171717; margin-bottom: 12px; }
+    .cs-timeline-body { font-size: 15px; color: #666; line-height: 1.65; }
+
+    /* Reflection (dark) */
+    .cs-reflection-section { background: #171717; padding: 80px 0; overflow: hidden; }
+    .cs-reflection-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; box-sizing: border-box; width: 100%; }
+    .cs-reflection-label { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+    .cs-reflection-heading { font-family: 'Bricolage Grotesque', sans-serif; font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -1px; color: #fff; margin-bottom: 40px; }
+    .cs-reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .cs-reflection-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); border-radius: 20px; padding: 36px; }
+    .cs-reflection-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #7342E2; margin-bottom: 14px; }
+    .cs-reflection-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cs-reflection-card-body { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; }
+    .cs-reflection-quote { font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 500; line-height: 1.55; color: rgba(255,255,255,0.65); margin-top: 48px; }
+    .cs-reflection-quote em { color: #7342E2; font-style: normal; }
+
+    /* Case Study Nav */
+    .cs-case-nav { border-top: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 100px; display: flex; }
+    .cs-case-nav-card { flex: 1; padding: 48px 0; display: flex; flex-direction: column; gap: 10px; text-decoration: none; transition: background 0.2s; }
+    .cs-case-nav-card:hover { background: #fafafa; }
+    .cs-case-nav-prev { padding-right: 60px; border-right: 1px solid rgba(0,0,0,0.08); }
+    .cs-case-nav-next { padding-left: 60px; text-align: right; margin-left: auto; }
+    .cs-case-nav-label { font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 6px; }
+    .cs-case-nav-next .cs-case-nav-label { justify-content: flex-end; }
+    .cs-case-nav-project { font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 1.5px; }
+    .cs-case-nav-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; color: #171717; line-height: 1.2; letter-spacing: -0.5px; transition: color 0.2s; }
+    .cs-case-nav-card:hover .cs-case-nav-title { color: #7342E2; }
+
+    /* Image placeholder */
+    .cs-img-placeholder {
+      background: #f5f4f2; border: 2px dashed rgba(0,0,0,0.12); border-radius: 20px;
+      padding: 64px 40px; display: flex; flex-direction: column;
+      align-items: center; gap: 12px; text-align: center;
+    }
+    .cs-img-placeholder-icon { opacity: 0.25; }
+    .cs-img-placeholder-label { font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px; }
+    .cs-img-placeholder-caption { font-size: 14px; color: rgba(0,0,0,0.4); line-height: 1.6; }
+
+    /* Fade up */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Cinematic footer */
+    .cinematic-footer-wrapper {
+      position: relative; width: 100%; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden; font-family: 'Bricolage Grotesque', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      --cf-bg: #0c0c0f; --cf-fg: #f0ede8; --cf-primary: #7342E2;
+      --cf-secondary: #ec4899; --cf-muted: rgba(240,237,232,0.5);
+      --cf-border: rgba(115,66,226,0.2); --cf-destructive: #ef4444;
+      --pill-bg-1: rgba(115,66,226,0.08); --pill-bg-2: rgba(115,66,226,0.03);
+      --pill-shadow: rgba(0,0,0,0.5); --pill-highlight: rgba(115,66,226,0.2);
+      --pill-inset-shadow: rgba(0,0,0,0.6); --pill-border: rgba(115,66,226,0.25);
+      background: var(--cf-bg); color: var(--cf-fg);
+    }
+    .cf-aurora { position: absolute; left: 50%; top: 50%; width: 80vw; height: 60vh; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(115,66,226,0.35) 0%, rgba(115,66,226,0.18) 35%, rgba(236,72,153,0.08) 60%, transparent 75%); filter: blur(80px); pointer-events: none; z-index: 0; animation: cf-breathe 8s ease-in-out infinite alternate; }
+    .cf-grid { position: absolute; inset: 0; z-index: 0; pointer-events: none; background-size: 60px 60px; background-image: linear-gradient(to right, rgba(240,237,232,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(240,237,232,0.04) 1px, transparent 1px); mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent); }
+    .cf-giant-text { position: absolute; bottom: -2vh; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 26vw; line-height: 0.75; font-weight: 900; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1px rgba(240,237,232,0.05); background: linear-gradient(180deg, rgba(240,237,232,0.1) 0%, transparent 60%); -webkit-background-clip: text; background-clip: text; z-index: 0; pointer-events: none; user-select: none; }
+    .cf-marquee-bar { position: sticky; top: 64px; width: 100%; overflow: hidden; border-bottom: 1px solid rgba(240,237,232,0.08); background: rgba(10,10,15,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 14px 0; z-index: 20; transform: rotate(-1.5deg) scaleX(1.08); box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+    .cf-marquee-track { display: flex; width: max-content; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cf-muted); animation: cf-marquee 40s linear infinite; }
+    .cf-marquee-item { display: flex; align-items: center; gap: 48px; padding: 0 24px; }
+    .cf-marquee-item span.dot { color: rgba(115,66,226,0.6); }
+    .cf-pill { background: linear-gradient(145deg, var(--pill-bg-1) 0%, var(--pill-bg-2) 100%); box-shadow: 0 10px 30px -10px var(--pill-shadow), inset 0 1px 1px var(--pill-highlight), inset 0 -1px 2px var(--pill-inset-shadow); border: 1px solid var(--pill-border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: all 0.4s cubic-bezier(0.16,1,0.3,1); text-decoration: none; cursor: pointer; }
+    .cf-main { position: relative; z-index: 10; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px 80px; }
+    .cf-heading { font-size: clamp(42px,8vw,96px); font-weight: 900; letter-spacing: -0.04em; text-align: center; margin-bottom: 48px; line-height: 1; color: #ffffff; -webkit-text-fill-color: #ffffff; filter: drop-shadow(0 0 20px rgba(240,237,232,0.12)); }
+    .cf-cta-group { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
+    .cf-primary-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .cf-cta-btn { padding: 18px 40px; border-radius: 100px; color: var(--cf-fg); font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; gap: 10px; background: transparent !important; box-shadow: none !important; border: 1px solid rgba(240,237,232,0.2) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; font-family: 'Bricolage Grotesque', sans-serif; }
+    .cf-bottom { position: relative; z-index: 20; width: 100%; padding: 0 48px 32px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; }
+    .cf-copyright { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cf-muted); }
+    .cf-made-badge { margin-left: auto; cursor: default; white-space: nowrap; padding: 12px 22px; border-radius: 100px; display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-muted); }
+    .cf-heart { font-size: 14px; color: var(--cf-destructive); animation: cf-heartbeat 2s cubic-bezier(0.25,1,0.5,1) infinite; }
+    .cf-back-top { padding: 10px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 7px; color: var(--cf-muted); border: none; background: none; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; transition: color 0.25s ease; font-family: 'Bricolage Grotesque', sans-serif; cursor: pointer; }
+    .cf-back-top svg { transition: transform 0.3s ease; flex-shrink: 0; }
+    .cf-back-top:hover { color: var(--cf-fg); }
+    .cf-back-top:hover svg { transform: translateY(-3px); }
+    #cfEmailBtn { position: relative; }
+    #cfEmailBtn::after { content: 'Click to copy'; position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(4px); background: rgba(240,237,232,0.12); color: rgba(240,237,232,0.7); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(240,237,232,0.15); backdrop-filter: blur(8px); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
+    #cfEmailBtn:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @keyframes cf-breathe { 0% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; } 100% { transform: translate(-50%,-50%) scale(1.1); opacity: 1; } }
+    @keyframes cf-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes cf-heartbeat { 0%, 100% { transform: scale(1); } 15%, 45% { transform: scale(1.25); } 30% { transform: scale(1); } }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .cs-section { padding: 60px 48px; }
+      .cs-problem-inner { padding: 0 48px; }
+      .cs-meta-bar-inner { padding: 0 48px; }
+      .cs-reflection-inner { padding: 0 48px; }
+      .cs-case-nav-inner { padding: 0 48px; }
+      .cs-exec-phases { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .cs-problem-grid { grid-template-columns: 1fr; gap: 40px; }
+      .cs-exec-phases { grid-template-columns: 1fr; }
+      .cs-timeline { grid-template-columns: 1fr; }
+      .cs-reflection-grid { grid-template-columns: 1fr; }
+      .cs-stats-row { grid-template-columns: 1fr; }
+      .cs-meta-bar-inner { grid-template-columns: 1fr 1fr; }
+      .cs-meta-cell:nth-child(2) { border-right: none; }
+      .cs-meta-cell:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.08); }
+      .cs-meta-cell { padding-left: 0 !important; }
+    }
+    @media (max-width: 640px) {
+      .cs-section { padding: 48px 24px; }
+      .cs-problem-inner { padding: 0 24px; }
+      .cs-reflection-inner { padding: 0 24px; }
+      .cs-case-nav-inner { padding: 0 24px; flex-direction: column; }
+      .cs-meta-bar-inner { padding: 0 24px; grid-template-columns: 1fr 1fr; }
+      .cs-hero { padding: 120px 24px 64px; }
+      .cs-hero-title { font-size: 36px; letter-spacing: -1px; }
+      .cs-back { left: 24px; }
+      .cs-heading { font-size: 32px; }
+      .cs-reflection-heading { font-size: 32px; }
+      .cs-reflection-quote { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo">SR<span>.</span></a>
+      <div class="nav-right">
+        <a href="https://linkedin.com" class="nav-text-link">LinkedIn</a>
+        <a href="https://dribbble.com" class="nav-text-link">Dribbble</a>
+        <a href="Santhosh-Resume.pdf" target="_blank" class="nav-cta">Download Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="cs-hero">
+    <div class="cs-hero-bg"></div>
+    <div class="cs-hero-grid"></div>
+    <a href="index.html#works" class="cs-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Works
+    </a>
+    <div class="cs-hero-content">
+      <div class="cs-hero-tag-row">
+        <span class="cs-hero-tag">Poshmark</span>
+        <span class="cs-hero-tag">Commerce</span>
+        <span class="cs-hero-tag">A/B Testing</span>
+      </div>
+      <h1 class="cs-hero-title" style="max-width: 680px; margin-left: auto; margin-right: auto; text-wrap: balance;">17 million views, one chance to convert</h1>
+      <p class="cs-hero-sub" style="max-width: 780px; margin-left: auto; margin-right: auto; text-wrap: balance;">Poshmark's listing details page was the most visited page on the platform and the most cluttered. This is how a phased redesign turned it into a focused, conversion-driven experience.</p>
+    </div>
+  </div>
+
+  <!-- META BAR -->
+  <div class="cs-meta-bar">
+    <div class="cs-meta-bar-inner">
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-value">Manager, Product Design</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Timeline</div>
+        <div class="cs-meta-value">Listing Details · 4 phases</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Platforms</div>
+        <div class="cs-meta-value">iOS · Android · Web</div>
+      </div>
+      <div class="cs-meta-cell">
+        <div class="cs-meta-label">Outcome</div>
+        <div class="cs-meta-value">Graduated to 100% of users</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. CONTEXT -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Context</div>
+    <h2 class="cs-heading">The most important page we hadn't redesigned</h2>
+    <p class="cs-body" style="margin-top: 24px;">The listing details page is where every purchase decision on Poshmark happens. A buyer arrives, sees the item, reads the details, and decides to buy, offer, or leave. At 17 million daily views, even marginal improvements in how that decision gets made compound into significant business outcomes.</p>
+    <p class="cs-body" style="margin-top: 16px;">The problem was that the page had been built incrementally. Each team added sections over time without a unified information architecture. The result was a page that mixed trust signals with noise, buried the purchase actions behind exploratory links, and presented information without visual priority. It wasn't a bad page. It was a page that had never been designed as a whole.</p>
+
+    <div class="cs-stats-row" style="margin-top: 56px;">
+      <div class="cs-stat">
+        <div class="cs-stat-num">17<span class="cs-stat-unit">M</span></div>
+        <div class="cs-stat-label">Daily page views, over half a billion per month, making this the highest-traffic commerce surface on the platform</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">$5.35<span class="cs-stat-unit">M</span></div>
+        <div class="cs-stat-label">Daily GMV flowing through this single page, at an average order value of $40 across 134,000 daily orders</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">4<span class="cs-stat-unit"> </span></div>
+        <div class="cs-stat-label">Independently shipped phases, each with its own hypothesis, A/B test, and graduation decision before the next began</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image placeholder: original listing details page -->
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 100px 60px;">
+    <div class="cs-img-placeholder">
+      <svg class="cs-img-placeholder-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="cs-img-placeholder-label">Image needed</div>
+      <div class="cs-img-placeholder-caption" style="max-width: 520px;">Screenshot of the original listing details page, showing the cluttered information hierarchy, non-clickable links mixed with clickable ones, and the original image scroll experience before the redesign.</div>
+    </div>
+  </div>
+
+  <!-- 2. THE PROBLEM -->
+  <div class="cs-problem-section fade-up">
+    <div class="cs-problem-inner">
+      <div class="cs-problem-label">The Problem</div>
+      <div class="cs-problem-quote">The page wasn't designed to help buyers decide. It was designed to <em>hold everything</em>, and over time, everything had accumulated.</div>
+
+      <div class="cs-problem-grid">
+        <div>
+          <div class="cs-problem-col-label">What the page was doing</div>
+          <ul class="cs-problem-list">
+            <li>Category, style tag, and department links sent buyers away from the listing before they could form purchase intent</li>
+            <li>Buy Now and Offer buttons competed with exploratory navigation, requiring buyers to scroll past low-intent paths to reach a decision</li>
+            <li>Product details had no hierarchy, title, brand, price, size, and condition presented at the same visual weight</li>
+            <li>Images were displayed in a vertical scroll, requiring significant scrolling to see all photos on a high-trust, secondhand item</li>
+            <li>Promotional signals like New with Tags, Boutique, and shipping deals were buried in text rather than surfaced as trust anchors</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cs-problem-col-label">What we needed instead</div>
+          <ul class="cs-problem-list">
+            <li>A page structured around the purchase decision, not around every possible action a buyer might take</li>
+            <li>Images that let buyers build trust quickly, with a horizontal gallery replacing the vertical scroll</li>
+            <li>A hierarchy that surfaces title, brand, price, and size first, the four things that determine purchase intent</li>
+            <li>Deals and trust signals elevated to a dedicated section with tappable context, not buried as metadata</li>
+            <li>Cross-merch exposure that increases naturally from better page structure, rather than through explicit links</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs-problem-why">
+        <div class="cs-problem-col-label">The hypothesis</div>
+        <p class="cs-problem-why-body">By restructuring the information architecture to reduce low-intent exits and surface purchase-critical details more clearly, we can increase conversion without cannibalising revenue or engagement. Every link we removed was a decision to trust the page hierarchy over the safety net of exploration.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. APPROACH -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Approach</div>
+    <h2 class="cs-heading">Four phases, each independently tested</h2>
+    <p class="cs-body" style="margin-top: 20px;">Rather than a single big-bang redesign, we broke the work into four independently shippable phases. Each phase had its own hypothesis, A/B test, and graduation decision before the next began. This let us move fast, build confidence with data, and de-risk the full overhaul across iOS, Android, and Web.</p>
+
+    <div class="cs-exec-phases">
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 0</span>
+        <div class="cs-exec-title">Image Scroll</div>
+        <p class="cs-exec-body">Buyers of secondhand goods rely heavily on photos to build trust. The original vertical layout required significant scrolling to see all images. We replaced it with a horizontal swipe gallery, giving buyers faster access to the full set of photos without losing context of the rest of the page. Shipped in 4 weeks.</p>
+      </div>
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 1</span>
+        <div class="cs-exec-title">Product Details Restructure</div>
+        <p class="cs-exec-body">The core intervention. Removed all hyperlinks from product metadata, reordered the information hierarchy to surface title, brand, and price first, elevated deals and promotions to a dedicated row, standardised size display, and collapsed long descriptions. This was the highest-risk phase and the one with the clearest hypothesis.</p>
+      </div>
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 2</span>
+        <div class="cs-exec-title">CTA Placement Test</div>
+        <p class="cs-exec-body">With the product details restructured, we tested whether Buy Now and Offer buttons should appear above or below the product details section. Two variants, A/B tested across both logged-in users and visitors, with separate feature flags for the Cross Merch V3 web test running in parallel.</p>
+      </div>
+      <div class="cs-exec-phase">
+        <span class="cs-exec-badge">Phase 3</span>
+        <div class="cs-exec-title">Web Rollout</div>
+        <p class="cs-exec-body">Extended the app redesign to web, adapting the same hierarchy and link removal logic to the desktop and mobile web experience. Added visitor login retention so users returning after login landed back on the same listing, not the home page. Scoped to US and CA with v3 test infrastructure compatibility.</p>
+      </div>
+    </div>
+
+    <!-- Image placeholder: roadmap -->
+    <div style="margin-top: 48px;" class="cs-img-placeholder">
+      <svg class="cs-img-placeholder-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="cs-img-placeholder-label">Image needed</div>
+      <div class="cs-img-placeholder-caption" style="max-width: 500px;">Phase roadmap or Figma exploration showing the 4 design phases laid out sequentially, with scope and timeline for each.</div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- 4. KEY DECISIONS -->
+  <div class="cs-warm-section fade-up">
+    <div class="cs-section">
+      <div class="cs-label">Key Decisions</div>
+      <h2 class="cs-heading">Where the design earned its tradeoffs</h2>
+      <p class="cs-body" style="margin-top: 20px;">Four decisions defined Phase 1. Each had real disagreement, real tradeoffs, and data behind it. These are the moments where information architecture either improves conversion or creates new problems.</p>
+
+      <div style="margin-top: 48px;">
+
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">01</div>
+            <div class="cs-decision-title">Remove all hyperlinks from product metadata</div>
+          </div>
+          <p class="cs-decision-body">Category, subcategory, style tag, and department links had historically been clickable, sending buyers to browse pages. None of these pages had meaningful conversion rates. They served as exploratory exits from the highest-intent moment in the buyer journey. The debate was whether removing them would hurt discovery. The data said otherwise: Category and style tag pages had very low conversion rates, serving more as passive browsing paths than purchase paths. We removed clickability entirely and kept the metadata as non-interactive labels. The information stayed; the exit disappeared.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            Category, subcategory, style tag, and color fields made non-clickable. Metadata remains visible; low-intent exits removed.
+          </div>
+        </div>
+
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">02</div>
+            <div class="cs-decision-title">Move seller profile below photos, not above</div>
+          </div>
+          <p class="cs-decision-body">The original page placed the seller profile bar at the top, immediately below the nav. This was a holdover from when seller trust was the primary purchase signal. User research indicated that buyers now evaluate the item first and the seller second. Moving the profile below photos, alongside social actions, let the item speak first. Title, brand, and price followed directly below, creating a clean top-to-bottom purchase evaluation flow. The seller profile became a trust reinforcement signal, not a navigation anchor.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            Seller profile moved below photos. Item title, brand, and price now lead the page hierarchy.
+          </div>
+          <div style="margin-top: 24px;" class="cs-img-placeholder">
+            <svg class="cs-img-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div class="cs-img-placeholder-label">Image needed</div>
+            <div class="cs-img-placeholder-caption" style="max-width: 440px;">Side-by-side of the original page hierarchy vs. the redesigned hierarchy, annotated to show the seller profile repositioning and new title/brand/price ordering.</div>
+          </div>
+        </div>
+
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">03</div>
+            <div class="cs-decision-title">Surface deals as active trust signals, not metadata</div>
+          </div>
+          <p class="cs-decision-body">New with Tags, Boutique, Free Authentication, discounted shipping, and price drops had been presented as text metadata, easy to scan past. We redesigned them as a dedicated deals row with tappable buttons that pull up informational action sheets. Each button became a conversation starter, not just a label. The intent was to make trust signals feel earned rather than listed. A "Free Authentication" badge you can tap and read builds more confidence than the same two words in a text field.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            Deals elevated to a tappable row with contextual action sheets for NWT, Boutique, Free Authentication, and shipping promotions.
+          </div>
+        </div>
+
+        <div class="cs-decision fade-up">
+          <div class="cs-decision-header">
+            <div class="cs-decision-num">04</div>
+            <div class="cs-decision-title">Collapse descriptions at 500 characters</div>
+          </div>
+          <p class="cs-decision-body">Long seller descriptions were one of the main causes of page length variance. Some listings had two-line descriptions; others had ten. This made the page feel inconsistent and pushed purchase CTAs further down for long-description listings. We introduced a 500-character threshold with a "Show more" link. The default state is clean. Buyers who want the full description can access it with one tap. Sellers' content is fully available; it just doesn't dominate the page for buyers who don't need it.</p>
+          <div class="cs-decision-outcome">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+            Description capped at 500 characters with a "Show more" link. Once expanded, remains expanded for the session until the buyer returns to the listing.
+          </div>
+          <div style="margin-top: 24px;" class="cs-img-placeholder">
+            <svg class="cs-img-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div class="cs-img-placeholder-label">Image needed</div>
+            <div class="cs-img-placeholder-caption" style="max-width: 440px;">Before/after showing a long-description listing with the old unconstrained view vs. the truncated version with the Show more interaction.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- 5. RESULTS -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Results</div>
+    <h2 class="cs-heading">The data said graduate</h2>
+    <p class="cs-body" style="margin-top: 20px;">The redesign ran as an A/B test across 26% of app users on iOS and Android. After a two-week test window, the results were clear enough to recommend graduation. Overall business metrics were neutral to positive. Purchase intent metrics moved significantly. The recommendation was to ship.</p>
+
+    <!-- Image placeholder: A/B test results dashboard -->
+    <div style="margin-top: 48px;" class="cs-img-placeholder">
+      <svg class="cs-img-placeholder-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="cs-img-placeholder-label">Image needed</div>
+      <div class="cs-img-placeholder-caption" style="max-width: 480px;">Eppo or internal metrics dashboard screenshot showing the final A/B test results with stat-sig highlights for Buy Now clicks, Buyer Offer clicks, and D7 order conversion.</div>
+    </div>
+
+    <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div>
+        <div class="cs-label" style="margin-bottom: 12px;">Purchase Intent</div>
+        <table class="cs-metrics-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Lift</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Buy Now Clicks</td>
+              <td><span class="cs-metric-lift up">+1.68%</span></td>
+            </tr>
+            <tr>
+              <td>Buyer Offer Clicks</td>
+              <td><span class="cs-metric-lift up">+2.09%</span></td>
+            </tr>
+            <tr>
+              <td>D7 Order / First Match Conversion</td>
+              <td><span class="cs-metric-lift up">+1.14%</span></td>
+            </tr>
+            <tr>
+              <td>App Buyer Orders</td>
+              <td><span class="cs-metric-lift up">+0.33%</span></td>
+            </tr>
+            <tr>
+              <td>App Buy Now Orders</td>
+              <td><span class="cs-metric-lift up">+0.53%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="cs-label" style="margin-bottom: 12px;">Business Metrics</div>
+        <table class="cs-metrics-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Lift</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>App Buyer GMV</td>
+              <td><span class="cs-metric-lift up">+0.11%</span></td>
+            </tr>
+            <tr>
+              <td>App Buyers</td>
+              <td><span class="cs-metric-lift neutral">+0.07%</span></td>
+            </tr>
+            <tr>
+              <td>Cross-Merch Grid Views</td>
+              <td><span class="cs-metric-lift up">+4.01%</span></td>
+            </tr>
+            <tr>
+              <td>Cross-Merch Grid Clickers</td>
+              <td><span class="cs-metric-lift up">+1.73%</span></td>
+            </tr>
+            <tr>
+              <td>Ads Impressions on Listing Details</td>
+              <td><span class="cs-metric-lift up">+2.82%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; background: #171717; border-radius: 20px; padding: 40px 48px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start;">
+      <div style="width: 48px; height: 48px; background: rgba(115,66,226,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7342E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: #7342E2; margin-bottom: 10px;">Why First Match Dropped and Why We Shipped Anyway</div>
+        <p style="font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; margin: 0;">First Match dropped -0.99%, driven by the No Purchase segment (-2.67%, representing 37% of all users). This was the key stakeholder debate. The data told a nuanced story: the FM drop was a behaviour shift, not a revenue loss. Users were spending less time exploring the seller's closet from the listing page, not because they were less engaged, but because they were making purchase decisions directly from the listing. D7 Order/FM conversion for the No Purchase segment improved +3.05%, and overall buyer orders in that segment increased +2.46%. Users clicking less on the seller's name from the listing page contributed to 70% of the community closet page view loss, but the orders followed them to the listing. The redesign was working as intended.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- 6. WEB ROLLOUT -->
+  <div class="cs-section fade-up">
+    <div class="cs-label">Web Rollout</div>
+    <h2 class="cs-heading">Extending the redesign to web</h2>
+    <p class="cs-body" style="margin-top: 20px;">After graduating on mobile, we extended the redesign to web, adapting the same hierarchy and link removal logic to desktop and mobile web. The web rollout added two additional requirements: CTA placement testing above vs. below product details, and a visitor login retention fix that returned users to the same listing after signing in rather than the home page.</p>
+
+    <div class="cs-timeline" style="margin-top: 40px;">
+      <div class="cs-timeline-card near">
+        <span class="cs-timeline-badge near">Web Changes</span>
+        <div class="cs-timeline-title">Same hierarchy, new surface constraints</div>
+        <p class="cs-timeline-body">The web experience required separate feature flags for logged-in users and visitors, including compatibility with the Cross Merch V3 visitor test running in parallel. Two CTA placement variants were tested independently. Scoped to US and CA.</p>
+      </div>
+      <div class="cs-timeline-card far">
+        <span class="cs-timeline-badge far">Visitor Login Fix</span>
+        <div class="cs-timeline-title">Return to listing after login</div>
+        <p class="cs-timeline-body">Visitors who signed in on a listing details page were previously redirected to the home page, breaking their purchase intent. The fix returned them to the exact listing they were viewing, maintaining context and reducing drop-off at the login conversion step.</p>
+      </div>
+    </div>
+
+    <!-- Image placeholder: web listing details -->
+    <div style="margin-top: 32px;" class="cs-img-placeholder">
+      <svg class="cs-img-placeholder-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="cs-img-placeholder-label">Image needed</div>
+      <div class="cs-img-placeholder-caption" style="max-width: 500px;">Before/after of the web listing details page, showing the redesigned product details section on desktop and mobile web, ideally with the two CTA placement variants side by side.</div>
+    </div>
+  </div>
+
+  <!-- 7. REFLECTION -->
+  <div class="cs-reflection-section">
+    <div class="cs-reflection-inner fade-up">
+      <div class="cs-reflection-label">Reflection</div>
+      <h2 class="cs-reflection-heading">What this project taught me about conversion design</h2>
+      <div class="cs-reflection-grid">
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On the FM story</div>
+          <div class="cs-reflection-card-title">Model the expected shift before the test</div>
+          <p class="cs-reflection-card-body">The First Match drop created stakeholder anxiety mid-test that was difficult to manage in real time. If I had modelled the expected FM redistribution before launch, using demand match data we already had, we could have reframed the metric as a leading indicator of conversion shift rather than a loss. The story would have been the same. The conversation would have been easier.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On scope</div>
+          <div class="cs-reflection-card-title">Test description truncation independently</div>
+          <p class="cs-reflection-card-body">The 500-character collapse was bundled into Phase 1 rather than isolated in its own test. We shipped it with confidence that it was the right call, but we don't know its isolated impact on conversion or engagement for long-description listings. That's a decision that deserved its own data, and on the next initiative, it would get one.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On phased execution</div>
+          <div class="cs-reflection-card-title">The phased approach was worth its overhead</div>
+          <p class="cs-reflection-card-body">Running four independent tests across roughly 12 months added coordination overhead that a single redesign wouldn't have. But it also meant each decision was backed by its own data, each phase built confidence for the next, and the graduation decision at the end was made with evidence from every part of the change. The overhead was the cost of being able to answer "why" for every choice.</p>
+        </div>
+        <div class="cs-reflection-card">
+          <div class="cs-reflection-card-label">On cross-merch</div>
+          <div class="cs-reflection-card-title">Removing links increased cross-sell exposure</div>
+          <p class="cs-reflection-card-body">Cross-Merch Grid Views went up +4.01% despite removing explicit cross-merch navigation links from the product details section. The redesigned page created a more structured scroll path that surfaced the cross-merch grid to more buyers. This was a counterintuitive result that reinforced the core hypothesis: a focused page does more than a page that tries to do everything.</p>
+        </div>
+      </div>
+      <div class="cs-reflection-quote">
+        "The best commerce page isn't the one that offers the most paths. It's the one that makes <em>the right path</em> impossible to miss."
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Study Nav -->
+  <div class="cs-case-nav">
+    <div class="cs-case-nav-inner">
+      <a href="poshmark.html" class="cs-case-nav-card cs-case-nav-prev">
+        <div class="cs-case-nav-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Previous Case Study</div>
+        <div class="cs-case-nav-project">Poshmark · App Redesign</div>
+        <div class="cs-case-nav-title">Redesigning for retention, not recognition</div>
+      </a>
+      <a href="typography.html" class="cs-case-nav-card cs-case-nav-next">
+        <div class="cs-case-nav-label">Next Case Study <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="cs-case-nav-project">Poshmark · Design Systems</div>
+        <div class="cs-case-nav-title">One type system, every surface</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="cinematic-footer-wrapper">
+    <div class="cf-aurora"></div>
+    <div class="cf-grid"></div>
+    <div class="cf-giant-text">SR.</div>
+
+    <div class="cf-marquee-bar">
+      <div class="cf-marquee-track">
+        <div class="cf-marquee-item">
+          <span>Product Design</span><span class="dot">✦</span>
+          <span>12+ Years Experience</span><span class="dot">✦</span>
+          <span>Design Leadership</span><span class="dot">✦</span>
+          <span>Commerce UX</span><span class="dot">✦</span>
+          <span>A/B Testing</span><span class="dot">✦</span>
+          <span>Strategic Vision</span><span class="dot">✦</span>
+          <span>Team Mentoring</span><span class="dot">✦</span>
+          <span>Stakeholder Alignment</span><span class="dot">✦</span>
+          <span>Design Systems</span><span class="dot">✦</span>
+          <span>OKR Planning</span><span class="dot">✦</span>
+        </div>
+        <div class="cf-marquee-item" aria-hidden="true">
+          <span>Product Design</span><span class="dot">✦</span>
+          <span>12+ Years Experience</span><span class="dot">✦</span>
+          <span>Design Leadership</span><span class="dot">✦</span>
+          <span>Commerce UX</span><span class="dot">✦</span>
+          <span>A/B Testing</span><span class="dot">✦</span>
+          <span>Strategic Vision</span><span class="dot">✦</span>
+          <span>Team Mentoring</span><span class="dot">✦</span>
+          <span>Stakeholder Alignment</span><span class="dot">✦</span>
+          <span>Design Systems</span><span class="dot">✦</span>
+          <span>OKR Planning</span><span class="dot">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-main">
+      <h2 class="cf-heading">Let's Work Together</h2>
+      <div class="cf-cta-group">
+        <div class="cf-primary-row">
+          <div class="cf-pill cf-cta-btn" style="cursor:default">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 989 424 9490
+          </div>
+          <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
+            onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            santhosh.r777@live.in
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-bottom">
+      <div class="cf-copyright">© 2026 SR. All rights reserved.</div>
+      <div class="cf-pill cf-made-badge">
+        <span>Designed with</span>
+        <span class="cf-heart">❤️</span>
+        <span style="color:rgba(240,237,232,0.25);margin:0 4px;">|</span>
+        <span>Vibe coded with passion</span>
+      </div>
+      <button class="cf-pill cf-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+        Back to top
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
