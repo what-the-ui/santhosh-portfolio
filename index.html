@@ -2934,6 +2934,23 @@
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+    // Nav active pill on scroll
+    const navLinks = document.querySelectorAll('.nav-pills-wrap a');
+    const sections = ['home', 'works', 'my-story'].map(id => document.getElementById(id)).filter(Boolean);
+    function updateActiveNav() {
+      let current = sections[0];
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - window.innerHeight / 2) {
+          current = section;
+        }
+      });
+      navLinks.forEach(link => link.classList.remove('nav-active'));
+      const active = document.querySelector(`.nav-pills-wrap a[href="#${current.id}"]`);
+      if (active) active.classList.add('nav-active');
+    }
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
     let hudTimer;
     function showComingSoon() {
       const hud = document.getElementById('cs-hud');
