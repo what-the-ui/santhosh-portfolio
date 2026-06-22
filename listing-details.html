@@ -319,6 +319,7 @@
     @keyframes cf-heartbeat { 0%, 100% { transform: scale(1); } 15%, 45% { transform: scale(1.25); } 30% { transform: scale(1); } }
 
     /* Responsive */
+    .cs-my-role-inner { max-width: 1280px; margin: 0 auto; padding: 36px 100px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; }
     @media (max-width: 1100px) {
       .cs-section { padding: 60px 48px; }
       .cs-problem-inner { padding: 0 48px; }
@@ -326,6 +327,7 @@
       .cs-reflection-inner { padding: 0 48px; }
       .cs-case-nav-inner { padding: 0 48px; }
       .cs-exec-phases { grid-template-columns: 1fr 1fr; }
+      .cs-my-role-inner { padding: 36px 48px; }
     }
     @media (max-width: 900px) {
       .cs-problem-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -404,6 +406,18 @@
       <div class="cs-meta-cell">
         <div class="cs-meta-label">Outcome</div>
         <div class="cs-meta-value">Graduated to 100% of users</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MY ROLE -->
+  <div style="background: #faf8ff; border-bottom: 1px solid rgba(115,66,226,0.1);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 36px 100px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start;">
+      <div style="padding-top: 2px; flex-shrink: 0;">
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #7342E2; margin-bottom: 8px;">My Role</div>
+      </div>
+      <div>
+        <p style="font-size: 15px; color: #444; line-height: 1.75; margin: 0;">I led this initiative as Design Manager, owning problem framing, stakeholder alignment, and the decision to structure the work as four independent phases rather than a single redesign. I set the strategic direction and hypothesis for each phase, managed the cross-functional coordination across iOS, Android, and Web, and made the graduation call on Phase 1 during active stakeholder disagreement about the First Match drop. Two designers on my team owned the screen-level execution — one focused on mobile, one on web — and I embedded with them weekly to shape design direction and unblock tradeoffs. This case study reflects the decisions I owned, the tradeoffs I navigated, and the outcomes I was accountable for.</p>
       </div>
     </div>
   </div>
@@ -496,7 +510,7 @@
       <div class="cs-exec-phase">
         <span class="cs-exec-badge">Phase 2</span>
         <div class="cs-exec-title">CTA Placement Test</div>
-        <p class="cs-exec-body">With the product details restructured, we tested whether Buy Now and Offer buttons should appear above or below the product details section. Two variants, A/B tested across both logged-in users and visitors, with separate feature flags for the Cross Merch V3 web test running in parallel.</p>
+        <p class="cs-exec-body">With the product details restructured, we tested whether Buy Now and Offer buttons should appear above or below the product details section. Two variants, A/B tested across logged-in users and visitors. The below-fold variant showed stronger directional performance, consistent with the hypothesis that buyers who read product details before seeing purchase options act with more intent. The result informed the default CTA position for the web rollout.</p>
       </div>
       <div class="cs-exec-phase">
         <span class="cs-exec-badge">Phase 3</span>
@@ -541,7 +555,7 @@
             <div class="cs-decision-num">02</div>
             <div class="cs-decision-title">Move seller profile below photos, not above</div>
           </div>
-          <p class="cs-decision-body">The original page placed the seller profile bar at the top, immediately below the nav. This was a holdover from when seller trust was the primary purchase signal. User research indicated that buyers now evaluate the item first and the seller second. Moving the profile below photos, alongside social actions, let the item speak first. Title, brand, and price followed directly below, creating a clean top-to-bottom purchase evaluation flow. The seller profile became a trust reinforcement signal, not a navigation anchor.</p>
+          <p class="cs-decision-body">The original page placed the seller profile bar at the top, immediately below the nav. This was a holdover from when seller trust was the primary purchase signal on a younger platform. Qual research and user interviews surfaced a clear behavioral shift: by this stage of the platform's maturity, buyers evaluated the item first and validated the seller second. Poshmark's seller ratings, social graph, and buyer protection had matured enough that the item itself had become the primary trust anchor. Moving the profile below photos, alongside social actions, let the item speak first. Title, brand, and price followed directly below, creating a clean top-to-bottom purchase evaluation flow. The seller profile became a trust reinforcement signal, not a navigation anchor.</p>
           <div class="cs-decision-outcome">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
             Seller profile moved below photos. Item title, brand, and price now lead the page hierarchy.
@@ -647,7 +661,7 @@
           <tbody>
             <tr>
               <td>App Buyer GMV</td>
-              <td><span class="cs-metric-lift up">+0.11%</span></td>
+              <td><span class="cs-metric-lift neutral">+0.11% (neutral)</span></td>
             </tr>
             <tr>
               <td>App Buyers</td>
@@ -676,7 +690,7 @@
       </div>
       <div>
         <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: #7342E2; margin-bottom: 10px;">Why First Match Dropped and Why We Shipped Anyway</div>
-        <p style="font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; margin: 0;">First Match dropped -0.99%, driven by the No Purchase segment (-2.67%, representing 37% of all users). This was the key stakeholder debate. The data told a nuanced story: the FM drop was a behaviour shift, not a revenue loss. Users were spending less time exploring the seller's closet from the listing page, not because they were less engaged, but because they were making purchase decisions directly from the listing. D7 Order/FM conversion for the No Purchase segment improved +3.05%, and overall buyer orders in that segment increased +2.46%. Users clicking less on the seller's name from the listing page contributed to 70% of the community closet page view loss, but the orders followed them to the listing. The redesign was working as intended.</p>
+        <p style="font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; margin: 0;">First Match dropped -0.99%, driven by the No Purchase segment (-2.67%, representing 37% of all users). This triggered the hardest stakeholder conversation of the project. Mid-test, I was asked whether we should stop early. I held the graduation recommendation because the demand-match segmentation told a different story: the FM drop was a behaviour shift, not a revenue loss. Users were spending less time exploring the seller's closet from the listing page not because they were less engaged, but because they were making purchase decisions directly from the listing. D7 Order/FM conversion for the No Purchase segment improved +3.05%, and buyer orders in that segment increased +2.46%. I brought that segmentation into the stakeholder review rather than defending the aggregate number. The graduation recommendation was not unanimous, but it was grounded in the data. Two weeks after graduation, the metrics held.</p>
       </div>
     </div>
   </div>
@@ -693,7 +707,7 @@
       <div class="cs-timeline-card near">
         <span class="cs-timeline-badge near">Web Changes</span>
         <div class="cs-timeline-title">Same hierarchy, new surface constraints</div>
-        <p class="cs-timeline-body">The web experience required separate feature flags for logged-in users and visitors, including compatibility with the Cross Merch V3 visitor test running in parallel. Two CTA placement variants were tested independently. Scoped to US and CA.</p>
+        <p class="cs-timeline-body">The web rollout wasn't a straight port. Desktop's wider viewport changed how the image gallery, product details, and cross-merch grid stacked relative to each other. The hover-based interaction model on desktop also meant the deals row needed rethinking — tappable action sheets designed for touch didn't translate directly. We adapted the same information hierarchy while re-solving for the surface. Separate feature flags for logged-in users and visitors were required, including compatibility with the Cross Merch V3 visitor test running in parallel. Scoped to US and CA.</p>
       </div>
       <div class="cs-timeline-card far">
         <span class="cs-timeline-badge far">Visitor Login Fix</span>
@@ -728,17 +742,22 @@
         </div>
         <div class="cs-reflection-card">
           <div class="cs-reflection-card-label">On phased execution</div>
-          <div class="cs-reflection-card-title">The phased approach was worth its overhead</div>
-          <p class="cs-reflection-card-body">Running four independent tests across roughly 12 months added coordination overhead that a single redesign wouldn't have. But it also meant each decision was backed by its own data, each phase built confidence for the next, and the graduation decision at the end was made with evidence from every part of the change. The overhead was the cost of being able to answer "why" for every choice.</p>
+          <div class="cs-reflection-card-title">Phasing is a stakeholder management tool, not just a risk tool</div>
+          <p class="cs-reflection-card-body">Four independent tests across 12 months meant four separate roadmap conversations, four alignment cycles, and four graduation decisions. The overhead was real. But it also meant every stakeholder had a clear entry point to question or support each change individually, without the weight of the whole redesign riding on one call. Phase 0's clean graduation gave us credibility for Phase 1's harder conversation. The phased structure didn't just de-risk the design — it de-risked the politics.</p>
         </div>
         <div class="cs-reflection-card">
           <div class="cs-reflection-card-label">On cross-merch</div>
           <div class="cs-reflection-card-title">Removing links increased cross-sell exposure</div>
           <p class="cs-reflection-card-body">Cross-Merch Grid Views went up +4.01% despite removing explicit cross-merch navigation links from the product details section. The redesigned page created a more structured scroll path that surfaced the cross-merch grid to more buyers. This was a counterintuitive result that reinforced the core hypothesis: a focused page does more than a page that tries to do everything.</p>
         </div>
+        <div class="cs-reflection-card" style="grid-column: 1 / -1;">
+          <div class="cs-reflection-card-label">On growing the team</div>
+          <div class="cs-reflection-card-title">The designer who owned Phase 3 had never shipped a web surface before</div>
+          <p class="cs-reflection-card-body">One of the outcomes I'm most proud of from this project isn't in the metrics. The designer who owned the web rollout had previously focused exclusively on mobile. I pushed for her to lead Phase 3 because she had built enough context on the product logic through Phases 1 and 2 that the surface shift was the right kind of stretch. She navigated the cross-Merch V3 compatibility work, pushed back on an engineering scope cut that would have compromised the hierarchy, and shipped. That's the kind of ownership I want to build in every designer on my team — not just executing a spec, but holding the design intent under real constraints.</p>
+        </div>
       </div>
       <div class="cs-reflection-quote">
-        "The best commerce page isn't the one that offers the most paths. It's the one that makes <em>the right path</em> impossible to miss."
+        I came away from this project with a conviction that now shapes how I frame every conversion problem: the best commerce page isn't the one that offers the most paths. It's the one that makes <em>the right path</em> impossible to miss.
       </div>
     </div>
   </div>
