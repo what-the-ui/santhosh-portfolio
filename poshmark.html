@@ -841,7 +841,7 @@
 
     /* ── Cinematic footer ── */
     .cinematic-footer-wrapper {
-      position: relative;
+      position: fixed; bottom: 0; left: 0; opacity: 0;
       width: 100%;
       min-height: 100vh;
       display: flex;
@@ -995,7 +995,16 @@
       15%, 45% { transform: scale(1.25); }
       30%      { transform: scale(1); }
     }
+
+    .cf-reveal-wrapper {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -1045,7 +1054,7 @@
 
     <div class="cs-hero-content" style="text-align: center; align-items: center; max-width: 800px;">
       <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px;">Poshmark · App Redesign</p>
-      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px);">Redesigning for<br>retention, not recognition</h1>
+      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px);">Redesigning for<br>Retention, Not Recognition</h1>
       <p class="cs-hero-sub" style="max-width: 900px; margin-left: auto; margin-right: auto; text-wrap: balance;">Fifteen years of product debt, a shrinking seller base, and a rare engineering window. The design strategy, trade-offs, and outcomes behind Poshmark's most significant platform investment in a decade.</p>
     </div>
 
@@ -1076,7 +1085,7 @@
   <!-- ════ 1. CONTEXT ════ -->
   <div class="cs-section fade-up">
     <div class="cs-label">Context</div>
-    <h2 class="cs-heading">A 15-year-old platform at a strategic inflection point</h2>
+    <h2 class="cs-heading">A 15-Year-Old Platform at a Strategic Inflection Point</h2>
     <p class="cs-body" style="margin-top: 24px;">Poshmark operates a two-sided marketplace. Every design decision impacts both supply and demand. When sellers struggle to list, inventory shrinks. When buyers can't discover relevant items, conversion drops. When conversion drops, seller confidence falls - and the cycle compounds.</p>
     <p class="cs-body" style="margin-top: 16px;">By FY2025, that cycle was working in reverse. DAU was declining, Gen-Z acquisition was lagging, and Depop and Vestiaire Collective were gaining ground on the core seller demographic. Over the years, Poshmark had expanded into live commerce, advertising, seller tools, and community features - each valuable in isolation, but together creating a product that was increasingly hard to understand and harder to use.</p>
     <p class="cs-body" style="margin-top: 16px;">A new engineering platform created a rare window to address this at scale. The challenge wasn't visual modernization - it was rebuilding the experience to reinforce the marketplace flywheel: <strong>more sellers → more inventory → better discovery → higher conversion → increased revenue → more sellers</strong>.</p>
@@ -1144,7 +1153,7 @@
   <!-- ════ 3. ROLE & TEAM ════ -->
   <div class="cs-section fade-up">
     <div class="cs-label">Role &amp; Team</div>
-    <h2 class="cs-heading">Design lead across a 30-person cross-functional team</h2>
+    <h2 class="cs-heading">Design Lead Across a 30-Person Cross-Functional Team</h2>
     <p class="cs-body" style="margin-top: 20px;">I owned the end-to-end design direction for the redesign - from north star definition through to launch. My role spanned hands-on design work on the core strategy and flows, stakeholder alignment across Product and Engineering, and leading a team of four designers across the full surface area. Every significant design decision on the initiative ran through me.</p>
     <div class="cs-role-split">
       <div class="cs-role-cell">
@@ -1189,7 +1198,7 @@
   <div class="cs-warm-section fade-up">
     <div class="cs-section">
       <div class="cs-label">Strategy</div>
-      <h2 class="cs-heading">Reduce effort while increasing marketplace participation</h2>
+      <h2 class="cs-heading">Reduce Effort While Increasing Marketplace Participation</h2>
       <p class="cs-body">That was the strategic lens. Instead of asking "how can we improve this screen?" we asked "how can we make buying and selling feel easier?" Every design decision - feature prioritisation, information architecture, component investment - was evaluated against its impact on marketplace participation, not interface quality alone.</p>
       <p class="cs-body" style="margin-top: 16px;">We translated this into three pillars, each mapped directly to a marketplace health lever.</p>
       <div class="cs-pillars">
@@ -1229,7 +1238,7 @@
   <!-- ════ 5. INSIGHTS ════ -->
   <div class="cs-section fade-up">
     <div class="cs-label">Research & Insights</div>
-    <h2 class="cs-heading">What the data revealed about marketplace health</h2>
+    <h2 class="cs-heading">What the Data Revealed About Marketplace Health</h2>
     <p class="cs-body" style="margin-top: 20px;">We ran a mixed-methods research programme in partnership with Data Science and Research. Quantitative signals came from session analysis, funnel abandonment studies, navigation path analysis, listing completion analytics, and marketplace conversion trends across millions of visits. Qualitative signals came from buyer and seller interviews, new-user studies, and diary studies. Not all findings shifted priorities - but the ones that did fundamentally changed the sequencing.</p>
 
     <div class="cs-insight-cards">
@@ -1263,7 +1272,7 @@
   <!-- ════ 6. EXPLORATION & DECISIONS ════ -->
   <div class="cs-section fade-up">
     <div class="cs-label">Key Design Decisions</div>
-    <h2 class="cs-heading">The calls that shaped the platform</h2>
+    <h2 class="cs-heading">The Calls That Shaped the Platform</h2>
     <p class="cs-body" style="margin-bottom: 40px;">Every major direction was tested against at least one alternative. These weren't aesthetic choices - they were strategic trade-offs with measurable stakes on marketplace health.</p>
 
     <div class="cs-decision">
@@ -1327,7 +1336,7 @@
   <div class="cs-warm-section fade-up">
     <div class="cs-section">
       <div class="cs-label">Rollout</div>
-      <h2 class="cs-heading">How we shipped it - ramp, criteria, learnings</h2>
+      <h2 class="cs-heading">How We Shipped It - Ramp, Criteria, Learnings</h2>
       <p class="cs-body">Each phase had explicit success criteria set before work started. Phases weren't arbitrary - they were sequenced so each one generated data that de-risked the next investment.</p>
       <div class="cs-exec-phases">
         <div class="cs-exec-phase">
@@ -1368,7 +1377,7 @@
   <!-- ════ 8. IMPACT ════ -->
   <div class="cs-section fade-up">
     <div class="cs-label">Impact</div>
-    <h2 class="cs-heading">Business outcomes across every dimension of the marketplace</h2>
+    <h2 class="cs-heading">Business Outcomes Across Every Dimension of the Marketplace</h2>
     <p class="cs-body" style="margin-bottom: 0;">The redesign delivered measurable improvement across supply, demand, conversion, retention, and operational efficiency. The DAU lift was the strongest single-year platform improvement since the launch of social selling features. Supply-side gains held through the following two quarters.</p>
     <div class="cs-stats-row">
       <div class="cs-stat">
@@ -1380,7 +1389,7 @@
         <div class="cs-stat-label">DAU year-over-year, the strongest platform-wide engagement growth in five years</div>
       </div>
       <div class="cs-stat">
-        <div class="cs-stat-num">~25<span class="cs-stat-unit">%</span></div>
+        <div class="cs-stat-num">~+6<span class="cs-stat-unit">%</span></div>
         <div class="cs-stat-label">Lift in new seller activation within 90 days of launch, reversing three consecutive quarters of decline</div>
       </div>
     </div>
@@ -1410,7 +1419,7 @@
   <div class="cs-reflection-section fade-up">
     <div class="cs-reflection-inner">
       <div class="cs-reflection-label">Design Leadership</div>
-      <h2 class="cs-reflection-heading">What elevated this beyond design execution</h2>
+      <h2 class="cs-reflection-heading">What Elevated This Beyond Design Execution</h2>
       <div class="cs-reflection-grid">
         <div class="cs-reflection-card">
           <div class="cs-reflection-card-label">Framing design as marketplace economics</div>
@@ -1475,10 +1484,11 @@
   </div>
 
   <!-- ════ FOOTER ════ -->
-  <footer class="cinematic-footer-wrapper">
+  <div class="cf-reveal-wrapper">
+  <footer class="cinematic-footer-wrapper" id="cinematicFooter">
     <div class="cf-aurora"></div>
     <div class="cf-grid"></div>
-    <div class="cf-giant-text">SR.</div>
+    <div class="cf-giant-text" id="cfGiantText">SR.</div>
 
     <div class="cf-marquee-bar">
       <div class="cf-marquee-track">
@@ -1510,15 +1520,14 @@
     </div>
 
     <div class="cf-main">
-      <h2 class="cf-heading">Let's Work Together</h2>
-      <div class="cf-cta-group">
+      <h2 class="cf-heading" id="cfHeading">Let's Work Together</h2>
+      <div class="cf-cta-group" id="cfLinks">
         <div class="cf-primary-row">
           <div class="cf-pill cf-cta-btn" style="cursor:default">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             +91 989 424 9490
           </div>
-          <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
-            onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+          <button class="cf-pill cf-cta-btn" id="cfEmailBtn" onclick="copyEmail()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
@@ -1543,26 +1552,111 @@
       </button>
     </div>
   </footer>
+  </div>
+
+  <!-- CINEMATIC FOOTER ANIMATIONS -->
+  <script>
+    (function initCinematicFooter() {
+      if (typeof gsap === 'undefined') return;
+      var footer  = document.getElementById('cinematicFooter');
+      var giant   = document.getElementById('cfGiantText');
+      var heading = document.getElementById('cfHeading');
+      var links   = document.getElementById('cfLinks');
+      var wrapper = footer && footer.closest('.cf-reveal-wrapper');
+      if (!footer || !wrapper) return;
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.create({
+        trigger: wrapper, start: 'top 90%', end: 'top top',
+        onEnter: function() { gsap.to(footer, { opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' }); },
+        onLeaveBack: function() { gsap.to(footer, { opacity: 0, pointerEvents: 'none', duration: 0.3, ease: 'power2.in' }); },
+      });
+      gsap.fromTo(giant, { y: '8vh', opacity: 0 }, {
+        y: '0vh', opacity: 1, ease: 'power1.out',
+        scrollTrigger: { trigger: wrapper, start: 'top 85%', end: 'bottom bottom', scrub: 1.2 }
+      });
+      gsap.fromTo([heading, links], { y: 60, opacity: 0 }, {
+        y: 0, opacity: 1, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: wrapper, start: 'top 45%', end: 'bottom bottom', scrub: 1 }
+      });
+    })();
+  </script>
+  <script>
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Before/after slider
+    (function() {
+      var slider = document.querySelector('.ba-slider');
+      if (!slider) return;
+      var clip = slider.querySelector('.ba-before-clip');
+      var divider = slider.querySelector('.ba-divider');
+      var dragging = false;
+
+      function setPos(pct) {
+        pct = Math.max(2, Math.min(98, pct));
+        clip.style.width = pct + '%';
+        divider.style.left = pct + '%';
+      }
+
+      setPos(50); // start at center
+
+      function getPos(e) {
+        var rect = slider.getBoundingClientRect();
+        var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        return ((clientX - rect.left) / rect.width) * 100;
+      }
+
+      slider.addEventListener('mousedown', function(e) { dragging = true; setPos(getPos(e)); e.preventDefault(); });
+      slider.addEventListener('touchstart', function(e) { dragging = true; setPos(getPos(e)); }, { passive: true });
+      window.addEventListener('mousemove', function(e) { if (dragging) setPos(getPos(e)); });
+      window.addEventListener('touchmove', function(e) { if (dragging) setPos(getPos(e)); }, { passive: true });
+      window.addEventListener('mouseup', function() { dragging = false; });
+      window.addEventListener('touchend', function() { dragging = false; });
+    })();
+  </script>
+
+  <script>
+    // Password gate
+    const PASS = 'w3lcome!';
+    const gate = document.getElementById('pw-gate');
+    const pwInput = document.getElementById('pw-input');
+    const pwError = document.getElementById('pw-error');
+    if (sessionStorage.getItem('pm_unlocked') === '1') gate.style.display = 'none';
+    function checkPassword() {
+      if (pwInput.value === PASS) {
+        sessionStorage.setItem('pm_unlocked', '1');
+        gate.classList.add('unlocking');
+        setTimeout(() => gate.remove(), 420);
+      } else {
+        pwError.textContent = 'Incorrect password. Please try again.';
+        pwInput.classList.add('error');
+        pwInput.value = '';
+        setTimeout(() => pwInput.classList.remove('error'), 400);
+      }
+    }
+    pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); pwError.textContent = ''; });
+  </script>
+
+
 
   <script>
     function copyEmail() {
       var email = 'santhosh.r777@live.in';
-      var btn = document.getElementById('footerEmailBtn');
+      var btn = document.getElementById('cfEmailBtn');
       var origHTML = btn.innerHTML;
-      var origTip = btn.getAttribute('data-tooltip');
-      var checkSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      var checkSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><polyline points="20 6 9 17 4 12"></polyline></svg>';
       function showCopied() {
         btn.innerHTML = checkSVG + ' Copied!';
-        btn.setAttribute('data-tooltip', 'Copied!');
-        setTimeout(function() {
-          btn.innerHTML = origHTML;
-          btn.setAttribute('data-tooltip', origTip);
-        }, 2000);
+        setTimeout(function() { btn.innerHTML = origHTML; }, 2000);
       }
       if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(email).then(showCopied).catch(function() {
-          fallbackCopy(email, showCopied);
-        });
+        navigator.clipboard.writeText(email).then(showCopied).catch(function() { fallbackCopy(email, showCopied); });
       } else {
         fallbackCopy(email, showCopied);
       }
@@ -1572,111 +1666,11 @@
       ta.value = text;
       ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
       document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
+      ta.focus(); ta.select();
       try { document.execCommand('copy'); cb(); } catch(e) {}
       document.body.removeChild(ta);
     }
-    const PASS = 'w3lcome!';
-    const gate = document.getElementById('pw-gate');
-    const input = document.getElementById('pw-input');
-    const errorEl = document.getElementById('pw-error');
-    if (sessionStorage.getItem('pm_unlocked') === '1') gate.style.display = 'none';
-    function checkPassword() {
-      if (input.value === PASS) {
-        sessionStorage.setItem('pm_unlocked', '1');
-        gate.classList.add('unlocking');
-        setTimeout(() => gate.remove(), 420);
-      } else {
-        errorEl.textContent = 'Incorrect password. Please try again.';
-        input.classList.add('error');
-        input.value = '';
-        setTimeout(() => input.classList.remove('error'), 400);
-      }
-    }
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); errorEl.textContent = ''; });
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // ── Before / After Slider ──
-    (function() {
-      function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
-
-      document.querySelectorAll('.ba-slider').forEach(function(slider) {
-        const clip = slider.querySelector('.ba-before-clip');
-        const divider = slider.querySelector('.ba-divider');
-        let dragging = false;
-        let hintPlayed = false;
-
-        function setPos(pct) {
-          pct = Math.max(0, Math.min(100, pct));
-          clip.style.width = pct + '%';
-          divider.style.left = pct + '%';
-        }
-
-        function playHint(startPct) {
-          if (hintPlayed) return;
-          hintPlayed = true;
-          const rect = slider.getBoundingClientRect();
-          const deltaPct = (40 / rect.width) * 100;
-          const targetPct = startPct + deltaPct;
-          const duration = 1400;
-          let start = null;
-          function animate(ts) {
-            if (dragging) return;
-            if (!start) start = ts;
-            const elapsed = ts - start;
-            const t = Math.min(elapsed / duration, 1);
-            const ease = easeInOut(t);
-            const pos = t <= 0.5
-              ? startPct + ease * deltaPct * 2
-              : targetPct - (ease - 0.5) * deltaPct * 2;
-            setPos(t < 1 ? pos : startPct);
-            if (t < 1) requestAnimationFrame(animate);
-          }
-          requestAnimationFrame(animate);
-        }
-
-        function initPos() {
-          setPos(50);
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                setTimeout(() => playHint(50), 400);
-                observer.disconnect();
-              }
-            });
-          }, { threshold: 0.5 });
-          observer.observe(slider);
-        }
-
-        const afterImg = slider.querySelector('.ba-after');
-        if (afterImg.complete) initPos();
-        else afterImg.addEventListener('load', initPos);
-
-        function getPercent(clientX) {
-          const rect = slider.getBoundingClientRect();
-          return ((clientX - rect.left) / rect.width) * 100;
-        }
-
-        slider.addEventListener('mousedown', e => { dragging = true; setPos(getPercent(e.clientX)); });
-        window.addEventListener('mousemove', e => { if (dragging) setPos(getPercent(e.clientX)); });
-        window.addEventListener('mouseup', () => { dragging = false; });
-        slider.addEventListener('touchstart', e => { dragging = true; setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
-        window.addEventListener('touchmove', e => { if (dragging) setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
-        window.addEventListener('touchend', () => { dragging = false; });
-      });
-    })();
   </script>
-  <script>
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-  </script>
-
 
 </body>
 </html>

@@ -278,7 +278,7 @@
 
     /* Cinematic footer */
     .cinematic-footer-wrapper {
-      position: relative; width: 100%; min-height: 100vh;
+      position: fixed; bottom: 0; left: 0; opacity: 0; width: 100%; min-height: 100vh;
       display: flex; flex-direction: column; justify-content: space-between;
       overflow: hidden; font-family: 'Bricolage Grotesque', sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -395,7 +395,16 @@
     .pw-error { font-size: 13px; color: #ef4444; margin-top: 10px; min-height: 18px; }
     @keyframes gateOut { to { opacity:0; transform:scale(1.03); pointer-events:none; } }
     #pw-gate.unlocking { animation: gateOut 0.4s ease forwards; }
+
+    .cf-reveal-wrapper {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -443,7 +452,7 @@
         <span class="cs-hero-tag">Commerce</span>
         <span class="cs-hero-tag">A/B Testing</span>
       </div>
-      <h1 class="cs-hero-title" style="max-width: 680px; margin-left: auto; margin-right: auto; text-wrap: balance;">17 million views, one chance to convert</h1>
+      <h1 class="cs-hero-title" style="max-width: 680px; margin-left: auto; margin-right: auto; text-wrap: balance;">17 Million Views, One Chance to Convert</h1>
       <p class="cs-hero-sub" style="max-width: 780px; margin-left: auto; margin-right: auto; text-wrap: balance;">Poshmark's listing details page was the most visited page on the platform and the most cluttered. This is how a phased redesign turned it into a focused, conversion-driven experience.</p>
     </div>
   </div>
@@ -479,10 +488,10 @@
   </div>
 
   <!-- PULL QUOTE -->
-  <div style="background: #faf8ff; border-bottom: 1px solid rgba(0,0,0,0.06);">
+  <div style="background: #171717;">
     <div style="max-width: 1280px; margin: 0 auto; padding: 48px 100px;">
       <blockquote style="margin: 0; padding-left: 28px; border-left: 3px solid #7342E2;">
-        <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 500; color: #171717; line-height: 1.55; margin: 0 0 12px 0;">Phasing the work wasn't just a risk strategy. Phase 0's clean graduation gave us the credibility to have Phase 1's harder conversation. The structure de-risked the design - and the politics.</p>
+        <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 500; color: #fff; line-height: 1.55; margin: 0 0 12px 0;">Phasing the work wasn't just a risk strategy. Phase 0's clean graduation gave us the credibility to have Phase 1's harder conversation. The structure de-risked the design - and the politics.</p>
         <cite style="font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; font-style: normal;">From the Reflection section below</cite>
       </blockquote>
     </div>
@@ -491,7 +500,7 @@
   <!-- 1. CONTEXT -->
   <div class="cs-section fade-up">
     <div class="cs-label">Context</div>
-    <h2 class="cs-heading">The most important page we hadn't redesigned</h2>
+    <h2 class="cs-heading">The Most Important Page We Hadn't Redesigned</h2>
     <p class="cs-body" style="margin-top: 24px;">The listing details page is where every purchase decision on Poshmark happens. A buyer arrives, sees the item, reads the details, and decides to buy, offer, or leave. At 17 million daily views, even marginal improvements in how that decision gets made compound into significant business outcomes.</p>
     <p class="cs-body" style="margin-top: 16px;">The problem was that the page had been built incrementally. Each team added sections over time without a unified information architecture. The result was a page that mixed trust signals with noise, buried the purchase actions behind exploratory links, and presented information without visual priority. It wasn't a bad page. It was a page that had never been designed as a whole.</p>
 
@@ -555,7 +564,7 @@
   <!-- 3. APPROACH -->
   <div class="cs-section fade-up">
     <div class="cs-label">Approach</div>
-    <h2 class="cs-heading">Four phases, each independently tested</h2>
+    <h2 class="cs-heading">Four Phases, Each Independently Tested</h2>
     <p class="cs-body" style="margin-top: 20px;">Rather than a single big-bang redesign, we broke the work into four independently shippable phases. Each phase had its own hypothesis, A/B test, and graduation decision before the next began. This let us move fast, build confidence with data, and de-risk the full overhaul across iOS, Android, and Web.</p>
 
     <!-- Strategic decision callout -->
@@ -601,7 +610,7 @@
         <span style="width: 1px; height: 14px; background: rgba(115,66,226,0.25);"></span>
         <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #aaa;">Image Scroll</span>
       </div>
-      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">We didn't assume horizontal was the answer. We tested four ways to show photos.</h3>
+      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">We Didn't Assume Horizontal Was the Answer. We Tested Four Ways to Show Photos.</h3>
       <p style="font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 48px;">Secondhand buyers rely on photos more than almost any other signal - condition, authenticity, and fit are all visual judgments. The original vertical scroll worked but required significant effort. Before committing to horizontal, we ran a simultaneous A/B/C/D test across three challenger variants to find out which gallery pattern gave buyers the fastest path to confidence.</p>
 
       <!-- 4-variant grid -->
@@ -682,7 +691,7 @@
         <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #aaa;">Information Hierarchy</span>
       </div>
 
-      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">Information on this page is the key. But whose logic should it follow?</h3>
+      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">Information on This Page Is the Key. But Whose Logic Should It Follow?</h3>
 
       <p style="font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 48px;">With the image scroll resolved, Phase 1 turned to the harder question: what order should the information on the page follow? The risk was defaulting to a hierarchy that made sense to the business - prominence by revenue contribution - rather than one that matched how buyers actually make decisions.</p>
 
@@ -769,7 +778,7 @@
         <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #aaa;">CTA Placement</span>
       </div>
 
-      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">Where should the Buy Now button live?</h3>
+      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">Where Should the Buy Now Button Live?</h3>
 
       <p style="font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 48px;">With the image scroll and information hierarchy validated, Phase 2 turned to purchase actions. The question was deceptively simple: should Buy Now and Offer appear before the product details, or after? The answer had real stakes - too early and you interrupt a buyer still forming intent, too late and a ready buyer has to hunt for the action.</p>
 
@@ -844,7 +853,7 @@
         <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #aaa;">From Evidence to Design</span>
       </div>
 
-      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">Three phases of evidence, one redesign to ship.</h3>
+      <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1px; color: #171717; margin-bottom: 16px; line-height: 1.15;">Three Phases of Evidence, One Redesign to Ship.</h3>
 
       <p style="font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 48px;">The pre-redesign tests weren't a detour - they were the foundation. Each phase answered a specific question that the redesign needed to get right before touching visual design or engineering. By the time the redesign brief was finalised, we weren't guessing at hierarchy, scroll patterns, or CTA placement. We had data.</p>
 
@@ -907,7 +916,7 @@
   <div class="cs-warm-section fade-up">
     <div class="cs-section">
       <div class="cs-label">Key Decisions</div>
-      <h2 class="cs-heading">Where the design earned its tradeoffs</h2>
+      <h2 class="cs-heading">Where the Design Earned Its Tradeoffs</h2>
       <p class="cs-body" style="margin-top: 20px;">These are the decisions that defined the redesign. Each had real disagreement, real tradeoffs, and data behind it - the moments where information architecture either improves conversion or creates new problems.</p>
 
       <div style="margin-top: 48px;">
@@ -969,7 +978,7 @@
   <!-- 5. RESULTS -->
   <div class="cs-section fade-up">
     <div class="cs-label">Results</div>
-    <h2 class="cs-heading">The data said graduate</h2>
+    <h2 class="cs-heading">The Data Said Graduate</h2>
     <p class="cs-body" style="margin-top: 20px;">The redesign ran as an A/B test across 26% of app users on iOS and Android. After a two-week test window, the results were clear enough to recommend graduation. Overall business metrics were neutral to positive. Purchase intent metrics moved significantly. The recommendation was to ship.</p>
 
     <!-- Image placeholder: A/B test results dashboard -->
@@ -1058,7 +1067,7 @@
   <div class="cs-reflection-section">
     <div class="cs-reflection-inner fade-up">
       <div class="cs-reflection-label">Reflection</div>
-      <h2 class="cs-reflection-heading">What this project taught me about conversion design</h2>
+      <h2 class="cs-reflection-heading">What This Project Taught Me About Conversion Design</h2>
       <div class="cs-reflection-grid">
         <div class="cs-reflection-card">
           <div class="cs-reflection-card-label">On the FM story</div>
@@ -1109,10 +1118,11 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="cinematic-footer-wrapper">
+  <div class="cf-reveal-wrapper">
+  <footer class="cinematic-footer-wrapper" id="cinematicFooter">
     <div class="cf-aurora"></div>
     <div class="cf-grid"></div>
-    <div class="cf-giant-text">SR.</div>
+    <div class="cf-giant-text" id="cfGiantText">SR.</div>
 
     <div class="cf-marquee-bar">
       <div class="cf-marquee-track">
@@ -1144,15 +1154,14 @@
     </div>
 
     <div class="cf-main">
-      <h2 class="cf-heading">Let's Work Together</h2>
-      <div class="cf-cta-group">
+      <h2 class="cf-heading" id="cfHeading">Let's Work Together</h2>
+      <div class="cf-cta-group" id="cfLinks">
         <div class="cf-primary-row">
           <div class="cf-pill cf-cta-btn" style="cursor:default">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             +91 989 424 9490
           </div>
-          <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
-            onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+          <button class="cf-pill cf-cta-btn" id="cfEmailBtn" onclick="copyEmail()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
@@ -1177,6 +1186,34 @@
       </button>
     </div>
   </footer>
+  </div>
+
+  <!-- CINEMATIC FOOTER ANIMATIONS -->
+  <script>
+    (function initCinematicFooter() {
+      if (typeof gsap === 'undefined') return;
+      var footer  = document.getElementById('cinematicFooter');
+      var giant   = document.getElementById('cfGiantText');
+      var heading = document.getElementById('cfHeading');
+      var links   = document.getElementById('cfLinks');
+      var wrapper = footer && footer.closest('.cf-reveal-wrapper');
+      if (!footer || !wrapper) return;
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.create({
+        trigger: wrapper, start: 'top 90%', end: 'top top',
+        onEnter: function() { gsap.to(footer, { opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' }); },
+        onLeaveBack: function() { gsap.to(footer, { opacity: 0, pointerEvents: 'none', duration: 0.3, ease: 'power2.in' }); },
+      });
+      gsap.fromTo(giant, { y: '8vh', opacity: 0 }, {
+        y: '0vh', opacity: 1, ease: 'power1.out',
+        scrollTrigger: { trigger: wrapper, start: 'top 85%', end: 'bottom bottom', scrub: 1.2 }
+      });
+      gsap.fromTo([heading, links], { y: 60, opacity: 0 }, {
+        y: 0, opacity: 1, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: wrapper, start: 'top 45%', end: 'bottom bottom', scrub: 1 }
+      });
+    })();
+  </script>
 
   <script>
     const header = document.querySelector('header');
@@ -1208,5 +1245,33 @@
     }
     pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); pwError.textContent = ''; });
   </script>
+
+  <script>
+    function copyEmail() {
+      var email = 'santhosh.r777@live.in';
+      var btn = document.getElementById('cfEmailBtn');
+      var origHTML = btn.innerHTML;
+      var checkSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      function showCopied() {
+        btn.innerHTML = checkSVG + ' Copied!';
+        setTimeout(function() { btn.innerHTML = origHTML; }, 2000);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(function() { fallbackCopy(email, showCopied); });
+      } else {
+        fallbackCopy(email, showCopied);
+      }
+    }
+    function fallbackCopy(text, cb) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); cb(); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  </script>
+
 </body>
 </html>

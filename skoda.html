@@ -694,7 +694,7 @@
 
     /* ── Cinematic footer ── */
     .cinematic-footer-wrapper {
-      position: relative; width: 100%; min-height: 100vh;
+      position: fixed; bottom: 0; left: 0; opacity: 0; width: 100%; min-height: 100vh;
       display: flex; flex-direction: column; justify-content: space-between;
       overflow: hidden; font-family: 'Bricolage Grotesque', sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -993,7 +993,16 @@
       .cs-reflection-heading { font-size: 32px; }
       .cs-reflection-quote { font-size: 22px; }
     }
+
+    .cf-reveal-wrapper {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -1024,7 +1033,7 @@
     </a>
     <div class="cs-hero-content" style="text-align: center; align-items: center; max-width: 800px;">
       <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px;">Škoda · Automotive App</p>
-      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px); white-space: nowrap;">A smarter way to own a car</h1>
+      <h1 class="cs-hero-title" style="font-size: clamp(40px, 4.8vw, 64px); white-space: nowrap;">A Smarter Way to Own a Car</h1>
       <p class="cs-hero-sub" style="max-width: 860px; margin-left: auto; margin-right: auto; text-wrap: balance;">A conceptual redesign of a connected car app for Škoda vehicle owners, bringing keyless access, remote controls, and real-time vehicle insights into a seamless mobile experience.</p>
     </div>
   </section>
@@ -1056,7 +1065,7 @@
     <div class="cs-two-col">
       <div class="fade-up">
         <div class="cs-label">Overview</div>
-        <h2 class="cs-heading">What I set out to build</h2>
+        <h2 class="cs-heading">What I Set Out to Build</h2>
         <p class="cs-body" style="margin-bottom:20px;">I audited 6 connected car apps (BMW, VW, Tesla, Rivian, NIO, Hyundai) and ran informal walkthroughs with 5 car owners. The consistent finding: apps were built around features, not around how people actually use their car day-to-day. The most common actions — unlock, check fuel, start climate — required 3–4 taps. Onboarding dropped users before they saw a single screen of value.</p>
         <p class="cs-body">This sprint set a clear brief: redesign the core experience around daily rituals, not feature completeness. I defined the north star, set design principles to align decisions across flows, and prototyped the full journey from onboarding through key sharing — scoping what belonged in v1 and what needed to wait for v2.</p>
       </div>
@@ -1152,7 +1161,7 @@
   <!-- ════ Navigating Ambiguity ════ -->
   <section class="cs-section">
     <div class="cs-label">Navigating Ambiguity</div>
-    <h2 class="cs-heading">It wasn't a straight line</h2>
+    <h2 class="cs-heading">It Wasn't a Straight Line</h2>
     <p class="cs-body">Here's what the process actually looked like, the assumptions that proved wrong, the pivots that felt risky, and the tensions I had to hold.</p>
     <div class="cs-messy-grid">
       <div class="cs-messy-card wrong fade-up">
@@ -1181,7 +1190,7 @@
   <!-- ════ Process ════ -->
   <section class="cs-section">
     <div class="cs-label">Process</div>
-    <h2 class="cs-heading">How I think through design</h2>
+    <h2 class="cs-heading">How I Think Through Design</h2>
     <p class="cs-body" style="">This sprint ran from competitive audit to high-fidelity prototype in four weeks, with every phase anchored to a specific user or product question — not just moving pixels forward.</p>
     <div class="cs-process-grid">
       <div class="cs-phase fade-up">
@@ -1236,7 +1245,7 @@
   <!-- ════ Onboarding Screens ════ -->
   <section class="cs-section">
     <div class="cs-label">Onboarding</div>
-    <h2 class="cs-heading">Your phone number is all you need</h2>
+    <h2 class="cs-heading">Your Phone Number Is All You Need</h2>
     <p class="cs-body" style="margin-bottom:60px;">The onboarding flow is designed to feel effortless. No VIN numbers, no dealer codes. Just your phone number, a 6-digit OTP, and you're in, pairing your vehicle is the first thing you do inside the app, not a prerequisite to enter.</p>
     <div class="fade-up">
       <img src="images/skoda/Skoda%201.png" alt="Škoda Onboarding Screens" style="width:100%; border-radius:20px; display:block;">
@@ -1250,7 +1259,7 @@
     <div class="cs-two-col cs-two-col-narrow" style="gap:60px; align-items:center;">
       <div class="fade-up" style="display:flex; flex-direction:column; justify-content:center;">
         <div class="cs-label">Home Dashboard</div>
-        <h2 class="cs-heading">Your car at a glance</h2>
+        <h2 class="cs-heading">Your Car at a Glance</h2>
         <p class="cs-body" style="margin-bottom:24px;">The home dashboard puts the car first. The header section shows the vehicle model, a real-time silhouette rendering, and the two stats that matter most, fuel percentage and estimated range. Below it, the 4 most-used actions are arranged in a 2×2 grid within thumb reach.</p>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:14px;">
           <li style="display:flex; align-items:flex-start; gap:12px;">
@@ -1282,7 +1291,7 @@
   <!-- ════ Digital Key ════ -->
   <section class="cs-section">
     <div class="cs-label">Digital Key</div>
-    <h2 class="cs-heading">Share your car like you share a file</h2>
+    <h2 class="cs-heading">Share Your Car Like You Share a File</h2>
     <p class="cs-body" style="margin-bottom:60px;">The digital key feature reimagines car sharing. Instead of handing over a physical key (or a clunky token), you share access directly from your phone with granular permission controls, time-limited, revocable, and no sign-up required for the recipient.</p>
     <div class="fade-up">
       <img src="images/skoda/Skoda%207.png" alt="Škoda Digital Key" style="width:100%; border-radius:20px; display:block;">
@@ -1293,7 +1302,7 @@
   <section class="cs-screens-section">
     <div class="cs-screens-inner">
       <div class="cs-label">Vehicle Controls</div>
-      <h2 class="cs-heading">A dashboard that reads the moment</h2>
+      <h2 class="cs-heading">A Dashboard That Reads the Moment</h2>
       <p class="cs-body" style="margin-bottom:60px;">From pre-conditioning the cabin to checking tyre pressure before a long drive, each control screen is built for speed. Big tap targets, clear states (on/off/active), and haptic confirmation on every critical action.</p>
       <div class="fade-up">
         <img src="images/skoda/Skoda%204.png" alt="Škoda Vehicle Controls" style="width:100%; border-radius:20px; display:block;">
@@ -1438,7 +1447,7 @@
   <!-- ════ Impact & Business Case ════ -->
   <section class="cs-section">
     <div class="cs-label">Impact & Business Case</div>
-    <h2 class="cs-heading">Why this matters for Škoda as a business</h2>
+    <h2 class="cs-heading">Why This Matters for Škoda as a Business</h2>
     <p class="cs-body" style="margin-bottom:12px;">Connected car apps aren't just a customer experience play, they're a retention and loyalty instrument. For an automotive brand, the app is the primary touchpoint between purchases. Here's the business case for investing in this direction:</p>
 
     <div class="cs-impact-grid">
@@ -1484,7 +1493,7 @@
   <!-- ════ Design System ════ -->
   <section class="cs-section">
     <div class="cs-label">Design System</div>
-    <h2 class="cs-heading">Built for outdoors, refined for trust</h2>
+    <h2 class="cs-heading">Built for Outdoors, Refined for Trust</h2>
     <p class="cs-body" style="margin-bottom:48px;">Every visual decision in this design system serves a function. The dark forest green creates premium contrast both indoors and in bright sunlight. Mint (#78faae) is reserved exclusively for active states and success feedback, a visual language that users learn quickly.</p>
 
     <div class="cs-two-col" style="gap:60px;">
@@ -1549,7 +1558,7 @@
   <!-- ════ Key Decisions ════ -->
   <section class="cs-section">
     <div class="cs-label">Key Decisions</div>
-    <h2 class="cs-heading">Every decision has a reason</h2>
+    <h2 class="cs-heading">Every Decision Has a Reason</h2>
 
     <div class="cs-decision fade-up">
       <div class="cs-decision-header">
@@ -1611,7 +1620,7 @@
   <!-- ════ What I Didn't Build ════ -->
   <section class="cs-section">
     <div class="cs-label">Trade-offs</div>
-    <h2 class="cs-heading">What I cut and why</h2>
+    <h2 class="cs-heading">What I Cut and Why</h2>
     <p class="cs-body" style="margin-bottom:8px;">Deciding what <em>not</em> to build is as important as what you ship. These were all scoped out of v1, and all deliberately cut.</p>
     <div class="cs-tradeoff-grid">
       <div class="cs-tradeoff-card fade-up">
@@ -1663,7 +1672,7 @@
   <section class="cs-reflection-section">
     <div class="cs-reflection-inner">
       <div class="cs-reflection-label">Reflection</div>
-      <h2 class="cs-reflection-heading">Honest notes to myself</h2>
+      <h2 class="cs-reflection-heading">Honest Notes to Myself</h2>
       <div class="cs-reflection-grid">
         <div class="cs-reflection-card fade-up">
           <div class="cs-reflection-card-label">If I did this again</div>
@@ -1724,10 +1733,11 @@
   </div>
 
   <!-- ════ FOOTER ════ -->
-  <footer class="cinematic-footer-wrapper">
+  <div class="cf-reveal-wrapper">
+  <footer class="cinematic-footer-wrapper" id="cinematicFooter">
     <div class="cf-aurora"></div>
     <div class="cf-grid"></div>
-    <div class="cf-giant-text">SR.</div>
+    <div class="cf-giant-text" id="cfGiantText">SR.</div>
 
     <div class="cf-marquee-bar">
       <div class="cf-marquee-track">
@@ -1759,15 +1769,14 @@
     </div>
 
     <div class="cf-main">
-      <h2 class="cf-heading">Let's Work Together</h2>
-      <div class="cf-cta-group">
+      <h2 class="cf-heading" id="cfHeading">Let's Work Together</h2>
+      <div class="cf-cta-group" id="cfLinks">
         <div class="cf-primary-row">
           <div class="cf-pill cf-cta-btn" style="cursor:default">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.81a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 2 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             +91 989 424 9490
           </div>
-          <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
-            onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+          <button class="cf-pill cf-cta-btn" id="cfEmailBtn" onclick="copyEmail()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
@@ -1792,6 +1801,34 @@
       </button>
     </div>
   </footer>
+  </div>
+
+  <!-- CINEMATIC FOOTER ANIMATIONS -->
+  <script>
+    (function initCinematicFooter() {
+      if (typeof gsap === 'undefined') return;
+      var footer  = document.getElementById('cinematicFooter');
+      var giant   = document.getElementById('cfGiantText');
+      var heading = document.getElementById('cfHeading');
+      var links   = document.getElementById('cfLinks');
+      var wrapper = footer && footer.closest('.cf-reveal-wrapper');
+      if (!footer || !wrapper) return;
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.create({
+        trigger: wrapper, start: 'top 90%', end: 'top top',
+        onEnter: function() { gsap.to(footer, { opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' }); },
+        onLeaveBack: function() { gsap.to(footer, { opacity: 0, pointerEvents: 'none', duration: 0.3, ease: 'power2.in' }); },
+      });
+      gsap.fromTo(giant, { y: '8vh', opacity: 0 }, {
+        y: '0vh', opacity: 1, ease: 'power1.out',
+        scrollTrigger: { trigger: wrapper, start: 'top 85%', end: 'bottom bottom', scrub: 1.2 }
+      });
+      gsap.fromTo([heading, links], { y: 60, opacity: 0 }, {
+        y: 0, opacity: 1, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: wrapper, start: 'top 45%', end: 'bottom bottom', scrub: 1 }
+      });
+    })();
+  </script>
 
   <script>
     // Scroll-based fade-up
@@ -1807,5 +1844,33 @@
       header.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   </script>
+
+  <script>
+    function copyEmail() {
+      var email = 'santhosh.r777@live.in';
+      var btn = document.getElementById('cfEmailBtn');
+      var origHTML = btn.innerHTML;
+      var checkSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      function showCopied() {
+        btn.innerHTML = checkSVG + ' Copied!';
+        setTimeout(function() { btn.innerHTML = origHTML; }, 2000);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(function() { fallbackCopy(email, showCopied); });
+      } else {
+        fallbackCopy(email, showCopied);
+      }
+    }
+    function fallbackCopy(text, cb) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); cb(); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  </script>
+
 </body>
 </html>

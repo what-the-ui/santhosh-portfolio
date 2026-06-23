@@ -2402,9 +2402,8 @@
 
       <!-- Card 4: Poshmark Typography -->
       <div class="wc2" style="margin-top:16px; cursor:default;">
-        <div class="wc2-img-wrap" style="position:relative; background:#BA4E41;">
-          <img src="images/Typography.png" alt="Poshmark Typography Guidelines" style="mix-blend-mode:luminosity; opacity:0.55;">
-          <div style="position:absolute; inset:0; background:#BA4E41; opacity:0.45;"></div>
+        <div class="wc2-img-wrap" style="position:relative;">
+          <img src="images/Typography.png" alt="Poshmark Typography Guidelines">
           <div style="position:absolute; top:16px; left:16px; background:#fff; color:#171717; font-family:'Lato',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border-radius:100px; z-index:1;">Coming Soon</div>
         </div>
         <div class="wc2-caption">
@@ -2878,8 +2877,7 @@
               </svg>
               +91 989 424 9490
             </div>
-            <button class="cf-pill cf-cta-btn" id="cfEmailBtn"
-              onclick="navigator.clipboard.writeText('santhosh.r777@live.in').then(function(){var b=document.getElementById('cfEmailBtn');var orig=b.innerHTML;b.innerHTML='<svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'opacity:0.6\'><polyline points=\'20 6 9 17 4 12\'></polyline></svg> Copied!';setTimeout(function(){b.innerHTML=orig;},2000);})">
+            <button class="cf-pill cf-cta-btn" id="cfEmailBtn" onclick="copyEmail()">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
@@ -3292,6 +3290,32 @@
     })();
   </script>
 
+  <script>
+    function copyEmail() {
+      var email = 'santhosh.r777@live.in';
+      var btn = document.getElementById('cfEmailBtn');
+      var origHTML = btn.innerHTML;
+      var checkSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      function showCopied() {
+        btn.innerHTML = checkSVG + ' Copied!';
+        setTimeout(function() { btn.innerHTML = origHTML; }, 2000);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(function() { fallbackCopy(email, showCopied); });
+      } else {
+        fallbackCopy(email, showCopied);
+      }
+    }
+    function fallbackCopy(text, cb) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); cb(); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  </script>
 
 </body>
 </html>
