@@ -203,13 +203,13 @@
     /* Decisions */
     .cs-decision { border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 40px; margin-bottom: 24px; background: #fff; }
     .cs-decision-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-    .cs-decision-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; color: #ede9fe; line-height: 1; flex-shrink: 0; }
+    .cs-decision-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; color: #c4b5fd; line-height: 1; flex-shrink: 0; }
     .cs-decision-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #171717; }
     .cs-decision-body { font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 20px; }
     .cs-decision-outcome {
       display: flex; align-items: flex-start; gap: 12px;
-      background: #f0fdf4; border-radius: 12px; padding: 16px 20px;
-      font-size: 15px; color: #166534; line-height: 1.6;
+      background: #f0ecff; border-radius: 12px; padding: 16px 20px;
+      font-size: 15px; color: #5b21b6; line-height: 1.6;
     }
 
     /* Warm section */
@@ -531,8 +531,11 @@
   </div>
 
   <!-- Image: original listing details page -->
-  <div style="max-width: 1280px; margin: 0 auto; padding: 0 100px 60px;">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 100px 8px;">
     <img src="images/LDP1.png" alt="Original listing details page before the redesign" style="width: 100%; border-radius: 24px; display: block;">
+  </div>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 100px 60px;">
+    <p style="font-size: 12px; color: #999; letter-spacing: 0.3px; margin-top: 10px;">Before · The original listing details page — built incrementally by multiple teams, no unified information architecture, purchase actions buried below exploratory links.</p>
   </div>
 
   <!-- 2. THE PROBLEM -->
@@ -591,17 +594,17 @@
       <a class="cs-exec-phase" href="#phase-0" style="text-decoration: none; color: inherit; cursor: pointer;">
         <span class="cs-exec-badge">Phase 0</span>
         <div class="cs-exec-title">Image Scroll</div>
-        <p class="cs-exec-body">Buyers of secondhand goods rely heavily on photos to build trust. The original vertical layout required significant scrolling to see all images. We replaced it with a horizontal swipe gallery, giving buyers faster access to the full set of photos without losing context of the rest of the page. Shipped in 4 weeks.</p>
+        <p class="cs-exec-body">Buyers of secondhand goods rely heavily on photos to build trust. The original vertical layout required significant scrolling to see all images. We replaced it with a horizontal swipe gallery, giving buyers faster access to the full set of photos without losing context of the rest of the page. <span style="font-weight:700;color:#7342E2;">4 weeks to ship.</span></p>
       </a>
       <a class="cs-exec-phase" href="#phase-1" style="text-decoration: none; color: inherit; cursor: pointer;">
         <span class="cs-exec-badge">Phase 1</span>
         <div class="cs-exec-title">Product Details Restructure</div>
-        <p class="cs-exec-body">The core intervention. Removed all hyperlinks from product metadata, reordered the information hierarchy to surface title, brand, and price first, elevated deals and promotions to a dedicated row, standardised size display, and collapsed long descriptions. This was the highest-risk phase and the one with the clearest hypothesis.</p>
+        <p class="cs-exec-body">The core intervention. Removed all hyperlinks from product metadata, reordered the information hierarchy to surface title, brand, and price first, elevated deals and promotions to a dedicated row, standardised size display, and collapsed long descriptions. This was the highest-risk phase. <span style="font-weight:700;color:#7342E2;">6 weeks to graduate.</span></p>
       </a>
       <a class="cs-exec-phase" href="#phase-2" style="text-decoration: none; color: inherit; cursor: pointer;">
         <span class="cs-exec-badge">Phase 2</span>
         <div class="cs-exec-title">CTA Placement Test</div>
-        <p class="cs-exec-body">With the product details restructured, we tested whether Buy Now and Offer buttons should appear above or below the product details section. Two variants, A/B tested across logged-in users and visitors. The below-fold variant showed stronger directional performance, consistent with the hypothesis that buyers who read product details before seeing purchase options act with more intent. The result informed the default CTA position for the web rollout.</p>
+        <p class="cs-exec-body">With the product details restructured, we tested whether Buy Now and Offer buttons should appear above or below the product details section. Two variants, A/B tested across logged-in users and visitors. The below-fold variant showed stronger directional performance. The result informed the default CTA position for the web rollout. <span style="font-weight:700;color:#7342E2;">5 weeks to ship.</span></p>
       </a>
       <a class="cs-exec-phase" href="#into-redesign" style="text-decoration: none; color: inherit; cursor: pointer; background: #171717; border-radius: 16px;">
         <span class="cs-exec-badge" style="background: #7342E2; color: #fff;">→ Synthesis</span>
@@ -780,7 +783,7 @@
   <div style="background: #171717;">
     <div style="max-width: 1280px; margin: 0 auto; padding: 48px 100px;">
       <blockquote style="margin: 0; padding-left: 28px; border-left: 3px solid #7342E2;">
-        <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 500; color: #fff; line-height: 1.55; margin: 0 0 12px 0;">Phasing the work wasn't just a risk strategy. Phase 0's clean graduation gave us the credibility to have Phase 1's harder conversation. The structure de-risked the design - and the politics.</p>
+        <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 500; color: #fff; line-height: 1.55; margin: 0 0 12px 0;">Phasing the work wasn't just a risk strategy. Phase 0's clean graduation gave us the credibility to have Phase 1's harder conversation. The structure de-risked the design — and the politics.</p>
         <cite style="font-size: 11px; font-weight: 700; color: #7342E2; text-transform: uppercase; letter-spacing: 2px; font-style: normal;">From the Reflection section below</cite>
       </blockquote>
     </div>
@@ -839,7 +842,6 @@
         <img src="images/LDP7.png" alt="CTA Placement Test" style="width: 100%; display: block;">
       </div>
       <p style="font-size: 12px; color: #999; letter-spacing: 0.3px; margin-bottom: 32px;">Phase 2 · Three CTA variants — Control (A) with static buttons above details, Sticky Separate CTAs (B) for new users, and Sticky with Pay With PayPal primary (C) for repeat PayPal buyers.</p>
-      <p style="font-size: 12px; color: #999; margin-bottom: 32px; letter-spacing: 0.3px;">Three CTA variants - Control (A) with static buttons above details, Sticky Separate CTAs (B) for new users, and Sticky with Pay With PayPal primary (C) for repeat PayPal buyers.</p>
 
       <!-- Winner callout -->
       <div style="background: #171717; border-radius: 20px; padding: 36px 48px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;">
