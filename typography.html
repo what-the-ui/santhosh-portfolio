@@ -111,23 +111,15 @@
       -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
     }
     .cs-back {
-      position: absolute; top: 96px; left: 48px;
+      position: absolute; top: 84px; left: 48px;
       display: inline-flex; align-items: center; gap: 6px;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 13px; font-weight: 600; color: rgba(240,237,232,0.5);
-      text-decoration: none; z-index: 10;
-      transition: color 0.2s;
+      font-size: 14px; font-weight: 600; color: rgba(240,237,232,0.4);
+      transition: color 0.2s; z-index: 3;
     }
-    .cs-back:hover { color: rgba(240,237,232,0.9); }
+    .cs-back:hover { color: #f0ede8; }
     .cs-hero-content {
       position: relative; z-index: 10;
       text-align: center; align-items: center; max-width: 860px;
-    }
-    .cs-hero-tag-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-    .cs-hero-tag {
-      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-      padding: 4px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(240,237,232,0.5); background: rgba(255,255,255,0.04);
     }
     .cs-hero-title {
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -375,7 +367,7 @@
       <div class="nav-right">
         <a href="index.html" class="nav-text-link">LinkedIn</a>
         <a href="https://dribbble.com" class="nav-text-link">Dribbble</a>
-        <a href="images/Santhosh-Resume.pdf" target="_blank" class="nav-cta">Download Resume</a>
+        <a href="Santhosh-Resume.pdf" target="_blank" class="nav-cta">Download Resume</a>
       </div>
     </nav>
   </header>
@@ -389,11 +381,7 @@
       Back to Works
     </a>
     <div class="cs-hero-content">
-      <div class="cs-hero-tag-row">
-        <span class="cs-hero-tag">Poshmark</span>
-        <span class="cs-hero-tag">Design Systems</span>
-        <span class="cs-hero-tag">Typography</span>
-      </div>
+      <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px;">Poshmark · Typography System</p>
       <h1 class="cs-hero-title" style="white-space: nowrap;">One type system, every surface</h1>
       <p class="cs-hero-sub" style="max-width: 780px; margin-left: auto; margin-right: auto; text-wrap: balance;">Poshmark's typography was a patchwork of local decisions accumulated over years. This is how we turned inconsistency into a unified design standard, spanning iOS and Android, in six weeks.</p>
     </div>
