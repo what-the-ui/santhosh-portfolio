@@ -385,28 +385,6 @@
       transition: opacity 0.2s ease;
     }
     .hero-location-city:hover { opacity: 0.7; }
-    .hero-desc {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-    .hero-wop-badge {
-      display: inline-flex;
-      flex-shrink: 0;
-      opacity: 0.9;
-      transition: opacity 0.25s ease, transform 0.3s ease;
-    }
-    .hero-wop-badge:hover {
-      opacity: 1;
-      transform: translateY(-2px);
-    }
-    .hero-wop-badge img {
-      display: block;
-      height: 52px;
-      width: auto;
-      border-radius: 8px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-    }
     .hero-location-time {
       font-family: 'Lato', sans-serif;
       font-size: 13px;
@@ -479,6 +457,18 @@
       min-width: 148px;
       text-align: left;
     }
+    .hero-wop-badge {
+      display: block;
+      flex-shrink: 0;
+    }
+    .hero-wop-badge img {
+      display: block;
+      transition: transform 0.3s ease;
+      /* Match .stat-card: padding + .stat-num + gap + .stat-label */
+      height: calc(22px * 2 + 44px + 6px + 13px * 1.35);
+      width: auto;
+    }
+    .hero-wop-badge:hover img { transform: translateY(-3px); }
     .stat-num {
       display: block;
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -1831,6 +1821,7 @@
       .hero-name  { opacity: 0; animation: heroFadeUp 1s ease 0.1s forwards; }
       .stat-card:nth-child(1) { opacity: 0; animation: heroFadeUp 0.7s ease 0.55s forwards; }
       .stat-card:nth-child(2) { opacity: 0; animation: heroFadeUp 0.7s ease 0.7s forwards; }
+      .hero-wop-badge         { opacity: 0; animation: heroFadeUp 0.7s ease 0.85s forwards; }
 
       /* Nav logo subtle pulse on load */
       .nav-logo { animation: heroFadeUp 0.5s ease forwards; }
@@ -2244,9 +2235,6 @@
         <p class="hero-label-sub">AI-first designer with more than a decade of experience crafting seamless, user-friendly products through thoughtful design thinking. Currently spearheading design at <a href="https://www.poshmark.com" target="_blank" rel="noopener noreferrer" class="hero-inline-link">Poshmark</a>.</p>
       </div>
       <div class="hero-desc">
-        <a class="hero-wop-badge" href="https://www.wallofportfolios.in/portfolios/santhosh-rajendran/" target="_blank" rel="noopener" aria-label="Featured on Wall of Portfolios">
-          <img src="images/wall-of-portfolios-badge.png" alt="Featured on Wall of Portfolios" width="111" height="52">
-        </a>
         <div class="hero-location">
           <span class="hero-location-dot">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -2275,6 +2263,9 @@
           <span class="stat-num" data-target="200" data-suffix="+">0+</span>
           <span class="stat-label">Projects completed</span>
         </div>
+        <a class="hero-wop-badge" href="https://www.wallofportfolios.in/portfolios/santhosh-rajendran/" target="_blank" rel="noopener" aria-label="Featured on Wall of Portfolios">
+          <img src="images/wall-of-portfolios-badge.png" alt="Featured on Wall of Portfolios" width="239" height="112">
+        </a>
 
         <!-- Open to Work ring -->
         <div class="otw-ring">
