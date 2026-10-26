@@ -1602,6 +1602,22 @@
       letter-spacing: 0;
       text-transform: none;
     }
+    .cf-wop-badge {
+      display: inline-flex;
+      flex-shrink: 0;
+      opacity: 0.85;
+      transition: opacity 0.25s ease, transform 0.3s ease;
+    }
+    .cf-wop-badge:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    .cf-wop-badge img {
+      display: block;
+      height: 44px;
+      width: auto;
+      border-radius: 8px;
+    }
     .cf-heart {
       font-size: 14px;
       color: var(--cf-destructive);
@@ -1712,6 +1728,7 @@
       .cf-copyright { order: 3; }
       .cf-made-badge { order: 1; }
       .cf-back-top { order: 2; }
+      .cf-wop-badge { order: 4; width: 100%; justify-content: center; }
     }
 
     /* ── Responsive ── */
@@ -2921,6 +2938,9 @@
       <!-- Bottom bar -->
       <div class="cf-bottom">
         <div class="cf-copyright">© 2026 SR. All rights reserved.</div>
+        <a class="cf-wop-badge" href="https://www.wallofportfolios.in" target="_blank" rel="noopener" aria-label="Featured on Wall of Portfolios">
+          <img src="images/wall-of-portfolios-badge.png" alt="Featured on Wall of Portfolios" width="94" height="44" loading="lazy">
+        </a>
         <div class="cf-pill cf-made-badge">
           <span>Designed with</span>
           <span class="cf-heart">❤️</span>
