@@ -404,6 +404,38 @@
       flex-direction: column;
       gap: 8px;
     }
+    .hero-news {
+      display: inline-flex;
+      align-self: flex-start;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 4px 16px 4px 4px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #f0ede8;
+      transition: background 0.25s ease;
+    }
+    .hero-news:hover { background: rgba(255,255,255,0.2); }
+    .hero-news-tag {
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: #f0ede8;
+      color: #0c0c0f;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .hero-news-arrow {
+      opacity: 0.6;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .hero-news:hover .hero-news-arrow { transform: translateX(3px); opacity: 1; }
     .hero-tagline {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 20px;
@@ -457,18 +489,6 @@
       min-width: 148px;
       text-align: left;
     }
-    .hero-wop-badge {
-      display: block;
-      flex-shrink: 0;
-    }
-    .hero-wop-badge img {
-      display: block;
-      transition: transform 0.3s ease;
-      /* Match .stat-card: padding + .stat-num + gap + .stat-label */
-      height: calc(22px * 2 + 44px + 6px + 13px * 1.35);
-      width: auto;
-    }
-    .hero-wop-badge:hover img { transform: translateY(-3px); }
     .stat-num {
       display: block;
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -1821,7 +1841,7 @@
       .hero-name  { opacity: 0; animation: heroFadeUp 1s ease 0.1s forwards; }
       .stat-card:nth-child(1) { opacity: 0; animation: heroFadeUp 0.7s ease 0.55s forwards; }
       .stat-card:nth-child(2) { opacity: 0; animation: heroFadeUp 0.7s ease 0.7s forwards; }
-      .hero-wop-badge         { opacity: 0; animation: heroFadeUp 0.7s ease 0.85s forwards; }
+      .hero-news  { opacity: 0; animation: heroFadeUp 0.8s ease 0.05s forwards; }
 
       /* Nav logo subtle pulse on load */
       .nav-logo { animation: heroFadeUp 0.5s ease forwards; }
@@ -2251,6 +2271,11 @@
     <!-- Bottom row: huge name left · stat cards right -->
     <div class="hero-bottom">
       <div class="hero-name-wrap">
+        <a class="hero-news" href="https://www.wallofportfolios.in/portfolios/santhosh-rajendran/" target="_blank" rel="noopener">
+          <span class="hero-news-tag">New</span>
+          <span>Featured on Wall of Portfolios</span>
+          <span class="hero-news-arrow" aria-hidden="true">→</span>
+        </a>
         <p class="hero-tagline">Product Design Manager and Vibe Coder</p>
         <h1 class="hero-name" id="hero-name-scramble">Santhosh<br>Rajendran</h1>
       </div>
@@ -2263,9 +2288,6 @@
           <span class="stat-num" data-target="200" data-suffix="+">0+</span>
           <span class="stat-label">Projects completed</span>
         </div>
-        <a class="hero-wop-badge" href="https://www.wallofportfolios.in/portfolios/santhosh-rajendran/" target="_blank" rel="noopener" aria-label="Featured on Wall of Portfolios">
-          <img src="images/wall-of-portfolios-badge.png" alt="Featured on Wall of Portfolios" width="239" height="112">
-        </a>
 
         <!-- Open to Work ring -->
         <div class="otw-ring">
