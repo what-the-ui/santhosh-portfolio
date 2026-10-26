@@ -3181,51 +3181,6 @@
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-  <!-- Wall of Portfolios floating seal -->
-  <style>
-    .wop-seal {
-      position: fixed;
-      top: 50%;
-      right: 24px;
-      z-index: 150;
-      width: 64px;
-      transform: translateY(-50%);
-      filter: drop-shadow(0 0 1px rgba(0,0,0,0.35)) drop-shadow(0 8px 20px rgba(0,0,0,0.22));
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    .wop-seal img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-    .wop-seal:hover {
-      transform: translateY(-50%) scale(1.06);
-    }
-    .wop-seal.hidden {
-      opacity: 0;
-      transform: translateY(-50%) translateX(12px);
-      pointer-events: none;
-    }
-    @media (max-width: 640px) {
-      .wop-seal { display: none; }
-    }
-  </style>
-  <a class="wop-seal" id="wopSeal" href="https://www.wallofportfolios.in/portfolios/santhosh-rajendran/" target="_blank" rel="noopener" aria-label="Featured on Wall of Portfolios 2026">
-    <img src="images/wall-of-portfolios-seal.png" alt="Featured on Wall of Portfolios 2026" width="64" height="121">
-  </a>
-  <script>
-    (function() {
-      const seal = document.getElementById('wopSeal');
-      const footerWrapper = document.querySelector('.cf-reveal-wrapper');
-      if (!seal || !footerWrapper) return;
-      // The footer already carries its own badge, so tuck the seal away there
-      const obs = new IntersectionObserver(([entry]) => {
-        seal.classList.toggle('hidden', entry.isIntersecting);
-      }, { threshold: 0.2 });
-      obs.observe(footerWrapper);
-    })();
-  </script>
-
   <!-- Vibe Coding badge -->
   <style>
     @keyframes vibe-shimmer {
