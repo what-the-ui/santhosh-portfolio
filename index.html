@@ -424,12 +424,28 @@
     }
     .hero-news:hover { background: rgba(255,255,255,0.2); }
     .hero-news-tag {
+      position: relative;
+      overflow: hidden;
       padding: 4px 12px;
       border-radius: 100px;
-      background: #f0ede8;
-      color: #0c0c0f;
+      background: linear-gradient(90deg, #c8b0ff, #ffc2e2);
+      color: #2a1260;
       font-size: 12px;
       font-weight: 600;
+    }
+    /* One-time shine across the chip after the hero fades in */
+    .hero-news-tag::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.85) 50%, transparent 70%);
+      transform: translateX(-100%);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-news-tag::after { animation: hero-news-shine 1.2s ease-in-out 1.4s forwards; }
+    }
+    @keyframes hero-news-shine {
+      to { transform: translateX(100%); }
     }
     .hero-news-arrow {
       flex-shrink: 0;
@@ -2274,8 +2290,8 @@
     <div class="hero-bottom">
       <div class="hero-name-wrap">
         <a class="hero-news" href="https://www.wallofportfolios.in/portfolios/santhosh-rajendran/" target="_blank" rel="noopener">
-          <span class="hero-news-tag">Achievement Unlocked</span>
-          <span>Featured on Wall of Portfolios</span>
+          <span class="hero-news-tag">Featured On</span>
+          <span>Wall of Portfolios, 2026</span>
           <svg class="hero-news-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
         </a>
         <p class="hero-tagline">Product Design Manager and Vibe Coder</p>
